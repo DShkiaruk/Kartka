@@ -194,13 +194,14 @@
       <a href="#personas-gaps">Прогалини</a>
     </div>
 
-    <a class="sb-page" data-page="entities" href="#entities"><span class="ic" aria-hidden="true">🗂</span> Сутності <span class="tag">IA</span></a>
+    <a class="sb-page" data-page="entities" href="#entities"><span class="ic" aria-hidden="true">🗂</span> Sitemap <span class="tag">IA</span></a>
     <div class="sb-sub" data-sub="entities" hidden>
       <a href="#ent-struct">Структурні</a>
       <a href="#ent-content">Контентні</a>
       <a href="#ent-derived">Похідні</a>
       <a href="#ent-map">Карта звʼязків</a>
       <a href="#ent-open">Під питанням</a>
+      <a href="#ent-screens">Екрани</a>
     </div>
 
     <div class="sb-label">Скоро</div>
@@ -540,8 +541,8 @@
 
 <!-- ENTITIES (page) -->
 <section id="entities" data-page="entities"><div class="wrap">
-  <h2>Сутності <span class="ctx">· IA крок 1</span></h2>
-  <p class="sub">Джерело: <code>sitemap.md</code> — об'єкти й зв'язки, ще <b>не екрани</b>. Нанизано на Профіль (обраний IA-корінь). Кожна сутність має ≥1 job.</p>
+  <h2>Sitemap <span class="ctx">· IA: сутності + екрани</span></h2>
+  <p class="sub">Джерело: <code>sitemap.md</code> — сутності (об'єкти/зв'язки) та екрани, на профіль-першому IA-корені. Кожен вузол прив'язаний до job.</p>
 
   <h3 id="ent-struct">Структурні (кореневі)</h3>
   <div class="grid2">
@@ -700,7 +701,87 @@
       <li>❌ <b>Норма / зона / відхилення / оцінка</b> — <span class="v v-avoid">УНИКАЄМО</span> (SaMD).</li>
     </ul>
   </div>
-  <p class="ctx">Наступний крок IA (окремо): як ці об'єкти лягають на екрани й навігацію.</p>
+  <h3 id="ent-screens">Екрани <span class="ctx">· IA крок 2</span></h3>
+  <p class="ctx">Дерево екранів на профіль-першому каркасі. Біля кожного — <b>(job)</b>; <b>★</b> точка входу проти холодного старту; <b>•</b> навмисно <b>не окремий екран</b>; усі — primary (Координатор), крім <b>[secondary]</b>. Стани (empty / loading / error) — не екрани.</p>
+
+  <div class="card">
+    <h4>Вхід / Онбординг</h4>
+    <ul>
+      <li>Екран входу — email + пароль <span class="pill">MAIN</span> <span class="ctx">умова доступу</span></li>
+      <li>Онбординг нового користувача
+        <ul>
+          <li><b>★ «Додай СЕБЕ»</b> → перший self-профіль <span class="pill">MAIN</span> <span class="ctx">анти-холодний-старт</span></li>
+          <li>«Додати рідного» <span class="ctx">(опційно, далі)</span> <span class="pill">MAIN</span></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h4>Домівка <span class="ctx">вісь = Профіль</span></h4>
+    <ul>
+      <li>Перемикач профілю (аватар, sheet) <span class="pill">сц.10</span></li>
+      <li>Дашборд профілю — «важливе» <span class="pill">MAIN</span> <span class="ctx">критичне · сьогодні (ліки/візит) · останнє · завжди-«+» → drill-down</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h4>Під профілем <span class="ctx">розділи за типом · drill-down</span></h4>
+    <ul>
+      <li>Документи — список <span class="pill">R1</span>
+        <ul>
+          <li>Додати документ (фото-перший) <span class="pill">R1</span> <span class="ctx">← ризик №1</span></li>
+          <li>Документ — перегляд <span class="pill">R1</span> <span class="pill">R2</span></li>
+        </ul>
+      </li>
+      <li>Ліки — список (активні + історія) <span class="pill">R3</span>
+        <ul>
+          <li>Деталь препарату (+ Журнал прийому) <span class="pill">R3</span></li>
+          <li>Додати / редагувати ліки <span class="pill">R3</span></li>
+          <li class="ctx"><b>•</b> Нагадування про поповнення — не окремий екран, усередині «Ліки» (сц.9)</li>
+        </ul>
+      </li>
+      <li>Аналізи — список показників <span class="pill">R4</span>
+        <ul>
+          <li>Показник — крива в часі <span class="v v-avoid">без норм</span> <span class="pill">R4</span></li>
+          <li>Додати результат аналізу <span class="pill">R4</span></li>
+          <li class="ctx"><b>•</b> Довідник показників — не окремий екран, службовий reference у цьому потоці</li>
+        </ul>
+      </li>
+      <li>Візити — список / найближчі <span class="pill">R4</span>
+        <ul>
+          <li>Візит — деталь <span class="pill">R4</span></li>
+          <li>Додати / редагувати візит <span class="pill">R4</span></li>
+          <li class="ctx"><b>•</b> Нагадування про візит — не окремий екран, усередині «Візиту» (сц.5)</li>
+        </ul>
+      </li>
+      <li>Базова картка профілю — перегляд / редагування <span class="pill">MAIN</span> <span class="ctx">живить R5</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h4>Проєкції <span class="ctx">перегляд / генерація, не створення об'єкта</span></h4>
+    <ul>
+      <li>Анамнез-PDF — генерація + перегляд <span class="pill">R2</span> <span class="ctx">розділи / обсяг / мова / шер</span></li>
+      <li>Екстрена картка — перегляд <span class="pill">R5</span> <span class="ctx">офлайн, без входу · <b>[secondary]</b>-доступ: Носій / інший дорослий</span>
+        <ul><li class="ctx"><b>•</b> дія «Лікарня / травмпункт поряд» → зовнішні мапи (handoff, не екран)</li></ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h4>Наскрізне</h4>
+    <ul>
+      <li>Пошук <span class="pill">MAIN</span> <span class="ctx">вторинний, escape hatch (за IA — не первинний)</span></li>
+      <li>Налаштування / Акаунт <span class="pill">MAIN</span> <span class="ctx">профілі · мова · приватність · «Експорт усього»</span></li>
+    </ul>
+  </div>
+
+  <div class="card" style="border-color:var(--line)">
+    <p class="ctx"><b>[SIROTA]:</b> немає — кожен екран має job. &nbsp;·&nbsp; <b>Стани (не екрани):</b> порожній дашборд cold-start = empty-state (→ онбординг «★ додай себе»); loading / error / offline — стани екранів. &nbsp;·&nbsp; <b>Відкладено за IA:</b> Таймлайн — «другий» патерн, первинним екраном стає лише з автоімпортом.</p>
+  </div>
+
+  <p class="ctx">Глибину тримаємо мінімальною — рівні / стани / краєві потоки додамо свідомо на кроці 3.</p>
 </div></section>
 
 <!-- 3. PAINS -->
