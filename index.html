@@ -901,6 +901,7 @@
     <tr><td><b>R5</b></td><td class="c">✓</td><td class="c"></td><td class="c">✓</td></tr>
   </table></div>
   <p class="ctx">R2/R5 проєкційні: PDF/екстрена <b>компонують</b> дані-екрани (картка, ліки, показники, візити) — живлять непрямо, тому окремих ✓ там не ставимо.</p>
+  <p class="ctx">⚠️ <b>R5 / сц.6 — покрито ЧАСТКОВО, не повним ✓:</b> екрани закривають доступ <b>на присутньому розблокованому пристрої Координатора</b>; шлях «носій без пристрою Координатора» свідомо <b>поза MVP</b> (PWA без lock-screen, CLAUDE §4/§6) — це зафіксоване обмеження, не екран-сирота й не діра.</p>
 
   <h4>Emotional / Social — окремо (покривається властивістю, не екраном)</h4>
   <div class="tw"><table>
@@ -994,37 +995,6 @@ flowchart TD
   queue --> ok
   ok --> view["Документ — перегляд (тип/лікар можна дозаповнити)"]
 </pre></div>
-  <div class="card">
-    <p class="ctx">Щасливий шлях:</p>
-    <p style="line-height:2.4">
-      <span class="pill">Дашборд</span> →
-      <span class="pill">➕ <b>1</b></span> →
-      <span class="pill">тип: Документ <b>2</b></span> →
-      <span class="pill">📷 Знімок <b>3</b></span> →
-      <span class="v v-take">збережено ✓</span>
-    </p>
-    <p class="ctx">дата = сьогодні, профіль = активний (авто); знімок одразу в durable-чернетку, синк — фоном; undo.</p>
-  </div>
-  <div class="card">
-    <h4>Розгалуження та стани</h4>
-    <ul>
-      <li>🔶 <b>Перший запуск / порожньо?</b>
-        <ul>
-          <li>так → <span class="pill">Онбординг: Додай СЕБЕ</span> → 🟠 <b>холодний старт:</b> порожній дашборд → CTA «додай перший запис» → у потік
-            <ul><li>🟥 <b>тупик:</b> не зрозумів навіщо → пішов, нічого не додав <span class="ctx">(adoption-ризик)</span></li></ul>
-          </li>
-          <li>ні → <span class="pill">Дашборд профілю</span></li>
-        </ul>
-      </li>
-      <li>🔶 <b>Профіль активний?</b> — ні → <span class="pill">Перемикач профілю</span> → назад</li>
-      <li>🔶 <b>Який тип?</b> — ліки/аналіз/візит → інші потоки R3/R4 · документ → нижче</li>
-      <li>🔶 <b>Фото чи з галереї?</b> · 🔶 <b>Дозвіл камери?</b> — ні → з галереї / файл</li>
-      <li>🔶 <b>Локальну чернетку записано?</b> — знімок одразу йде в <b>durable-чернетку</b> (той самий механізм, що офлайн-черга); лише рідкісний збій сховища → 🟠 помилка → Повторити
-        <ul><li><span class="v v-take">закрито (було тупиком):</span> «вийшов під час помилки → знімок втрачено» <b>більше не тупик</b> — синк-помилка лише відкладає докоміт у фон, не тиха втрата</li></ul>
-      </li>
-      <li>🔶 <b>Є мережа? / Синк удався?</b> — ні → 🟠 у черзі на синк (чернетка локально) → ✓ · так → ✓</li>
-    </ul>
-  </div>
 
   <h3 id="flow-r2">R2 — Показати анамнез лікарю <span class="ctx">· момент цінності</span></h3>
   <div class="tw"><pre class="mermaid">
@@ -1060,31 +1030,6 @@ flowchart TD
   how -->|лінк| shared
   how -->|друк| shared
 </pre></div>
-  <div class="card">
-    <p class="ctx">Щасливий шлях:</p>
-    <p style="line-height:2.4">
-      <span class="pill">Дашборд</span> →
-      <span class="pill">📤 Показати <b>1</b></span> →
-      <span class="pill">Згенерувати <b>2</b></span> →
-      <span class="v v-take">показ лікарю ✓</span>
-      <span class="ctx">(+</span> <span class="pill">Поділитися <b>3</b></span> <span class="ctx">= файл/лінк/друк)</span>
-    </p>
-    <p class="ctx">= <b>2 тапи</b> показати на екрані / 3 — віддати копію.</p>
-  </div>
-  <div class="card">
-    <h4>Розгалуження та стани</h4>
-    <ul>
-      <li>🔶 <b>Профіль обрано?</b> — ні → <span class="pill">Перемикач профілю</span></li>
-      <li>🔶 <b>Повний анамнез чи лише критичне?</b> → вибір розділів + мова (укр/англ)</li>
-      <li>🔶 <b>Є мережа?</b>
-        <ul>
-          <li>так → 🟠 генерація PDF на сервері (loading) → 🔶 згенеровано? ні → 🟠 помилка → повтор/кеш</li>
-          <li>ні → 🔶 є офлайн-копія? так → показ · 🟥 <b>тупик:</b> офлайн і нема кешу → потрібна мережа</li>
-        </ul>
-      </li>
-      <li>🔶 <b>Достатньо даних?</b> — мало (новий профіль) → 🟠 «неповна картина» (чесна позначка, <b>не оцінка</b>) → все одно показ</li>
-    </ul>
-  </div>
 
   <h3 id="flow-r5">R5 — Екстрена картка <span class="ctx">· гарячий момент · офлайн</span></h3>
   <div class="tw"><pre class="mermaid">
@@ -1107,29 +1052,6 @@ flowchart TD
   hosp -->|так| maps["Зовнішні мапи — handoff, без даних пацієнта"]
   hosp -->|ні| done["Готово — критичне видно за секунди"]
 </pre></div>
-  <div class="card">
-    <p class="ctx">Щасливий шлях:</p>
-    <p style="line-height:2.4">
-      <span class="pill">🆘 / офлайн-ярлик <b>1</b></span> →
-      <span class="pill">Екстрена картка</span> →
-      <span class="v v-take">критичне видно за секунди ✓</span>
-    </p>
-    <p class="ctx">= <b>1 тап</b>, <b>офлайн і без повного входу</b> (service worker, CLAUDE §6) — <b>на присутньому розблокованому пристрої Координатора</b>.</p>
-  </div>
-  <div class="card">
-    <h4>Розгалуження та стани</h4>
-    <ul>
-      <li>🔶 <b>Як відкривають / на чиєму пристрої?</b> — офлайн-ярлик (пристрій Координатора, розблокований) · у застосунку → шапка 🆘 · <b>носій без пристрою Координатора → 🚧 зафіксоване обмеження, поза MVP (нижче)</b></li>
-      <li>🔶 <b>Є мережа?</b> — ні → 🟠 <b>офлайн-кеш</b> екстреної картки (обов'язкова гілка); так → онлайн-перегляд</li>
-      <li>🔶 <b>Картку заповнено?</b>
-        <ul>
-          <li>так → показ: алергії · хроніка · група крові · ліки · контакти</li>
-          <li>🟥 <b>тупик:</b> порожня картка → у кризі нема що показати <span class="ctx">(холодний старт б'є саме тут — найдорожчий тупик)</span></li>
-        </ul>
-      </li>
-      <li>🔶 <b>Потрібна лікарня поряд?</b> — так → зовнішні мапи (handoff, без даних пацієнта, не екран)</li>
-    </ul>
-  </div>
 
   <div class="card" style="border-color:var(--green)">
     <h4><span class="v v-take">✅ РІШЕНО</span> R5 secondary <span class="ctx">P0 — варіант «а», обіцянку звужено</span></h4>
@@ -1449,7 +1371,7 @@ flowchart TD
 
 </main><!-- /.content -->
 
-<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script src="vendor/mermaid.min.js"></script>
 <script>
   if (window.mermaid) mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' });
 </script>
@@ -1466,9 +1388,14 @@ flowchart TD
       if (on) t.setAttribute('aria-current', 'page'); else t.removeAttribute('aria-current');
     });
     subBlocks.forEach(b => { b.hidden = (b.dataset.sub !== name); });
+    // Mermaid ламається в display:none → рендеримо ЛИШЕ коли таб «Потоки» став
+    // активним (секцію вже показано), і через rAF — щоб браузер перерахував
+    // ширину перед виміром Mermaid (інакше граф порожній / 0-width).
     if (name === 'flows' && !window.__flowsRendered && window.mermaid) {
       window.__flowsRendered = true;
-      try { mermaid.run({ querySelector: '#flows pre.mermaid' }); } catch (e) {}
+      requestAnimationFrame(() => {
+        try { mermaid.run({ querySelector: '#flows pre.mermaid' }); } catch (e) {}
+      });
     }
     window.scrollTo(0, 0);
   }
