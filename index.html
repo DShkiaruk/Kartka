@@ -203,6 +203,7 @@
       <a href="#ent-open">Під питанням</a>
       <a href="#ent-screens">Екрани</a>
       <a href="#ent-nav">Навігація</a>
+      <a href="#ent-trace">Трасування</a>
     </div>
 
     <a class="sb-page" data-page="flows" href="#flows"><span class="ic" aria-hidden="true">🔀</span> Потоки</a>
@@ -852,6 +853,62 @@
     <div class="card"><h4>Контекстне <span class="ctx">у потоці</span></h4><p class="ctx">«Додати» в розділі · позначка прийому + undo · шер лише розділу «ліки» (сц.8) · вибір розділів/мови в PDF · тип/лікар після фото · пошук-іконка.</p></div>
     <div class="card"><h4>Глибоке <span class="ctx">рідкісне</span></h4><p class="ctx">Налаштування/акаунт (профілі · мова · приватність · <b>експорт усього</b>) · базова картка · повторюваність/тихі години · «додати рідного» · історія прийому.</p></div>
     <div class="card" style="border-color:var(--red)"><h4>🆘 Екстрена <span class="ctx">особливий випадок</span></h4><p class="ctx">поза звичайною навігацією: 1 тап (шапка) + <b>офлайн home-screen-ярлик без повного входу</b> (service worker, CLAUDE §6). Не залежить від bottom bar і мережі.</p></div>
+  </div>
+
+  <h3 id="ent-trace">Трасування <span class="ctx">· job × екран</span></h3>
+  <p class="ctx">Рядки — jobs, стовпці — екрани; <b>✓</b> = екран бере участь у закритті job. Через ширину — 4 під-матриці. <span class="ctx">* наскрізний (не екран-сирота)</span>.</p>
+
+  <p class="ctx"><b>T1 — структурні / глобальні</b></p>
+  <div class="tw"><table>
+    <tr><th>job</th><th class="c">Вхід</th><th class="c">Self</th><th class="c">Рідн</th><th class="c">Дашб</th><th class="c">Світч*</th><th class="c">Швид＋*</th><th class="c">Пошук</th><th class="c">Налашт</th></tr>
+    <tr><td><b>MAIN</b></td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td><td class="c"></td><td class="c">✓</td><td class="c">✓</td></tr>
+    <tr><td><b>R1</b></td><td class="c"></td><td class="c"></td><td class="c"></td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td><td class="c"></td><td class="c"></td></tr>
+    <tr><td><b>R2</b></td><td class="c"></td><td class="c"></td><td class="c"></td><td class="c">✓</td><td class="c">✓</td><td class="c"></td><td class="c"></td><td class="c"></td></tr>
+    <tr><td><b>R3</b></td><td class="c"></td><td class="c"></td><td class="c"></td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td><td class="c"></td><td class="c"></td></tr>
+    <tr><td><b>R4</b></td><td class="c"></td><td class="c"></td><td class="c"></td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td><td class="c"></td><td class="c"></td></tr>
+    <tr><td><b>R5</b></td><td class="c"></td><td class="c"></td><td class="c"></td><td class="c"></td><td class="c">✓</td><td class="c"></td><td class="c"></td><td class="c"></td></tr>
+  </table></div>
+
+  <p class="ctx"><b>T2 — Документи + Ліки</b></p>
+  <div class="tw"><table>
+    <tr><th>job</th><th class="c">Док-сп</th><th class="c">Док＋</th><th class="c">Док-пер</th><th class="c">Лік-сп</th><th class="c">Лік-дет</th><th class="c">Лік＋</th></tr>
+    <tr><td><b>MAIN</b></td><td class="c">✓</td><td class="c"></td><td class="c"></td><td class="c">✓</td><td class="c"></td><td class="c"></td></tr>
+    <tr><td><b>R1</b></td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td><td class="c"></td><td class="c"></td><td class="c"></td></tr>
+    <tr><td><b>R3</b></td><td class="c"></td><td class="c"></td><td class="c"></td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td></tr>
+  </table></div>
+
+  <p class="ctx"><b>T3 — Аналізи + Візити</b></p>
+  <div class="tw"><table>
+    <tr><th>job</th><th class="c">Ан-сп</th><th class="c">Ан-крива</th><th class="c">Ан＋</th><th class="c">Віз-сп</th><th class="c">Віз-дет</th><th class="c">Віз＋</th></tr>
+    <tr><td><b>MAIN</b></td><td class="c">✓</td><td class="c"></td><td class="c"></td><td class="c">✓</td><td class="c"></td><td class="c"></td></tr>
+    <tr><td><b>R4</b></td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td></tr>
+  </table></div>
+
+  <p class="ctx"><b>T4 — Базова картка + проєкції</b></p>
+  <div class="tw"><table>
+    <tr><th>job</th><th class="c">Картка</th><th class="c">PDF-анамнез</th><th class="c">🆘 Екстрена</th></tr>
+    <tr><td><b>MAIN</b></td><td class="c">✓</td><td class="c"></td><td class="c"></td></tr>
+    <tr><td><b>R2</b></td><td class="c"></td><td class="c">✓</td><td class="c"></td></tr>
+    <tr><td><b>R5</b></td><td class="c">✓</td><td class="c"></td><td class="c">✓</td></tr>
+  </table></div>
+  <p class="ctx">R2/R5 проєкційні: PDF/екстрена <b>компонують</b> дані-екрани (картка, ліки, показники, візити) — живлять непрямо, тому окремих ✓ там не ставимо.</p>
+
+  <h4>Emotional / Social — окремо (покривається властивістю, не екраном)</h4>
+  <div class="tw"><table>
+    <tr><th>job</th><th>Чим закривається</th><th class="c">Екран?</th></tr>
+    <tr><td><b>E1</b> підготовленість</td><td>повнота архіву + готовність (PDF / 🆘)</td><td class="c">ні — якість</td></tr>
+    <tr><td><b>E2</b> приватність</td><td>архітектура RLS + at-rest + без AI / без третіх</td><td class="c">ні — властивість</td></tr>
+    <tr><td><b>S1</b> надійний опікун</td><td>здатність показати повну картину (PDF) + повнота</td><td class="c">ні — наслідок</td></tr>
+  </table></div>
+
+  <div class="grid2">
+    <div class="card" style="border-color:var(--green)"><h4>Екрани-сироти</h4><p class="ctx"><b>немає</b> — кожен екран має ≥1 job. Наскрізні (перемикач, швидке додавання) мають ✓; нагадування / довідник показників — свідомо не екрани.</p></div>
+    <div class="card" style="border-color:var(--green)"><h4>Jobs-сироти</h4><p class="ctx"><b>немає</b> — MAIN/R1–R5 усі покриті. Emotional/social не зараховуються (покриваються властивістю).</p></div>
+  </div>
+
+  <div class="card">
+    <h4>Звірка пріоритизації — ядро R1/R2/R5 не загублене</h4>
+    <p class="ctx"><b>R1</b> щільно (Дашб·Світч·Швид＋·Док-сп·Док＋·Док-пер). <b>R2/R5</b> концентровано (не кволо): дедикований первинний екран (PDF / 🆘) + джерело (архів / базова картка), компонують усю картину. R3/R4 мають більше клітинок <b>лише бо це CRUD-важкі table-stakes</b>, не бо важливіші — щільність ≠ кількість CRUD-екранів.</p>
   </div>
 </div></section>
 
