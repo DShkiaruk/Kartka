@@ -194,6 +194,15 @@
       <a href="#personas-gaps">Прогалини</a>
     </div>
 
+    <a class="sb-page" data-page="entities" href="#entities"><span class="ic" aria-hidden="true">🗂</span> Сутності <span class="tag">IA</span></a>
+    <div class="sb-sub" data-sub="entities" hidden>
+      <a href="#ent-struct">Структурні</a>
+      <a href="#ent-content">Контентні</a>
+      <a href="#ent-derived">Похідні</a>
+      <a href="#ent-map">Карта звʼязків</a>
+      <a href="#ent-open">Під питанням</a>
+    </div>
+
     <div class="sb-label">Скоро</div>
     <span class="sb-page soon"><span class="ic">🎨</span> Дизайн-система <span class="tag">soon</span></span>
     <span class="sb-page soon"><span class="ic">🧩</span> Компоненти <span class="tag">soon</span></span>
@@ -529,6 +538,98 @@
   </div>
 </div></section>
 
+<!-- ENTITIES (page) -->
+<section id="entities" data-page="entities"><div class="wrap">
+  <h2>Сутності <span class="ctx">· IA крок 1</span></h2>
+  <p class="sub">Джерело: <code>sitemap.md</code> — об'єкти й зв'язки, ще <b>не екрани</b>. Нанизано на Профіль (обраний IA-корінь). Кожна сутність має ≥1 job.</p>
+
+  <h3 id="ent-struct">Структурні (кореневі)</h3>
+  <div class="grid2">
+    <div class="card">
+      <h4>Акаунт / Домогосподарство</h4>
+      <p class="ctx">email+пароль (Auth), налаштування, містить профілі.</p>
+      <p><b>Job:</b> <span class="pill">MAIN</span> · сц.10 — один вхід на родину.</p>
+      <p><b>Зв'язки:</b> 1—N Профіль (верхній контейнер).</p>
+    </div>
+    <div class="card" style="border-color:var(--acc)">
+      <h4>Профіль члена родини <span class="ctx">вісь IA</span></h4>
+      <p class="ctx">ім'я, аватар/колір, дата народж., стосунок; <b>Базова картка</b>: алергії[], хроніка[], група крові, екстрені контакти[].</p>
+      <p><b>Job:</b> <span class="pill">MAIN</span> <span class="pill">R5</span> (сц.6) · наскрізно сц.10.</p>
+      <p><b>Зв'язки:</b> 1—N Документ / Ліки / Показник / Візит; 1—1 Базова картка.</p>
+    </div>
+  </div>
+
+  <h3 id="ent-content">Контентні (під профілем)</h3>
+  <div class="grid2">
+    <div class="card">
+      <h4>Документ <span class="pill">R1</span></h4>
+      <p class="ctx">файл/фото, дата (дефолт «сьогодні»), тип (пресет), лікар = текст, нотатка.</p>
+      <p><b>Job:</b> R1 — зафіксувати вхідне (сц.4).</p>
+      <p><b>Зв'язки:</b> N—1 Профіль; опц. ↔ Вимірювання / Ліки.</p>
+    </div>
+    <div class="card">
+      <h4>Ліки <span class="pill">R3</span></h4>
+      <p class="ctx">назва, доза, схема, період (курс/постійно), статус; <b>Журнал прийому</b> {дата, прийнято/пропущено, undo}.</p>
+      <p><b>Job:</b> R3 — ліки в часі й між людьми (сц.1, 8, 9).</p>
+      <p><b>Зв'язки:</b> N—1 Профіль; 1—N Прийом.</p>
+    </div>
+    <div class="card">
+      <h4>Показник аналізу <span class="pill">R4</span></h4>
+      <p class="ctx">назва, одиниця; <b>Вимірювання</b> {дата, значення, опц. файл-джерело}.</p>
+      <p><b>Job:</b> R4 — динаміка показника в часі (сц.7).</p>
+      <p><b>Зв'язки:</b> N—1 Профіль; 1—N Вимірювання ↔ Документ (опц).</p>
+      <p><span class="v v-avoid">УНИКАЄМО</span> норми/зони/оцінки (SaMD) — лише сира крива.</p>
+    </div>
+    <div class="card">
+      <h4>Візит (з нагадуванням) <span class="pill">R4</span></h4>
+      <p class="ctx">тип, дата/час, повторюваність, випередження, тихі години, статус.</p>
+      <p><b>Job:</b> R4 — не пропустити планове (сц.5).</p>
+      <p><b>Зв'язки:</b> N—1 Профіль.</p>
+    </div>
+  </div>
+
+  <h3 id="ent-derived">Похідні (проєкції — не нові дані)</h3>
+  <div class="grid2">
+    <div class="card">
+      <h4>Анамнез-PDF <span class="pill">R2</span></h4>
+      <p class="ctx">проєкція профілю: базова картка + ліки + показники + візити + документи. Конфіг: розділи, обсяг, мова, офлайн.</p>
+      <p><b>Job:</b> R2 — показати повну картину іншому за секунди (сц.2, 3, 8).</p>
+    </div>
+    <div class="card">
+      <h4>Екстрена картка <span class="pill">R5</span></h4>
+      <p class="ctx">проєкція: базова картка + активні ліки + контакти. Офлайн, без повного входу.</p>
+      <p><b>Job:</b> R5 — готовність до критичного без мене (сц.6).</p>
+    </div>
+  </div>
+
+  <h3 id="ent-map">Карта зв'язків</h3>
+  <div class="tw"><pre style="margin:0; padding:14px; font-size:.82rem; line-height:1.55; color:var(--tx); white-space:pre">Акаунт / Домогосподарство
+└─ Профіль  (вісь IA)
+     ├─ Базова картка        алергії · хроніка · група крові · контакти
+     ├─ Документ             R1 · сц.4        [тип=enum · лікар=текст]
+     ├─ Ліки                 R3 · сц.1,8,9    └─ Прийом (журнал)
+     ├─ Показник             R4 · сц.7        └─ Вимірювання ↔ Документ(опц)
+     └─ Візит + нагадування  R4 · сц.5
+
+Проєкції профілю (без нових даних):
+   • Анамнез-PDF      R2 · сц.2,3,8   = картка + ліки + показники + візити + документи
+   • Екстрена картка  R5 · сц.6       = картка + активні ліки + контакти</pre></div>
+
+  <h3 id="ent-open">Під питанням / навмисно НЕ сутності</h3>
+  <div class="card">
+    <ul>
+      <li><b>Нагадування</b> — властивість Візиту/Ліків чи окрема сутність? <span class="b b-q">?</span></li>
+      <li><b>Лікар / Заклад</b> — поле-текст, <b>не каталог</b> (каталог закладів не будуємо).</li>
+      <li><b>Тип документа</b> — enum-словник (пресети), не сутність.</li>
+      <li><b>Довідник показників</b> — службовий reference (seed для Показника), не дані користувача. <span class="b b-q">?</span></li>
+      <li><b>Співкоординатор / multi-user</b> — поза MVP.</li>
+      <li><b>«Лікарня / травмпункт поряд»</b> — дія-handoff у мапи, без власних даних.</li>
+      <li>❌ <b>Норма / зона / відхилення / оцінка</b> — <span class="v v-avoid">УНИКАЄМО</span> (SaMD).</li>
+    </ul>
+  </div>
+  <p class="ctx">Наступний крок IA (окремо): як ці об'єкти лягають на екрани й навігацію.</p>
+</div></section>
+
 <!-- 3. PAINS -->
 <section id="pains" data-page="research"><div class="wrap">
   <h2>3 · Болі користувачів</h2>
@@ -832,7 +933,7 @@
 </div></section>
 
 <footer><div class="wrap">
-  <p>Kartka — research synthesis. Джерело правди: MD-файли в <code>research/</code> (research.md · jtbd.md · personas.md · user-pains.md · competitors.md · ux-patterns.md · benchmark.md · patterns-information-architecture.md). Контент цієї сторінки не виходить за межі цих файлів.</p>
+  <p>Kartka — research synthesis. Джерело правди: MD-файли в <code>research/</code> (research.md · jtbd.md · personas.md · user-pains.md · competitors.md · ux-patterns.md · benchmark.md · patterns-information-architecture.md) + <code>sitemap.md</code> (IA-сутності). Контент цієї сторінки не виходить за межі цих файлів.</p>
 </div></footer>
 
 </main><!-- /.content -->
