@@ -205,6 +205,13 @@
       <a href="#ent-nav">Навігація</a>
     </div>
 
+    <a class="sb-page" data-page="flows" href="#flows"><span class="ic" aria-hidden="true">🔀</span> Потоки</a>
+    <div class="sb-sub" data-sub="flows" hidden>
+      <a href="#flow-r1">R1 · Додати</a>
+      <a href="#flow-r2">R2 · Показати</a>
+      <a href="#flow-r5">R5 · Екстрена</a>
+    </div>
+
     <div class="sb-label">Скоро</div>
     <span class="sb-page soon"><span class="ic">🎨</span> Дизайн-система <span class="tag">soon</span></span>
     <span class="sb-page soon"><span class="ic">🧩</span> Компоненти <span class="tag">soon</span></span>
@@ -846,6 +853,99 @@
     <div class="card"><h4>Глибоке <span class="ctx">рідкісне</span></h4><p class="ctx">Налаштування/акаунт (профілі · мова · приватність · <b>експорт усього</b>) · базова картка · повторюваність/тихі години · «додати рідного» · історія прийому.</p></div>
     <div class="card" style="border-color:var(--red)"><h4>🆘 Екстрена <span class="ctx">особливий випадок</span></h4><p class="ctx">поза звичайною навігацією: 1 тап (шапка) + <b>офлайн home-screen-ярлик без повного входу</b> (service worker, CLAUDE §6). Не залежить від bottom bar і мережі.</p></div>
   </div>
+</div></section>
+
+<!-- FLOWS (page) -->
+<section id="flows" data-page="flows"><div class="wrap">
+  <h2>User flows <span class="ctx">· ядро MVP</span></h2>
+  <p class="sub">Джерело: <code>flows.md</code> (повні Mermaid-графи там; GitHub їх рендерить). Тут — стилізована візуалізація. Легенда: <span class="pill">екран</span> · 🔶 рішення · 🟠 стан · 🟥 тупик · <span class="v v-take">✓ успіх</span>. Жоден вузол не інтерпретує дані (AVOID).</p>
+
+  <h3 id="flow-r1">R1 — Додати документ <span class="ctx">· ризик №1 · ≤3 тапи</span></h3>
+  <div class="card">
+    <p class="ctx">Щасливий шлях:</p>
+    <p style="line-height:2.4">
+      <span class="pill">Дашборд</span> →
+      <span class="pill">➕ <b>1</b></span> →
+      <span class="pill">тип: Документ <b>2</b></span> →
+      <span class="pill">📷 Знімок <b>3</b></span> →
+      <span class="v v-take">збережено ✓</span>
+    </p>
+    <p class="ctx">дата = сьогодні, профіль = активний (авто); фото-перший комітить одразу; undo.</p>
+  </div>
+  <div class="card">
+    <h4>Розгалуження та стани</h4>
+    <ul>
+      <li>🔶 <b>Перший запуск / порожньо?</b>
+        <ul>
+          <li>так → <span class="pill">Онбординг: Додай СЕБЕ</span> → 🟠 <b>холодний старт:</b> порожній дашборд → CTA «додай перший запис» → у потік
+            <ul><li>🟥 <b>тупик:</b> не зрозумів навіщо → пішов, нічого не додав <span class="ctx">(adoption-ризик)</span></li></ul>
+          </li>
+          <li>ні → <span class="pill">Дашборд профілю</span></li>
+        </ul>
+      </li>
+      <li>🔶 <b>Профіль активний?</b> — ні → <span class="pill">Перемикач профілю</span> → назад</li>
+      <li>🔶 <b>Який тип?</b> — ліки/аналіз/візит → інші потоки R3/R4 · документ → нижче</li>
+      <li>🔶 <b>Фото чи з галереї?</b> · 🔶 <b>Дозвіл камери?</b> — ні → з галереї / файл</li>
+      <li>🔶 <b>Збереглося?</b> — ні → 🟠 помилка → Повторити
+        <ul><li>🟥 <b>тупик:</b> вийшов під час помилки → знімок втрачено</li></ul>
+      </li>
+      <li>🔶 <b>Є мережа?</b> — ні → 🟠 збережено локально (синк пізніше) → ✓ · так → ✓</li>
+    </ul>
+  </div>
+
+  <h3 id="flow-r2">R2 — Показати анамнез лікарю <span class="ctx">· момент цінності</span></h3>
+  <div class="card">
+    <p class="ctx">Щасливий шлях:</p>
+    <p style="line-height:2.4">
+      <span class="pill">Дашборд</span> →
+      <span class="pill">📤 Показати <b>1</b></span> →
+      <span class="pill">Згенерувати <b>2</b></span> →
+      <span class="v v-take">показ лікарю ✓</span>
+      <span class="ctx">(+</span> <span class="pill">Поділитися <b>3</b></span> <span class="ctx">= файл/лінк/друк)</span>
+    </p>
+    <p class="ctx">= <b>2 тапи</b> показати на екрані / 3 — віддати копію.</p>
+  </div>
+  <div class="card">
+    <h4>Розгалуження та стани</h4>
+    <ul>
+      <li>🔶 <b>Профіль обрано?</b> — ні → <span class="pill">Перемикач профілю</span></li>
+      <li>🔶 <b>Повний анамнез чи лише критичне?</b> → вибір розділів + мова (укр/англ)</li>
+      <li>🔶 <b>Є мережа?</b>
+        <ul>
+          <li>так → 🟠 генерація PDF на сервері (loading) → 🔶 згенеровано? ні → 🟠 помилка → повтор/кеш</li>
+          <li>ні → 🔶 є офлайн-копія? так → показ · 🟥 <b>тупик:</b> офлайн і нема кешу → потрібна мережа</li>
+        </ul>
+      </li>
+      <li>🔶 <b>Достатньо даних?</b> — мало (новий профіль) → 🟠 «неповна картина» (чесна позначка, <b>не оцінка</b>) → все одно показ</li>
+    </ul>
+  </div>
+
+  <h3 id="flow-r5">R5 — Екстрена картка <span class="ctx">· гарячий момент · офлайн</span></h3>
+  <div class="card">
+    <p class="ctx">Щасливий шлях:</p>
+    <p style="line-height:2.4">
+      <span class="pill">🆘 / офлайн-ярлик <b>1</b></span> →
+      <span class="pill">Екстрена картка</span> →
+      <span class="v v-take">критичне видно за секунди ✓</span>
+    </p>
+    <p class="ctx">= <b>1 тап</b>, <b>офлайн і без повного входу</b> (service worker, CLAUDE §6).</p>
+  </div>
+  <div class="card">
+    <h4>Розгалуження та стани</h4>
+    <ul>
+      <li>🔶 <b>Як відкривають?</b> — офлайн-ярлик (home screen, без логіну) · у застосунку → шапка 🆘</li>
+      <li>🔶 <b>Є мережа?</b> — ні → 🟠 <b>офлайн-кеш</b> екстреної картки (обов'язкова гілка); так → онлайн-перегляд</li>
+      <li>🔶 <b>Картку заповнено?</b>
+        <ul>
+          <li>так → показ: алергії · хроніка · група крові · ліки · контакти</li>
+          <li>🟥 <b>тупик:</b> порожня картка → у кризі нема що показати <span class="ctx">(холодний старт б'є саме тут — найдорожчий тупик)</span></li>
+        </ul>
+      </li>
+      <li>🔶 <b>Потрібна лікарня поряд?</b> — так → зовнішні мапи (handoff, без даних пацієнта, не екран)</li>
+    </ul>
+  </div>
+
+  <p class="ctx">Повні діаграми (decision-гілки графом) — у <code>flows.md</code>.</p>
 </div></section>
 
 <!-- 3. PAINS -->
