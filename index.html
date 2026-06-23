@@ -202,6 +202,7 @@
       <a href="#ent-map">Карта звʼязків</a>
       <a href="#ent-open">Під питанням</a>
       <a href="#ent-screens">Екрани</a>
+      <a href="#ent-nav">Навігація</a>
     </div>
 
     <div class="sb-label">Скоро</div>
@@ -782,6 +783,69 @@
   </div>
 
   <p class="ctx">Глибину тримаємо мінімальною — рівні / стани / краєві потоки додамо свідомо на кроці 3.</p>
+
+  <h3 id="ent-nav">Навігація <span class="ctx">· IA крок 2.5</span></h3>
+  <p class="ctx">Профіль-перший каркас. Перемикач профілю = аватар у шапці (наскрізний, <b>не таб</b>). 4 пункти bottom bar + наскрізне в шапці.</p>
+
+  <div style="max-width:420px; margin:14px auto; border:1px solid var(--line); border-radius:16px; overflow:hidden; background:var(--bg2)">
+    <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; border-bottom:1px solid var(--line); font-size:.8rem; color:var(--mut)">
+      <span>🧑 ▾ профіль</span><span style="color:var(--red)">🆘 Екстрене</span>
+    </div>
+    <div style="height:84px; display:grid; place-items:center; color:var(--mut); font-size:.8rem">… контент профілю …</div>
+    <div style="display:flex; border-top:1px solid var(--line); text-align:center; font-size:.74rem">
+      <div style="flex:1; padding:10px 4px; color:var(--acc)">🏠<br>Головна</div>
+      <div style="flex:1; padding:10px 4px; color:var(--tx)">🗂<br>Записи</div>
+      <div style="flex:1; padding:8px 4px"><span style="display:inline-block; background:var(--acc); color:#0d1117; border-radius:50%; width:32px; height:32px; line-height:32px; font-weight:800">＋</span><br><span style="color:var(--mut)">Додати</span></div>
+      <div style="flex:1; padding:10px 4px; color:var(--tx)">📤<br>Показати</div>
+    </div>
+  </div>
+  <p class="ctx" style="text-align:center">Світчер профілю і 🆘 — у шапці (наскрізні). Типи — drill-down, пошук — вторинний.</p>
+
+  <div class="grid2">
+    <div class="card"><h4>🏠 Головна <span class="pill">MAIN</span></h4><p class="ctx">дашборд «важливе»: дістати ключове за секунди; гасить холодний старт.</p></div>
+    <div class="card"><h4>🗂 Записи <span class="pill">MAIN</span> <span class="pill">R3/R4</span></h4><p class="ctx">архів за типами (drill-down) — знайти конкретне в усьому.</p></div>
+    <div class="card"><h4>➕ Додати <span class="pill">R1</span> <span class="pill">R3/R4</span></h4><p class="ctx">глобальне швидке додавання, сам питає тип. Найчастіша дія + ризик №1.</p></div>
+    <div class="card"><h4>📤 Показати <span class="pill">R2</span></h4><p class="ctx">анамнез-PDF / шер — гарячий момент цінності, 1 тап звідусіль.</p></div>
+  </div>
+
+  <h4>Два критичні шляхи (тапи)</h4>
+  <div class="card">
+    <p><b>А · Додати документ</b> <span class="pill">R1</span> <span class="v v-take">≤3 тапи</span></p>
+    <p style="line-height:2">
+      <span class="pill">Головна</span> →
+      <span class="pill">➕ <b>1</b></span> →
+      <span class="pill">Документ <b>2</b></span> →
+      <span class="pill">📷 знімок <b>3</b></span> →
+      <b>збережено</b>
+    </p>
+    <p class="ctx">дата = сьогодні, профіль = активний (авто); фото-перший комітить одразу; миттєвий undo; тип/лікар — потім. <b>= 3 тапи ✓</b></p>
+    <p style="margin-top:14px"><b>Б · Показати</b> <span class="pill">R2</span> <span class="pill">R5</span></p>
+    <p style="line-height:2">
+      <span class="ctx">R2:</span>
+      <span class="pill">Головна</span> →
+      <span class="pill">📤 Показати <b>1</b></span> →
+      <span class="pill">Згенерувати <b>2</b></span> → показ
+      <span class="ctx">(+</span><span class="pill">Поділитися <b>3</b></span><span class="ctx">= шер)</span>
+    </p>
+    <p style="line-height:2">
+      <span class="ctx">R5:</span>
+      <span class="pill">home-screen-ярлик <b>1</b></span> → екстрена картка
+      <span class="ctx">офлайн, без логіну (або шапка 🆘)</span>
+    </p>
+    <p class="ctx"><b>R2 = 2 тапи</b> показати / 3 шер; <b>R5 = 1 тап</b>, офлайн. Найгарячіший — найкоротший.</p>
+  </div>
+
+  <div class="card">
+    <h4>Швидке-додавання vs drill-down → глобальний «+»</h4>
+    <p class="ctx">глобальний <b>➕ = 3 тапи</b> з будь-де · лише-через-розділи (Головна → Документи → Додати → камера → зберегти) <b>= 4 тапи</b> й тільки зі «свого» розділу → «+» виграє для дії №1. Контекстне «Додати» в розділах лишаємо.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="card"><h4>Глобальне <span class="ctx">завжди видно</span></h4><p class="ctx">bottom bar (Головна · Записи · ➕ · Показати) + шапка (аватар-світчер · 🆘 Екстрене).</p></div>
+    <div class="card"><h4>Контекстне <span class="ctx">у потоці</span></h4><p class="ctx">«Додати» в розділі · позначка прийому + undo · шер лише розділу «ліки» (сц.8) · вибір розділів/мови в PDF · тип/лікар після фото · пошук-іконка.</p></div>
+    <div class="card"><h4>Глибоке <span class="ctx">рідкісне</span></h4><p class="ctx">Налаштування/акаунт (профілі · мова · приватність · <b>експорт усього</b>) · базова картка · повторюваність/тихі години · «додати рідного» · історія прийому.</p></div>
+    <div class="card" style="border-color:var(--red)"><h4>🆘 Екстрена <span class="ctx">особливий випадок</span></h4><p class="ctx">поза звичайною навігацією: 1 тап (шапка) + <b>офлайн home-screen-ярлик без повного входу</b> (service worker, CLAUDE §6). Не залежить від bottom bar і мережі.</p></div>
+  </div>
 </div></section>
 
 <!-- 3. PAINS -->
