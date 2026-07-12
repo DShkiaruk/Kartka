@@ -1,0 +1,171 @@
+/* _wireframe.css — спільна база каркасів Kartka (створено з першим екраном, конвенції §1).
+   ТІЛЬКИ структура + спейсинг. Без кольору (лише сіра тональність), бренду, іконок,
+   тіней, радіусів (§0/§8). Ієрархія — розміром / вагою / відступом, не кольором. */
+
+:root {
+  /* шкала відступів §1 — інших значень не вводимо */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-6: 24px; --sp-8: 32px; --sp-12: 48px;
+
+  /* канва §1 */
+  --app-max: 430px;      /* макс. ширина застосунку */
+  --pad: 16px;           /* бічні поля контенту */
+
+  /* зони §1 */
+  --header-h: 56px; --bottom-h: 56px; --tap: 44px;   /* min ціль дотику */
+
+  /* сіра тональність (нейтральна, НЕ бренд) */
+  --ink: #1a1a1a; --muted: #6a6a6a; --line: #bdbdbd; --line-2: #9a9a9a;
+  --fill: #ededed; --fill-2: #f6f6f6; --page: #d7d7d7;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: system-ui, sans-serif;   /* системний дефолт, не бренд (§0) */
+  color: var(--ink);
+  background: var(--page);               /* сіре тло навколо канви */
+  line-height: 1.4;
+}
+
+/* канва «телефону», центрована; базова ширина 390, макс 430 (§1) */
+.app {
+  width: 100%;
+  max-width: var(--app-max);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: #fff;                      /* «папір» каркаса */
+  display: flex;
+  flex-direction: column;
+  border-inline: 1px solid var(--line);
+}
+
+/* ── шапка ─────────────────────────────────────────── */
+.app > header {
+  flex: 0 0 var(--header-h);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding-inline: var(--pad);
+  border-bottom: 1px solid var(--line);
+}
+.app > header .spacer { flex: 1; }
+
+.profile-switcher {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  border: 0;
+  background: none;
+  padding: var(--sp-1);
+  min-height: var(--tap);
+  font: inherit;
+  color: var(--ink);
+  cursor: pointer;
+}
+.profile-switcher .who { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.15; }
+.profile-switcher .name { font-weight: 700; font-size: 0.95rem; }
+.profile-switcher .role { font-size: 0.72rem; color: var(--muted); }
+
+.hdr-search {              /* запасний вихід — тихо (§ рішення 1) */
+  border: 0; background: none; color: var(--muted);
+  font: inherit; font-size: 0.72rem; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  min-height: var(--tap);
+}
+.hdr-sos {                 /* 1-тапний вхід у екстрене (R5) — виразніше, але без кольору */
+  border: 1px solid var(--line-2); background: var(--fill);
+  font: inherit; font-size: 0.75rem; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  min-height: var(--tap); padding: var(--sp-1) var(--sp-2);
+}
+
+/* ── контент ───────────────────────────────────────── */
+.app > main {
+  flex: 1 1 auto;
+  padding: var(--sp-6) var(--pad);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);                      /* ритм між секціями = 24 */
+}
+
+section {
+  border: 1px solid var(--line);
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+section > h2 {                           /* підпис зони */
+  margin: 0; font-size: 0.72rem; font-weight: 700; color: var(--muted);
+}
+h3 { margin: 0; font-size: 0.78rem; font-weight: 600; color: var(--muted); }
+
+/* рядок «ключ: значення» (критичний блок) */
+.kv { display: flex; gap: var(--sp-2); font-size: 0.95rem; }
+.kv .k { color: var(--muted); flex: 0 0 108px; }
+
+/* запис списку */
+article {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-height: var(--tap);
+  padding: var(--sp-3);
+  border: 1px solid var(--line-2);
+}
+article .body { flex: 1; text-decoration: none; color: var(--ink); }
+article .meta { color: var(--muted); font-size: 0.85rem; }
+
+/* дії — сірі, без кольору */
+button, .btn {
+  font: inherit;
+  min-height: var(--tap);
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--line-2);
+  background: var(--fill);
+  color: var(--ink);
+  text-decoration: none;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+/* слот-бокс для ассета (§0): [аватар], [іконка] тощо */
+.slot {
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px dashed var(--line-2); background: var(--fill-2);
+  color: var(--muted); font-size: 0.66rem;
+  padding: 2px 6px; min-height: 22px;
+}
+.slot.avatar { width: 36px; height: 36px; padding: 0; }
+
+/* ── нижній бар (4 таби) ───────────────────────────── */
+.app > nav {
+  flex: 0 0 var(--bottom-h);
+  display: flex;
+  border-top: 1px solid var(--line);
+}
+.app > nav a,
+.app > nav button {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  min-height: var(--tap);
+  font: inherit; font-size: 0.68rem; color: var(--muted);
+  text-decoration: none;
+  background: none; border: 0; border-right: 1px solid var(--fill);
+  cursor: pointer;
+}
+.app > nav > :last-child { border-right: 0; }
+.app > nav [aria-current="page"] { color: var(--ink); font-weight: 700; background: var(--fill-2); }
+.nav-add .slot { border-style: solid; }          /* прайм-слот ➕ — виділити межею, без кольору */
+.nav-add { font-weight: 600; color: var(--ink); }
+
+/* прихований заголовок (семантика без видимого title — § рішення 3) */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* анотація каркаса — це МЕТА (пояснення зони), не UI-текст продукту */
+.wf-note { margin: 0; font-size: 0.68rem; font-style: italic; color: var(--muted); }
