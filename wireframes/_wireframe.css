@@ -33,6 +33,7 @@ body {
   width: 100%;
   max-width: var(--app-max);
   min-height: 100vh;
+  flex-shrink: 0;                        /* не стискати нижче контенту (інакше «папір» обрізає) */
   margin: 0 auto;
   background: #fff;                      /* «папір» каркаса */
   display: flex;
@@ -169,3 +170,72 @@ button, .btn {
 
 /* анотація каркаса — це МЕТА (пояснення зони), не UI-текст продукту */
 .wf-note { margin: 0; font-size: 0.68rem; font-style: italic; color: var(--muted); }
+
+/* ─────────────────────────────────────────────────────────────────────
+   РИШТУВАННЯ навігації між екранами вайрфреймів (НЕ продукт Kartka; поза
+   макетом екрана). Темніший сірий — щоб tooling візуально відділявся від
+   «паперового» макета. Без кольору-хью, без іконок. Розмітку дає _wf-nav.js;
+   стилі спільні для всіх сторінок. Префікс wfnav- (не плутати з .wf-note).
+   ───────────────────────────────────────────────────────────────────── */
+.wfnav-layout { display: flex; height: 100vh; }
+
+.wfnav-tree {
+  flex: 0 0 300px;
+  height: 100%;
+  overflow-y: auto;
+  padding: var(--sp-4);
+  background: #262626;                 /* сіре tooling-тло, не бренд */
+  color: #cfcfcf;
+  font-family: ui-monospace, Menlo, Consolas, monospace;   /* dev-doc дух */
+  font-size: 12px;
+  line-height: 1.5;
+  border-right: 1px solid #000;
+}
+.wfnav-stage {                          /* макет — вужча колонка праворуч */
+  flex: 1 1 auto;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;               /* дозволити compare-bar над макетом */
+  align-items: center;
+  background: var(--page);
+}
+
+/* compare-bar — риштування: перемкнутися між базою і станом (відкривати поряд) */
+.wfnav-compare {
+  width: 100%;
+  max-width: var(--app-max);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-4);
+  background: #1f1f1f;
+  color: #cfcfcf;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 12px;
+}
+.wfnav-compare .lbl { color: #7a7a7a; }
+.wfnav-compare a { color: #d4d4d4; text-decoration: none; padding: 2px 6px; }
+.wfnav-compare a:hover { background: #333; }
+.wfnav-compare .cur { color: #fff; font-weight: 700; background: #454545; padding: 2px 6px; }
+
+.wfnav-title   { margin: 0 0 var(--sp-3); font-size: 11px; font-weight: 700; color: #9a9a9a; }
+.wfnav-section { margin: var(--sp-3) 0 var(--sp-1); font-size: 10px; color: #7a7a7a; }
+.wfnav-tree ul { list-style: none; margin: 0 0 var(--sp-3); padding: 0; }
+.wfnav-tree li { margin: 1px 0; }
+.wfnav-tree li.lvl-screen { padding-left: var(--sp-3); }   /* екран — відступ 1 */
+.wfnav-tree li.lvl-state  { padding-left: var(--sp-6); }   /* стан  — відступ 2 (вкладеність) */
+
+.wfnav-tree a { display: block; padding: 2px 6px; color: #d4d4d4; text-decoration: none; }
+.wfnav-tree a:hover { background: #333; }
+.wfnav-tree a.active { background: #454545; color: #fff; font-weight: 700; }   /* поточна */
+
+.wfnav-planned { display: block; padding: 2px 6px; color: #6d6d6d; }           /* сторінки ще нема */
+.wfnav-planned::after { content: ' · ще нема'; color: #565656; }
+.wfnav-overlay { display: block; padding: 2px 6px; color: #6d6d6d; font-style: italic; } /* не роут (§7) */
+
+/* ── порожні стани (empty) — текст-запрошення, не «глухо порожньо» ── */
+.lead { margin: 0; font-size: 0.95rem; }
+.empty-hint { margin: 0; font-size: 0.9rem; color: var(--muted); }
+section p { margin: 0; font-size: 0.9rem; }
+.btn-primary { background: #dedede; border: 1px solid var(--ink); font-weight: 700; }  /* акцент дією, не кольором */

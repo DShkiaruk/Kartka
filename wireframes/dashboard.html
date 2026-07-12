@@ -22,6 +22,12 @@
   Межа CLAUDE §4: значення аналізів сирі — без норм/зон/оцінок.
 -->
 <body>
+  <div class="wfnav-layout">
+
+    <!-- РИШТУВАННЯ: навігація між екранами вайрфреймів (НЕ продукт Kartka; розмітку дає _wf-nav.js) -->
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
   <div class="app">
 
     <header>
@@ -66,12 +72,12 @@
 
         <h3>Ліки</h3>
         <article>
-          <span class="body">Еналаприл 10&nbsp;мг <span class="meta">— ранок</span></span>
+          <span class="body">Еналаприл 10&nbsp;мг <span class="meta">— 08:00 (ранок)</span></span>
           <button>Прийнято</button>
         </article>
         <article>
-          <span class="body">Аторвастатин 20&nbsp;мг <span class="meta">— вечір</span></span>
-          <span class="meta">попереду</span>
+          <span class="body">Аторвастатин 20&nbsp;мг <span class="meta">— 20:00 (вечір)</span></span>
+          <span class="meta">о 20:00</span>
         </article>
 
         <h3>Візит</h3>
@@ -86,7 +92,7 @@
       <section aria-labelledby="s-last">
         <h2 id="s-last">Останнє</h2>
         <article>
-          <a class="body" href="#">Виписка <span class="meta">— 10.07.2026 · документ</span></a>
+          <a class="body" href="#">Виписка — поліклініка №4, кардіолог <span class="meta">— 10.07.2026</span></a>
         </article>
         <article>
           <a class="body" href="#">Гемоглобін — 118&nbsp;г/л <span class="meta">— 08.07.2026 · аналіз</span></a>
@@ -102,6 +108,11 @@
       <a href="#"><span class="slot">іконка</span>Показати</a>
     </nav>
 
-  </div>
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
 </body>
 </html>
