@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Документи — список (порожній)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Документи — список  |  СТАН: порожній (нема документів).
+  Холодний старт розділу — спокійне запрошення додати перший (фото-перший потік R1).
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Документи — список:</span>
+        <a href="documents.html">База</a>
+        <span class="cur">Порожній</span>
+        <a href="documents-loading.html">Завантаження</a>
+        <a href="documents-error.html">Помилка</a>
+      </div>
+
+  <div class="app" data-screen="documents">
+
+    <header>
+      <a class="hdr-back" href="dashboard.html" aria-label="Назад">‹ Назад</a>
+      <span class="hdr-title">Документи</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">Мама</span>
+    </header>
+
+    <main>
+      <h1 class="sr-only">Документи — Мама (порожньо)</h1>
+      <p class="empty-hint">Ще немає документів.</p>
+      <p>Сфотографуйте виписку, рецепт чи результат — і він завжди буде під рукою.</p>
+      <a class="btn btn-primary" href="add-document.html">Додати перший документ</a>
+      <p class="wf-note">Холодний старт розділу — спокійне запрошення, не тривога. CTA веде у фото-перший потік R1 (add-document).</p>
+    </main>
+
+    <nav aria-label="Головна навігація">
+      <a href="dashboard.html"><span class="slot">іконка</span>Головна</a>
+      <a href="#" aria-current="page"><span class="slot">іконка</span>Записи</a>
+      <a class="nav-add" href="quick-add.html"><span class="slot">іконка</span>Додати</a>
+      <a href="anamnesis.html"><span class="slot">іконка</span>Показати</a>
+    </nav>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Документи — список (база)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Документи — список (архів за типом)  (sitemap рядок 132 · R1 · drill-down із Записів)
+  СТАН:  база / успіх (є документи). Порожній/Завантаження/Помилка — окремо.
+  JOB:   MAIN-retrieve — «знайти конкретний документ в архіві» (зворотний бік сц.4).
+  Додано КРОК-9 аудитом: R1 покрив лише capture-флоу (add/view); browse-список лишався незверстаним.
+  Кожен рядок → document-view. «Додати» → add-document (фото-перший, R1). Тип — пресети (CLAUDE ф.2).
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Документи — список:</span>
+        <span class="cur">База</span>
+        <a href="documents-empty.html">Порожній</a>
+        <a href="documents-loading.html">Завантаження</a>
+        <a href="documents-error.html">Помилка</a>
+      </div>
+
+  <div class="app" data-screen="documents">
+
+    <header>
+      <a class="hdr-back" href="dashboard.html" aria-label="Назад">‹ Назад</a>
+      <span class="hdr-title">Документи</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">Мама</span>
+    </header>
+
+    <main>
+      <h1 class="sr-only">Документи — Мама</h1>
+
+      <a class="btn" href="add-document.html">＋ Додати документ</a>
+
+      <section aria-labelledby="d-all">
+        <h2 id="d-all">Усі документи</h2>
+        <article>
+          <a class="body" href="document-view.html">Виписка <span class="meta">— поліклініка №4, кардіолог · 10.07.2026</span></a>
+        </article>
+        <article>
+          <a class="body" href="document-view.html">Результат аналізу <span class="meta">— лабораторія, кров · 08.07.2026</span></a>
+        </article>
+        <article>
+          <a class="body" href="document-view.html">Рецепт <span class="meta">— сімейний лікар · 05.07.2026</span></a>
+        </article>
+      </section>
+
+      <p class="wf-note">Архів за типом (drill-down із Записів). Рядки — за датою (новіші зверху); тип = пресет (виписка/рецепт/результат…, CLAUDE ф.2). Кожен → document-view. МЕЖА: лише зберігання/показ, без інтерпретації.</p>
+    </main>
+
+    <nav aria-label="Головна навігація">
+      <a href="dashboard.html"><span class="slot">іконка</span>Головна</a>
+      <a href="#" aria-current="page"><span class="slot">іконка</span>Записи</a>
+      <a class="nav-add" href="quick-add.html"><span class="slot">іконка</span>Додати</a>
+      <a href="anamnesis.html"><span class="slot">іконка</span>Показати</a>
+    </nav>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

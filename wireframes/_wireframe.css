@@ -495,6 +495,12 @@ input[type="radio"], input[type="checkbox"] { accent-color: #7a7a7a; }  /* сі�
   .app[data-screen="visit-add"] > main { max-width: 560px; margin-inline: auto; }
   .app[data-screen="visit-add"] > .actionbar { max-width: 560px; margin-inline: auto; width: 100%; }
 
+  /* ЗАПИСИ — АРХІВ (hub) — читабельна колонка меню розділів, як інші списки */
+  .app[data-screen="records-index"] > main { max-width: 760px; margin-inline: auto; }
+
+  /* ДОКУМЕНТИ — СПИСОК (R1, додано аудитом) — читабельна колонка, як інші списки */
+  .app[data-screen="documents"] > main { max-width: 760px; margin-inline: auto; }
+
   /* OVERLAY §7 (швидке додавання, пікер типу) — нижній лист → центрована МОДАЛКА:
      bottom-sheet = мобільна ідіома (палець унизу); десктопний еквівалент вибору-над-контекстом = модалка.
      Спільне для обох, бо це та сама ВЗАЄМОДІЯ (транзитний вибір над екраном), не «бо однаково» */

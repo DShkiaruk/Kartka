@@ -19,9 +19,9 @@
     (живить R5; закриває тупик deadempty з flows.md R5: «критичних даних нема»).
   • Сьогодні / Останнє — м'який CTA «додати перший запис» → потік R1
     (flows.md: cold → онбординг → empty → CTA → sheet; альтернатива — churn, якого уникаємо).
-  • Тон — запрошення почати з себе (self-онбординг), не «глухо порожньо».
+  • Тон — запрошення внести критичне (cold-start профілю), не «глухо порожньо».
   • Той самий shell (header + нижній бар), що в dashboard.html; міняється лише вміст секцій.
-  Активний профіль схеми — «Я» (щойно створений self-профіль).
+  Активний профіль схеми — «Мама» (демо-профіль, консистентно з рештою екранів).
 -->
 <body>
   <div class="wfnav-layout">
@@ -41,11 +41,11 @@
   <div class="app" data-screen="dashboard-empty">
 
     <header>
-      <button class="profile-switcher" aria-haspopup="dialog" aria-label="Перемкнути профіль. Активний: Я">
-        <span class="slot avatar">аватар: Я</span>
+      <button class="profile-switcher" aria-haspopup="dialog" aria-label="Перемкнути профіль. Активний: Мама">
+        <span class="slot avatar">аватар: Мама</span>
         <span class="who">
-          <span class="name">Я</span>
-          <span class="role">я</span>
+          <span class="name">Мама</span>
+          <span class="role">мама</span>
         </span>
         <span aria-hidden="true">▾</span>
       </button>
@@ -64,15 +64,15 @@
     </header>
 
     <main>
-      <h1 class="sr-only">Головна — картка: Я (порожньо, холодний старт)</h1>
+      <h1 class="sr-only">Головна — картка: Мама (порожньо, холодний старт)</h1>
 
-      <p class="lead">Профіль «Я» створено. Kartka поки порожня — почніть із критичного про себе.</p>
+      <p class="lead">Профіль «Мама» створено. Kartka поки порожня — почніть із критичного про Маму.</p>
 
       <!-- ① Критичне — порожнє, але ПРОАКТИВНЕ (ключовий adoption-елемент) -->
       <section aria-labelledby="s-crit">
         <h2 id="s-crit">Критичне</h2>
         <p class="empty-hint">Алергії, хроніка та група крові ще не внесені.</p>
-        <p>Внесіть критичне про себе — воно буде під рукою в невідкладний момент, навіть офлайн.</p>
+        <p>Внесіть критичне про Маму — воно буде під рукою в невідкладний момент, навіть офлайн.</p>
         <a class="btn btn-primary" href="edit-base-card.html">Додати алергії / групу крові</a>
         <p class="wf-note">головна дія (adoption): заповнити критичне → живить Екстрене (R5); закриває тупик deadempty (flows.md R5)</p>
       </section>
@@ -96,7 +96,7 @@
 
     <nav aria-label="Головна навігація">
       <a href="#" aria-current="page"><span class="slot">іконка</span>Головна</a>
-      <a href="#"><span class="slot">іконка</span>Записи</a>
+      <a href="records-index.html"><span class="slot">іконка</span>Записи</a>
       <a class="nav-add" href="quick-add.html" aria-haspopup="dialog" aria-label="Додати запис"><span class="slot">іконка</span>Додати</a>
       <a href="anamnesis-incomplete.html"><span class="slot">іконка</span>Показати</a>
     </nav>

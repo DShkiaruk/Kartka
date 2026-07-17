@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Записи — архів за типами (hub)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Записи — архів за типами (hub)  (sitemap · НИЖНІЙ БАР · «🗂 Записи», рядки 206/212-214)
+  JOB:   MAIN-retrieve + R3/R4-manage — «знайти конкретне в усьому архіві» ≠ «глянути важливе» (окремо від Головної).
+  РОЛЬ:  drill-down-хаб → списки за типом (Документи / Ліки / Аналізи / Візити). У sitemap Записи = таб-екран.
+  ЗАКРИВАЄ: 9 мертвих «Записи»-табів (Фаза 2 · записано в _critique.md).
+  Усі 4 розділи ведуть у свій список: Документи → documents · Ліки → medications · Аналізи → analyses · Візити → visits.
+  (documents.html додано тією ж Фазою 2 — закрив асиметрію «Документи без списку»; див. _critique.md.)
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+  <div class="app" data-screen="records-index">
+
+    <header>
+      <a class="hdr-back" href="dashboard.html" aria-label="Назад на Головну">‹ Головна</a>
+      <span class="hdr-title">Записи</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">Мама</span>
+    </header>
+
+    <main>
+      <h1 class="sr-only">Записи — архів за типами (Мама)</h1>
+
+      <section aria-labelledby="r-types">
+        <h2 id="r-types">Архів за типами</h2>
+        <article>
+          <a class="body" href="documents.html">Документи <span class="meta">— виписки, рецепти, результати</span></a>
+        </article>
+        <article>
+          <a class="body" href="medications.html">Ліки <span class="meta">— активні + історія</span></a>
+        </article>
+        <article>
+          <a class="body" href="analyses.html">Аналізи <span class="meta">— показники в часі</span></a>
+        </article>
+        <article>
+          <a class="body" href="visits.html">Візити <span class="meta">— попереду + відбулися</span></a>
+        </article>
+      </section>
+
+      <p class="wf-note">Записи = архів за типами (sitemap: окремо від Головної — «знайти конкретне» ≠ «глянути важливе»). Drill-down у список кожного з 4 типів (усі зверстані). МЕЖА: лише навігація/зберігання, без інтерпретації.</p>
+    </main>
+
+    <nav aria-label="Головна навігація">
+      <a href="dashboard.html"><span class="slot">іконка</span>Головна</a>
+      <a href="#" aria-current="page"><span class="slot">іконка</span>Записи</a>
+      <a class="nav-add" href="quick-add.html"><span class="slot">іконка</span>Додати</a>
+      <a href="anamnesis.html"><span class="slot">іконка</span>Показати</a>
+    </nav>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

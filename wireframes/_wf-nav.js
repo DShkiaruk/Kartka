@@ -24,6 +24,11 @@
       ] }
     ] },
     { section: 'ПІД ПРОФІЛЕМ · Документи', screens: [
+      { name: 'Документи — список', file: 'documents.html', exists: true, states: [
+        { name: 'Порожній (нема документів)', file: 'documents-empty.html', exists: true },
+        { name: 'Завантаження (спільний патерн)', file: 'documents-loading.html', exists: true },
+        { name: 'Помилка завантаження (спільний)', file: 'documents-error.html', exists: true }
+      ] },
       { name: 'Додати документ', file: 'add-document.html', exists: true, states: [
         { name: 'Помилка сховища', file: 'add-document-error.html', exists: true }
       ] },
@@ -88,6 +93,7 @@
       { name: 'Базова картка — редагування', file: 'edit-base-card.html', exists: true }
     ] },
     { section: 'НАСКРІЗНЕ', screens: [
+      { name: 'Записи — архів (hub)', file: 'records-index.html', exists: true },
       // ➕-вибір типу — overlay поверх Дашборда (§7); окрема сторінка лише як референс структури
       { name: 'Швидке додавання (overlay §7)', file: 'quick-add.html', exists: true }
     ] }
