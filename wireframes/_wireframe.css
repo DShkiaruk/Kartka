@@ -239,3 +239,55 @@ button, .btn {
 .empty-hint { margin: 0; font-size: 0.9rem; color: var(--muted); }
 section p { margin: 0; font-size: 0.9rem; }
 .btn-primary { background: #dedede; border: 1px solid var(--ink); font-weight: 700; }  /* акцент дією, не кольором */
+
+/* ── патерни для решти R1-flow (усе сіре; §0/§1) ────────────────────── */
+
+/* заголовок-детейл: «назад» + назва + профіль-контекст (антипомилка сц.10) */
+.hdr-back  { border: 0; background: none; font: inherit; cursor: pointer; min-height: var(--tap); padding: var(--sp-1) var(--sp-2); color: var(--ink); text-decoration: none; display: inline-flex; align-items: center; }
+.hdr-title { font-weight: 700; font-size: 0.95rem; }
+.hdr-ctx   { color: var(--muted); font-size: 0.8rem; }   /* «для: Мама» */
+
+/* фокус-потік: екшн-бар унизу замість нижнього бару (add-document, онбординг) */
+.actionbar {
+  flex: 0 0 auto;
+  display: flex; align-items: center; gap: var(--sp-2);
+  padding: var(--sp-3) var(--pad);
+  border-top: 1px solid var(--line);
+}
+.actionbar .grow { flex: 1; }
+
+/* великий слот: видошукач камери / знімок документа */
+.slot-big {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 220px; text-align: center;
+  border: 1px dashed var(--line-2); background: var(--fill-2); color: var(--muted);
+}
+
+/* форма (онбординг) — мінімум полів */
+.field { margin-bottom: var(--sp-4); }
+.field label { display: block; font-size: 0.8rem; color: var(--muted); margin-bottom: var(--sp-1); }
+.field input { width: 100%; font: inherit; min-height: var(--tap); padding: var(--sp-2); border: 1px solid var(--line-2); background: #fff; }
+
+/* інфо/статус-смужка (автодефолти, «Збережено ✓», «синхронізується») */
+.status { margin: 0; font-size: 0.85rem; padding: var(--sp-2) var(--sp-3); border: 1px solid var(--line-2); background: var(--fill-2); }
+
+/* рядок «поле: значення» з опційною дією «дозаповнити» */
+.meta-row { display: flex; align-items: center; gap: var(--sp-2); font-size: 0.9rem; }
+.meta-row .k { flex: 0 0 116px; color: var(--muted); }
+.meta-row .v { flex: 1; }
+.meta-row .todo { font-style: italic; color: var(--muted); }
+.meta-row input { flex: 1; font: inherit; min-height: var(--tap); padding: var(--sp-2); border: 1px solid var(--line-2); background: #fff; }  /* інлайн-редагування (авто-save при закритті) */
+
+/* overlay sheet (§7): scrim + нижній лист поверх екрана під ним */
+.app { position: relative; }
+.wf-scrim { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.45); }   /* приглушений фон (сірий+альфа) */
+.wf-sheet {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  background: #fff; border-top: 2px solid var(--line-2);
+  padding: var(--sp-4);
+  display: flex; flex-direction: column; gap: var(--sp-2);
+}
+.wf-sheet h2 { margin: 0 0 var(--sp-2); font-size: 0.85rem; font-weight: 700; color: var(--muted); }
+.wf-sheet .btn { align-self: stretch; text-align: left; }
+.btn.disabled { color: var(--muted); background: var(--fill-2); border-style: dashed; cursor: default; }
+.wf-sheet .cancel { align-self: center; margin-top: var(--sp-2); color: var(--muted); }

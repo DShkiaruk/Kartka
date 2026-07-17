@@ -16,7 +16,7 @@
 (function () {
   var TREE = [
     { section: 'ВХІД / ОНБОРДИНГ', screens: [
-      { name: 'Онбординг — Додай СЕБЕ', file: 'onboarding-self.html', exists: false }
+      { name: 'Онбординг — Додай СЕБЕ', file: 'onboarding.html', exists: true }
     ] },
     { section: 'ДОМІВКА', screens: [
       { name: 'Дашборд профілю', file: 'dashboard.html', exists: true, states: [
@@ -24,16 +24,17 @@
       ] }
     ] },
     { section: 'ПІД ПРОФІЛЕМ · Документи', screens: [
-      { name: 'Додати документ', file: 'add-document.html', exists: false, states: [
-        { name: 'Помилка сховища', file: 'add-document-error.html', exists: false }
+      { name: 'Додати документ', file: 'add-document.html', exists: true, states: [
+        { name: 'Помилка сховища', file: 'add-document-error.html', exists: true }
       ] },
-      { name: 'Документ — перегляд', file: 'document.html', exists: false, states: [
-        { name: 'Завантаження (синк)', file: 'document-loading.html', exists: false }
+      { name: 'Документ — перегляд', file: 'document-view.html', exists: true, states: [
+        { name: 'Завантаження (синк)', file: 'document-view-loading.html', exists: true },
+        { name: 'Дозаповнити тип (overlay §7, under-flow)', file: 'document-edit-type.html', exists: true }
       ] }
     ] },
     { section: 'НАСКРІЗНЕ', screens: [
-      // ➕-вибір типу — overlay поверх Дашборда (§7), не окремий роут → не лінкуємо
-      { name: 'Швидке додавання — вибір типу', overlay: true }
+      // ➕-вибір типу — overlay поверх Дашборда (§7); окрема сторінка лише як референс структури
+      { name: 'Швидке додавання (overlay §7)', file: 'quick-add.html', exists: true }
     ] }
   ];
 

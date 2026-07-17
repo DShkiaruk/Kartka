@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Тип документа (пікер, overlay)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Пікер типу документа  |  under-flow екрана «Документ — перегляд» (НЕ 4-й стан).
+  OVERLAY §7 — sheet ПОВЕРХ перегляду; контекст (документ) видно приглушеним.
+  JOB:   R1 — дозаповнити метадані (тип). Пресети = 6 типів документів (CLAUDE фіча 2).
+  FLOW (flows.md R1): view → {Дозаповнити тип?} →|так| Пікер типу (overlay) → авто-save при виборі → view.
+  Авто-save при виборі, БЕЗ кнопки «Зберегти» (durable-принцип). Вибір/Скасувати → повернення на перегляд.
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+  <div class="app">
+
+    <!-- приглушений backdrop «Документ — перегляд» (контекст не втрачається, §7) -->
+    <header>
+      <a class="hdr-back" href="document-view.html" aria-label="Назад">‹ Назад</a>
+      <span class="hdr-title">Документ</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">Мама</span>
+    </header>
+
+    <main aria-hidden="true">
+      <p class="status">Збережено ✓</p>
+      <div class="slot-big">знімок документа</div>
+      <section>
+        <h2>Деталі</h2>
+        <div class="meta-row"><span class="k">Дата</span><span class="v">12.07.2026 (сьогодні)</span></div>
+        <div class="meta-row"><span class="k">Тип</span><span class="v todo">не вказано</span></div>
+      </section>
+    </main>
+
+    <nav aria-label="Головна навігація">
+      <a href="dashboard.html"><span class="slot">іконка</span>Головна</a>
+      <a href="#" aria-current="page"><span class="slot">іконка</span>Записи</a>
+      <a class="nav-add" href="quick-add.html"><span class="slot">іконка</span>Додати</a>
+      <a href="#"><span class="slot">іконка</span>Показати</a>
+    </nav>
+
+    <!-- overlay: приглушення + нижній лист вибору типу -->
+    <div class="wf-scrim"></div>
+    <div class="wf-sheet" role="dialog" aria-modal="true" aria-label="Тип документа">
+      <h2>Тип документа</h2>
+      <a class="btn" href="document-view.html">Виписка / епікриз</a>
+      <a class="btn" href="document-view.html">Направлення</a>
+      <a class="btn" href="document-view.html">Рецепт</a>
+      <a class="btn" href="document-view.html">Результат аналізу</a>
+      <a class="btn" href="document-view.html">Довідка</a>
+      <a class="btn" href="document-view.html">Висновок</a>
+      <a class="cancel" href="document-view.html">Скасувати</a>
+      <p class="wf-note">§7: overlay над переглядом. Вибір = авто-save (без кнопки) → повернення на перегляд. 6 пресетів = CLAUDE фіча 2.</p>
+    </div>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Додати документ — помилка сховища</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Додати документ  |  СТАН: Помилка сховища (єдиний стан-стор. поза базою, _screens.md).
+  Це збій ЛОКАЛЬНОГО запису (рідкісний) — М'ЯКИЙ: durable-чернетка вже спіймала знімок,
+  тож його НЕ втрачено (flows.md R1: «вийшов під час помилки → знімок втрачено» БІЛЬШЕ не тупик).
+  FLOW (flows.md R1): draft → savecheck →|ні (рідкісний збій сховища)| retry «Повторити» → savecheck.
+  Синк-помилка тут ні до чого — це збій локального сховища, не мережі.
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Додати документ:</span>
+        <a href="add-document.html">База</a>
+        <span class="cur">Помилка сховища</span>
+      </div>
+
+  <div class="app">
+
+    <header>
+      <span class="hdr-title">Додати документ</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">для: Мама</span>
+    </header>
+
+    <main>
+      <div class="slot-big">знімок документа (у чернетці)</div>
+      <p class="status">Не вдалося зберегти на пристрої. Знімок збережено в чернетці — його не втрачено.</p>
+      <p>Спробуйте ще раз. Якщо повториться — перезапустіть застосунок; чернетка збережеться.</p>
+      <p class="wf-note">м'який тон: durable-чернетка вже спіймала знімок; це збій ЛОКАЛЬНОГО сховища, не синку. «Повторити» → успіх → перегляд.</p>
+    </main>
+
+    <div class="actionbar">
+      <a class="btn btn-primary" href="document-view.html">Повторити</a>
+      <span class="grow"></span>
+      <a class="btn" href="dashboard.html">Скасувати</a>
+    </div>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

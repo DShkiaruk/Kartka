@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Онбординг (Додай СЕБЕ)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Онбординг нового користувача → ★ «Додай СЕБЕ» → перший self-профіль  (sitemap)
+  СТАН:  лише база (у _screens.md станів «—» → сторінок стану НЕ робимо).
+  JOB:   MAIN · анти-холодний-старт — закладає вісь-Профіль (перший self-профіль).
+  FLOW (flows.md R1): auth →|новий| cold → onb «Додай СЕБЕ» → dashboard-empty (порожній дашборд).
+  Немає нижнього бару (ще немає застосунку-контексту); footer = дія «Зберегти».
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+  <div class="app">
+
+    <header>
+      <span class="hdr-title">Kartka</span>
+    </header>
+
+    <main>
+      <h1>Почнімо з вас</h1>
+      <p class="lead">Kartka — приватний медичний щоденник вашої родини. Спершу створіть власну картку; рідних додасте потім.</p>
+
+      <form>
+        <div class="field">
+          <label for="nm">Як вас звати?</label>
+          <input id="nm" type="text" placeholder="Ім'я">
+        </div>
+        <div class="field">
+          <label for="bd">Дата народження (опційно)</label>
+          <input id="bd" type="text" placeholder="рррр-мм-дд">
+        </div>
+      </form>
+
+      <p class="empty-hint">Роль — «я». Дітей і батьків додасте пізніше.</p>
+      <p class="wf-note">мінімум полів (принцип №1 — вартість введення); це вхід у холодний старт</p>
+    </main>
+
+    <div class="actionbar">
+      <span class="grow"></span>
+      <a class="btn btn-primary" href="dashboard-empty.html">Зберегти й продовжити</a>
+    </div>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

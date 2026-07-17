@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Документ — перегляд (синхронізується)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Документ — перегляд  |  СТАН: Завантаження (синк ФОНОМ) — єдиний стан поза базою (_screens.md).
+  Та сама структура, що в document-view.html; міняється лише статус-рядок.
+  FLOW (flows.md R1): офлайн/черга → queue «У черзі на синк» → ok → view зі статусом «синхронізується».
+  Синк не блокує екран; невдалий синк flows.md лише ПЕРЕ-СТАВИТЬ у чергу (це не «Помилка», а «Завантаження»).
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Документ:</span>
+        <a href="document-view.html">База / успіх</a>
+        <span class="cur">Завантаження</span>
+      </div>
+
+  <div class="app">
+
+    <header>
+      <a class="hdr-back" href="dashboard.html" aria-label="Назад на Головну">‹ Назад</a>
+      <span class="hdr-title">Документ</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">Мама</span>
+    </header>
+
+    <main>
+      <p class="status">Збережено локально · синхронізується…</p>
+      <div class="slot-big">знімок документа</div>
+
+      <section aria-labelledby="s-det">
+        <h2 id="s-det">Деталі</h2>
+        <div class="meta-row"><span class="k">Дата</span><span class="v">12.07.2026 (сьогодні)</span></div>
+        <div class="meta-row"><span class="k">Профіль</span><span class="v">Мама</span></div>
+        <div class="meta-row"><span class="k">Тип</span><span class="v todo">не вказано</span><a class="btn" href="document-edit-type.html">Вказати</a></div>
+        <div class="meta-row">
+          <label class="k" for="doc-mama-loading">Лікар / заклад</label>
+          <input class="v" id="doc-mama-loading" type="text" placeholder="напр. поліклініка №4, кардіолог">
+        </div>
+        <p class="wf-note">документ уже видно й редагований; синк іде фоном (помилки нема — невдалий синк лише повертає в чергу). Тип → пікер overlay §7; лікар/заклад → інлайн, авто-save.</p>
+      </section>
+    </main>
+
+    <nav aria-label="Головна навігація">
+      <a href="dashboard.html"><span class="slot">іконка</span>Головна</a>
+      <a href="#" aria-current="page"><span class="slot">іконка</span>Записи</a>
+      <a class="nav-add" href="quick-add.html"><span class="slot">іконка</span>Додати</a>
+      <a href="#"><span class="slot">іконка</span>Показати</a>
+    </nav>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

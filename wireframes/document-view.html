@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Документ — перегляд (успіх)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Документ — перегляд  (sitemap · R1 · R2)
+  СТАН:  база = УСПІХ (приземлення після збереження) + Завантаження → document-view-loading.html.
+         Успіх окремої сторінки не має — ним є цей перегляд (flows.md ok «Збережено ✓» → view).
+  JOB:   R1 сц.4 — вхідне надійно «покладено на місце» (перегляд живить і R2, поза скоупом).
+  FLOW (flows.md R1): ok «Збережено ✓ — дата=сьогодні, профіль=активний» → view (тип/лікар можна дозаповнити).
+  Нижній бар видимий; активний таб — Записи (документ живе в архіві).
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Документ:</span>
+        <span class="cur">База / успіх</span>
+        <a href="document-view-loading.html">Завантаження</a>
+      </div>
+
+  <div class="app">
+
+    <header>
+      <a class="hdr-back" href="dashboard.html" aria-label="Назад на Головну">‹ Назад</a>
+      <span class="hdr-title">Документ</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">Мама</span>
+    </header>
+
+    <main>
+      <p class="status">Збережено ✓</p>
+      <div class="slot-big">знімок документа</div>
+
+      <section aria-labelledby="s-det">
+        <h2 id="s-det">Деталі</h2>
+        <div class="meta-row"><span class="k">Дата</span><span class="v">12.07.2026 (сьогодні)</span></div>
+        <div class="meta-row"><span class="k">Профіль</span><span class="v">Мама</span></div>
+        <div class="meta-row"><span class="k">Тип</span><span class="v todo">не вказано</span><a class="btn" href="document-edit-type.html">Вказати</a></div>
+        <div class="meta-row">
+          <label class="k" for="doc-mama">Лікар / заклад</label>
+          <input class="v" id="doc-mama" type="text" placeholder="напр. поліклініка №4, кардіолог">
+        </div>
+        <p class="wf-note">тип → пікер overlay §7 (document-edit-type.html); лікар/заклад → інлайн текст, авто-save при закритті (без кнопки). flows.md гілка «дозаповнити метадані».</p>
+      </section>
+    </main>
+
+    <nav aria-label="Головна навігація">
+      <a href="dashboard.html"><span class="slot">іконка</span>Головна</a>
+      <a href="#" aria-current="page"><span class="slot">іконка</span>Записи</a>
+      <a class="nav-add" href="quick-add.html"><span class="slot">іконка</span>Додати</a>
+      <a href="#"><span class="slot">іконка</span>Показати</a>
+    </nav>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

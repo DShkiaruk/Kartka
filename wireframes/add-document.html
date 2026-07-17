@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Додати документ (фото-перший)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Додати документ (фото-перший потік)  (sitemap · R1 · екзистенційний ризик №1)
+  СТАН:  база (тут) + Помилка сховища → add-document-error.html.
+         Завантаження/успіх тут НЕ роблю (успіх = перехід у document-view; синк — фоном).
+  JOB:   R1 сц.4 — «зафіксувати вхідне, поки не загубив». Фото-перший, автодата, тип/лікар опційно.
+  FLOW (flows.md R1): quick-add →|документ| adddoc → shot «Знімок (3)» → durable-чернетка → синк фоном → document-view.
+  ≤3 ТАПИ: тут ТАП 3 = «Зняти». Немає нижнього бару (фокус-потік); footer = екшн-бар.
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Додати документ:</span>
+        <span class="cur">База</span>
+        <a href="add-document-error.html">Помилка сховища</a>
+      </div>
+
+  <div class="app">
+
+    <header>
+      <span class="hdr-title">Додати документ</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">для: Мама</span>
+    </header>
+
+    <main>
+      <div class="slot-big">камера: видошукач</div>
+      <p class="status">Дата: сьогодні (12.07.2026) · Профіль: Мама</p>
+      <p class="empty-hint">Тип і лікаря додасте після знімка — необов'язково.</p>
+      <p class="wf-note">головна дія: «Зняти» (тап 3) → durable-чернетка одразу, синк фоном → перегляд. Автодефолти: дата=сьогодні, профіль=активний (не питаємо «для кого»). «З галереї» — альтернатива входу, не +тап.</p>
+    </main>
+
+    <div class="actionbar">
+      <a class="btn btn-primary" href="document-view.html">Зняти</a>
+      <a class="btn" href="document-view.html">З галереї / файл</a>
+      <span class="grow"></span>
+      <a class="btn" href="dashboard.html">Скасувати</a>
+    </div>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>
