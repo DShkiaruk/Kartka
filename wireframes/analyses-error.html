@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Аналізи — помилка завантаження (спільний патерн)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  СТАН: Помилка завантаження — СПІЛЬНИЙ патерн (зверстано раз, той самий на списку І кривій).
+  Збій завантаження з сервера → Повторити. Це помилка ЗАВАНТАЖЕННЯ, не збереження.
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Аналізи — список:</span>
+        <a href="analyses.html">База</a>
+        <a href="analyses-empty.html">Порожній</a>
+        <a href="analyses-loading.html">Завантаження</a>
+        <span class="cur">Помилка</span>
+      </div>
+
+  <div class="app" data-screen="analyses">
+
+    <header>
+      <a class="hdr-back" href="dashboard.html" aria-label="Назад">‹ Назад</a>
+      <span class="hdr-title">Аналізи</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">Мама</span>
+    </header>
+
+    <main>
+      <h1 class="sr-only">Аналізи — помилка завантаження</h1>
+      <p class="status">Не вдалося завантажити аналізи.</p>
+      <div class="share-row">
+        <a class="btn btn-primary" href="analyses.html">Повторити</a>
+      </div>
+      <p class="wf-note">СПІЛЬНИЙ патерн помилки-завантаження (той самий на списку й кривій) — зверстано раз, перевикористано. Це помилка ЗАВАНТАЖЕННЯ (сервер), не збереження.</p>
+    </main>
+
+    <nav aria-label="Головна навігація">
+      <a href="dashboard.html"><span class="slot">іконка</span>Головна</a>
+      <a href="#" aria-current="page"><span class="slot">іконка</span>Записи</a>
+      <a class="nav-add" href="quick-add.html"><span class="slot">іконка</span>Додати</a>
+      <a href="anamnesis.html"><span class="slot">іконка</span>Показати</a>
+    </nav>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

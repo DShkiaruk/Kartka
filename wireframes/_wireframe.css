@@ -320,6 +320,14 @@ input[type="radio"], input[type="checkbox"] { accent-color: #7a7a7a; }  /* сі�
 .reveal[hidden] { display: none; }   /* JS-conditional reveal: показуємо поля лише обраного типу */
 .sched-inline { display: none; }     /* розклад інлайн — лише на десктопі (див. @container) */
 
+/* ── R4 аналізи: автодоповнення показника (under-flow, довідник) — статичний список підказок під полем ── */
+.ac-list { list-style: none; margin: var(--sp-1) 0 0; padding: 0; border: 1px solid var(--line-2); background: #fff; }
+.ac-list li { padding: var(--sp-2) var(--sp-3); border-bottom: 1px solid var(--fill); font-size: 0.9rem; }
+.ac-list li:last-child { border-bottom: 0; }
+.ac-list .syn { color: var(--muted); font-size: 0.8rem; }
+.ac-list .own { font-weight: 600; background: var(--fill-2); }   /* канонічний збіг — виділено вагою, не кольором */
+.ac-list .ac-own { color: var(--muted); font-style: italic; border-top: 1px dashed var(--line-2); }  /* «свій параметр» */
+
 /* overlay sheet (§7): scrim + нижній лист поверх екрана під ним */
 .app { position: relative; }
 .wf-scrim { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.45); }   /* приглушений фон (сірий+альфа) */
@@ -454,6 +462,27 @@ input[type="radio"], input[type="checkbox"] { accent-color: #7a7a7a; }  /* сі�
   /* ЛІКИ — РОЗКЛАД (R3 under-flow) — вузька центрована форма (як додати) */
   .app[data-screen="medication-schedule"] > main { max-width: 560px; margin-inline: auto; }
   .app[data-screen="medication-schedule"] > .actionbar { max-width: 560px; margin-inline: auto; width: 100%; }
+
+  /* АНАЛІЗИ — СПИСОК (R4) — читабельна колонка серій показників (сканувати останні значення),
+     як список ліків; не розтягуємо на всю ширину */
+  .app[data-screen="analyses"] > main { max-width: 760px; margin-inline: auto; }
+
+  /* ПОКАЗНИК — КРИВА (R4, n≥2) — великий візуал крива + деталі обраної точки поруч (природа медіа+метадані,
+     як документ-перегляд): бачити криву великою і точку одночасно; мобілка — стек.
+     n=1 (без .point-detail) → вузька центрована колонка (точка + нота; колонки зайві) */
+  .app[data-screen="analysis-curve"] > main:has(.point-detail) {
+    display: grid; grid-template-columns: 1.4fr 1fr; gap: var(--sp-4) var(--sp-6);
+    align-items: start; max-width: 1080px;
+  }
+  .app[data-screen="analysis-curve"] > main:has(.point-detail) > .field    { grid-column: 1 / -1; }   /* період — повна ширина зверху */
+  .app[data-screen="analysis-curve"] > main:has(.point-detail) > .slot-big { grid-column: 1; min-height: 420px; }
+  .app[data-screen="analysis-curve"] > main:has(.point-detail) > section   { grid-column: 2; align-self: start; }
+  .app[data-screen="analysis-curve"] > main:has(.point-detail) > .wf-note  { grid-column: 1 / -1; }
+  .app[data-screen="analysis-curve"] > main:not(:has(.point-detail)) { max-width: 560px; margin-inline: auto; }
+
+  /* ДОДАТИ РЕЗУЛЬТАТ (R4) — вузька центрована форма (лінійне введення + автодоповнення показника) */
+  .app[data-screen="analysis-add"] > main { max-width: 560px; margin-inline: auto; }
+  .app[data-screen="analysis-add"] > .actionbar { max-width: 560px; margin-inline: auto; width: 100%; }
 
   /* OVERLAY §7 (швидке додавання, пікер типу) — нижній лист → центрована МОДАЛКА:
      bottom-sheet = мобільна ідіома (палець унизу); десктопний еквівалент вибору-над-контекстом = модалка.

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Аналізи — список показників (база)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Аналізи — список показників  (sitemap · ПІД ПРОФІЛЕМ · R4)
+  СТАН:  база / успіх (є показники). Порожній/Завантаження/Помилка — окремо.
+  JOB:   R4 (сц.7) — бачити показники профілю, кожен з останнім значенням, і заходити в динаміку.
+  DISCOVERABILITY (анти-Synevo, O19): список організовано ПО ПОКАЗНИКУ (серія), НЕ по PDF-результату
+    → динаміка НЕ захована; крива = 1 тап зі списку. Кожен рядок несе останнє значення + міні-криву.
+  МЕЖА (CLAUDE §4): сирі значення, БЕЗ норм / зон / кольорів-оцінок (AVOID).
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Аналізи — список:</span>
+        <span class="cur">База</span>
+        <a href="analyses-empty.html">Порожній</a>
+        <a href="analyses-loading.html">Завантаження</a>
+        <a href="analyses-error.html">Помилка</a>
+      </div>
+
+  <div class="app" data-screen="analyses">
+
+    <header>
+      <a class="hdr-back" href="dashboard.html" aria-label="Назад">‹ Назад</a>
+      <span class="hdr-title">Аналізи</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">Мама</span>
+    </header>
+
+    <main>
+      <h1 class="sr-only">Аналізи — Мама</h1>
+
+      <a class="btn" href="analysis-add.html">＋ Додати результат</a>
+
+      <section aria-labelledby="a-params">
+        <h2 id="a-params">Показники</h2>
+        <article>
+          <a class="body" href="analysis-curve.html">Гемоглобін <span class="meta">— 128 г/л · 12.07.2026</span></a>
+          <span class="slot">крива</span>
+        </article>
+        <article>
+          <a class="body" href="analysis-curve.html">Глюкоза <span class="meta">— 5,1 ммоль/л · 03.07.2026</span></a>
+          <span class="slot">крива</span>
+        </article>
+        <article>
+          <a class="body" href="analysis-curve-onepoint.html">Вітамін D <span class="meta">— 28 нг/мл · 20.06.2026</span></a>
+          <span class="slot">1 точка</span>
+        </article>
+      </section>
+
+      <p class="wf-note">Список організовано ПО ПОКАЗНИКУ (серія значень), НЕ по PDF-результату — динаміка не захована (анти-Synevo, O19): крива = 1 тап зі списку; кожен рядок несе останнє значення + міні-криву-слот. МЕЖА: сире значення + дата, БЕЗ норм / зон / «в межах/поза» / кольорів-оцінок (CLAUDE §4).</p>
+    </main>
+
+    <nav aria-label="Головна навігація">
+      <a href="dashboard.html"><span class="slot">іконка</span>Головна</a>
+      <a href="#" aria-current="page"><span class="slot">іконка</span>Записи</a>
+      <a class="nav-add" href="quick-add.html"><span class="slot">іконка</span>Додати</a>
+      <a href="anamnesis.html"><span class="slot">іконка</span>Показати</a>
+    </nav>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

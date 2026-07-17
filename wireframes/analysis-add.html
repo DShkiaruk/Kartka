@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Додати результат аналізу</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Додати результат аналізу  (sitemap · ПІД ПРОФІЛЕМ · R4)
+  СТАН:  база (форма). Помилка збереження → analysis-add-error.html.
+  UNDER-FLOW: довідник показників (автодоповнення, НЕ екран) — канонічна назва + синоніми;
+    вибір канонічного → одиниця авто; «свій параметр» → назва+одиниця вручну (гібрид CLAUDE ф.4).
+  МЕЖА: вводимо лише {показник · значення · одиниця · дата · опц. файл}. ЖОДНОЇ норми / діапазону / оцінки.
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Додати результат:</span>
+        <span class="cur">Форма</span>
+        <a href="analysis-add-error.html">Помилка збереження</a>
+      </div>
+
+  <div class="app" data-screen="analysis-add">
+
+    <header>
+      <span class="hdr-title">Додати результат</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">для: Мама</span>
+    </header>
+
+    <main>
+      <form>
+        <div class="field">
+          <label for="param">Показник</label>
+          <input id="param" type="text" value="гемогл" placeholder="почніть вводити… напр. гемоглобін">
+          <ul class="ac-list" aria-label="Підказки з довідника показників">
+            <li class="own">Гемоглобін <span class="syn">· г/л</span></li>
+            <li>Глюкоза <span class="syn">· ммоль/л · синонім «цукор»</span></li>
+            <li class="ac-own">＋ Свій параметр (назва + одиниця вручну)</li>
+          </ul>
+          <p class="wf-note">Автодоповнення з довідника показників (under-flow, НЕ окремий екран): канонічна назва + синоніми («цукор»→«Глюкоза», «Hb»→«Гемоглобін»). Вибір канонічного → одиниця підставляється авто. «Свій параметр» → назва+одиниця вручну (гібрид).</p>
+        </div>
+
+        <div class="field">
+          <label for="unit">Одиниця</label>
+          <input id="unit" type="text" value="г/л">
+          <p class="wf-note">підставлено з довідника (Гемоглобін → г/л); для «свій параметр» — вводиться вручну.</p>
+        </div>
+
+        <div class="field">
+          <label for="value">Значення</label>
+          <input id="value" type="text" inputmode="decimal" placeholder="напр. 128">
+        </div>
+
+        <div class="field">
+          <label for="date">Дата</label>
+          <input id="date" type="date" value="2026-07-12">
+        </div>
+
+        <div class="field">
+          <label>Файл-джерело <span class="hdr-ctx">(опційно)</span></label>
+          <div class="share-row">
+            <a class="btn" href="#">＋ Прикріпити файл</a>
+            <span class="slot">файл: результат аналізу</span>
+          </div>
+          <p class="wf-note">опційно: вимірювання ↔ Документ-джерело; тап на точку кривої потім покаже це джерело.</p>
+        </div>
+      </form>
+      <p class="wf-note">durable-save (авто, як R1/R3). МЕЖА (CLAUDE §4): вводимо лише значення + одиницю + дату — НЕ норму, НЕ діапазон «норми», НЕ оцінку. Інтерпретація = SaMD.</p>
+    </main>
+
+    <div class="actionbar">
+      <a class="btn btn-primary" href="analyses.html">Зберегти</a>
+      <a class="btn" href="analyses.html">Скасувати</a>
+    </div>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

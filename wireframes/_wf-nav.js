@@ -46,6 +46,19 @@
         { name: 'Журнал порожній', file: 'medication-detail-empty.html', exists: true }
       ] }
     ] },
+    { section: 'ПІД ПРОФІЛЕМ · Аналізи (R4)', screens: [
+      { name: 'Аналізи — список показників', file: 'analyses.html', exists: true, states: [
+        { name: 'Порожній (нема показників)', file: 'analyses-empty.html', exists: true },
+        { name: 'Завантаження (спільний патерн)', file: 'analyses-loading.html', exists: true },
+        { name: 'Помилка завантаження (спільний)', file: 'analyses-error.html', exists: true }
+      ] },
+      { name: 'Показник — крива в часі', file: 'analysis-curve.html', exists: true, states: [
+        { name: 'Одна точка (n=1 — борг динаміки)', file: 'analysis-curve-onepoint.html', exists: true }
+      ] },
+      { name: 'Додати результат аналізу', file: 'analysis-add.html', exists: true, states: [
+        { name: 'Помилка збереження', file: 'analysis-add-error.html', exists: true }
+      ] }
+    ] },
     { section: 'ПРОЄКЦІЇ · R2', screens: [
       { name: 'Анамнез-PDF — перегляд', file: 'anamnesis.html', exists: true, states: [
         { name: 'Генерація', file: 'anamnesis-loading.html', exists: true },
@@ -94,7 +107,7 @@
   function render(mount) {
     var title = document.createElement('div');
     title.className = 'wfnav-title';
-    title.textContent = 'Вайрфрейми · MVP (R1·R2·R5) + R3';
+    title.textContent = 'Вайрфрейми · MVP (R1·R2·R5) + R3·R4';
     mount.appendChild(title);
 
     TREE.forEach(function (sec) {

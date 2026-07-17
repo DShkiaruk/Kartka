@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Аналізи — список (порожній)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Аналізи — список  |  СТАН: порожній (нема показників).
+  R4 ОПЦІЙНИЙ — людина без аналізів усе одно має цінну Kartka (CLAUDE §1). НЕ тупик, спокійне запрошення.
+  Порожній СПИСОК («додай перший результат») ≠ n=1 КРИВА («одна точка, потрібен ще запис»).
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Аналізи — список:</span>
+        <a href="analyses.html">База</a>
+        <span class="cur">Порожній</span>
+        <a href="analyses-loading.html">Завантаження</a>
+        <a href="analyses-error.html">Помилка</a>
+      </div>
+
+  <div class="app" data-screen="analyses">
+
+    <header>
+      <a class="hdr-back" href="dashboard.html" aria-label="Назад">‹ Назад</a>
+      <span class="hdr-title">Аналізи</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">Мама</span>
+    </header>
+
+    <main>
+      <h1 class="sr-only">Аналізи — Мама (порожньо)</h1>
+      <p class="empty-hint">Ще немає аналізів.</p>
+      <p>Тут з'являться показники члена родини — значення в часі, щоб бачити зміну.</p>
+      <a class="btn btn-primary" href="analysis-add.html">Додати перший результат</a>
+      <p class="wf-note">R4 опційний: без аналізів Kartka все одно цінна (CLAUDE §1). Порожній СПИСОК («додай перший результат») ≠ n=1 КРИВА («одна точка, потрібен ще запис»). Жодних норм / оцінок і тут.</p>
+    </main>
+
+    <nav aria-label="Головна навігація">
+      <a href="dashboard.html"><span class="slot">іконка</span>Головна</a>
+      <a href="#" aria-current="page"><span class="slot">іконка</span>Записи</a>
+      <a class="nav-add" href="quick-add.html"><span class="slot">іконка</span>Додати</a>
+      <a href="anamnesis.html"><span class="slot">іконка</span>Показати</a>
+    </nav>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

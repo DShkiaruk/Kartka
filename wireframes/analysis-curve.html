@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Показник — крива в часі (n≥2)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Показник — крива в часі (без норм / зон)  (sitemap · ПІД ПРОФІЛЕМ · R4)
+  СТАН:  база / крива (n≥2 вимірювань). Одна точка (n=1) — окремо. Завантаження/помилка — спільний патерн (як список).
+  JOB:   R4 (сц.7) — побачити ДИНАМІКУ показника, не окремі цифри.
+  КРИВА = СЛОТ-БОКС (графік — ассет, §0: реальний SVG у каркасах НЕ малюємо).
+  МЕЖА (CLAUDE §4 — НАЙТОНШЕ місце продукту): показуємо ЩО і КОЛИ, НЕ судимо.
+    AVOID на цьому екрані: норми · зони «в межах/поза» · кольори-оцінки · стрілки «краще/гірше» ·
+    target-line · «відхилення» · %-зміна-висновок · вердикти «покращується/погіршується/в нормі».
+    Дозволено (сирий факт): значення · дата · сира крива · тап-точка (знач.+дата+джерело) · зум міс/6міс/рік.
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Показник — крива:</span>
+        <span class="cur">Крива (n≥2)</span>
+        <a href="analysis-curve-onepoint.html">Одна точка (n=1)</a>
+        <a href="analyses-loading.html">Завантаження*</a>
+        <a href="analyses-error.html">Помилка*</a>
+      </div>
+
+  <div class="app" data-screen="analysis-curve">
+
+    <header>
+      <a class="hdr-back" href="analyses.html" aria-label="Назад до аналізів">‹ Аналізи</a>
+      <span class="hdr-title">Гемоглобін</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">Мама</span>
+    </header>
+
+    <main>
+      <div class="field">
+        <label>Період</label>
+        <div class="chips" role="group" aria-label="Період перегляду">
+          <button type="button" class="chip">Міс</button>
+          <button type="button" class="chip on">6 міс</button>
+          <button type="button" class="chip">Рік</button>
+        </div>
+      </div>
+
+      <div class="slot-big">[крива: Гемоглобін · 5 вимірювань · г/л]</div>
+
+      <section class="point-detail" aria-labelledby="pt">
+        <h2 id="pt">Точка (обрано)</h2>
+        <div class="kv"><span class="k">Значення</span><span class="v">128 г/л</span></div>
+        <div class="kv"><span class="k">Дата</span><span class="v">12.07.2026</span></div>
+        <div class="kv"><span class="k">Джерело</span><span class="v"><span class="slot">файл: аналіз крові</span></span></div>
+        <p class="wf-note">тап на точку кривої → значення + дата + джерело (прикріплений файл). Тут статично показано одну обрану точку.</p>
+      </section>
+
+      <p class="wf-note">Крива = слот-бокс (графік — ассет, §0; реальний SVG у каркасах не малюємо; стани показуємо різним вмістом слота). Зум міс/6міс/рік = ВІКНО перегляду, НЕ оцінка. МЕЖА (CLAUDE §4): жодних норм / зон / кольорів-оцінок / стрілок «краще-гірше» / target-line / «відхилень» / %-висновку / вердиктів «покращується-погіршується». Лише сира крива значень.</p>
+    </main>
+
+    <nav aria-label="Головна навігація">
+      <a href="dashboard.html"><span class="slot">іконка</span>Головна</a>
+      <a href="#" aria-current="page"><span class="slot">іконка</span>Записи</a>
+      <a class="nav-add" href="quick-add.html"><span class="slot">іконка</span>Додати</a>
+      <a href="anamnesis.html"><span class="slot">іконка</span>Показати</a>
+    </nav>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

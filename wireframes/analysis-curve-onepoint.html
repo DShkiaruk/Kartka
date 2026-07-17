@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Показник — одна точка (n=1)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Показник — крива в часі  |  СТАН: одна точка (n=1 — ВИЗНАНИЙ борг динаміки).
+  Одна точка ≠ динаміка (sitemap чек-ліст). Показуємо точку + чесну ноту + CTA додати ще.
+  БЕЗ вигаданої лінії / прогнозу / екстраполяції. Це ЗМІСТОВНИЙ стан, не шаблонний empty.
+  (n=0 не існує — показник створюється разом із першим вимірюванням.)
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Показник — крива:</span>
+        <a href="analysis-curve.html">Крива (n≥2)</a>
+        <span class="cur">Одна точка (n=1)</span>
+        <a href="analyses-loading.html">Завантаження*</a>
+        <a href="analyses-error.html">Помилка*</a>
+      </div>
+
+  <div class="app" data-screen="analysis-curve">
+
+    <header>
+      <a class="hdr-back" href="analyses.html" aria-label="Назад до аналізів">‹ Аналізи</a>
+      <span class="hdr-title">Вітамін D</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">Мама</span>
+    </header>
+
+    <main>
+      <div class="slot-big">[одна точка: Вітамін D · 28 нг/мл · 20.06.2026]</div>
+
+      <p class="empty-hint">Поки одна точка — потрібен ще ≥1 запис, щоб побачити динаміку.</p>
+      <p>Значення збережене. Крива з'явиться після наступного результату.</p>
+      <a class="btn btn-primary" href="analysis-add.html">Додати ще результат</a>
+
+      <p class="wf-note">n=1 — ЗМІСТОВНИЙ стан (визнаний борг динаміки), НЕ шаблонний «порожній». Показуємо точку + чесну ноту, БЕЗ вигаданої лінії / прогнозу / екстраполяції. Зум-періодів немає (одна точка). МЕЖА (CLAUDE §4): жодної норми / оцінки й тут.</p>
+    </main>
+
+    <nav aria-label="Головна навігація">
+      <a href="dashboard.html"><span class="slot">іконка</span>Головна</a>
+      <a href="#" aria-current="page"><span class="slot">іконка</span>Записи</a>
+      <a class="nav-add" href="quick-add.html"><span class="slot">іконка</span>Додати</a>
+      <a href="anamnesis.html"><span class="slot">іконка</span>Показати</a>
+    </nav>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>
