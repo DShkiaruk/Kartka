@@ -138,7 +138,7 @@ IA-борг sitemap), не замовчуємо.
 - Базова сторінка: `wireframes/<назва>.html`
 - Сторінка стану: `wireframes/<назва>-<стан>.html`
 - Латиниця, kebab-case: `add-document.html`, `dashboard-empty.html`,
-  `document-loading.html`.
+  `document-view-loading.html`.
 - `<стан>` ∈ `{empty, error, loading}` (успіх = базова, без суфікса).
 
 ---
@@ -176,7 +176,7 @@ components** (CLAUDE §7, PRODUCT.md). У каркасах їх не з'явля
 | Дашборд профілю | `dashboard.html` (успіх/наповнений) · `dashboard-empty.html` (холодний старт) | bottom bar, активний таб 🏠 Головна |
 | Швидке додавання ➕ | **не окремий роут** → `dashboard.html` з відкритим sheet-шаром (§7); за потреби `add-type-sheet.html` лише як референс структури | sheet поверх; bottom bar приглушено під ним |
 | Додати документ (фото-перший) | `add-document.html` (база) · `add-document-error.html` (збій сховища) | немає bottom bar (фокус-потік); footer = екшн-бар «Зняти · З галереї · Скасувати» |
-| Документ — перегляд | `document.html` (успіх = приземлення) · `document-loading.html` (синк у черзі/фоном) | bottom bar видимий; у -loading — статус «збережено локально · синхронізується» |
+| Документ — перегляд | `document-view.html` (успіх = приземлення) · `document-view-loading.html` (синк у черзі/фоном) | bottom bar видимий; у -loading — статус «збережено локально · синхронізується» |
 
 Проєктованих станів (окремих `-` сторінок) потребують лише **3** екрани:
 Дашборд (`-empty`), Додати документ (`-error`), Документ-перегляд (`-loading`) —
