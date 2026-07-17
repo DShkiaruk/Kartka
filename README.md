@@ -20,7 +20,7 @@
 | Папка | Що всередині | Статус |
 |-------|--------------|--------|
 | [`research/`](./research/) | **[`research.md`](./research/research.md) — синтез-хаб** (наскрізні висновки + рішення + гіпотези). Деталі: **люди** — [`jtbd.md`](./research/jtbd.md) (стрижневий + ієрархія jobs main/related/emotional/social, матриця пріоритизації, 10 сценаріїв) і [`personas.md`](./research/personas.md) (ролі-персони, профілі, прогалини G1–G9); [`competitors.md`](./research/competitors.md), [`user-pains.md`](./research/user-pains.md), [`ux-patterns.md`](./research/ux-patterns.md), [`benchmark.md`](./research/benchmark.md), [`patterns-information-architecture.md`](./research/patterns-information-architecture.md) + [`screens/`](./research/screens/). | ✅ синтез |
-| [`wireframes/`](./wireframes/) | Низькодеталізовані каркаси екранів і потоків MVP. | 🌱 каркас |
+| [`wireframes/`](./wireframes/) | Низькодеталізовані каркаси **всіх MVP-потоків** (R1/R2/R5/R3/R4) + проєкції, mobile+desktop в одному файлі, стани з матриці, аудит [`_critique.md`](./wireframes/_critique.md). Див. розділ «Wireframes» нижче. | ✅ каркас |
 | [`concept/`](./concept/) | Високодеталізовані екрани у фінальному візуалі. | ⏳ далі |
 | [`tokens/`](./tokens/) | Колір, типографіка, відступи, радіуси — джерело правди візуалу. | ⏳ далі |
 | [`components/`](./components/) | Окремі UI-компоненти: специфікації й стани. | ⏳ далі |
@@ -46,6 +46,33 @@
   глибина шляхів) · **трасування** (матриця job × екран, дефект-чек). Джерело правди.
 - [`flows.md`](./flows.md) — **user flows** ядра MVP (R1 додати · R2 показати ·
   R5 екстрена) у Mermaid, з рішеннями / станами / тупиками. GitHub рендерить графи.
+
+---
+
+## Wireframes
+
+Низькодеталізовані каркаси **всіх MVP-потоків** — **фаза завершена й аудитована**
+([`_critique.md`](./wireframes/_critique.md)). Сіре / структурне (без кольору, шрифтів,
+іконок — лише слот-бокси), семантичний HTML, доменний текст, системні контроли. Кожен
+екран — **mobile-first + responsive-десктоп в одному файлі** (container queries); стани —
+строго з матриці; **межа не-медичного витримана наскрізь** (жодних норм / зон / оцінок / порад).
+
+**Покрито (6 розділів + проєкції):** R1 Документи (список / додати / перегляд) · R3 Ліки ·
+R4 Аналізи (крива без норм) · R4 Візити · R2 Анамнез-PDF · R5 Екстрена + базова картка;
+наскрізне — hub «Записи», швидке додавання.
+
+**У теці [`wireframes/`](./wireframes/):**
+
+- `*.html` — каркаси екранів і станів (`<екран>-<стан>.html`);
+- [`_conventions.md`](./wireframes/_conventions.md) — рулбук каркасів (§0–§9);
+- [`_screens.md`](./wireframes/_screens.md) — матриця екрани × стани (джерело станів);
+- [`_critique.md`](./wireframes/_critique.md) — фінальний аудит + виправлення (Крок 9);
+- `_wireframe.css` + `_wf-nav.js` — спільна база + риштування навігації між каркасами.
+
+**Як дивитися:**
+
+- **GitHub Pages:** [головна](https://dshkiaruk.github.io/Kartka/) → таб **«Вайрфрейми»** — дерево-навігація до всіх каркасів;
+- **локально:** `python3 -m http.server` у корені репо → `http://localhost:8000/wireframes/dashboard.html` (кожен каркас має ліворуч дерево-навігацію + перемикач Мобілка / Десктоп). *(Через `file://` риштування не працює — потрібен http.)*
 
 ---
 

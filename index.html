@@ -216,10 +216,21 @@
       <a href="#flow-r4v">R4 · Візити</a>
     </div>
 
+    <a class="sb-page" data-page="wireframes" href="#wireframes"><span class="ic" aria-hidden="true">🖼️</span> Вайрфрейми <span class="tag">каркас</span></a>
+    <div class="sb-sub" data-sub="wireframes" hidden>
+      <a href="#wf-onbo">Вхід / Онбординг</a>
+      <a href="#wf-home">Домівка</a>
+      <a href="#wf-docs">Документи · R1</a>
+      <a href="#wf-meds">Ліки · R3</a>
+      <a href="#wf-labs">Аналізи · R4</a>
+      <a href="#wf-visits">Візити · R4</a>
+      <a href="#wf-proj">Проєкції · R2 · R5</a>
+      <a href="#wf-cross">Наскрізне</a>
+    </div>
+
     <div class="sb-label">Скоро</div>
     <span class="sb-page soon"><span class="ic">🎨</span> Дизайн-система <span class="tag">soon</span></span>
     <span class="sb-page soon"><span class="ic">🧩</span> Компоненти <span class="tag">soon</span></span>
-    <span class="sb-page soon"><span class="ic">🖼️</span> Вайрфрейми <span class="tag">soon</span></span>
     <span class="sb-page soon"><span class="ic">🚀</span> Хендофф <span class="tag">soon</span></span>
   </nav>
 </aside>
@@ -1509,6 +1520,70 @@ flowchart TD
     <p><b>Холодний старт (головне).</b> Автономність → порожня стрічка на старті (ручний ввід). <b>Як дати цінність у перші хвилини, поки даних мало?</b> Ризик adoption №1 поряд зі швидкістю введення. <span class="ctx">Перша зачіпка: <b>self-профіль як природна точка входу</b> — почати з себе легше, ніж одразу заводити всю родину.</span></p>
     <p><b>Єдина точка втрати доступу.</b> «Один акаунт на домогосподарство» → якщо власник піде (втрата доступу/смерть), уся картина родини замкнена за його логіном. <b>Експорт усього</b> частково страхує, але повного рішення нема — фіксуємо ризик.</p>
   </div>
+</div></section>
+
+<!-- ВАЙРФРЕЙМИ — навігація до наявних каркасів (НЕ дубль контенту, §9): лінки на wireframes/*.html.
+     Структура дзеркалить дерево _wf-nav.js; джерело станів — wireframes/_screens.md. -->
+<section id="wireframes" data-page="wireframes"><div class="wrap">
+  <h2>Вайрфрейми · MVP</h2>
+  <p class="sub">Навігація до наявних каркасів (кожен відкривається в новій вкладці; має власне дерево + перемикач Мобілка/Десктоп). Джерело станів — <code>wireframes/_screens.md</code>; рулбук — <code>_conventions.md</code>; аудит — <code>_critique.md</code>.</p>
+
+  <div class="card">
+    <p><b>Фаза завершена й аудитована.</b> Усі 6 розділів (R1 · R2 · R5 · R3 · R4-Аналізи · R4-Візити) + проєкції. Mobile-first + responsive-десктоп в одному файлі (container queries); стани — строго з матриці; <b>межа не-медичного витримана наскрізь</b> (без норм / зон / оцінок / порад). <span class="ctx">Стани — вкладені посилання під кожним екраном.</span></p>
+  </div>
+
+  <h3 id="wf-onbo">Вхід / Онбординг</h3>
+  <ul>
+    <li><a href="wireframes/onboarding.html" target="_blank" rel="noopener">Онбординг — Додай СЕБЕ</a></li>
+  </ul>
+
+  <h3 id="wf-home">Домівка</h3>
+  <ul>
+    <li><a href="wireframes/dashboard.html" target="_blank" rel="noopener">Дашборд профілю</a> <span class="ctx">· стани: <a href="wireframes/dashboard-empty.html" target="_blank" rel="noopener">порожній / холодний старт</a></span></li>
+  </ul>
+
+  <h3 id="wf-docs">Документи <span class="ctx">· R1</span></h3>
+  <ul>
+    <li><a href="wireframes/documents.html" target="_blank" rel="noopener">Документи — список</a> <span class="ctx">· <a href="wireframes/documents-empty.html" target="_blank" rel="noopener">порожній</a> · <a href="wireframes/documents-loading.html" target="_blank" rel="noopener">завантаження</a> · <a href="wireframes/documents-error.html" target="_blank" rel="noopener">помилка</a></span></li>
+    <li><a href="wireframes/add-document.html" target="_blank" rel="noopener">Додати документ</a> <span class="ctx">· <a href="wireframes/add-document-error.html" target="_blank" rel="noopener">помилка сховища</a></span></li>
+    <li><a href="wireframes/document-view.html" target="_blank" rel="noopener">Документ — перегляд</a> <span class="ctx">· <a href="wireframes/document-view-loading.html" target="_blank" rel="noopener">завантаження (синк)</a> · <a href="wireframes/document-edit-type.html" target="_blank" rel="noopener">дозаповнити тип (overlay §7)</a></span></li>
+  </ul>
+
+  <h3 id="wf-meds">Ліки <span class="ctx">· R3</span></h3>
+  <ul>
+    <li><a href="wireframes/medications.html" target="_blank" rel="noopener">Ліки — список</a> <span class="ctx">· <a href="wireframes/medications-empty.html" target="_blank" rel="noopener">порожній</a> · <a href="wireframes/medications-loading.html" target="_blank" rel="noopener">завантаження</a> · <a href="wireframes/medications-error.html" target="_blank" rel="noopener">помилка</a></span></li>
+    <li><a href="wireframes/medication-add.html" target="_blank" rel="noopener">Додати / редагувати ліки</a> <span class="ctx">· <a href="wireframes/medication-add-error.html" target="_blank" rel="noopener">помилка збереження</a> · <a href="wireframes/medication-schedule.html" target="_blank" rel="noopener">розклад — пікер (інтерактивний)</a></span></li>
+    <li><a href="wireframes/medication-detail.html" target="_blank" rel="noopener">Ліки — деталь (+ журнал)</a> <span class="ctx">· <a href="wireframes/medication-detail-empty.html" target="_blank" rel="noopener">журнал порожній</a></span></li>
+  </ul>
+
+  <h3 id="wf-labs">Аналізи <span class="ctx">· R4</span></h3>
+  <ul>
+    <li><a href="wireframes/analyses.html" target="_blank" rel="noopener">Аналізи — список показників</a> <span class="ctx">· <a href="wireframes/analyses-empty.html" target="_blank" rel="noopener">порожній</a> · <a href="wireframes/analyses-loading.html" target="_blank" rel="noopener">завантаження</a> · <a href="wireframes/analyses-error.html" target="_blank" rel="noopener">помилка</a></span></li>
+    <li><a href="wireframes/analysis-curve.html" target="_blank" rel="noopener">Показник — крива в часі</a> <span class="ctx">· <a href="wireframes/analysis-curve-onepoint.html" target="_blank" rel="noopener">одна точка (n=1)</a></span></li>
+    <li><a href="wireframes/analysis-add.html" target="_blank" rel="noopener">Додати результат аналізу</a> <span class="ctx">· <a href="wireframes/analysis-add-error.html" target="_blank" rel="noopener">помилка збереження</a></span></li>
+  </ul>
+
+  <h3 id="wf-visits">Візити <span class="ctx">· R4</span></h3>
+  <ul>
+    <li><a href="wireframes/visits.html" target="_blank" rel="noopener">Візити — список</a> <span class="ctx">· <a href="wireframes/visits-empty.html" target="_blank" rel="noopener">порожній</a> · <a href="wireframes/visits-loading.html" target="_blank" rel="noopener">завантаження</a> · <a href="wireframes/visits-error.html" target="_blank" rel="noopener">помилка</a></span></li>
+    <li><a href="wireframes/visit-detail.html" target="_blank" rel="noopener">Візит — деталь (майбутній)</a> <span class="ctx">· <a href="wireframes/visit-detail-past.html" target="_blank" rel="noopener">минулий (нотатки)</a></span></li>
+    <li><a href="wireframes/visit-add.html" target="_blank" rel="noopener">Додати / редагувати візит</a> <span class="ctx">· <a href="wireframes/visit-add-error.html" target="_blank" rel="noopener">помилка збереження</a></span></li>
+  </ul>
+
+  <h3 id="wf-proj">Проєкції <span class="ctx">· R2 · R5</span></h3>
+  <ul>
+    <li><a href="wireframes/anamnesis.html" target="_blank" rel="noopener">Анамнез-PDF — перегляд</a> <span class="ctx">· <a href="wireframes/anamnesis-loading.html" target="_blank" rel="noopener">генерація</a> · <a href="wireframes/anamnesis-error.html" target="_blank" rel="noopener">помилка</a> · <a href="wireframes/anamnesis-incomplete.html" target="_blank" rel="noopener">неповна картина</a> · <a href="wireframes/anamnesis-offline.html" target="_blank" rel="noopener">офлайн без кешу</a> · <a href="wireframes/anamnesis-config.html" target="_blank" rel="noopener">обсяг / мова (overlay §7)</a></span></li>
+    <li><a href="wireframes/emergency-card.html" target="_blank" rel="noopener">Екстрена картка — перегляд</a> <span class="ctx">· <a href="wireframes/emergency-card-deadempty.html" target="_blank" rel="noopener">порожня (deadempty)</a></span></li>
+    <li><a href="wireframes/edit-base-card.html" target="_blank" rel="noopener">Базова картка — редагування</a></li>
+  </ul>
+
+  <h3 id="wf-cross">Наскрізне</h3>
+  <ul>
+    <li><a href="wireframes/records-index.html" target="_blank" rel="noopener">Записи — архів (hub)</a></li>
+    <li><a href="wireframes/quick-add.html" target="_blank" rel="noopener">Швидке додавання (overlay §7)</a></li>
+  </ul>
+
+  <p class="ctx">Це навігація на наявні файли, не дубль контенту (§9): структура дзеркалить дерево <code>_wf-nav.js</code>, джерело станів — <code>_screens.md</code>.</p>
 </div></section>
 
 <footer><div class="wrap">
