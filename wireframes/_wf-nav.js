@@ -59,6 +59,19 @@
         { name: 'Помилка збереження', file: 'analysis-add-error.html', exists: true }
       ] }
     ] },
+    { section: 'ПІД ПРОФІЛЕМ · Візити (R4)', screens: [
+      { name: 'Візити — список', file: 'visits.html', exists: true, states: [
+        { name: 'Порожній (нема візитів)', file: 'visits-empty.html', exists: true },
+        { name: 'Завантаження (спільний патерн)', file: 'visits-loading.html', exists: true },
+        { name: 'Помилка завантаження (спільний)', file: 'visits-error.html', exists: true }
+      ] },
+      { name: 'Візит — деталь (майбутній)', file: 'visit-detail.html', exists: true, states: [
+        { name: 'Минулий (відбувся, нотатки)', file: 'visit-detail-past.html', exists: true }
+      ] },
+      { name: 'Додати / редагувати візит', file: 'visit-add.html', exists: true, states: [
+        { name: 'Помилка збереження', file: 'visit-add-error.html', exists: true }
+      ] }
+    ] },
     { section: 'ПРОЄКЦІЇ · R2', screens: [
       { name: 'Анамнез-PDF — перегляд', file: 'anamnesis.html', exists: true, states: [
         { name: 'Генерація', file: 'anamnesis-loading.html', exists: true },

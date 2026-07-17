@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Візити — список (база)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Візити — список / найближчі  (sitemap · ПІД ПРОФІЛЕМ · R4)
+  СТАН:  база / успіх (є візити). Порожній/Завантаження/Помилка — окремо.
+  JOB:   R4 (сц.5) — бачити майбутні (не пропустити) + минулі (нотатки).
+  СТРУКТУРА: дві секції за полем статус — Попереду / Відбулися (як «Активні/Історія» Ліків), не lifecycle-стан.
+  ЗВ'ЯЗОК: «найближчий візит» на Дашборді = ТОЙ САМИЙ запис (одне джерело).
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Візити — список:</span>
+        <span class="cur">База</span>
+        <a href="visits-empty.html">Порожній</a>
+        <a href="visits-loading.html">Завантаження</a>
+        <a href="visits-error.html">Помилка</a>
+      </div>
+
+  <div class="app" data-screen="visits">
+
+    <header>
+      <a class="hdr-back" href="dashboard.html" aria-label="Назад">‹ Назад</a>
+      <span class="hdr-title">Візити</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">Мама</span>
+    </header>
+
+    <main>
+      <h1 class="sr-only">Візити — Мама</h1>
+
+      <a class="btn" href="visit-add.html">＋ Додати візит</a>
+
+      <section aria-labelledby="v-next">
+        <h2 id="v-next">Попереду</h2>
+        <article>
+          <a class="body" href="visit-detail.html">Кардіолог <span class="meta">— 16.07.2026, 14:00 · нагадати за тиждень</span></a>
+        </article>
+        <article>
+          <a class="body" href="visit-detail.html">Чекап (терапевт) <span class="meta">— 12.09.2026 · раз на рік</span></a>
+        </article>
+      </section>
+
+      <section aria-labelledby="v-past">
+        <h2 id="v-past">Відбулися</h2>
+        <article>
+          <a class="body" href="visit-detail-past.html">Стоматолог <span class="meta">— 05.07.2026 · є нотатки</span></a>
+        </article>
+      </section>
+
+      <p class="wf-note">Дві секції за полем статус — Попереду / Відбулися (як «Активні/Історія» Ліків), НЕ lifecycle-стан. Майбутній → нагадування; минулий → нотатки. «Найближчий візит» на Дашборді — той самий запис (одне джерело). МЕЖА: без порад/оцінок.</p>
+    </main>
+
+    <nav aria-label="Головна навігація">
+      <a href="dashboard.html"><span class="slot">іконка</span>Головна</a>
+      <a href="#" aria-current="page"><span class="slot">іконка</span>Записи</a>
+      <a class="nav-add" href="quick-add.html"><span class="slot">іконка</span>Додати</a>
+      <a href="anamnesis.html"><span class="slot">іконка</span>Показати</a>
+    </nav>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

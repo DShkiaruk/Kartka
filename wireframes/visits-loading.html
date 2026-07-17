@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Візити — завантаження (спільний патерн)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  СТАН: Завантаження — СПІЛЬНИЙ патерн (зверстано раз, той самий на списку І деталі).
+  Список/деталь вантажаться з сервера. Тут — представник патерну.
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Візити — список:</span>
+        <a href="visits.html">База</a>
+        <a href="visits-empty.html">Порожній</a>
+        <span class="cur">Завантаження</span>
+        <a href="visits-error.html">Помилка</a>
+      </div>
+
+  <div class="app" data-screen="visits">
+
+    <header>
+      <a class="hdr-back" href="dashboard.html" aria-label="Назад">‹ Назад</a>
+      <span class="hdr-title">Візити</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">Мама</span>
+    </header>
+
+    <main>
+      <h1 class="sr-only">Візити — завантаження</h1>
+      <div class="slot-big">завантаження…</div>
+      <p class="wf-note">СПІЛЬНИЙ патерн завантаження (той самий на списку й деталі) — зверстано раз, перевикористано.</p>
+    </main>
+
+    <nav aria-label="Головна навігація">
+      <a href="dashboard.html"><span class="slot">іконка</span>Головна</a>
+      <a href="#" aria-current="page"><span class="slot">іконка</span>Записи</a>
+      <a class="nav-add" href="quick-add.html"><span class="slot">іконка</span>Додати</a>
+      <a href="anamnesis.html"><span class="slot">іконка</span>Показати</a>
+    </nav>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

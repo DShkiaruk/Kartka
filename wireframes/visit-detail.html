@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Візит — деталь (майбутній)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Візит — деталь  (sitemap · ПІД ПРОФІЛЕМ · R4)
+  СТАН:  МАЙБУТНІЙ (попереду) — варіант бази за статусом (не lifecycle). Минулий → visit-detail-past.html.
+  JOB:   R4 (сц.5) — керувати нагадуванням / перенести / позначити відбувся.
+  НАГАДУВАННЯ: перевикористання push-fallback з R3 (той самий патерн, дефолт «за тиждень»).
+  МЕЖА: Kartka показує факт візиту, НЕ радить/не оцінює (жодних «варто перенести/звернутись»).
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Візит — деталь:</span>
+        <span class="cur">Майбутній</span>
+        <a href="visit-detail-past.html">Минулий (нотатки)</a>
+        <a href="visits-loading.html">Завантаження*</a>
+        <a href="visits-error.html">Помилка*</a>
+      </div>
+
+  <div class="app" data-screen="visit-detail">
+
+    <header>
+      <a class="hdr-back" href="visits.html" aria-label="Назад до візитів">‹ Візити</a>
+      <span class="hdr-title">Кардіолог</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">Мама</span>
+    </header>
+
+    <main>
+      <section aria-labelledby="v-info">
+        <h2 id="v-info">Візит</h2>
+        <div class="kv"><span class="k">Коли</span><span class="v">16.07.2026, 14:00</span></div>
+        <div class="kv"><span class="k">Де / лікар</span><span class="v">Поліклініка №4, кабінет 312</span></div>
+        <div class="kv"><span class="k">Тип</span><span class="v">спеціаліст</span></div>
+        <div class="kv"><span class="k">Повторюваність</span><span class="v">одноразово</span></div>
+        <div class="kv"><span class="k">Статус</span><span class="v">попереду</span></div>
+      </section>
+
+      <section aria-labelledby="v-remind">
+        <h2 id="v-remind">Нагадування</h2>
+        <div class="kv"><span class="k">Коли нагадати</span><span class="v">за тиждень — 09.07.2026, 09:00</span></div>
+        <p class="status">Push вимкнено на цьому пристрої → нагадаємо локально / e-mail.</p>
+        <p class="wf-note">нагадування = перевикористання push-fallback R3 (той самий патерн): push недоступний → локальне/email + видимий статус. Дефолт випередження «за тиждень» (планові — завчасно).</p>
+      </section>
+
+      <div class="share-row">
+        <a class="btn" href="visit-add.html">Перенести</a>
+        <a class="btn btn-primary" href="visit-detail-past.html">Позначити «відбувся»</a>
+      </div>
+      <p class="wf-note">«Перенести» = правка дати (той самий запис). «Позначити відбувся» → перебіг у МИНУЛИЙ (додати нотатки). МЕЖА (CLAUDE §4): показуємо факт, Kartka не радить/не оцінює.</p>
+    </main>
+
+    <nav aria-label="Головна навігація">
+      <a href="dashboard.html"><span class="slot">іконка</span>Головна</a>
+      <a href="#" aria-current="page"><span class="slot">іконка</span>Записи</a>
+      <a class="nav-add" href="quick-add.html"><span class="slot">іконка</span>Додати</a>
+      <a href="anamnesis.html"><span class="slot">іконка</span>Показати</a>
+    </nav>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

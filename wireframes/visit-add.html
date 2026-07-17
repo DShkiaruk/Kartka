@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Додати / редагувати візит</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Додати / редагувати візит  (sitemap · ПІД ПРОФІЛЕМ · R4)
+  СТАН:  база (форма). Помилка збереження → visit-add-error.html.
+  UNDER-FLOW: нагадування — інлайн-fieldset (перевикористання R3 push-fallback, НЕ окремий екран).
+    Дефолт випередження «за тиждень» (планові — завчасно, сц.5). Системні контроли (select/date/time).
+  ЛІКАР/ЗАКЛАД — поле-текст, не сутність (каталог закладів не будуємо, CLAUDE ф.7).
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Додати візит:</span>
+        <span class="cur">Форма</span>
+        <a href="visit-add-error.html">Помилка збереження</a>
+      </div>
+
+  <div class="app" data-screen="visit-add">
+
+    <header>
+      <span class="hdr-title">Додати візит</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">для: Мама</span>
+    </header>
+
+    <main>
+      <form>
+        <div class="field">
+          <label for="vtype">Тип</label>
+          <select id="vtype">
+            <option>Чекап (терапевт)</option>
+            <option selected>Спеціаліст</option>
+            <option>Стоматолог</option>
+            <option>Інше</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="vname">Лікар / заклад <span class="hdr-ctx">(текст, опційно)</span></label>
+          <input id="vname" type="text" placeholder="напр. Кардіолог, поліклініка №4">
+        </div>
+        <div class="field">
+          <label for="vdate">Дата</label>
+          <input id="vdate" type="date" value="2026-07-16">
+        </div>
+        <div class="field">
+          <label for="vtime">Час</label>
+          <input id="vtime" type="time" value="14:00">
+        </div>
+        <div class="field">
+          <label for="vrec">Повторюваність</label>
+          <select id="vrec">
+            <option selected>Одноразово</option>
+            <option>Раз на рік</option>
+            <option>Раз на 6 місяців</option>
+            <option>Кастом</option>
+          </select>
+        </div>
+
+        <fieldset>
+          <legend>Нагадування</legend>
+          <label class="opt"><input type="checkbox" checked> Нагадувати</label>
+          <div class="field">
+            <label for="vlead">Випередження</label>
+            <select id="vlead">
+              <option selected>за тиждень</option>
+              <option>за день</option>
+              <option>за 3 дні</option>
+              <option>кастом</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Тихі години</label>
+            <span class="range"><input type="time" value="22:00" aria-label="від"> – <input type="time" value="07:00" aria-label="до"></span>
+          </div>
+        </fieldset>
+        <p class="wf-note">Нагадування — under-flow інлайн (перевикористання R3, НЕ окремий екран): дефолт «за тиждень» (планові — завчасно, сц.5); кастомізація лишена. Системні контроли (select/date/time), не вільний текст. push недоступний (iOS) → fallback: локальне/email + видимий статус. Не тупик.</p>
+      </form>
+    </main>
+
+    <div class="actionbar">
+      <a class="btn btn-primary" href="visits.html">Зберегти</a>
+      <a class="btn" href="visits.html">Скасувати</a>
+    </div>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

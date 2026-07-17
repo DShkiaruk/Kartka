@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Додати візит — помилка збереження</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Додати / редагувати візит  |  СТАН: Помилка ЗБЕРЕЖЕННЯ (durable, м'яка).
+  Форму НЕ втрачено (durable-чернетка, як R1/R3/R4). Це збереження, не завантаження (інший патерн).
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Додати візит:</span>
+        <a href="visit-add.html">Форма</a>
+        <span class="cur">Помилка збереження</span>
+      </div>
+
+  <div class="app" data-screen="visit-add">
+
+    <header>
+      <span class="hdr-title">Додати візит</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">для: Мама</span>
+    </header>
+
+    <main>
+      <p class="status">Не вдалося зберегти на пристрої. Введене не втрачено — спробуйте ще раз.</p>
+      <form>
+        <div class="field">
+          <label for="vtype2">Тип</label>
+          <select id="vtype2">
+            <option selected>Спеціаліст</option>
+            <option>Чекап (терапевт)</option>
+            <option>Стоматолог</option>
+            <option>Інше</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="vname2">Лікар / заклад</label>
+          <input id="vname2" type="text" value="Кардіолог, поліклініка №4">
+        </div>
+        <div class="field">
+          <label for="vdate2">Дата</label>
+          <input id="vdate2" type="date" value="2026-07-16">
+        </div>
+        <div class="field">
+          <label for="vtime2">Час</label>
+          <input id="vtime2" type="time" value="14:00">
+        </div>
+      </form>
+      <p class="wf-note">м'яко: durable — введене збережено локально, дані не втрачено (як R1/R3/R4 save-error). Це помилка ЗБЕРЕЖЕННЯ, не завантаження — інший патерн, ніж список/деталь.</p>
+    </main>
+
+    <div class="actionbar">
+      <a class="btn btn-primary" href="visits.html">Повторити</a>
+      <a class="btn" href="visits.html">Скасувати</a>
+    </div>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>
