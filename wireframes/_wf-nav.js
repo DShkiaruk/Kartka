@@ -32,6 +32,12 @@
         { name: 'Дозаповнити тип (overlay §7, under-flow)', file: 'document-edit-type.html', exists: true }
       ] }
     ] },
+    { section: 'ПРОЄКЦІЇ · R5', screens: [
+      { name: 'Екстрена картка — перегляд', file: 'emergency-card.html', exists: true, states: [
+        { name: 'Порожня (deadempty)', file: 'emergency-card-deadempty.html', exists: true }
+      ] },
+      { name: 'Базова картка — редагування', file: 'edit-base-card.html', exists: true }
+    ] },
     { section: 'НАСКРІЗНЕ', screens: [
       // ➕-вибір типу — overlay поверх Дашборда (§7); окрема сторінка лише як референс структури
       { name: 'Швидке додавання (overlay §7)', file: 'quick-add.html', exists: true }
@@ -65,7 +71,7 @@
   function render(mount) {
     var title = document.createElement('div');
     title.className = 'wfnav-title';
-    title.textContent = 'Вайрфрейми · R1 «Додати документ»';
+    title.textContent = 'Вайрфрейми · R1 + R5 (ядро MVP)';
     mount.appendChild(title);
 
     TREE.forEach(function (sec) {

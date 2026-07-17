@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Екстрена картка (база/успіх)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Екстрена картка — перегляд  (sitemap · ПРОЄКЦІЇ · R5 · [secondary-доступ])
+  СТАН:  база / успіх (заповнена). Порожня → emergency-card-deadempty.html.
+  JOB:   R5 (сц.6) — готовність до критичного моменту. Гарячий момент, офлайн обов'язково.
+  FLOW (flows.md R5): 🆘/офлайн-ярлик → card →|так| show → {Той член?} / {Лікарня поряд?}.
+  Входи: 🆘 у шапці (в застосунку) АБО офлайн-ярлик home-screen (без логіну) — на присутньому
+  розблокованому пристрої Координатора. 1 тап. Офлайн-first (з кешу). Активний профіль: Мама.
+  Межа: акцент критичного — розміром/вагою; колір (червоний) — на потім (§8/tokens).
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Екстрена картка:</span>
+        <span class="cur">База / успіх</span>
+        <a href="emergency-card-deadempty.html">Порожня (deadempty)</a>
+      </div>
+
+  <div class="app">
+
+    <header>
+      <a class="hdr-back" href="dashboard.html" aria-label="Назад">‹ Назад</a>
+      <span class="hdr-title">Екстрена картка</span>
+      <span class="spacer"></span>
+      <span class="offline-badge">офлайн · з кешу</span>
+    </header>
+
+    <main>
+      <h1 class="sr-only">Екстрена картка — Мама</h1>
+
+      <!-- member-switch ПРЯМО на картці (дефолт = активний профіль) -->
+      <button class="profile-switcher" aria-haspopup="dialog" aria-label="Перемкнути члена. Зараз: Мама">
+        <span class="slot avatar">аватар: Мама</span>
+        <span class="who"><span class="name">Мама</span><span class="role">мама</span></span>
+        <span aria-hidden="true">▾</span>
+      </button>
+      <span class="member-hint">не той член? — перемкнути тут (не окремий крок)</span>
+
+      <section aria-label="Критичне">
+        <div class="crit-row"><span class="k">Алергії</span><span class="v">Пеніцилін</span></div>
+        <div class="crit-row"><span class="k">Хроніка</span><span class="v">Гіпертонія</span></div>
+        <div class="crit-row"><span class="k">Група крові</span><span class="v">A(II) Rh+</span></div>
+        <div class="crit-row"><span class="k">Активні ліки</span><span class="v">Еналаприл 10 мг · Аторвастатин 20 мг</span></div>
+        <div class="crit-row"><span class="k">Екстрені контакти</span><span class="v">Донька — 067 000 00 00</span></div>
+      </section>
+
+      <p class="wf-note">1 тап від 🆘/ярлика; офлайн-first (з кешу, без логіну застосунку). Member-switch — на картці, дефолт активний. Акцент критичного — розміром/вагою; колір — tokens.</p>
+    </main>
+
+    <div class="actionbar">
+      <!-- deep-link у мапи ОС: зовнішній handoff, без даних пацієнта. НЕ внутрішній екран (тому #). -->
+      <a class="btn" href="#" aria-label="Лікарня / травмпункт поряд — відкрити в зовнішніх мапах">Лікарня / травмпункт поряд</a>
+    </div>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

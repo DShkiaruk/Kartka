@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Базова картка — редагування</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Базова картка профілю — редагування  (sitemap · ПІД ПРОФІЛЕМ · MAIN · «живить R5»)
+  СТАН:  лише база (форма). СПІЛЬНИЙ екран — вихід із ДВОХ empty:
+         R5 emergency-card-deadempty («заповнити критичне») + dashboard-empty («додати критичне»).
+  JOB:   MAIN (живить R5) — наповнити критичне, щоб екстрена картка не була порожньою в кризі.
+  SAVE:  авто-save при зміні/закритті (durable-принцип, БЕЗ кнопки «Зберегти»).
+  Поля: алергії · хроніка · група крові · екстрені контакти. Профіль: Я.
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+  <div class="app">
+
+    <header>
+      <a class="hdr-back" href="dashboard.html" aria-label="Назад">‹ Назад</a>
+      <span class="hdr-title">Базова картка</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">для: Я</span>
+    </header>
+
+    <main>
+      <p class="lead">Критичне про «Я» — з'явиться в екстреній картці й анамнезі.</p>
+
+      <form>
+        <div class="field">
+          <label for="alg">Алергії</label>
+          <input id="alg" type="text" placeholder="напр. пеніцилін">
+        </div>
+        <div class="field">
+          <label for="chr">Хронічні стани</label>
+          <input id="chr" type="text" placeholder="напр. гіпертонія">
+        </div>
+        <div class="field">
+          <label for="blood">Група крові</label>
+          <input id="blood" type="text" placeholder="напр. A(II) Rh+">
+        </div>
+        <div class="field">
+          <label for="contact">Екстрені контакти</label>
+          <input id="contact" type="text" placeholder="напр. Донька — 067 000 00 00">
+        </div>
+      </form>
+
+      <p class="status">Зберігається автоматично.</p>
+      <p class="wf-note">авто-save (durable, без кнопки «Зберегти»); спільний екран для R5-deadempty і dashboard-empty. Лише база (форма). Мінімум полів — критичне для R5.</p>
+    </main>
+
+    <div class="actionbar">
+      <span class="grow"></span>
+      <a class="btn" href="dashboard.html">Готово</a>
+    </div>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

@@ -278,6 +278,14 @@ section p { margin: 0; font-size: 0.9rem; }
 .meta-row .todo { font-style: italic; color: var(--muted); }
 .meta-row input { flex: 1; font: inherit; min-height: var(--tap); padding: var(--sp-2); border: 1px solid var(--line-2); background: #fff; }  /* інлайн-редагування (авто-save при закритті) */
 
+/* ── екстрена картка (R5): критичне крупніше (акцент розміром/вагою; колір — tokens) ── */
+.crit-row { display: flex; gap: var(--sp-3); padding: var(--sp-3) 0; border-bottom: 1px solid var(--fill); }
+.crit-row:last-child { border-bottom: 0; }
+.crit-row .k { flex: 0 0 128px; align-self: center; color: var(--muted); font-size: 0.8rem; }
+.crit-row .v { flex: 1; font-size: 1.05rem; font-weight: 600; }
+.offline-badge { font-size: 0.72rem; color: var(--muted); }   /* тихий індикатор «з кешу» */
+.member-hint { display: block; margin-top: var(--sp-1); font-size: 0.72rem; color: var(--muted); }  /* «не той? перемкнути» */
+
 /* overlay sheet (§7): scrim + нижній лист поверх екрана під ним */
 .app { position: relative; }
 .wf-scrim { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.45); }   /* приглушений фон (сірий+альфа) */
