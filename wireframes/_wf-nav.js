@@ -32,6 +32,19 @@
         { name: 'Дозаповнити тип (overlay §7, under-flow)', file: 'document-edit-type.html', exists: true }
       ] }
     ] },
+    { section: 'ПІД ПРОФІЛЕМ · Ліки (R3)', screens: [
+      { name: 'Ліки — список', file: 'medications.html', exists: true, states: [
+        { name: 'Порожній (нема ліків)', file: 'medications-empty.html', exists: true },
+        { name: 'Завантаження (спільний патерн)', file: 'medications-loading.html', exists: true },
+        { name: 'Помилка завантаження (спільний)', file: 'medications-error.html', exists: true }
+      ] },
+      { name: 'Додати / редагувати ліки', file: 'medication-add.html', exists: true, states: [
+        { name: 'Помилка збереження', file: 'medication-add-error.html', exists: true }
+      ] },
+      { name: 'Ліки — деталь (+ журнал)', file: 'medication-detail.html', exists: true, states: [
+        { name: 'Журнал порожній', file: 'medication-detail-empty.html', exists: true }
+      ] }
+    ] },
     { section: 'ПРОЄКЦІЇ · R2', screens: [
       { name: 'Анамнез-PDF — перегляд', file: 'anamnesis.html', exists: true, states: [
         { name: 'Генерація', file: 'anamnesis-loading.html', exists: true },
@@ -80,7 +93,7 @@
   function render(mount) {
     var title = document.createElement('div');
     title.className = 'wfnav-title';
-    title.textContent = 'Вайрфрейми · ядро MVP (R1 · R2 · R5)';
+    title.textContent = 'Вайрфрейми · MVP (R1·R2·R5) + R3';
     mount.appendChild(title);
 
     TREE.forEach(function (sec) {

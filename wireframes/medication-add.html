@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Додати / редагувати ліки</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Додати / редагувати ліки  (sitemap · ПІД ПРОФІЛЕМ · R3)
+  СТАН:  база (форма). Помилка збереження → medication-add-error.html.
+  РОЗКЛАД (under-flow у формі): 4 типи — показуємо поля лише ОБРАНОГО (не монстр).
+  Нагадування (under-flow): конфіг + fallback (push недоступний → локальне/email + статус).
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Додати ліки:</span>
+        <span class="cur">Форма</span>
+        <a href="medication-add-error.html">Помилка збереження</a>
+      </div>
+
+  <div class="app" data-screen="medication-add">
+
+    <header>
+      <span class="hdr-title">Додати ліки</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">для: Мама</span>
+    </header>
+
+    <main>
+      <form>
+        <div class="field">
+          <label for="name">Назва</label>
+          <input id="name" type="text" placeholder="напр. Еналаприл">
+        </div>
+        <div class="field">
+          <label for="dose">Дозування</label>
+          <input id="dose" type="text" placeholder="напр. 10 мг">
+        </div>
+
+        <fieldset>
+          <legend>Розклад</legend>
+          <label class="opt"><input type="radio" name="sched"> Щодня</label>
+          <label class="opt"><input type="radio" name="sched" checked> Певні дні тижня</label>
+          <label class="opt"><input type="radio" name="sched"> Курс із датами (від—до)</label>
+          <label class="opt"><input type="radio" name="sched"> За потреби</label>
+
+          <div class="field">
+            <label>Дні тижня</label>
+            <div class="chips" role="group" aria-label="Дні тижня">
+              <button type="button" class="chip on">Пн</button><button type="button" class="chip">Вт</button><button type="button" class="chip on">Ср</button><button type="button" class="chip">Чт</button><button type="button" class="chip on">Пт</button><button type="button" class="chip">Сб</button><button type="button" class="chip">Нд</button>
+            </div>
+          </div>
+          <div class="field"><label for="time1">Час</label><input id="time1" type="time" value="08:00"></div>
+        </fieldset>
+        <p class="wf-note">Поля — лише ОБРАНОГО типу (тут «Певні дні тижня» → перемикачі-чипи днів + час). Щодня → «скільки разів/день» (select) + час(и); Курс → «дата від» / «дата до» (date-пікери); За потреби → без полів. Час/дати/дні — СИСТЕМНІ контроли, не вільний текст. *(Дефолт у продукті — Щодня; тут показано «Певні дні», щоб видно було вибір днів.)*</p>
+
+        <fieldset>
+          <legend>Нагадування</legend>
+          <label class="opt"><input type="checkbox" checked> Нагадувати</label>
+          <div class="field">
+            <label for="lead">За скільки</label>
+            <select id="lead">
+              <option>за 5 хв</option>
+              <option selected>за 10 хв</option>
+              <option>за 15 хв</option>
+              <option>за 30 хв</option>
+              <option>за годину</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Тихі години</label>
+            <span class="range"><input type="time" value="22:00" aria-label="від"> – <input type="time" value="07:00" aria-label="до"></span>
+          </div>
+        </fieldset>
+        <p class="wf-note">«За скільки» — dropdown; «час» / «тихі години» — системні time-пікери (не вільний текст). push недоступний (iOS) → fallback: локальне/email + видимий статус. Не тупик.</p>
+      </form>
+    </main>
+
+    <div class="actionbar">
+      <a class="btn btn-primary" href="medications.html">Зберегти</a>
+      <a class="btn" href="medications.html">Скасувати</a>
+    </div>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

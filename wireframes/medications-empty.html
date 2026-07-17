@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Ліки — список (порожній)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Ліки — список  |  СТАН: порожній (нема ліків).
+  R3 ОПЦІЙНИЙ — людина без регулярних ліків усе одно має цінну Kartka (CLAUDE §1).
+  Тому це НЕ тупик і не тривога — спокійне запрошення додати. Порожній список ≠ порожній журнал.
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Ліки — список:</span>
+        <a href="medications.html">База</a>
+        <span class="cur">Порожній</span>
+        <a href="medications-loading.html">Завантаження</a>
+        <a href="medications-error.html">Помилка</a>
+      </div>
+
+  <div class="app" data-screen="medications">
+
+    <header>
+      <a class="hdr-back" href="dashboard.html" aria-label="Назад">‹ Назад</a>
+      <span class="hdr-title">Ліки</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">Мама</span>
+    </header>
+
+    <main>
+      <h1 class="sr-only">Ліки — Мама (порожньо)</h1>
+      <p class="empty-hint">Ще немає ліків.</p>
+      <p>Тут з'являться ліки члена родини — розклад і що прийнято сьогодні.</p>
+      <a class="btn btn-primary" href="medication-add.html">Додати перші ліки</a>
+      <p class="wf-note">R3 опційний: без регулярних ліків Kartka все одно цінна (CLAUDE §1). Порожній СПИСОК («додай перші ліки») ≠ порожній ЖУРНАЛ («ще не позначав прийомів»).</p>
+    </main>
+
+    <nav aria-label="Головна навігація">
+      <a href="dashboard.html"><span class="slot">іконка</span>Головна</a>
+      <a href="#" aria-current="page"><span class="slot">іконка</span>Записи</a>
+      <a class="nav-add" href="quick-add.html"><span class="slot">іконка</span>Додати</a>
+      <a href="anamnesis.html"><span class="slot">іконка</span>Показати</a>
+    </nav>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

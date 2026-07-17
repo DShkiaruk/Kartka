@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Ліки — деталь (+ журнал)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Ліки — деталь препарату (+ журнал прийому)  (sitemap · ПІД ПРОФІЛЕМ · R3)
+  СТАН:  база (деталь + статус сьогодні + журнал подій). Журнал порожній — окремо.
+  ЗВ'ЯЗОК (IA-борг R3): «Прийнято» тут пише ТУ САМУ подію, що inline на Дашборді (одне джерело).
+  МЕЖА: журнал = сирі події (дата-час, статус), без % / стріків / оцінки (AVOID, CLAUDE §1).
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Ліки — деталь:</span>
+        <span class="cur">База</span>
+        <a href="medication-detail-empty.html">Журнал порожній</a>
+      </div>
+
+  <div class="app" data-screen="medication-detail">
+
+    <header>
+      <a class="hdr-back" href="medications.html" aria-label="Назад до списку ліків">‹ Ліки</a>
+      <span class="hdr-title">Еналаприл 10 мг</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">Мама</span>
+    </header>
+
+    <main>
+      <section aria-labelledby="d-med">
+        <h2 id="d-med">Препарат</h2>
+        <div class="kv"><span class="k">Дозування</span><span class="v">10 мг</span></div>
+        <div class="kv"><span class="k">Розклад</span><span class="v">щодня 08:00</span></div>
+        <div class="kv"><span class="k">Період</span><span class="v">постійно</span></div>
+        <div class="meta-row"><span class="k">Сьогодні</span><span class="v todo">не позначено</span><button>Прийнято</button></div>
+        <p class="wf-note">«Прийнято» пише ТУ САМУ подію, що inline на Дашборді (одне джерело) — не окрема логіка; миттєвий undo.</p>
+      </section>
+
+      <section aria-labelledby="d-journal">
+        <h2 id="d-journal">Журнал прийому</h2>
+        <article><span class="body">12.07.2026 · 08:00 <span class="meta">— прийнято</span></span></article>
+        <article><span class="body">11.07.2026 · 08:00 <span class="meta">— прийнято</span></span></article>
+        <article><span class="body">10.07.2026 · 08:00 <span class="meta">— пропущено</span></span></article>
+        <p class="wf-note">журнал = сирі події {дата-час, статус}, без агрегатів/оцінки (AVOID % / стріки, CLAUDE §1).</p>
+      </section>
+    </main>
+
+    <nav aria-label="Головна навігація">
+      <a href="dashboard.html"><span class="slot">іконка</span>Головна</a>
+      <a href="#" aria-current="page"><span class="slot">іконка</span>Записи</a>
+      <a class="nav-add" href="quick-add.html"><span class="slot">іконка</span>Додати</a>
+      <a href="anamnesis.html"><span class="slot">іконка</span>Показати</a>
+    </nav>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

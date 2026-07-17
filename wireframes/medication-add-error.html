@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Додати ліки — помилка збереження</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Додати / редагувати ліки  |  СТАН: Помилка ЗБЕРЕЖЕННЯ (durable, м'яка).
+  Форму НЕ втрачено (durable-чернетка, як R1). Це збереження, не завантаження (інший патерн).
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Додати ліки:</span>
+        <a href="medication-add.html">Форма</a>
+        <span class="cur">Помилка збереження</span>
+      </div>
+
+  <div class="app" data-screen="medication-add">
+
+    <header>
+      <span class="hdr-title">Додати ліки</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">для: Мама</span>
+    </header>
+
+    <main>
+      <p class="status">Не вдалося зберегти на пристрої. Введене не втрачено — спробуйте ще раз.</p>
+      <form>
+        <div class="field">
+          <label for="name2">Назва</label>
+          <input id="name2" type="text" value="Еналаприл">
+        </div>
+        <div class="field">
+          <label for="dose2">Дозування</label>
+          <input id="dose2" type="text" value="10 мг">
+        </div>
+      </form>
+      <p class="wf-note">м'яко: durable — введене збережено локально, дані не втрачено (як R1 save-error). Це помилка ЗБЕРЕЖЕННЯ, не завантаження — інший патерн, ніж список/деталь.</p>
+    </main>
+
+    <div class="actionbar">
+      <a class="btn btn-primary" href="medications.html">Повторити</a>
+      <a class="btn" href="medications.html">Скасувати</a>
+    </div>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

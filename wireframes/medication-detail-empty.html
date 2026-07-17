@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Ліки — деталь (журнал порожній)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Ліки — деталь  |  СТАН: журнал порожній (ліки щойно додано, прийомів ще нема).
+  Порожній ЖУРНАЛ («ще не позначав прийомів») ≠ порожній СПИСОК («додай перші ліки») — інший текст/CTA.
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Ліки — деталь:</span>
+        <a href="medication-detail.html">База</a>
+        <span class="cur">Журнал порожній</span>
+      </div>
+
+  <div class="app" data-screen="medication-detail">
+
+    <header>
+      <a class="hdr-back" href="medications.html" aria-label="Назад до списку ліків">‹ Ліки</a>
+      <span class="hdr-title">Еналаприл 10 мг</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">Мама</span>
+    </header>
+
+    <main>
+      <section aria-labelledby="de-med">
+        <h2 id="de-med">Препарат</h2>
+        <div class="kv"><span class="k">Дозування</span><span class="v">10 мг</span></div>
+        <div class="kv"><span class="k">Розклад</span><span class="v">щодня 08:00</span></div>
+        <div class="kv"><span class="k">Період</span><span class="v">постійно</span></div>
+        <div class="meta-row"><span class="k">Сьогодні</span><span class="v todo">не позначено</span><button>Прийнято</button></div>
+      </section>
+
+      <section aria-labelledby="de-journal">
+        <h2 id="de-journal">Журнал прийому</h2>
+        <p class="empty-hint">Ще не позначав прийомів.</p>
+        <p>Перший «Прийнято» з'явиться тут — і на Дашборді, і в журналі (одна подія).</p>
+        <p class="wf-note">порожній ЖУРНАЛ ≠ порожній СПИСОК: тут «ще не позначав» (перший прийом попереду), не «додай ліки».</p>
+      </section>
+    </main>
+
+    <nav aria-label="Головна навігація">
+      <a href="dashboard.html"><span class="slot">іконка</span>Головна</a>
+      <a href="#" aria-current="page"><span class="slot">іконка</span>Записи</a>
+      <a class="nav-add" href="quick-add.html"><span class="slot">іконка</span>Додати</a>
+      <a href="anamnesis.html"><span class="slot">іконка</span>Показати</a>
+    </nav>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

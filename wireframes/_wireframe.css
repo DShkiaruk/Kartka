@@ -301,10 +301,20 @@ section p { margin: 0; font-size: 0.9rem; }
 
 /* R2 анамнез: ряд шеру (файл/друк) + опції конфігу (обсяг/мова/розділи) в overlay */
 .share-row { display: flex; gap: var(--sp-2); flex-wrap: wrap; margin-top: var(--sp-2); }
-.wf-sheet fieldset { border: 1px solid var(--line); padding: var(--sp-2) var(--sp-3); margin: 0 0 var(--sp-2); }
-.wf-sheet legend { font-size: 0.75rem; color: var(--muted); padding: 0 var(--sp-1); }
-.wf-sheet .opt { display: block; padding: var(--sp-1) 0; font-size: 0.9rem; }
+fieldset { border: 1px solid var(--line); padding: var(--sp-2) var(--sp-3); margin: 0 0 var(--sp-3); }
+legend { font-size: 0.75rem; color: var(--muted); padding: 0 var(--sp-1); }
+.opt { display: block; padding: var(--sp-1) 0; font-size: 0.9rem; }
 input[type="radio"], input[type="checkbox"] { accent-color: #7a7a7a; }  /* сірий акцент, не системний синій (§0) */
+
+/* системні контроли замість вільного тексту (час/дата/дропдаун) + чипи днів тижня */
+.field select,
+.field input[type="time"],
+.field input[type="date"] { width: 100%; font: inherit; min-height: var(--tap); padding: var(--sp-2); border: 1px solid var(--line-2); background: #fff; }
+.range { display: inline-flex; align-items: center; gap: var(--sp-2); }
+.range input[type="time"] { width: auto; }
+.chips { display: flex; flex-wrap: wrap; gap: var(--sp-1); }
+.chip { font: inherit; min-height: var(--tap); padding: var(--sp-1) var(--sp-3); border: 1px solid var(--line-2); background: var(--fill-2); color: var(--muted); cursor: pointer; }
+.chip.on { background: var(--fill); color: var(--ink); border-color: var(--ink); font-weight: 600; }
 
 /* overlay sheet (§7): scrim + нижній лист поверх екрана під ним */
 .app { position: relative; }
@@ -419,6 +429,20 @@ input[type="radio"], input[type="checkbox"] { accent-color: #7a7a7a; }  /* сі�
      (лінійне читання зверху вниз — потік читання важливіший за ширину; НЕ колонки);
      бічний рейл із tab-навігації (📤 Показати — таб) */
   .app[data-screen="anamnesis"] > main { max-width: 860px; margin-inline: auto; }
+
+  /* ЛІКИ — СПИСОК (R3) — читабельна колонка: сканувати «що прийнято сьогодні» (сц.1),
+     список бондиться, не розтягуємо на всю ширину */
+  .app[data-screen="medications"] > main { max-width: 760px; margin-inline: auto; }
+
+  /* ЛІКИ — ДОДАТИ (R3) — вузька центрована форма (лінійне введення + розклад-пікер) */
+  .app[data-screen="medication-add"] > main { max-width: 560px; margin-inline: auto; }
+  .app[data-screen="medication-add"] > .actionbar { max-width: 560px; margin-inline: auto; width: 100%; }
+
+  /* ЛІКИ — ДЕТАЛЬ (R3) — препарат | журнал поруч: конфіг+статус ↔ лог подій одночасно */
+  .app[data-screen="medication-detail"] > main {
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--sp-6);
+    align-items: start; max-width: 1000px;
+  }
 
   /* OVERLAY §7 (швидке додавання, пікер типу) — нижній лист → центрована МОДАЛКА:
      bottom-sheet = мобільна ідіома (палець унизу); десктопний еквівалент вибору-над-контекстом = модалка.
