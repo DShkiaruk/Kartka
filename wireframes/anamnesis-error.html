@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Анамнез-PDF (помилка генерації)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Анамнез-PDF  |  СТАН: Помилка ГЕНЕРАЦІЇ (сервер не зібрав/не віддав PDF).
+  Це помилка генерації (проєкція не склалась), НЕ збереження — R2 нічого не зберігає.
+  FLOW (flows.md R2): gen → genok →|ні| generr → Повторити / показати кешований.
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Анамнез:</span>
+        <a href="anamnesis.html">База / успіх</a>
+        <a href="anamnesis-loading.html">Генерація</a>
+        <span class="cur">Помилка</span>
+        <a href="anamnesis-incomplete.html">Неповна</a>
+        <a href="anamnesis-offline.html">Офлайн</a>
+      </div>
+
+  <div class="app" data-screen="anamnesis">
+
+    <header>
+      <button class="profile-switcher" aria-haspopup="dialog" aria-label="Перемкнути профіль. Активний: Мама">
+        <span class="slot avatar">аватар: Мама</span>
+        <span class="who"><span class="name">Мама</span><span class="role">мама</span></span>
+        <span aria-hidden="true">▾</span>
+      </button>
+      <span class="spacer"></span>
+      <button class="hdr-search" aria-label="Пошук (запасний вихід)"><span class="slot">іконка</span>Пошук</button>
+      <a class="hdr-sos" href="emergency-card.html" aria-label="Екстрена картка"><span class="slot">іконка</span>Екстрене</a>
+    </header>
+
+    <main>
+      <h1 class="sr-only">Анамнез — Мама (помилка генерації)</h1>
+      <p class="status">Не вдалося зібрати анамнез. Спробуйте ще раз.</p>
+      <div class="share-row">
+        <a class="btn btn-primary" href="anamnesis.html">Повторити</a>
+        <a class="btn" href="anamnesis.html">Показати кешований</a>
+      </div>
+      <p class="wf-note">помилка ГЕНЕРАЦІЇ (сервер), не збереження — R2 нічого не зберігає. flows.md generr → повтор / кеш. «Показати кешований» доступне лише якщо анамнез уже генерували.</p>
+    </main>
+
+    <nav aria-label="Головна навігація">
+      <a href="dashboard.html"><span class="slot">іконка</span>Головна</a>
+      <a href="#"><span class="slot">іконка</span>Записи</a>
+      <a class="nav-add" href="quick-add.html"><span class="slot">іконка</span>Додати</a>
+      <a href="anamnesis.html" aria-current="page"><span class="slot">іконка</span>Показати</a>
+    </nav>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

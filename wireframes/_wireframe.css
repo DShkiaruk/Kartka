@@ -217,8 +217,10 @@ button, .btn {
   width: 100%;
   max-width: var(--app-max);
   display: flex;
+  flex-wrap: wrap;                       /* багато станів (напр. R2) — переносимо, не вилазимо */
   align-items: center;
   gap: var(--sp-2);
+  row-gap: var(--sp-1);
   padding: var(--sp-2) var(--sp-4);
   background: #1f1f1f;
   color: #cfcfcf;
@@ -296,6 +298,13 @@ section p { margin: 0; font-size: 0.9rem; }
 .crit-row .v { flex: 1; font-size: 1.05rem; font-weight: 600; }
 .offline-badge { font-size: 0.72rem; color: var(--muted); }   /* тихий індикатор «з кешу» */
 .member-hint { display: block; margin-top: var(--sp-1); font-size: 0.72rem; color: var(--muted); }  /* «не той? перемкнути» */
+
+/* R2 анамнез: ряд шеру (файл/друк) + опції конфігу (обсяг/мова/розділи) в overlay */
+.share-row { display: flex; gap: var(--sp-2); flex-wrap: wrap; margin-top: var(--sp-2); }
+.wf-sheet fieldset { border: 1px solid var(--line); padding: var(--sp-2) var(--sp-3); margin: 0 0 var(--sp-2); }
+.wf-sheet legend { font-size: 0.75rem; color: var(--muted); padding: 0 var(--sp-1); }
+.wf-sheet .opt { display: block; padding: var(--sp-1) 0; font-size: 0.9rem; }
+input[type="radio"], input[type="checkbox"] { accent-color: #7a7a7a; }  /* сірий акцент, не системний синій (§0) */
 
 /* overlay sheet (§7): scrim + нижній лист поверх екрана під ним */
 .app { position: relative; }
@@ -405,6 +414,11 @@ section p { margin: 0; font-size: 0.9rem; }
   .app[data-screen="add-document"] > main { max-width: 640px; margin-inline: auto; }
   .app[data-screen="add-document"] > main > .slot-big { min-height: 320px; }
   .app[data-screen="add-document"] > .actionbar { max-width: 640px; margin-inline: auto; width: 100%; }
+
+  /* АНАМНЕЗ (R2) — документ для лікаря: читабельна центрована «сторінка»
+     (лінійне читання зверху вниз — потік читання важливіший за ширину; НЕ колонки);
+     бічний рейл із tab-навігації (📤 Показати — таб) */
+  .app[data-screen="anamnesis"] > main { max-width: 860px; margin-inline: auto; }
 
   /* OVERLAY §7 (швидке додавання, пікер типу) — нижній лист → центрована МОДАЛКА:
      bottom-sheet = мобільна ідіома (палець унизу); десктопний еквівалент вибору-над-контекстом = модалка.

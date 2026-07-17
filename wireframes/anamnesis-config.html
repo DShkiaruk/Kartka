@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Анамнез — обсяг / мова (overlay)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Обсяг / мова анамнезу  |  under-flow екрана «Анамнез-PDF» (НЕ стан).
+  OVERLAY §7 — панель ПОВЕРХ анамнезу; дефолти: обсяг=повний, мова=укр.
+  FLOW (flows.md R2): scope / sections. Застосування — при закритті (авто), без окремого «Зберегти».
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+  <div class="app" data-screen="anamnesis">
+
+    <!-- приглушений backdrop анамнезу (контекст не втрачається, §7) -->
+    <header>
+      <button class="profile-switcher" aria-hidden="true" tabindex="-1">
+        <span class="slot avatar">аватар: Мама</span>
+        <span class="who"><span class="name">Мама</span><span class="role">мама</span></span>
+        <span aria-hidden="true">▾</span>
+      </button>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">Пошук</span>
+      <span class="hdr-ctx">Екстрене</span>
+    </header>
+
+    <main aria-hidden="true">
+      <p class="status">Обсяг: повний · Мова: укр</p>
+      <section><h2>Базова картка</h2><p class="empty-hint">…</p></section>
+      <section><h2>Поточні ліки</h2><p class="empty-hint">…</p></section>
+    </main>
+
+    <nav aria-label="Головна навігація">
+      <a href="dashboard.html"><span class="slot">іконка</span>Головна</a>
+      <a href="#"><span class="slot">іконка</span>Записи</a>
+      <a class="nav-add" href="quick-add.html"><span class="slot">іконка</span>Додати</a>
+      <a href="anamnesis.html" aria-current="page"><span class="slot">іконка</span>Показати</a>
+    </nav>
+
+    <!-- overlay: приглушення + панель конфігу -->
+    <div class="wf-scrim"></div>
+    <div class="wf-sheet" role="dialog" aria-modal="true" aria-label="Обсяг і мова анамнезу">
+      <h2>Обсяг і мова</h2>
+
+      <fieldset>
+        <legend>Обсяг</legend>
+        <label class="opt"><input type="radio" name="scope" checked> Повний анамнез</label>
+        <label class="opt"><input type="radio" name="scope"> Лише критичне</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Мова</legend>
+        <label class="opt"><input type="radio" name="lang" checked> Українська</label>
+        <label class="opt"><input type="radio" name="lang"> English</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Розділи</legend>
+        <label class="opt"><input type="checkbox" checked> Базова картка</label>
+        <label class="opt"><input type="checkbox" checked> Поточні ліки</label>
+        <label class="opt"><input type="checkbox" checked> Останні показники</label>
+        <label class="opt"><input type="checkbox" checked> Візити</label>
+        <label class="opt"><input type="checkbox"> Документи</label>
+      </fieldset>
+
+      <a class="cancel" href="anamnesis.html">Готово</a>
+      <p class="wf-note">under-flow (§7 overlay), не стан. Дефолти: повний / укр / усі розділи крім Документів. Застосовується при «Готово» (авто, без окремого «Зберегти»). сц.8 — «Лише критичне» + один розділ «Ліки».</p>
+    </div>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

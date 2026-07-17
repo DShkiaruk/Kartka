@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Анамнез-PDF (база/успіх)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Анамнез-PDF — генерація + перегляд  (sitemap · ПРОЄКЦІЇ · R2)
+  СТАН:  база / успіх (згенеровано, готово показати/віддати).
+  ПРИРОДА: ПРОЄКЦІЯ — компонує наявні дані (базова картка + ліки + показники + візити +
+  опц. документи), нічого не зберігає. Шер = файл/друк (лінка НЕМА, рішення «б»).
+  JOB:   R2 (сц.2/3/8) — показати повну картину лікарю за секунди. Щасливий шлях 2 тапи.
+  Обсяг/мова — under-flow (anamnesis-config), дефолти повний/укр. Межа: значення сирі, без норм (CLAUDE §4).
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Анамнез:</span>
+        <span class="cur">База / успіх</span>
+        <a href="anamnesis-loading.html">Генерація</a>
+        <a href="anamnesis-error.html">Помилка</a>
+        <a href="anamnesis-incomplete.html">Неповна</a>
+        <a href="anamnesis-offline.html">Офлайн</a>
+      </div>
+
+  <div class="app" data-screen="anamnesis">
+
+    <header>
+      <button class="profile-switcher" aria-haspopup="dialog" aria-label="Перемкнути профіль. Активний: Мама">
+        <span class="slot avatar">аватар: Мама</span>
+        <span class="who"><span class="name">Мама</span><span class="role">мама</span></span>
+        <span aria-hidden="true">▾</span>
+      </button>
+      <span class="spacer"></span>
+      <button class="hdr-search" aria-label="Пошук (запасний вихід)"><span class="slot">іконка</span>Пошук</button>
+      <a class="hdr-sos" href="emergency-card.html" aria-label="Екстрена картка"><span class="slot">іконка</span>Екстрене</a>
+    </header>
+
+    <main>
+      <h1 class="sr-only">Анамнез — Мама</h1>
+
+      <p class="status">Обсяг: повний · Мова: укр — <a href="anamnesis-config.html">Налаштувати</a></p>
+
+      <section aria-labelledby="a-base">
+        <h2 id="a-base">Базова картка</h2>
+        <div class="kv"><span class="k">Алергії</span><span class="v">Пеніцилін</span></div>
+        <div class="kv"><span class="k">Хроніка</span><span class="v">Гіпертонія</span></div>
+        <div class="kv"><span class="k">Група крові</span><span class="v">A(II) Rh+</span></div>
+        <div class="kv"><span class="k">Контакти</span><span class="v">Донька — 067 000 00 00</span></div>
+      </section>
+
+      <section aria-labelledby="a-meds">
+        <h2 id="a-meds">Поточні ліки</h2>
+        <article><span class="body">Еналаприл 10&nbsp;мг <span class="meta">— щодня 08:00</span></span></article>
+        <article><span class="body">Аторвастатин 20&nbsp;мг <span class="meta">— щодня 20:00</span></span></article>
+      </section>
+
+      <section aria-labelledby="a-labs">
+        <h2 id="a-labs">Останні показники</h2>
+        <article><span class="body">Гемоглобін — 118&nbsp;г/л <span class="meta">— 08.07.2026</span></span></article>
+        <p class="wf-note">значення сирі — без норм / зон / оцінок (CLAUDE §4)</p>
+      </section>
+
+      <section aria-labelledby="a-visits">
+        <h2 id="a-visits">Візити</h2>
+        <article><span class="body">Кардіолог <span class="meta">— 16.07.2026, 14:00</span></span></article>
+      </section>
+
+      <section aria-labelledby="a-docs">
+        <h2 id="a-docs">Документи</h2>
+        <article><span class="body">Виписка — поліклініка №4, кардіолог <span class="meta">— 10.07.2026</span></span></article>
+      </section>
+
+      <div class="share-row">
+        <a class="btn btn-primary" href="#">Поділитися файлом</a>
+        <a class="btn" href="#">Друк</a>
+      </div>
+      <p class="wf-note">R2 — проєкція: компонує наявне, нічого не зберігає. Шер = файл/друк (публічного лінка немає — рішення «б», приватність). Файл/друк — дії ОС (тому #).</p>
+    </main>
+
+    <nav aria-label="Головна навігація">
+      <a href="dashboard.html"><span class="slot">іконка</span>Головна</a>
+      <a href="#"><span class="slot">іконка</span>Записи</a>
+      <a class="nav-add" href="quick-add.html"><span class="slot">іконка</span>Додати</a>
+      <a href="anamnesis.html" aria-current="page"><span class="slot">іконка</span>Показати</a>
+    </nav>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

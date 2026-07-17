@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Анамнез-PDF (неповна картина)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Анамнез-PDF  |  СТАН: Неповна картина — джерела тонкі (новий профіль, мало записів).
+  Генерується З ЧЕСНОЮ ПОЗНАЧКОЮ ФАКТУ «це не вся історія» — БЕЗ оцінки (межа не-медичного, CLAUDE §4):
+  «внесено мало записів» ✓ · «недостатньо для діагнозу» ✗ · «повнота 40%» ✗.
+  Не «порожній» — проєкція завжди щось компонує; це її розріджений край. Профіль схеми: Я (новий).
+  FLOW (flows.md R2): sparse →|мало| weak → show.
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Анамнез:</span>
+        <a href="anamnesis.html">База / успіх</a>
+        <a href="anamnesis-loading.html">Генерація</a>
+        <a href="anamnesis-error.html">Помилка</a>
+        <span class="cur">Неповна</span>
+        <a href="anamnesis-offline.html">Офлайн</a>
+      </div>
+
+  <div class="app" data-screen="anamnesis">
+
+    <header>
+      <button class="profile-switcher" aria-haspopup="dialog" aria-label="Перемкнути профіль. Активний: Я">
+        <span class="slot avatar">аватар: Я</span>
+        <span class="who"><span class="name">Я</span><span class="role">я</span></span>
+        <span aria-hidden="true">▾</span>
+      </button>
+      <span class="spacer"></span>
+      <button class="hdr-search" aria-label="Пошук (запасний вихід)"><span class="slot">іконка</span>Пошук</button>
+      <a class="hdr-sos" href="emergency-card-deadempty.html" aria-label="Екстрена картка"><span class="slot">іконка</span>Екстрене</a>
+    </header>
+
+    <main>
+      <h1 class="sr-only">Анамнез — Я (неповна картина)</h1>
+
+      <p class="status">Це не вся історія — внесено мало записів.</p>
+
+      <section aria-labelledby="i-base">
+        <h2 id="i-base">Базова картка</h2>
+        <div class="kv"><span class="k">Група крові</span><span class="v">A(II) Rh+</span></div>
+        <div class="kv"><span class="k">Алергії</span><span class="v todo">не внесено</span></div>
+      </section>
+
+      <section aria-labelledby="i-meds">
+        <h2 id="i-meds">Поточні ліки</h2>
+        <p class="empty-hint">Ще немає записів.</p>
+      </section>
+
+      <section aria-labelledby="i-labs">
+        <h2 id="i-labs">Показники · Візити · Документи</h2>
+        <p class="empty-hint">Ще немає записів.</p>
+      </section>
+
+      <div class="share-row">
+        <a class="btn btn-primary" href="#">Поділитися файлом</a>
+        <a class="btn" href="#">Друк</a>
+      </div>
+      <p class="wf-note">МЕЖА: позначка ФАКТУ неповноти («мало записів»), НЕ оцінка («недостатньо…» / «%» — заборонено, CLAUDE §4). Показати/віддати можна — з чесною позначкою. Не «порожній»: проєкція компонує наявне.</p>
+    </main>
+
+    <nav aria-label="Головна навігація">
+      <a href="dashboard.html"><span class="slot">іконка</span>Головна</a>
+      <a href="#"><span class="slot">іконка</span>Записи</a>
+      <a class="nav-add" href="quick-add.html"><span class="slot">іконка</span>Додати</a>
+      <a href="anamnesis.html" aria-current="page"><span class="slot">іконка</span>Показати</a>
+    </nav>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

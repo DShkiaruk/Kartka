@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Анамнез-PDF (офлайн без кешу)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Анамнез-PDF  |  СТАН: Офлайн без кешу — повний анамнез не зібрати (генерація серверна).
+  НЕ глухий кут: чесне обмеження + ВИХІД у R5 Екстрену картку (критичне офлайн) + «повний — коли мережа».
+  FLOW (flows.md R2): net→ні → cache →|ні| offlim → emerg (R5) / laternet.
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Анамнез:</span>
+        <a href="anamnesis.html">База / успіх</a>
+        <a href="anamnesis-loading.html">Генерація</a>
+        <a href="anamnesis-error.html">Помилка</a>
+        <a href="anamnesis-incomplete.html">Неповна</a>
+        <span class="cur">Офлайн</span>
+      </div>
+
+  <div class="app" data-screen="anamnesis">
+
+    <header>
+      <button class="profile-switcher" aria-haspopup="dialog" aria-label="Перемкнути профіль. Активний: Мама">
+        <span class="slot avatar">аватар: Мама</span>
+        <span class="who"><span class="name">Мама</span><span class="role">мама</span></span>
+        <span aria-hidden="true">▾</span>
+      </button>
+      <span class="spacer"></span>
+      <span class="offline-badge">офлайн</span>
+      <a class="hdr-sos" href="emergency-card.html" aria-label="Екстрена картка"><span class="slot">іконка</span>Екстрене</a>
+    </header>
+
+    <main>
+      <h1 class="sr-only">Анамнез — Мама (офлайн, повний недоступний)</h1>
+      <p class="status">Офлайн: повний анамнез потребує мережі (генерується на сервері).</p>
+      <p>Кешованої копії ще немає (цей анамнез не генерували раніше).</p>
+      <div class="share-row">
+        <a class="btn btn-primary" href="emergency-card.html">Відкрити Екстрену картку</a>
+      </div>
+      <p class="empty-hint">Критичне (алергії · група крові · ліки · контакти) доступне офлайн. Повний анамнез — щойно з'явиться мережа.</p>
+      <p class="wf-note">НЕ глухий кут (flows.md offlim): вихід у R5 (критичне офлайн) + «повний — коли мережа». Дзеркалить R5-deadempty.</p>
+    </main>
+
+    <nav aria-label="Головна навігація">
+      <a href="dashboard.html"><span class="slot">іконка</span>Головна</a>
+      <a href="#"><span class="slot">іконка</span>Записи</a>
+      <a class="nav-add" href="quick-add.html"><span class="slot">іконка</span>Додати</a>
+      <a href="anamnesis.html" aria-current="page"><span class="slot">іконка</span>Показати</a>
+    </nav>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

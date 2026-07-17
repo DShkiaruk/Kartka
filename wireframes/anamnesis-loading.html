@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Анамнез-PDF (генерація)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Анамнез-PDF  |  СТАН: Завантаження — СЕРВЕРНА генерація PDF.
+  Спінер ДОРЕЧНИЙ (на відміну від R5 — це не гарячий момент; лікар поруч, кілька секунд норма).
+  FLOW (flows.md R2): net→так → gen → genok.
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Анамнез:</span>
+        <a href="anamnesis.html">База / успіх</a>
+        <span class="cur">Генерація</span>
+        <a href="anamnesis-error.html">Помилка</a>
+        <a href="anamnesis-incomplete.html">Неповна</a>
+        <a href="anamnesis-offline.html">Офлайн</a>
+      </div>
+
+  <div class="app" data-screen="anamnesis">
+
+    <header>
+      <button class="profile-switcher" aria-haspopup="dialog" aria-label="Перемкнути профіль. Активний: Мама">
+        <span class="slot avatar">аватар: Мама</span>
+        <span class="who"><span class="name">Мама</span><span class="role">мама</span></span>
+        <span aria-hidden="true">▾</span>
+      </button>
+      <span class="spacer"></span>
+      <button class="hdr-search" aria-label="Пошук (запасний вихід)"><span class="slot">іконка</span>Пошук</button>
+      <a class="hdr-sos" href="emergency-card.html" aria-label="Екстрена картка"><span class="slot">іконка</span>Екстрене</a>
+    </header>
+
+    <main>
+      <h1 class="sr-only">Анамнез — Мама (генерується)</h1>
+      <div class="slot-big">генерація анамнезу…</div>
+      <p class="status">Збираємо базову картку, ліки, показники, візити…</p>
+      <p class="wf-note">серверна генерація PDF; спінер доречний (не гарячий момент). flows.md gen → genok.</p>
+    </main>
+
+    <nav aria-label="Головна навігація">
+      <a href="dashboard.html"><span class="slot">іконка</span>Головна</a>
+      <a href="#"><span class="slot">іконка</span>Записи</a>
+      <a class="nav-add" href="quick-add.html"><span class="slot">іконка</span>Додати</a>
+      <a href="anamnesis.html" aria-current="page"><span class="slot">іконка</span>Показати</a>
+    </nav>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

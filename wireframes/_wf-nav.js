@@ -32,6 +32,15 @@
         { name: 'Дозаповнити тип (overlay §7, under-flow)', file: 'document-edit-type.html', exists: true }
       ] }
     ] },
+    { section: 'ПРОЄКЦІЇ · R2', screens: [
+      { name: 'Анамнез-PDF — перегляд', file: 'anamnesis.html', exists: true, states: [
+        { name: 'Генерація', file: 'anamnesis-loading.html', exists: true },
+        { name: 'Помилка генерації', file: 'anamnesis-error.html', exists: true },
+        { name: 'Неповна картина', file: 'anamnesis-incomplete.html', exists: true },
+        { name: 'Офлайн без кешу', file: 'anamnesis-offline.html', exists: true },
+        { name: 'Обсяг/мова (overlay §7, under-flow)', file: 'anamnesis-config.html', exists: true }
+      ] }
+    ] },
     { section: 'ПРОЄКЦІЇ · R5', screens: [
       { name: 'Екстрена картка — перегляд', file: 'emergency-card.html', exists: true, states: [
         { name: 'Порожня (deadempty)', file: 'emergency-card-deadempty.html', exists: true }
@@ -71,7 +80,7 @@
   function render(mount) {
     var title = document.createElement('div');
     title.className = 'wfnav-title';
-    title.textContent = 'Вайрфрейми · R1 + R5 (ядро MVP)';
+    title.textContent = 'Вайрфрейми · ядро MVP (R1 · R2 · R5)';
     mount.appendChild(title);
 
     TREE.forEach(function (sec) {
