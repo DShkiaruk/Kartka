@@ -3,14 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kartka — каркас: Додати / редагувати ліки</title>
+  <title>Kartka — каркас: Розклад ліків (інтерактивний пікер)</title>
   <link rel="stylesheet" href="_wireframe.css">
 </head>
 <!--
-  ЕКРАН: Додати / редагувати ліки  (sitemap · ПІД ПРОФІЛЕМ · R3)
-  СТАН:  база (форма). Помилка збереження → medication-add-error.html.
-  РОЗКЛАД (under-flow у формі): 4 типи — показуємо поля лише ОБРАНОГО (не монстр).
-  Нагадування (under-flow): конфіг + fallback (push недоступний → локальне/email + статус).
+  ЕКРАН: Розклад ліків — under-flow «Додати / редагувати ліки» (R3). ІНТЕРАКТИВНИЙ.
+  Радіо ПРАЦЮЮТЬ (мінімальний інлайн-JS conditional-reveal): клік по типу → показує поля
+  ЦЬОГО типу під ним, ховає інші (progressive disclosure; патерн GOV.UK — поля під обраним радіо).
+  Це свідомий виняток зі «статичних екранів» — контрол СПРАВДІ динамічний (research: Apple Health/
+  Medisafe окремий крок «частота»). Системні контроли (select/time/date/чипи), не текст.
+  Типи: щодня · певні дні · курс(дати) · за потреби(без полів/нагадувань). «Час» повторюється — норма.
+  Поза MVP (CLAUDE §1): «кожні N днів» / циклічний — не робимо.
 -->
 <body>
   <div class="wfnav-layout">
@@ -18,41 +21,20 @@
     <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
 
     <div class="wfnav-stage">
-
-      <div class="wfnav-compare">
-        <span class="lbl">Додати ліки:</span>
-        <span class="cur">Форма</span>
-        <a href="medication-add-error.html">Помилка збереження</a>
-      </div>
-
-  <div class="app" data-screen="medication-add">
+  <div class="app" data-screen="medication-schedule">
 
     <header>
-      <span class="hdr-title">Додати ліки</span>
+      <a class="hdr-back" href="medication-add.html" aria-label="Назад до форми ліків">‹ Додати ліки</a>
+      <span class="hdr-title">Розклад</span>
       <span class="spacer"></span>
       <span class="hdr-ctx">для: Мама</span>
     </header>
 
     <main>
-      <form>
-        <div class="field">
-          <label for="name">Назва</label>
-          <input id="name" type="text" placeholder="напр. Еналаприл">
-        </div>
-        <div class="field">
-          <label for="dose">Дозування</label>
-          <input id="dose" type="text" placeholder="напр. 10 мг">
-        </div>
+      <form autocomplete="off">
+        <fieldset>
+          <legend>Тип розкладу</legend>
 
-        <!-- МОБІЛКА: розклад окремим екраном (простір обмежений) -->
-        <div class="field sched-summary">
-          <label>Розклад</label>
-          <p class="status">Щодня · 08:00 — <a href="medication-schedule.html">Змінити</a></p>
-        </div>
-
-        <!-- ДЕСКТОП: той самий пікер ІНЛАЙН на цій сторінці (є простір) -->
-        <fieldset class="sched-inline">
-          <legend>Розклад</legend>
           <label class="opt"><input type="radio" name="sched" value="daily" checked> Щодня</label>
           <div class="reveal" data-for="daily">
             <div class="field"><label for="times">Скільки разів на день</label>
@@ -60,6 +42,7 @@
             </div>
             <div class="field"><label for="t-daily">Час</label><input id="t-daily" type="time" value="08:00"></div>
           </div>
+
           <label class="opt"><input type="radio" name="sched" value="weekdays"> Певні дні тижня</label>
           <div class="reveal" data-for="weekdays" hidden>
             <div class="field">
@@ -70,45 +53,27 @@
             </div>
             <div class="field"><label for="t-week">Час</label><input id="t-week" type="time" value="08:00"></div>
           </div>
+
           <label class="opt"><input type="radio" name="sched" value="course"> Курс із датами (від—до)</label>
           <div class="reveal" data-for="course" hidden>
             <div class="field"><label for="from">Дата від</label><input id="from" type="date" value="2026-07-12"></div>
             <div class="field"><label for="to">Дата до</label><input id="to" type="date" value="2026-07-19"></div>
             <div class="field"><label for="t-course">Час</label><input id="t-course" type="time" value="08:00"></div>
           </div>
+
           <label class="opt"><input type="radio" name="sched" value="asneeded"> За потреби</label>
           <div class="reveal" data-for="asneeded" hidden>
             <p class="empty-hint">Без розкладу й нагадувань.</p>
-            <p>Прийом позначаєте, коли приймаєте.</p>
+            <p>Прийом позначаєте, коли приймаєте — у списку чи деталі препарату.</p>
           </div>
         </fieldset>
-        <p class="wf-note">Адаптив: МОБІЛКА → розклад окремим екраном (medication-schedule, простір обмежений); ДЕСКТОП → той самий пікер ІНЛАЙН тут (є простір). Радіо працюють (JS, той самий скрипт).</p>
-
-        <fieldset>
-          <legend>Нагадування</legend>
-          <label class="opt"><input type="checkbox" checked> Нагадувати</label>
-          <div class="field">
-            <label for="lead">За скільки</label>
-            <select id="lead">
-              <option>за 5 хв</option>
-              <option selected>за 10 хв</option>
-              <option>за 15 хв</option>
-              <option>за 30 хв</option>
-              <option>за годину</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Тихі години</label>
-            <span class="range"><input type="time" value="22:00" aria-label="від"> – <input type="time" value="07:00" aria-label="до"></span>
-          </div>
-        </fieldset>
-        <p class="wf-note">«За скільки» — dropdown; «час» / «тихі години» — системні time-пікери (не вільний текст). push недоступний (iOS) → fallback: локальне/email + видимий статус. Не тупик.</p>
+        <p class="wf-note">Радіо ПРАЦЮЮТЬ (клік → поля цього типу; інші ховаються). «Час» повторюється в 3 типах — норма. «За потреби» → без полів/нагадувань (наслідок для деталі — без щоденного «Сьогодні»). Мінімальний інлайн-JS — свідомий виняток (контрол справді динамічний).</p>
       </form>
     </main>
 
     <div class="actionbar">
-      <a class="btn btn-primary" href="medications.html">Зберегти</a>
-      <a class="btn" href="medications.html">Скасувати</a>
+      <span class="grow"></span>
+      <a class="btn btn-primary" href="medication-add.html">Готово</a>
     </div>
 
   </div><!-- /.app -->
@@ -118,7 +83,7 @@
 
   <script src="_wf-nav.js"></script>
   <script>
-    // Розклад інлайн (десктоп): радіо → поля обраного типу (той самий conditional-reveal).
+    // Conditional-reveal: показати поля обраного типу, сховати інші (progressive disclosure).
     (function () {
       function update() {
         var checked = document.querySelector('input[name="sched"]:checked');
@@ -130,6 +95,7 @@
       document.querySelectorAll('input[name="sched"]').forEach(function (r) {
         r.addEventListener('change', update);
       });
+      // чипи днів — теж клікабельні (toggle)
       document.querySelectorAll('.chip').forEach(function (c) {
         c.addEventListener('click', function () { c.classList.toggle('on'); });
       });

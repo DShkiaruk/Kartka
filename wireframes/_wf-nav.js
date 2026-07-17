@@ -39,7 +39,8 @@
         { name: 'Помилка завантаження (спільний)', file: 'medications-error.html', exists: true }
       ] },
       { name: 'Додати / редагувати ліки', file: 'medication-add.html', exists: true, states: [
-        { name: 'Помилка збереження', file: 'medication-add-error.html', exists: true }
+        { name: 'Помилка збереження', file: 'medication-add-error.html', exists: true },
+        { name: 'Розклад — пікер типу (інтерактивний)', file: 'medication-schedule.html', exists: true }
       ] },
       { name: 'Ліки — деталь (+ журнал)', file: 'medication-detail.html', exists: true, states: [
         { name: 'Журнал порожній', file: 'medication-detail-empty.html', exists: true }
