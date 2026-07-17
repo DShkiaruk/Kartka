@@ -29,12 +29,22 @@ body {
 }
 
 /* канва «телефону», центрована; базова ширина 390, макс 430 (§1) */
-.app {
+/* .app-frame — контейнер прев'ю (створює _wf-nav.js). Задає ширину поверхні й
+   container-type, щоб @container міг стилізувати САМ .app (контейнер не стилізує сам себе). */
+.app-frame {
   width: 100%;
   max-width: var(--app-max);
-  min-height: 100vh;
-  flex-shrink: 0;                        /* не стискати нижче контенту (інакше «папір» обрізає) */
   margin: 0 auto;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  container-type: inline-size;           /* адаптив по ширині КОНТЕЙНЕРА (не в'юпорта) — §9 */
+  container-name: screen;
+}
+
+.app {
+  width: 100%;
+  min-height: 100vh;
   background: #fff;                      /* «папір» каркаса */
   display: flex;
   flex-direction: column;
@@ -193,6 +203,7 @@ button, .btn {
 }
 .wfnav-stage {                          /* макет — вужча колонка праворуч */
   flex: 1 1 auto;
+  min-width: 0;                          /* flexbox: дозволити стиснутись, щоб не розпирати вправо */
   height: 100%;
   overflow-y: auto;
   display: flex;
@@ -299,3 +310,109 @@ section p { margin: 0; font-size: 0.9rem; }
 .wf-sheet .btn { align-self: stretch; text-align: left; }
 .btn.disabled { color: var(--muted); background: var(--fill-2); border-style: dashed; cursor: default; }
 .wf-sheet .cancel { align-self: center; margin-top: var(--sp-2); color: var(--muted); }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   АДАПТИВ — десктоп-поверхня ТОГО САМОГО файлу (конвенції §9).
+   Перемикач поверхні міняє ширину .app-контейнера → тому CONTAINER query
+   (@container), а не viewport @media: щоб два вигляди жили в одному вікні.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* перемикач поверхні у compare-bar (риштування, НЕ продукт) */
+.wfnav-surface { margin-left: auto; display: inline-flex; align-items: center; gap: var(--sp-1); }
+.wfnav-compare button {
+  font: inherit; font-size: 12px; cursor: pointer;
+  background: none; border: 0; color: #d4d4d4; padding: 2px 8px;
+}
+.wfnav-compare button:hover { background: #333; }
+.wfnav-compare button.cur { color: #fff; font-weight: 700; background: #454545; }
+
+/* десктоп-прев'ю: .app-frame заповнює доступний простір (не фіксовані 1280 → не вилазить),
+   верхня межа 1280; container query спрацьовує, щойно ширина рамки ≥1024 */
+.wfnav-stage.surface-desktop .app-frame { width: 100%; max-width: 1280px; }
+.wfnav-stage.surface-desktop .wfnav-compare { width: 100%; max-width: 1280px; }
+
+/* десктоп-розкладка тієї самої IA (брейкпойнт 1024px ПО КОНТЕЙНЕРУ) */
+@container screen (min-width: 1024px) {
+
+  /* екрани з нижнім баром → бічна навігація + сітка «рейл + контент» */
+  .app:has(> nav) {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    grid-template-rows: var(--header-h) 1fr;
+  }
+  .app:has(> nav) > header { grid-column: 2; grid-row: 1; padding-inline: var(--sp-8); }
+  .app:has(> nav) > main   { grid-column: 2; grid-row: 2; max-width: 960px; padding: var(--sp-8); }
+  .app:has(> nav) > nav {                       /* нижній бар → лівий рейл */
+    grid-column: 1; grid-row: 1 / -1;
+    flex-direction: column; align-items: stretch;
+    height: auto; border-top: 0; border-right: 1px solid var(--line);
+    padding-top: var(--sp-3);
+  }
+  .app:has(> nav) > nav a,
+  .app:has(> nav) > nav button {
+    flex: 0 0 auto; flex-direction: row; justify-content: flex-start;
+    gap: var(--sp-3); padding: var(--sp-3) var(--sp-4);
+    border-right: 0; border-bottom: 1px solid var(--fill); font-size: 0.85rem;
+  }
+
+  /* фокус-екрани без бару → центрована колонка, ширші поля */
+  .app:not(:has(> nav)) > main { max-width: 720px; margin-inline: auto; padding: var(--sp-8); }
+  .app:not(:has(> nav)) > header,
+  .app:not(:has(> nav)) > .actionbar { padding-inline: var(--sp-8); }
+
+  /* ДАШБОРД — сканувальна поверхня з кількох паралельних кластерів: 2 колонки,
+     критичне (пріоритет) на всю ширину зверху; ширина йде в користь огляду */
+  .app[data-screen="dashboard"] > main {
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-6); align-content: start;
+  }
+  .app[data-screen="dashboard"] > main > section:first-of-type { grid-column: 1 / -1; }
+}
+
+/* ═══ per-screen десктоп-розкладки — виведені з природи екрана/job, не шаблон ═══ */
+@container screen (min-width: 1024px) {
+
+  /* ДОКУМЕНТ-ПЕРЕГЛЯД — знімок (медіа) + деталі поруч: документ має ВІЗУАЛ і метадані,
+     десктоп дає бачити скан великим і дозаповнювати поля одночасно (мобілка — стек) */
+  .app[data-screen="document-view"] > main {
+    display: grid; grid-template-columns: 1.4fr 1fr; gap: var(--sp-4) var(--sp-6);
+    align-items: start; max-width: 1080px;
+  }
+  .app[data-screen="document-view"] > main > .status   { grid-column: 1 / -1; }   /* статус — повна ширина зверху */
+  .app[data-screen="document-view"] > main > .slot-big { grid-column: 1; min-height: 420px; }
+  .app[data-screen="document-view"] > main > section   { grid-column: 2; align-self: start; }
+
+  /* ЕКСТРЕНА КАРТКА — сфокусована картка по центру, критичне у 2 стовпці: кризовий glance,
+     усе критичне видно ЗА РАЗ без скролу; розпорошення на всю ширину шкодить швидкому читанню */
+  .app[data-screen="emergency-card"] > main { max-width: 780px; margin-inline: auto; }
+  .app[data-screen="emergency-card"] > .actionbar { max-width: 780px; margin-inline: auto; width: 100%; }
+  .app[data-screen="emergency-card"] > main > section:has(.crit-row) {
+    display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--sp-8);
+  }
+
+  /* ДАШБОРД-ПОРОЖНІЙ — рейл + вужча центрована колонка: контент розріджений (CTA-запрошення);
+     широка розтяжка робить його «загубленим» (на відміну від наповненого дашборда) */
+  .app[data-screen="dashboard-empty"] > main { max-width: 560px; margin-inline: auto; }
+
+  /* ФОРМИ (онбординг, базова картка) — вузька центрована колонка: коротке ЛІНІЙНЕ введення;
+     широкі поля шкодять; підходить обом бо однакова природа (форма з кількох полів), не «бо однаково» */
+  .app[data-screen="onboarding"] > main,
+  .app[data-screen="edit-base-card"] > main { max-width: 520px; margin-inline: auto; }
+  .app[data-screen="onboarding"] > .actionbar,
+  .app[data-screen="edit-base-card"] > .actionbar { max-width: 520px; margin-inline: auto; width: 100%; }
+
+  /* ДОДАТИ ДОКУМЕНТ — сфокусована колонка + великий дроп-зон: одна фокальна дія (захоплення/файл),
+     колонки зайві; на десктопі природний великий drop-target */
+  .app[data-screen="add-document"] > main { max-width: 640px; margin-inline: auto; }
+  .app[data-screen="add-document"] > main > .slot-big { min-height: 320px; }
+  .app[data-screen="add-document"] > .actionbar { max-width: 640px; margin-inline: auto; width: 100%; }
+
+  /* OVERLAY §7 (швидке додавання, пікер типу) — нижній лист → центрована МОДАЛКА:
+     bottom-sheet = мобільна ідіома (палець унизу); десктопний еквівалент вибору-над-контекстом = модалка.
+     Спільне для обох, бо це та сама ВЗАЄМОДІЯ (транзитний вибір над екраном), не «бо однаково» */
+  .wf-sheet {
+    left: 50%; right: auto; bottom: auto; top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(420px, 90%);
+    border: 1px solid var(--line-2);
+  }
+}

@@ -91,8 +91,55 @@
     });
   }
 
+  // Перемикач поверхні (Мобілка/Десктоп) — риштування: міняє ШИРИНУ .app-контейнера
+  // (не веде на інший файл, не в'юпорт). Десктоп-розкладку вмикає @container у css.
+  function mountSurfaceToggle() {
+    var stage = document.querySelector('.wfnav-stage');
+    if (!stage) return;
+    var bar = stage.querySelector('.wfnav-compare');
+    if (!bar) {                       // сторінки без compare-bar теж дістають перемикач
+      bar = document.createElement('div');
+      bar.className = 'wfnav-compare';
+      stage.insertBefore(bar, stage.firstChild);
+    }
+    var wrap = document.createElement('span');
+    wrap.className = 'wfnav-surface';
+    var lbl = document.createElement('span');
+    lbl.className = 'lbl';
+    lbl.textContent = 'Поверхня:';
+    wrap.appendChild(lbl);
+
+    var mob = document.createElement('button');  mob.type = 'button';  mob.textContent = 'Мобілка';
+    var desk = document.createElement('button'); desk.type = 'button'; desk.textContent = 'Десктоп';
+    function set(isDesktop) {
+      stage.classList.toggle('surface-desktop', isDesktop);
+      mob.className = isDesktop ? '' : 'cur';
+      desk.className = isDesktop ? 'cur' : '';
+    }
+    mob.addEventListener('click', function () { set(false); });
+    desk.addEventListener('click', function () { set(true); });
+    wrap.appendChild(mob);
+    wrap.appendChild(desk);
+    bar.appendChild(wrap);
+    set(false);                       // дефолт — мобілка
+  }
+
+  // Обгортає .app у .app-frame — контейнер для @container (сам контейнер не стилізує себе).
+  function frameApp() {
+    var stage = document.querySelector('.wfnav-stage');
+    if (!stage) return;
+    var app = stage.querySelector(':scope > .app');
+    if (!app || (app.parentElement && app.parentElement.classList.contains('app-frame'))) return;
+    var frame = document.createElement('div');
+    frame.className = 'app-frame';
+    stage.insertBefore(frame, app);
+    frame.appendChild(app);
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     var mount = document.getElementById('wfnav-tree');
     if (mount) render(mount);
+    frameApp();
+    mountSurfaceToggle();
   });
 })();
