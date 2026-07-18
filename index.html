@@ -767,7 +767,7 @@
       <li>Аналізи — список показників <span class="pill">R4</span>
         <ul>
           <li>Показник — крива в часі <span class="v v-avoid">без норм</span> <span class="pill">R4</span></li>
-          <li>Додати результат аналізу <span class="pill">R4</span></li>
+          <li>Додати вимірювання <span class="pill">R4</span></li>
           <li class="ctx"><b>•</b> Довідник показників — не окремий екран, службовий reference у цьому потоці</li>
         </ul>
       </li>
@@ -1145,8 +1145,8 @@ flowchart TD
   entry -->|"Записи → Аналізи"| list["Аналізи — список показників (кожен: останнє значення · дата · крива-слот)"]
   entry -->|"дашборд «остання динаміка» — ціль 1 тап (борг O19)"| curve
 
-  %% ── ДОДАТИ результат (створює Вимірювання; новий Показник — через довідник) ──
-  list --> add["Додати результат аналізу — ➕"]
+  %% ── ДОДАТИ вимірювання (створює Вимірювання; новий Показник — через довідник) ──
+  list --> add["Додати вимірювання — ➕"]
   add --> pick{"Показник уже є?"}
   pick -->|"так — обрати наявний"| val
   pick -->|"новий"| ref{"Є в довіднику показників?"}
@@ -1172,7 +1172,7 @@ flowchart TD
   tapp -->|"так"| point["Значення + дата + джерело (прикріплений файл)"]
   tapp -->|"ні"| done["Готово — видно ЩО і КОЛИ, без судження"]
   point --> done
-  one --> addmore["CTA «додати ще результат»"]
+  one --> addmore["CTA «додати ще вимірювання»"]
   addmore --> add
 
   %% ── МЕЖА (AVOID) — найкритичніша точка R4 ──
@@ -1560,7 +1560,7 @@ flowchart TD
   <ul>
     <li><a href="wireframes/analyses.html" target="_blank" rel="noopener">Аналізи — список показників</a> <span class="ctx">· <a href="wireframes/analyses-empty.html" target="_blank" rel="noopener">порожній</a> · <a href="wireframes/analyses-loading.html" target="_blank" rel="noopener">завантаження</a> · <a href="wireframes/analyses-error.html" target="_blank" rel="noopener">помилка</a></span></li>
     <li><a href="wireframes/analysis-curve.html" target="_blank" rel="noopener">Показник — крива в часі</a> <span class="ctx">· <a href="wireframes/analysis-curve-onepoint.html" target="_blank" rel="noopener">одна точка (n=1)</a></span></li>
-    <li><a href="wireframes/analysis-add.html" target="_blank" rel="noopener">Додати результат аналізу</a> <span class="ctx">· <a href="wireframes/analysis-add-error.html" target="_blank" rel="noopener">помилка збереження</a></span></li>
+    <li><a href="wireframes/analysis-add.html" target="_blank" rel="noopener">Додати вимірювання</a> <span class="ctx">· <a href="wireframes/analysis-add-error.html" target="_blank" rel="noopener">помилка збереження</a></span></li>
   </ul>
 
   <h3 id="wf-visits">Візити <span class="ctx">· R4</span></h3>
