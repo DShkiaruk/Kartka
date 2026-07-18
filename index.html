@@ -228,6 +228,14 @@
       <a href="#wf-cross">Наскрізне</a>
     </div>
 
+    <a class="sb-page" data-page="voice" href="#voice"><span class="ic" aria-hidden="true">🗣️</span> Голос <span class="tag">копі</span></a>
+    <div class="sb-sub" data-sub="voice" hidden>
+      <a href="#voice-principles">Принципи</a>
+      <a href="#voice-glossary">Словник</a>
+      <a href="#voice-forbidden">Заборонене</a>
+      <a href="#voice-anti">Анти-референс</a>
+    </div>
+
     <div class="sb-label">Скоро</div>
     <span class="sb-page soon"><span class="ic">🎨</span> Дизайн-система <span class="tag">soon</span></span>
     <span class="sb-page soon"><span class="ic">🧩</span> Компоненти <span class="tag">soon</span></span>
@@ -1584,6 +1592,57 @@ flowchart TD
   </ul>
 
   <p class="ctx">Це навігація на наявні файли, не дубль контенту (§9): структура дзеркалить дерево <code>_wf-nav.js</code>, джерело станів — <code>_screens.md</code>.</p>
+</div></section>
+
+<section id="voice" data-page="voice"><div class="wrap">
+  <h2>Голос · мікрокопі</h2>
+  <p class="sub">Як Kartka <b>говорить</b>. Стрижень — <b>не судимо</b>: кажемо <b>що</b> і <b>коли</b>, ніколи не оцінюємо. Це переказ суті; джерело правди — <code>wireframes/voice.md</code> (принципи · Словник · Заборонене · мікрокопі-за-типами) + інвентар <code>wireframes/microcopy.md</code>.</p>
+
+  <h3 id="voice-principles">Принципи</h3>
+  <ul>
+    <li><b>1 · Не судить</b> — сире значення + дата, без норм / оцінок / порад; порада — лише як слова лікаря, з атрибуцією («лікар радив»). <span class="ctx">Не стиль — межа медвиробу (SaMD).</span></li>
+    <li><b>2 · Приватність — тихо</b> — довіру дає стриманість, а не банер «🔒 захищено»; приватність названо раз, як факт.</li>
+    <li><b>3 · Гарячий момент</b> — під сканування чужим лікарем за ~10 сек: коротко, іменем речі (мітка + значення), без прелюдій.</li>
+    <li><b>4 · Холодний старт</b> — порожній екран <b>запрошує</b> внести перше цінне, ніколи не докоряє.</li>
+    <li><b>5 · Ціна помилки</b> — durable: «нічого не втрачено», не паніка. Локальний збій → «Повторити»; синк → «синхронізується…», <b>без</b> retry.</li>
+  </ul>
+
+  <h3 id="voice-glossary">Словник <span class="ctx">· одне поняття — одне слово (вибірка)</span></h3>
+  <div class="tw"><table>
+    <tr><th>Кажемо</th><th>Не вживати</th></tr>
+    <tr><td><b>профіль</b></td><td>«член» / «носій» (у перемикачі)</td></tr>
+    <tr><td><b>вимірювання</b> <span class="ctx">(точка кривої)</span></td><td>«результат» <span class="ctx">— це лише тип документа</span></td></tr>
+    <tr><td><b>візит</b> <span class="ctx">(зустріч лікаря)</span></td><td>«прийом» <span class="ctx">— лише подія прийому ліків; «прийом до лікаря» заборонено</span></td></tr>
+    <tr><td><b>активні</b> ліки</td><td>«поточні»</td></tr>
+    <tr><td><b>анамнез</b></td><td>«картина» / «історія» (як ярлик)</td></tr>
+    <tr><td><b>препарат</b></td><td>«медикамент»</td></tr>
+    <tr><td><b>Зберегти</b> (форма) · <b>Готово</b> (durable-екран)</td><td>плутати — слово за механікою збереження</td></tr>
+  </table></div>
+  <p class="ctx">Повний словник (14 понять) + бренд-виняток «картка» — у <code>voice.md</code>.</p>
+
+  <h3 id="voice-forbidden">Заборонене</h3>
+  <div class="grid2">
+    <div class="card" style="border-color:var(--red)">
+      <h4>Геть</h4>
+      <p>Фальш-бадьорість «Вітаємо / Ласкаво просимо», «успішно», «Ой, щось пішло не так», зайві оклики, емодзі (крім 🆘). <b>Retry на синк-стані.</b></p>
+      <p><b>МЕЖА (найкритичніше)</b> — жодної оцінки: <span class="v v-avoid">у нормі</span> <span class="v v-avoid">підвищено</span> <span class="v v-avoid">покращується</span> <span class="v v-avoid">↑ / ↓</span> <span class="v v-avoid">%</span> <span class="v v-avoid">ви пропустили</span></p>
+    </div>
+    <div class="card" style="border-color:var(--green)">
+      <h4>Дозволено <span class="ctx">(факт ≠ судження)</span></h4>
+      <p>«мало даних» · «потрібен ще ≥1 запис» · «Ще немає X» · «у черзі» · «збережено локально» · «це не вся історія».</p>
+      <p class="ctx">Це <b>факт нестачі даних</b>, не вирок — не зрізати.</p>
+    </div>
+  </div>
+
+  <h3 id="voice-anti">Анти-референс</h3>
+  <p class="sub">Так фреймлять результат конкуренти — <b>оцінка над цифрою</b> (клас мови їхнього копі; екрани результатів за логіном → <span class="b b-q">?</span>). <b>Kartka — ніколи.</b> Рамка обов'язкова: таб про «не судимо» без неї сам показав би оцінку.</p>
+  <div class="tw"><table>
+    <tr><th>🔴 Конкурент — оцінка над цифрою</th><th>🟢 Kartka — сирий факт</th></tr>
+    <tr><td><b>Synevo:</b> <span class="v v-avoid">підвищені / знижені</span> <span class="v v-avoid">в межах норми / поза межами</span> <span class="ctx">[бачив: budzdorova.synevo.ua]</span></td><td>«Гемоглобін — 128 г/л · 12.07.2026» — значення + дата, без вироку</td></tr>
+    <tr><td><b>MyChart:</b> <span class="v v-avoid">abnormal results will be flagged</span> <span class="ctx">[бачив: nmhs.net]</span></td><td>не флагує «abnormal» — показує криву, не вирок</td></tr>
+    <tr><td><b>MyChart</b> визнає, що вирок тривожить: «out-of-range values <span class="v v-avoid">can seem alarming</span>» <span class="ctx">[бачив: ecommunity.com]</span></td><td>не гасить тривогу — <b>не створює</b> її (нема чого заспокоювати)</td></tr>
+  </table></div>
+  <p class="ctx">Fitbit «In/Out of target range» / Apple «Out of Range» — <span class="b b-q">?</span> не підтверджено офіц. джерелом (лише Mobbin / за логіном), тому як цитату не наводимо.</p>
 </div></section>
 
 <footer><div class="wrap">
