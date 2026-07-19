@@ -61,6 +61,8 @@
     .app[data-screen^="dashboard"] .m-value{ font-size:2.4rem; font-weight:300; letter-spacing:-.03em; color:var(--g-ink); line-height:1.05; font-variant-numeric:tabular-nums; }
     .app[data-screen^="dashboard"] .m-value .m-unit{ font-size:1rem; font-weight:500; color:var(--g-mut); margin-left:5px; }
     .app[data-screen^="dashboard"] .m-date{ font-size:.82rem; color:var(--g-mut); }
+    /* «Остання динаміка» — міні-слот кривої (борг O19: динаміка за 1 тап). Слот-бокс §0 (реальний SVG кривої не малюємо). Лише десктоп — на мобілці контенту достатньо; там останнє значення вже = 1 тап до кривої. */
+    .app[data-screen="dashboard"] .moment-curve{ display:none; }
     /* КНОПКИ — окремий словник від бейджів: рамка/заливка, НІКОЛИ tint-тег */
     .app[data-screen^="dashboard"] .btn{ border:1px solid var(--g-line); background:var(--g-surf); color:var(--g-acci); border-radius:var(--g-r); font-weight:600; margin-top:var(--sp-3); }
     .app[data-screen^="dashboard"] .btn-primary{ background:var(--g-acc); border-color:var(--g-acc); color:var(--g-on); }
@@ -88,6 +90,14 @@
       .app[data-screen="dashboard"] section[aria-labelledby="s-crit"] > .kv{ display:inline-flex; gap:6px; padding:0; }
       .app[data-screen="dashboard"] section[aria-labelledby="s-crit"] > .kv .k{ flex:none; }
       .app[data-screen="dashboard"] section[aria-labelledby="s-crit"] > .btn{ margin-top:0; margin-left:auto; }
+      /* «Остання динаміка» — сирий міні-слот кривої наповнює колонку «Останнє» (борг O19). Без норм/зон/оцінок — лише слот. */
+      .app[data-screen="dashboard"] .moment-article{ padding-bottom:0; }
+      .app[data-screen="dashboard"] .moment-curve{
+        display:flex; align-items:center; justify-content:center; align-self:stretch;
+        margin-top:var(--sp-3); min-height:150px;
+        border:1px dashed var(--g-line); border-radius:var(--g-r);
+        background:var(--g-bg); color:var(--g-mut); font-size:.72rem; text-align:center;
+      }
     }
   </style>
 </head>
@@ -184,9 +194,10 @@
             <span class="m-name">Гемоглобін</span>
             <span class="m-value">128&nbsp;<span class="m-unit">г/л</span></span>
             <span class="m-date">12.07.2026 · аналіз</span>
+            <span class="moment-curve" aria-hidden="true">[крива: Гемоглобін · 5 вимірювань]</span>
           </a>
         </article>
-        <p class="wf-note">головна дія: відкрити запис. Значення сирі — без норм / зон / оцінок (CLAUDE §4)</p>
+        <p class="wf-note">головна дія: відкрити запис. Значення сирі — без норм / зон / оцінок (CLAUDE §4). Міні-слот кривої (лише десктоп) = «остання динаміка за 1 тап» (борг O19); слот-бокс §0 — реальний SVG кривої в каркасах не малюємо (ассет у analysis-curve.html).</p>
       </section>
     </main>
 
