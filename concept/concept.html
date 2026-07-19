@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kartka · Мова напряму Ґ · Фокус + Список</title>
+<style>
+  :root{
+    /* ==== напрям Ґ (скін Тиші) ==== */
+    --bg:#F1F3F4; --surface:#FFFFFF; --raise:#FFFFFF; --ink:#1B2127; --mut:#586067; --faint:#8A9297; --line:#DBDFE2; --line-soft:#E7EAEC;
+    --accent:#37476A; --accent-ink:#33445F; --accent-hover:#2C3A57; --accent-tint:#E7EAF1; --on-accent:#FFFFFF;
+    /* семантичні · СТАТУС СИСТЕМИ, не показ значень (A3 тримає паркан) */
+    --sync:#4E5E82; --sync-tint:#E6E9F0; --sync-ink:#3D4E72;
+    --local:#5A6668; --local-tint:#E8EBEB; --local-ink:#495557;
+    --ok:#3E6B4E; --ok-tint:#E4EDE7; --ok-ink:#356048;
+    --err:#A34A38; --err-tint:#F1E1DD; --err-ink:#8E3B2B;
+    /* форма */
+    --r-sm:4px; --r-md:6px; --r-lg:10px;
+    --sh-card:0 1px 2px rgba(20,30,40,.05), 0 8px 20px -14px rgba(20,30,40,.18);
+    --sh-pop:0 4px 10px rgba(20,30,40,.14), 0 14px 30px -12px rgba(20,30,40,.30);
+    --fs:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--fs); font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 clamp(16px,3vw,32px)}
+  h1,h2,h3{margin:0; letter-spacing:-.015em; text-wrap:balance}
+  p{margin:0}
+  code{font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:.86em; background:var(--accent-tint); color:var(--accent-ink); padding:1px 5px; border-radius:4px}
+  a{color:var(--accent-ink)}
+  :focus-visible{outline:2.5px solid var(--accent); outline-offset:2px; border-radius:3px}
+
+  /* attribute chips */
+  .a{display:inline-flex; align-items:center; font:600 .68rem/1 var(--fs); color:var(--accent-ink); background:var(--accent-tint); border-radius:5px; padding:4px 7px; white-space:nowrap; letter-spacing:0}
+  .a.m3{color:var(--err-ink); background:var(--err-tint)}
+
+  header.top{padding:clamp(30px,5vw,54px) 0 8px}
+  .eyebrow{font-size:.8rem; color:var(--mut); font-weight:600}
+  header.top h1{font-size:clamp(1.7rem,3.4vw,2.4rem); line-height:1.08; margin-top:8px; font-weight:640}
+  header.top .sub{margin-top:12px; color:var(--mut); max-width:68ch; font-size:1.02rem}
+  header.top .sub b{color:var(--ink)}
+  .legend{margin-top:20px; display:flex; flex-wrap:wrap; gap:8px}
+  .legend .a{font-size:.72rem}
+
+  section.blk{padding:clamp(30px,4.5vw,52px) 0 0}
+  .blk-head{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; border-bottom:1px solid var(--line); padding-bottom:14px; margin-bottom:24px}
+  .blk-head h2{font-size:1.5rem; flex:1 1 auto; min-width:200px; font-weight:620}
+  .blk-head .k{font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:.78rem; color:var(--accent-ink); font-weight:600}
+  .blk-head p{color:var(--mut); font-size:.92rem; max-width:46ch}
+
+  /* ===== мова живцем ===== */
+  .live{display:flex; flex-wrap:wrap; gap:28px; align-items:flex-start}
+  .phone{width:340px; max-width:100%; background:var(--surface); border:1px solid var(--line); border-radius:22px; box-shadow:var(--sh-card); padding:14px 14px 0; position:relative; overflow:hidden}
+  .ph-top{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:6px 4px 14px}
+  .switch{font:600 .95rem/1 var(--fs); color:var(--ink); background:none; border:0; display:inline-flex; align-items:center; gap:5px; cursor:pointer; padding:0}
+  .switch svg{width:15px; height:15px; color:var(--mut)}
+  .status{display:inline-flex; align-items:center; gap:6px; font-size:.72rem; font-weight:600; padding:4px 9px; border-radius:99px}
+  .status svg{width:13px; height:13px}
+  .st-local{background:var(--local-tint); color:var(--local-ink)}
+  .st-sync{background:var(--sync-tint); color:var(--sync-ink)}
+
+  .ph-scroll{padding-bottom:48px}
+  .moment{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:18px 16px 16px}
+  .m-lab{font-size:.78rem; color:var(--mut); font-weight:500}
+  .m-num{font-size:3rem; font-weight:300; letter-spacing:-.03em; color:var(--ink); line-height:1; margin-top:8px; font-variant-numeric:tabular-nums}
+  .m-num span{font-size:1.05rem; font-weight:500; color:var(--mut); margin-left:6px}
+  .m-date{margin-top:12px; font-size:.86rem; color:var(--mut)}
+
+  .doss{margin-top:14px}
+  .d-lab{font-size:.72rem; font-weight:600; color:var(--mut); padding:2px 2px 8px}
+  .d-row{display:flex; align-items:baseline; gap:10px; padding:11px 2px; border-top:1px solid var(--line-soft)}
+  .d-row .n{flex:1 1 auto; font-size:.9rem; color:var(--ink)}
+  .d-row .v{font-size:.88rem; color:var(--ink); font-variant-numeric:tabular-nums}
+  .d-row .dt{font-size:.78rem; color:var(--mut); min-width:48px; text-align:right}
+
+  .fab{position:absolute; right:16px; bottom:70px; width:48px; height:48px; border-radius:50%; background:var(--accent); color:var(--on-accent); border:0; font-size:1.5rem; line-height:1; cursor:pointer; box-shadow:var(--sh-pop); display:grid; place-items:center}
+  .tabs{display:flex; margin:16px -14px 0; border-top:1px solid var(--line); background:var(--surface)}
+  .tab{flex:1 1 0; display:flex; flex-direction:column; align-items:center; gap:3px; padding:9px 2px 12px; font-size:.66rem; color:var(--mut); text-decoration:none; font-weight:500}
+  .tab svg{width:21px; height:21px}
+  .tab.active{color:var(--accent-ink)}
+
+  .live-note{flex:1 1 280px; min-width:260px}
+  .live-note h3{font-size:1.05rem; font-weight:620; margin-bottom:10px}
+  .live-note ul{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px}
+  .live-note li{display:flex; gap:10px; align-items:flex-start; font-size:.9rem; color:var(--mut)}
+  .live-note li b{color:var(--ink); font-weight:600}
+  .live-note .a{margin-top:1px}
+
+  /* ===== палітра ===== */
+  .pal-group{margin-bottom:22px}
+  .pal-group > h3{font-size:.95rem; font-weight:600; color:var(--ink); margin-bottom:12px; display:flex; align-items:center; gap:9px}
+  .swatches{display:grid; grid-template-columns:repeat(auto-fill,minmax(155px,1fr)); gap:12px}
+  .sw{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); overflow:hidden}
+  .sw .chip{height:56px; border-bottom:1px solid var(--line-soft)}
+  .sw .meta{padding:9px 11px 11px}
+  .sw .role{font-size:.82rem; font-weight:600; color:var(--ink)}
+  .sw .hex{font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:.72rem; color:var(--mut); margin-top:2px}
+  .sw .a{margin-top:8px; font-size:.64rem}
+  .fence{margin-top:6px; border:1px solid var(--line); border-radius:var(--r-md); background:var(--surface); padding:13px 16px; font-size:.88rem; color:var(--mut); display:flex; gap:11px; align-items:flex-start}
+  .fence b{color:var(--ink)}
+  .fence .a{flex:none; margin-top:1px}
+
+  /* ===== типографіка ===== */
+  .type-scale{display:flex; flex-direction:column; gap:2px}
+  .ts-row{display:flex; align-items:baseline; gap:16px; padding:13px 16px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md)}
+  .ts-row.moment-step{border-color:var(--accent); background:linear-gradient(0deg,var(--accent-tint),var(--accent-tint)); }
+  .ts-spec{flex:1 1 auto; color:var(--ink); min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .ts-meta{font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:.72rem; color:var(--mut); white-space:nowrap}
+  .ts-note{font-size:.74rem; color:var(--mut); min-width:90px}
+  .fam{display:flex; gap:20px; flex-wrap:wrap; margin-bottom:18px}
+  .fam .card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:14px 16px; flex:1 1 240px}
+  .fam .big{font-size:2rem; color:var(--ink)}
+  .fam .w{display:flex; gap:14px; margin-top:8px; flex-wrap:wrap}
+  .fam .w span{font-size:.9rem; color:var(--mut)}
+
+  /* ===== форма (radii/shadow/spacing) ===== */
+  .form-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px}
+  .fc{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:16px}
+  .fc h3{font-size:.9rem; font-weight:600; margin-bottom:12px}
+  .radii{display:flex; gap:12px; align-items:flex-end}
+  .radii .r{flex:1 1 0; text-align:center}
+  .radii .box{height:44px; background:var(--accent-tint); border:1px solid var(--accent); }
+  .radii .r.sm .box{border-radius:var(--r-sm)} .radii .r.md .box{border-radius:var(--r-md)} .radii .r.lg .box{border-radius:var(--r-lg)}
+  .radii .lbl{font-size:.68rem; color:var(--mut); margin-top:6px; font-family:ui-monospace,"SF Mono",Menlo,monospace}
+  .shadows{display:flex; gap:16px}
+  .shadows .s{flex:1 1 0; height:56px; background:var(--surface); border:1px solid var(--line-soft); border-radius:var(--r-md); display:grid; place-items:center; font-size:.68rem; color:var(--mut)}
+  .shadows .s.card{box-shadow:var(--sh-card)} .shadows .s.pop{box-shadow:var(--sh-pop)}
+  .spacing{display:flex; gap:6px; align-items:flex-end; flex-wrap:wrap}
+  .spacing .u{background:var(--accent); align-self:flex-end}
+  .spacing .u i{display:block; font-style:normal; font-size:.62rem; color:var(--mut); text-align:center; margin-top:5px; font-family:ui-monospace,Menlo,monospace}
+  .spacing .col{display:flex; flex-direction:column; align-items:center}
+
+  /* ===== іконки ===== */
+  .iconset{display:flex; flex-wrap:wrap; gap:16px; padding:16px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); margin-bottom:16px}
+  .iconset svg{width:24px; height:24px; color:var(--ink)}
+  .cover{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:12px}
+  .cover .c{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:13px 15px}
+  .cover .c .t{font-size:.85rem; font-weight:600; color:var(--ink)}
+  .cover .c .d{font-size:.8rem; color:var(--mut); margin-top:3px}
+  .qset{display:inline-block; margin-top:14px; font-family:ui-monospace,Menlo,monospace; font-size:.74rem; color:var(--mut); border:1px dashed var(--line); border-radius:6px; padding:4px 9px}
+
+  /* ===== фото ===== */
+  .photos{display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap}
+  .thumb{border-radius:var(--r-sm); border:1px solid var(--line); background:#EDEFF2; overflow:hidden; position:relative}
+  .thumb svg{position:absolute; inset:0; width:100%; height:100%}
+  .thumb.sm{width:40px; height:50px}
+  .thumb.md{width:64px; height:80px}
+  .photo-note{flex:1 1 280px; font-size:.9rem; color:var(--mut)}
+  .photo-note b{color:var(--ink)}
+
+  /* ===== 3 живі компоненти (annotated) ===== */
+  .comp{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:18px}
+  .comp-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:18px; display:flex; flex-direction:column; gap:14px}
+  .comp-card > .ttl{display:flex; align-items:center; gap:9px; flex-wrap:wrap}
+  .comp-card > .ttl h3{font-size:1.05rem; font-weight:620}
+  .demo{background:var(--bg); border:1px solid var(--line-soft); border-radius:var(--r-md); padding:16px}
+  .anno{font-size:.84rem; color:var(--mut); display:flex; flex-direction:column; gap:8px}
+  .anno .row{display:flex; gap:9px; align-items:flex-start}
+  .anno .row .a{flex:none; margin-top:1px}
+  .anno b{color:var(--ink)}
+  .guard{border:1px solid var(--err); background:var(--err-tint); border-radius:var(--r-md); padding:11px 13px; font-size:.83rem; color:var(--err-ink)}
+  .guard b{color:var(--err-ink)}
+
+  /* form component */
+  .field{margin-bottom:12px}
+  .field label{display:block; font-size:.78rem; font-weight:600; color:var(--mut); margin-bottom:5px}
+  .field input{width:100%; font:400 .95rem/1.2 var(--fs); color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:10px 12px}
+  .field input::placeholder{color:var(--faint)}
+  .field input:focus-visible{border-color:var(--accent); outline:2px solid var(--accent-tint)}
+  .btn{font:600 .92rem/1 var(--fs); color:var(--on-accent); background:var(--accent); border:1px solid var(--accent); border-radius:var(--r-md); padding:11px 16px; cursor:pointer; transition:background .16s}
+  .btn:hover{background:var(--accent-hover)}
+  .btn.wide{width:100%}
+  .btn.ghost{background:transparent; color:var(--accent-ink); border-color:var(--line)}
+  .btn.ghost:hover{background:var(--accent-tint)}
+
+  footer{margin-top:clamp(40px,6vw,72px); border-top:1px solid var(--line); padding:26px 0 60px; color:var(--faint); font-size:.84rem}
+  footer b{color:var(--mut)}
+  footer .wrap{display:flex; flex-wrap:wrap; gap:14px 40px; justify-content:space-between}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="eyebrow">Kartka · concept · стенд мови</div>
+    <h1>Напрям Ґ · Фокус + Список</h1>
+    <p class="sub">Обрана мова інтерфейсу: <b>Момент Тиші</b> (одне велике число у фокусі) плюс <b>Досьє</b> (решта показників списком). Ієрархія, не плоска таблиця. Скін Тиші: прохолодний нейтрал, indigo-акцент, sans, повітря. Кожне рішення підписане атрибутом; межа <b>«показує, не судить»</b> тримається на найтоншому місці · великому числі.</p>
+    <div class="legend">
+      <span class="a">A1 · спокійно, не тривожно</span>
+      <span class="a">A2 · скан за 10 сек</span>
+      <span class="a m3">A3 · показує, не судить (межа)</span>
+      <span class="a">A4 · приватність тихо</span>
+      <span class="a">A5 · порожньо запрошує</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ===== МОВА ЖИВЦЕМ ===== -->
+  <section class="blk" id="live">
+    <div class="blk-head">
+      <h2>Мова живцем</h2>
+      <p>Компоненти разом, як у продукті. Специфікація нижче.</p>
+    </div>
+    <div class="live">
+      <div class="phone" role="img" aria-label="Прев'ю екрана Головна напряму Ґ">
+        <div class="ph-top">
+          <button class="switch" type="button">Мама <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+          <span class="status st-local"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Збережено локально</span>
+        </div>
+        <div class="ph-scroll">
+        <div class="moment">
+          <div class="m-lab">Останнє вимірювання · Гемоглобін</div>
+          <div class="m-num">128<span>г/л</span></div>
+          <div class="m-date">14 березня 2026</div>
+        </div>
+        <div class="doss">
+          <div class="d-lab">Інші показники</div>
+          <div class="d-row"><span class="n">Артеріальний тиск</span><span class="v">120/80</span><span class="dt">10 бер</span></div>
+          <div class="d-row"><span class="n">Глюкоза</span><span class="v">5.1 ммоль/л</span><span class="dt">02 бер</span></div>
+          <div class="d-row"><span class="n">Холестерин</span><span class="v">4.8 ммоль/л</span><span class="dt">02 бер</span></div>
+        </div>
+        </div>
+        <button class="fab" type="button" aria-label="Додати">＋</button>
+        <nav class="tabs" aria-label="Головна навігація">
+          <a class="tab active" href="#live"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"/></svg>Головна</a>
+          <a class="tab" href="#live"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>Записи</a>
+          <a class="tab" href="#live"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="8" rx="4"/><path d="M12 8v8"/></svg>Ліки</a>
+          <a class="tab" href="#live"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16"/><path d="M7 15l3.5-4 3 2.5L20 8"/></svg>Аналізи</a>
+        </nav>
+      </div>
+
+      <div class="live-note">
+        <h3>Що робить цю мову напрямом Ґ</h3>
+        <ul>
+          <li><span class="a">A1</span><span><b>Момент.</b> Одне велике легке число у фокусі. Спокій замість стіни цифр.</span></li>
+          <li><span class="a">A2</span><span><b>Досьє.</b> Решта показників рядками, скан за 10 секунд: назва · значення · дата.</span></li>
+          <li><span class="a m3">A3</span><span><b>Межа.</b> І число Моменту, і рядки Досьє · сирі: значення+дата, без score / зон / стрілок / кольору-оцінки.</span></li>
+          <li><span class="a">A4</span><span><b>Статус.</b> «Збережено локально» · тиха впевненість (дані тут, навіть офлайн), не гучний щит.</span></li>
+          <li><span class="a">A2</span><span><b>Кнопка «Додати».</b> Прокручувана область має нижній відступ (висота FAB + поле, ~88px), тож FAB не затуляє останній рядок з датою (Material). У резерві для data-first: «+» у верхньому барі.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ПАЛІТРА ===== -->
+  <section class="blk" id="palette">
+    <div class="blk-head">
+      <h2>Палітра</h2>
+      <p>Нейтраль + акцент + семантика. Семантика = статус системи, ніколи не значення.</p>
+    </div>
+
+    <div class="pal-group">
+      <h3>Нейтраль <span class="a">A1 · спокій</span></h3>
+      <div class="swatches">
+        <div class="sw"><div class="chip" style="background:#F1F3F4"></div><div class="meta"><div class="role">Тло</div><div class="hex">#F1F3F4</div></div></div>
+        <div class="sw"><div class="chip" style="background:#FFFFFF"></div><div class="meta"><div class="role">Поверхня</div><div class="hex">#FFFFFF</div></div></div>
+        <div class="sw"><div class="chip" style="background:#1B2127"></div><div class="meta"><div class="role">Чорнило</div><div class="hex">#1B2127</div></div></div>
+        <div class="sw"><div class="chip" style="background:#586067"></div><div class="meta"><div class="role">Приглушене</div><div class="hex">#586067</div></div></div>
+        <div class="sw"><div class="chip" style="background:#DBDFE2"></div><div class="meta"><div class="role">Лінія</div><div class="hex">#DBDFE2</div></div></div>
+      </div>
+    </div>
+
+    <div class="pal-group">
+      <h3>Акцент / Primary <span class="a">A1 · довіра</span> <span class="a">A4 · фокус</span></h3>
+      <div class="swatches">
+        <div class="sw"><div class="chip" style="background:#37476A"></div><div class="meta"><div class="role">Акцент (дії, фокус)</div><div class="hex">#37476A</div><span class="a">A1 · один глибокий акцент</span></div></div>
+        <div class="sw"><div class="chip" style="background:#33445F"></div><div class="meta"><div class="role">Акцент-чорнило</div><div class="hex">#33445F</div><span class="a">A2 · лінк/лейбл на світлому</span></div></div>
+        <div class="sw"><div class="chip" style="background:#E7EAF1"></div><div class="meta"><div class="role">Акцент-тінт</div><div class="hex">#E7EAF1</div><span class="a">A4 · виділення/чіп</span></div></div>
+      </div>
+    </div>
+
+    <div class="pal-group">
+      <h3>Семантика · статус системи <span class="a m3">A3 · паркан від значень</span></h3>
+      <div class="swatches">
+        <div class="sw"><div class="chip" style="background:#4E5E82"></div><div class="meta"><div class="role">Синк · завантаження</div><div class="hex">#4E5E82</div><span class="a">A4 · синхронізується…</span></div></div>
+        <div class="sw"><div class="chip" style="background:#5A6668"></div><div class="meta"><div class="role">Офлайн · локально</div><div class="hex">#5A6668</div><span class="a">A4 · збережено локально</span></div></div>
+        <div class="sw"><div class="chip" style="background:#3E6B4E"></div><div class="meta"><div class="role">Успіх (дія)</div><div class="hex">#3E6B4E</div><span class="a">A3 · лише «Збережено ✓»</span></div></div>
+        <div class="sw"><div class="chip" style="background:#A34A38"></div><div class="meta"><div class="role">Помилка збереження</div><div class="hex">#A34A38</div><span class="a">A3 · системна, не вирок</span></div></div>
+      </div>
+    </div>
+
+    <div class="fence">
+      <span class="a m3">A3</span>
+      <div><b>Паркан межі.</b> Семантичні кольори живуть <b>лише на статусі системи</b> (синк · офлайн · збережено · помилка збереження). На медичне <b>значення</b> жоден з них не потрапляє: ні зеленого «в нормі», ні червоного «відхилення». Так «показує, не судить» лишається цілим навіть за наявності семантичної палітри. Зелений · тільки для системного «Збережено ✓», не для даних.</div>
+    </div>
+  </section>
+
+  <!-- ===== ТИПОГРАФІКА ===== -->
+  <section class="blk" id="type">
+    <div class="blk-head">
+      <h2>Типографіка</h2>
+      <p>Одна родина вагами (product-регістр). Число Моменту · окремий крок шкали.</p>
+    </div>
+
+    <div class="fam">
+      <div class="card">
+        <div class="big">Аа Бб Вв 128</div>
+        <div class="w"><span>System UI · SF&nbsp;Pro / Segoe / Roboto</span></div>
+        <div class="w"><span>300 Light</span><span>400 Regular</span><span>500 Medium</span><span>600 Semibold</span></div>
+      </div>
+    </div>
+
+    <div class="type-scale">
+      <div class="ts-row moment-step"><span class="ts-spec" style="font-size:3rem;font-weight:300;letter-spacing:-.03em">128 г/л</span><span class="ts-note"><span class="a">A1</span> <span class="a m3">A3</span></span><span class="ts-meta">Момент · 3rem / 300</span></div>
+      <div class="ts-row"><span class="ts-spec" style="font-size:1.5rem;font-weight:600">Заголовок екрана</span><span class="ts-note">A1</span><span class="ts-meta">H1 · 1.5rem / 600</span></div>
+      <div class="ts-row"><span class="ts-spec" style="font-size:1.2rem;font-weight:600">Секція</span><span class="ts-note">A2</span><span class="ts-meta">H2 · 1.2rem / 600</span></div>
+      <div class="ts-row"><span class="ts-spec" style="font-size:1rem;font-weight:500">Назва показника</span><span class="ts-note">A2</span><span class="ts-meta">Metric · 1rem / 500</span></div>
+      <div class="ts-row"><span class="ts-spec" style="font-size:.95rem;font-weight:400">Основний текст, пояснення</span><span class="ts-note">A1</span><span class="ts-meta">Body · .95rem / 400</span></div>
+      <div class="ts-row"><span class="ts-spec" style="font-size:.9rem;font-weight:400;font-variant-numeric:tabular-nums">120/80 · 5.1 ммоль/л</span><span class="ts-note">A2</span><span class="ts-meta">Value · .9rem / tabular</span></div>
+      <div class="ts-row"><span class="ts-spec" style="font-size:.8rem;font-weight:500;color:var(--mut)">Мітка · метадані</span><span class="ts-note">A2</span><span class="ts-meta">Label · .8rem / 500</span></div>
+    </div>
+  </section>
+
+  <!-- ===== ФОРМА ===== -->
+  <section class="blk" id="form">
+    <div class="blk-head">
+      <h2>Форма</h2>
+      <p>Радіуси, тіні, ритм відступів. Повітря = A1; щільність списку = A2.</p>
+    </div>
+    <div class="form-grid">
+      <div class="fc">
+        <h3>Радіуси <span class="a">A1</span></h3>
+        <div class="radii">
+          <div class="r sm"><div class="box"></div><div class="lbl">4 · чіпи</div></div>
+          <div class="r md"><div class="box"></div><div class="lbl">6 · картки/поля</div></div>
+          <div class="r lg"><div class="box"></div><div class="lbl">10 · аркуші</div></div>
+        </div>
+      </div>
+      <div class="fc">
+        <h3>Тіні <span class="a">A1</span></h3>
+        <div class="shadows">
+          <div class="s card">картка</div>
+          <div class="s pop">FAB / поп</div>
+        </div>
+      </div>
+      <div class="fc">
+        <h3>Відступи <span class="a">A1 · повітря</span> <span class="a">A2 · щільність</span></h3>
+        <div class="spacing">
+          <div class="col"><div class="u" style="width:22px;height:4px"></div><i>4</i></div>
+          <div class="col"><div class="u" style="width:22px;height:8px"></div><i>8</i></div>
+          <div class="col"><div class="u" style="width:22px;height:12px"></div><i>12</i></div>
+          <div class="col"><div class="u" style="width:22px;height:16px"></div><i>16</i></div>
+          <div class="col"><div class="u" style="width:22px;height:20px"></div><i>20</i></div>
+          <div class="col"><div class="u" style="width:22px;height:24px"></div><i>24</i></div>
+          <div class="col"><div class="u" style="width:22px;height:32px"></div><i>32</i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ІКОНКИ ===== -->
+  <section class="blk" id="icons">
+    <div class="blk-head">
+      <h2>Іконки</h2>
+      <p>Стилістика напряму Ґ: тонка лінія (stroke ~1.5), заокруглені кінці.</p>
+    </div>
+    <div class="iconset">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="8" rx="4"/><path d="M12 8v8"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16"/><path d="M7 15l3.5-4 3 2.5L20 8"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 9h16M8 3v4M16 3v4"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v4h-4"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.5 6 10.5A6 6 0 0 1 6 13.5C6 9.5 12 3 12 3Z"/></svg>
+    </div>
+    <div class="cover">
+      <div class="c"><div class="t">Таб-бар</div><div class="d">Головна · Записи · Ліки · Аналізи (+ FAB «Додати»)</div></div>
+      <div class="c"><div class="t">Метадані запису</div><div class="d">дата · лікар/заклад · тип документа · вкладення</div></div>
+      <div class="c"><div class="t">Стани системи</div><div class="d">синк · офлайн/локально · збережено ✓ · помилка · порожній</div></div>
+    </div>
+    <span class="qset">конкретний набір (Lucide / Phosphor / власний) · [набір: ?], обереться на етапі tokens/</span>
+  </section>
+
+  <!-- ===== ФОТО ===== -->
+  <section class="blk" id="photo">
+    <div class="blk-head">
+      <h2>Фото</h2>
+      <p>Тільки мініатюра-вкладення документа. Людей не показуємо.</p>
+    </div>
+    <div class="photos">
+      <div>
+        <div class="thumb md"><svg viewBox="0 0 64 80" fill="none"><rect x="10" y="7" width="44" height="66" rx="3" fill="#fff" stroke="#C7CDD3" stroke-width="1.6"/><path d="M19 22h26M19 31h26M19 40h18" stroke="#C7CDD3" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <div style="font-size:.68rem;color:var(--mut);margin-top:6px;text-align:center;font-family:ui-monospace,Menlo,monospace">картка 64×80</div>
+      </div>
+      <div>
+        <div class="thumb sm"><svg viewBox="0 0 40 50" fill="none"><rect x="6" y="4" width="28" height="42" rx="2" fill="#fff" stroke="#C7CDD3" stroke-width="1.4"/><path d="M12 14h16M12 20h16M12 26h10" stroke="#C7CDD3" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+        <div style="font-size:.68rem;color:var(--mut);margin-top:6px;text-align:center;font-family:ui-monospace,Menlo,monospace">рядок 40×50</div>
+      </div>
+      <p class="photo-note"><b>Фото = лише мініатюра-вкладення</b> (скан виписки / результату), не герой і не портрет людини. Плейсхолдер · локальний inline-SVG, <b>без CDN</b> (приватність / офлайн · стрижень). Реальне вкладення: превʼю сторінки документа з заокругленням <code>4px</code>. <span class="a">A4</span> дані родини не «вітринимо».</p>
+    </div>
+  </section>
+
+  <!-- ===== 3 ЖИВІ КОМПОНЕНТИ ===== -->
+  <section class="blk" id="components">
+    <div class="blk-head">
+      <h2>Три живі компоненти</h2>
+      <p>Ядро мови Ґ, кожне рішення підписане атрибутом.</p>
+    </div>
+    <div class="comp">
+
+      <!-- 1 · Момент Тиші -->
+      <div class="comp-card">
+        <div class="ttl"><h3>1 · Картка «Момент Тиші»</h3><span class="a">A1</span><span class="a m3">A3</span></div>
+        <div class="demo">
+          <div class="moment" style="box-shadow:none">
+            <div class="m-lab">Останнє вимірювання · Гемоглобін</div>
+            <div class="m-num">128<span>г/л</span></div>
+            <div class="m-date">14 березня 2026</div>
+          </div>
+        </div>
+        <div class="guard"><b>Найтонше місце.</b> Велике число найлегше тягне оцінку. Тримаємо <b>сирим</b>: показник + значення + дата, крапка. Ніякого ↑/↓, ніякого кольору на числі, ніякого «у нормі». Колір числа = чорнило, не семантика.</div>
+        <div class="anno">
+          <div class="row"><span class="a">A1</span><span>Велике <b>легке</b> число (300) на повітрі · спокій, не тривога.</span></div>
+          <div class="row"><span class="a m3">A3</span><span>Значення+дата нейтральні; жодної оцінки засобами дизайну.</span></div>
+        </div>
+      </div>
+
+      <!-- 2 · Досьє -->
+      <div class="comp-card">
+        <div class="ttl"><h3>2 · Список «Досьє»</h3><span class="a">A2</span></div>
+        <div class="demo">
+          <div class="doss" style="margin:0">
+            <div class="d-lab">Показники</div>
+            <div class="d-row"><span class="n">Гемоглобін</span><span class="v">128 г/л</span><span class="dt">14 бер</span></div>
+            <div class="d-row"><span class="n">Артеріальний тиск</span><span class="v">120/80</span><span class="dt">10 бер</span></div>
+            <div class="d-row"><span class="n">Глюкоза</span><span class="v">5.1 ммоль/л</span><span class="dt">02 бер</span></div>
+            <div class="d-row"><span class="n">Холестерин</span><span class="v">4.8 ммоль/л</span><span class="dt">02 бер</span></div>
+          </div>
+        </div>
+        <div class="anno">
+          <div class="row"><span class="a">A2</span><span>Рядок = <b>назва · значення · дата</b>, tabular-цифри, hairline-дільники. Скан за 10 секунд.</span></div>
+          <div class="row"><span class="a m3">A3</span><span>Ті самі сирі значення, що й у Моменті. Жодних статус-кольорів на рядках.</span></div>
+        </div>
+      </div>
+
+      <!-- 3 · Форма + кнопка -->
+      <div class="comp-card">
+        <div class="ttl"><h3>3 · Форма «Додати вимірювання»</h3><span class="a">A2</span><span class="a">A5</span></div>
+        <div class="demo">
+          <div class="field"><label for="f1">Показник</label><input id="f1" type="text" value="Гемоглобін"></div>
+          <div class="field"><label for="f2">Значення</label><input id="f2" type="text" placeholder="напр. 128 г/л"></div>
+          <div class="field"><label for="f3">Дата</label><input id="f3" type="text" value="14.03.2026"></div>
+          <button class="btn wide" type="button">Зберегти</button>
+        </div>
+        <div class="anno">
+          <div class="row"><span class="a">Словник</span><span>Підписи полів словами Словника: <b>Показник · Значення · Дата</b>; дефолт дати = сьогодні.</span></div>
+          <div class="row"><span class="a">Voice</span><span>Форма з явним збереженням → кнопка <b>«Зберегти»</b> (не «Готово», не «ОК»).</span></div>
+          <div class="row"><span class="a">A5</span><span>Мінімум полів, розумні дефолти: швидке додавання проти порожнечі старту.</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b>Стенд мови напряму Ґ.</b> Каркаси лишаються сірими; це специфікація тону, не застосування. Контраст перевірено на WCAG AA; self-contained (системні шрифти, inline-SVG, без CDN).</p>
+    <p><b>Далі:</b> ці рішення → числа й ролі в <code>tokens/</code> + продуктовий <code>DESIGN.md</code>.</p>
+  </div>
+</footer>
+
+</body>
+</html>
