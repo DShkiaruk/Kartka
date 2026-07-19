@@ -5,6 +5,91 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kartka — каркас: Головна (база/успіх)</title>
   <link rel="stylesheet" href="_wireframe.css">
+  <style>
+    /* ═══ Мова напряму Ґ на dashboard (планка застосування; шар поверх _wireframe.css) ═══
+       Палітра/типо/форма з concept/concept.html. Значення СИРІ (межа A3): без норм/зон/оцінок/стрілок. */
+    .app[data-screen^="dashboard"]{
+      --g-bg:#F1F3F4; --g-surf:#FFFFFF; --g-ink:#1B2127; --g-mut:#586067;
+      --g-line:#DBDFE2; --g-line2:#EAECEE; --g-acc:#37476A; --g-acci:#33445F; --g-tint:#E7EAF1; --g-on:#FFFFFF;
+      --g-r:6px; --g-r-lg:12px;
+      background:var(--g-bg); color:var(--g-ink);
+      font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+      border-inline-color:var(--g-line);
+    }
+    /* бари білі; main прозорий (єдиний ґрунт .app) */
+    .app[data-screen^="dashboard"] > header{ background:var(--g-surf); border-bottom-color:var(--g-line); }
+    .app[data-screen^="dashboard"] > nav{ background:var(--g-surf); border-top-color:var(--g-line); }
+    .app[data-screen^="dashboard"] > main{ background:transparent; }
+    /* перемикач профілю: реальне імʼя + роль (демо: Олена · мама) */
+    .app[data-screen^="dashboard"] .profile-switcher{ color:var(--g-ink); border-radius:var(--g-r); align-items:center; }
+    .app[data-screen^="dashboard"] .profile-switcher .role{ color:var(--g-mut); }
+    .app[data-screen^="dashboard"] .profile-switcher .chev{ display:flex; align-items:center; color:var(--g-mut); }
+    .app[data-screen^="dashboard"] .profile-switcher .chev svg{ width:16px; height:16px; display:block; }
+    .app[data-screen^="dashboard"] .avatar{ width:36px; height:36px; border-radius:50%; background:var(--g-tint); color:var(--g-acci); display:inline-flex; align-items:center; justify-content:center; font-weight:600; font-size:.95rem; border:0; }
+    /* дії шапки — ОДНАКОВА висота/вирівнювання: іконка ЗЛІВА + текст (row), центровано на спільній лінії */
+    .app[data-screen^="dashboard"] .hdr-search,
+    .app[data-screen^="dashboard"] .hdr-sos{ flex-direction:row; align-items:center; align-self:center; gap:6px; font-size:.82rem; min-height:36px; padding-top:0; padding-bottom:0; }
+    .app[data-screen^="dashboard"] .hdr-search{ color:var(--g-mut); padding-inline:0; }
+    .app[data-screen^="dashboard"] .hdr-sos{ color:var(--g-acci); background:var(--g-tint); border:1px solid transparent; border-radius:var(--g-r); padding-inline:10px; }
+    .app[data-screen^="dashboard"] .hdr-search svg,
+    .app[data-screen^="dashboard"] .hdr-sos svg{ width:18px; height:18px; display:block; flex:none; }
+    /* СЕКЦІЯ = зовнішня картка; керований ритм (gap:0 + явні відступи), без вкладених рамок і подвійних відступів */
+    .app[data-screen^="dashboard"] section{ background:var(--g-surf); border:1px solid var(--g-line); border-radius:var(--g-r-lg); gap:0; }
+    .app[data-screen^="dashboard"] section > h2{ color:var(--g-ink); font-size:.95rem; font-weight:600; letter-spacing:-.01em; margin:0 0 var(--sp-3); }
+    .app[data-screen^="dashboard"] section > h3{ color:var(--g-mut); font-size:.7rem; font-weight:600; text-transform:uppercase; letter-spacing:.05em; margin:var(--sp-3) 0 2px; }
+    .app[data-screen^="dashboard"] section > h2 + h3{ margin-top:0; }
+    .app[data-screen^="dashboard"] .kv{ padding:5px 0; }
+    .app[data-screen^="dashboard"] .kv .k{ color:var(--g-mut); }
+    .app[data-screen^="dashboard"] .kv .v{ color:var(--g-ink); font-weight:500; }
+    /* БЕЙДЖ алергії = статус-тег (НЕ кнопка): tint-пігулка, крапка, дрібний */
+    .app[data-screen^="dashboard"] .kv-allergy{ align-items:center; }
+    .app[data-screen^="dashboard"] .kv-allergy .v{ display:inline-flex; align-items:center; gap:6px; background:var(--g-tint); color:var(--g-acci); border-radius:99px; padding:2px 10px; font-weight:600; font-size:.85rem; }
+    .app[data-screen^="dashboard"] .kv-allergy .v::before{ content:""; width:6px; height:6px; border-radius:50%; background:var(--g-acci); }
+    /* рядки списку: tap ~40, flush, hairline-розділювач (без вкладених карток, без подвоєних відступів) */
+    .app[data-screen^="dashboard"] article{ border:0; border-radius:0; background:transparent; gap:10px; padding:10px 0; min-height:0; }
+    /* розділювач ЛИШЕ між різними сутностями/групами (не між однотипними рядками) */
+    .app[data-screen^="dashboard"] section > article + h3{ border-top:1px solid var(--g-line2); margin-top:12px; padding-top:12px; }
+    .app[data-screen^="dashboard"] section > article + .moment-article{ border-top:1px solid var(--g-line2); }
+    .app[data-screen^="dashboard"] article .body{ color:var(--g-ink); }
+    .app[data-screen^="dashboard"] article .meta{ color:var(--g-mut); }
+    .app[data-screen^="dashboard"] .doc-thumb{ flex:none; width:30px; height:38px; border-radius:4px; border:1px solid var(--g-line); background:#EDEFF2; position:relative; overflow:hidden; }
+    .app[data-screen^="dashboard"] .doc-thumb svg{ position:absolute; inset:0; width:100%; height:100%; }
+    /* Момент Тиші: велике СИРЕ число (найтонше місце межі) */
+    .app[data-screen^="dashboard"] .moment-article{ display:block; min-height:0; padding:12px 0 2px; }
+    .app[data-screen^="dashboard"] .moment-row{ display:flex; flex-direction:column; align-items:flex-start; gap:3px; text-decoration:none; }
+    .app[data-screen^="dashboard"] .m-name{ font-size:.8rem; color:var(--g-mut); font-weight:500; }
+    .app[data-screen^="dashboard"] .m-value{ font-size:2.4rem; font-weight:300; letter-spacing:-.03em; color:var(--g-ink); line-height:1.05; font-variant-numeric:tabular-nums; }
+    .app[data-screen^="dashboard"] .m-value .m-unit{ font-size:1rem; font-weight:500; color:var(--g-mut); margin-left:5px; }
+    .app[data-screen^="dashboard"] .m-date{ font-size:.82rem; color:var(--g-mut); }
+    /* КНОПКИ — окремий словник від бейджів: рамка/заливка, НІКОЛИ tint-тег */
+    .app[data-screen^="dashboard"] .btn{ border:1px solid var(--g-line); background:var(--g-surf); color:var(--g-acci); border-radius:var(--g-r); font-weight:600; margin-top:var(--sp-3); }
+    .app[data-screen^="dashboard"] .btn-primary{ background:var(--g-acc); border-color:var(--g-acc); color:var(--g-on); }
+    .app[data-screen^="dashboard"] article button{ border:1px solid var(--g-line); background:var(--g-surf); color:var(--g-acci); border-radius:var(--g-r); font-weight:600; }
+    /* нижній бар */
+    .app[data-screen^="dashboard"] > nav a{ color:var(--g-mut); border-right-color:var(--g-line2); }
+    .app[data-screen^="dashboard"] > nav a svg{ width:21px; height:21px; }
+    .app[data-screen^="dashboard"] > nav [aria-current="page"]{ color:var(--g-acci); background:transparent; font-weight:600; }
+    .app[data-screen^="dashboard"] .nav-add{ color:var(--g-acci); }
+    /* порожній стан: керовані відступи (gap:0) */
+    .app[data-screen^="dashboard"] .lead{ color:var(--g-ink); }
+    .app[data-screen^="dashboard"] .empty-hint,
+    .app[data-screen^="dashboard"] section p{ color:var(--g-mut); }
+    .app[data-screen^="dashboard"] section > p{ margin-top:6px; }
+    .app[data-screen="dashboard-empty"] section:first-of-type{ background:var(--g-tint); border-color:color-mix(in oklab,var(--g-acc) 20%,var(--g-line)); }
+    /* мета-нотатки каркаса — НЕ в UI продукту */
+    .app[data-screen^="dashboard"] .wf-note{ display:none; }
+    /* десктоп: контент ЗАПОВНЮЄ колонку (прибирає вільне місце справа); cap для дуже широких */
+    @container screen (min-width:1024px){
+      .app[data-screen="dashboard"] > header,
+      .app[data-screen="dashboard"] > main{ max-width:1200px; margin-inline:auto; width:100%; }
+      /* Критичне на десктопі — горизонтальний факт-банд на всю ширину (без порожнечі справа) */
+      .app[data-screen="dashboard"] section[aria-labelledby="s-crit"]{ flex-flow:row wrap; align-items:center; column-gap:var(--sp-8); row-gap:var(--sp-2); }
+      .app[data-screen="dashboard"] section[aria-labelledby="s-crit"] > h2{ flex-basis:100%; margin-bottom:var(--sp-2); }
+      .app[data-screen="dashboard"] section[aria-labelledby="s-crit"] > .kv{ display:inline-flex; gap:6px; padding:0; }
+      .app[data-screen="dashboard"] section[aria-labelledby="s-crit"] > .kv .k{ flex:none; }
+      .app[data-screen="dashboard"] section[aria-labelledby="s-crit"] > .btn{ margin-top:0; margin-left:auto; }
+    }
+  </style>
 </head>
 <!--
   ЕКРАН: Дашборд профілю — «Головна»  (sitemap: «Дашборд профілю — «важливе»»)
@@ -31,35 +116,35 @@
   <div class="app" data-screen="dashboard">
 
     <header>
-      <button class="profile-switcher" aria-haspopup="dialog" aria-label="Перемкнути профіль. Активний: Мама">
-        <span class="slot avatar">аватар: Мама</span>
+      <button class="profile-switcher" aria-haspopup="dialog" aria-label="Перемкнути профіль. Активний: Олена (мама)">
+        <span class="avatar" aria-hidden="true">О</span>
         <span class="who">
-          <span class="name">Мама</span>
+          <span class="name">Олена</span>
           <span class="role">мама</span>
         </span>
-        <span aria-hidden="true">▾</span>
+        <span class="chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
       </button>
 
       <span class="spacer"></span>
 
       <button class="hdr-search" aria-label="Пошук (запасний вихід)">
-        <span class="slot">іконка</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.4-3.4"/></svg>
         Пошук
       </button>
 
       <a class="hdr-sos" href="emergency-card.html" aria-label="Екстрена картка">
-        <span class="slot">іконка</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3Z"/><path d="M12 8.5v5M9.5 11h5"/></svg>
         Екстрене
       </a>
     </header>
 
     <main>
-      <h1 class="sr-only">Головна — профіль: Мама</h1>
+      <h1 class="sr-only">Головна — профіль: Олена (мама)</h1>
 
       <!-- ① Критичне -->
       <section aria-labelledby="s-crit">
         <h2 id="s-crit">Критичне</h2>
-        <div class="kv"><span class="k">Алергія</span><span class="v">Пеніцилін</span></div>
+        <div class="kv kv-allergy"><span class="k">Алергія</span><span class="v">Пеніцилін</span></div>
         <div class="kv"><span class="k">Хроніка</span><span class="v">Гіпертонія</span></div>
         <div class="kv"><span class="k">Група крові</span><span class="v">A(II) Rh+</span></div>
         <a class="btn" href="edit-base-card.html">Базова картка</a>
@@ -77,7 +162,6 @@
         </article>
         <article>
           <a class="body" href="medication-detail.html">Аторвастатин 20&nbsp;мг <span class="meta">— 20:00 (вечір)</span></a>
-          <span class="meta">о 20:00</span>
         </article>
 
         <h3>Візит</h3>
@@ -92,20 +176,25 @@
       <section aria-labelledby="s-last">
         <h2 id="s-last">Останнє</h2>
         <article>
+          <span class="doc-thumb" aria-hidden="true"><svg viewBox="0 0 30 38" fill="none"><rect x="4" y="3" width="22" height="32" rx="2" fill="#fff" stroke="#C7CDD3" stroke-width="1.4"/><path d="M9 12h12M9 17h12M9 22h8" stroke="#C7CDD3" stroke-width="1.4" stroke-linecap="round"/></svg></span>
           <a class="body" href="document-view.html">Виписка — поліклініка №4, кардіолог <span class="meta">— 10.07.2026</span></a>
         </article>
-        <article>
-          <a class="body" href="analysis-curve.html">Гемоглобін — 128&nbsp;г/л <span class="meta">— 12.07.2026 · аналіз</span></a>
+        <article class="moment-article">
+          <a class="body moment-row" href="analysis-curve.html">
+            <span class="m-name">Гемоглобін</span>
+            <span class="m-value">128&nbsp;<span class="m-unit">г/л</span></span>
+            <span class="m-date">12.07.2026 · аналіз</span>
+          </a>
         </article>
         <p class="wf-note">головна дія: відкрити запис. Значення сирі — без норм / зон / оцінок (CLAUDE §4)</p>
       </section>
     </main>
 
     <nav aria-label="Головна навігація">
-      <a href="#" aria-current="page"><span class="slot">іконка</span>Головна</a>
-      <a href="records-index.html"><span class="slot">іконка</span>Записи</a>
-      <a class="nav-add" href="quick-add.html" aria-haspopup="dialog" aria-label="Додати запис"><span class="slot">іконка</span>Додати</a>
-      <a href="anamnesis.html"><span class="slot">іконка</span>Показати</a>
+      <a href="#" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"/></svg>Головна</a>
+      <a href="records-index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>Записи</a>
+      <a class="nav-add" href="quick-add.html" aria-haspopup="dialog" aria-label="Додати запис"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Додати</a>
+      <a href="anamnesis.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V4"/><path d="m8 8 4-4 4 4"/><path d="M5 13v6a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-6"/></svg>Показати</a>
     </nav>
 
   </div><!-- /.app -->
