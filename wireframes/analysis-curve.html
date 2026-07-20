@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kartka — каркас: Показник — крива в часі (n≥2)</title>
   <link rel="stylesheet" href="_wireframe.css">
+  <link rel="stylesheet" href="_lang-g.css">
 </head>
 <!--
   ЕКРАН: Показник — крива в часі (без норм / зон)  (sitemap · ПІД ПРОФІЛЕМ · R4)
@@ -50,7 +51,14 @@
         </div>
       </div>
 
-      <div class="slot-big">[крива: Гемоглобін · 5 вимірювань · г/л]</div>
+      <div class="slot-big curve" aria-hidden="true">
+        <svg viewBox="0 0 560 260" width="100%" height="auto" fill="none">
+          <line x1="0" y1="239" x2="560" y2="239" stroke="#EAECEE" stroke-width="1"/>
+          <polyline points="24,180 155,192 286,132 417,146 536,80" stroke="#37476A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="24" cy="180" r="3.5" fill="#37476A"/><circle cx="155" cy="192" r="3.5" fill="#37476A"/><circle cx="286" cy="132" r="3.5" fill="#37476A"/><circle cx="417" cy="146" r="3.5" fill="#37476A"/><circle cx="536" cy="80" r="5" fill="#37476A"/>
+        </svg>
+        <div class="axis"><span>лют</span><span>бер</span><span>кві</span><span>тра</span><span>лип</span></div>
+      </div>
 
       <section class="point-detail" aria-labelledby="pt">
         <h2 id="pt">Точка (обрано)</h2>
@@ -60,14 +68,14 @@
         <p class="wf-note">тап на точку кривої → значення + дата + джерело (прикріплений файл). Тут статично показано одну обрану точку.</p>
       </section>
 
-      <p class="wf-note">Крива = слот-бокс (графік — ассет, §0; реальний SVG у каркасах не малюємо; стани показуємо різним вмістом слота). Зум міс/6міс/рік = ВІКНО перегляду, НЕ оцінка. МЕЖА (CLAUDE §4): жодних норм / зон / кольорів-оцінок / стрілок «краще-гірше» / target-line / «відхилень» / %-висновку / вердиктів «покращується-погіршується». Лише сира крива значень.</p>
+      <p class="wf-note">Крива = СИРА намальована крива (лінія + точки + вісь часу); форма ілюстративна (у продукті — реальні дані), значення/дати справжні. Зум міс/6міс/рік = ВІКНО перегляду, НЕ оцінка. МЕЖА (CLAUDE §4): жодних норм / зон / кольорів-оцінок / підсвітки точок / стрілок «краще-гірше» / target-line / «відхилень» / %-висновку / вердиктів «покращується-погіршується». Остання точка виділена лише розміром (де ми зараз), не кольором-оцінкою. Лише сира крива значень.</p>
     </main>
 
     <nav aria-label="Головна навігація">
-      <a href="dashboard.html"><span class="slot">іконка</span>Головна</a>
-      <a href="#" aria-current="page"><span class="slot">іконка</span>Записи</a>
-      <a class="nav-add" href="quick-add.html"><span class="slot">іконка</span>Додати</a>
-      <a href="anamnesis.html"><span class="slot">іконка</span>Показати</a>
+      <a href="dashboard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"/></svg>Головна</a>
+      <a href="#" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>Записи</a>
+      <a class="nav-add" href="quick-add.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Додати</a>
+      <a href="anamnesis.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V4"/><path d="m8 8 4-4 4 4"/><path d="M5 13v6a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-6"/></svg>Показати</a>
     </nav>
 
   </div><!-- /.app -->

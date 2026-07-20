@@ -1,0 +1,148 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Мова напряму Ґ («скін Тиші») — ПЕРЕНОС на розділ Аналізи
+   Джерело токенів: concept/concept.html · зразок застосування: dashboard.html
+   (значення скопійовано зі зразка → картка показника = ОДИН продукт на обох).
+
+   Шар поверх _wireframe.css (лінкувати ПІСЛЯ нього). Один файл на всі екрани
+   розділу → кожен повтор компонента гарантовано ті самі токени (не лише перший).
+   Охоплення: [data-screen^="analys"] = analyses · analysis-curve · analysis-add.
+
+   МЕЖА §4 / A3 (найтонше місце — крива): показуємо ЩО і КОЛИ, НЕ судимо.
+   Тут НЕМАЄ і НЕ БУДЕ: норм / зон «в межах-поза» / target-line / градієнта
+   оцінки / кольору-оцінки на точках / стрілок «краще-гірше» / %-висновку.
+   Крива = слот-бокс (§0: реальний SVG кривої в каркасах не малюємо).
+   Семантичний колір — лише статус СИСТЕМИ (помилка завантаження), не показ значень.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.app[data-screen^="analys"]{
+  --g-bg:#F1F3F4; --g-surf:#FFFFFF; --g-ink:#1B2127; --g-mut:#586067;
+  --g-line:#DBDFE2; --g-line2:#EAECEE; --g-acc:#37476A; --g-acci:#33445F; --g-tint:#E7EAF1; --g-on:#FFFFFF;
+  --g-err:#A34A38; --g-err-tint:#F1E1DD; --g-err-ink:#8E3B2B;   /* статус системи, НЕ показ значень */
+  --g-r:6px; --g-r-lg:12px;
+  background:var(--g-bg); color:var(--g-ink);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  border-inline-color:var(--g-line);
+}
+
+/* ── поверхні: єдиний ґрунт .app; бари/actionbar білі; main прозорий ── */
+.app[data-screen^="analys"] > header{ background:var(--g-surf); border-bottom-color:var(--g-line); }
+.app[data-screen^="analys"] > nav{ background:var(--g-surf); border-top-color:var(--g-line); }
+.app[data-screen^="analys"] > main{ background:transparent; }
+.app[data-screen^="analys"] > .actionbar{ background:var(--g-surf); border-top-color:var(--g-line); }
+
+/* ── хедер ── */
+.app[data-screen^="analys"] .hdr-back{ color:var(--g-acci); }
+.app[data-screen^="analys"] .hdr-title{ color:var(--g-ink); font-size:.95rem; font-weight:600; letter-spacing:-.01em; }
+.app[data-screen^="analys"] .hdr-ctx{ color:var(--g-mut); }
+
+/* ── секція = зовнішня картка (без вкладених рамок; керований ритм) ── */
+.app[data-screen^="analys"] section{ background:var(--g-surf); border:1px solid var(--g-line); border-radius:var(--g-r-lg); gap:0; }
+.app[data-screen^="analys"] section > h2{ color:var(--g-ink); font-size:.95rem; font-weight:600; letter-spacing:-.01em; margin:0 0 var(--sp-2); }
+
+/* ── рядок списку показників: flush, hairline між рядками (це ЛІСТ однієї сутності) ── */
+.app[data-screen^="analys"] article{ border:0; border-radius:0; background:transparent; gap:10px; padding:12px 0; min-height:0; align-items:center; }
+.app[data-screen^="analys"] section > article + article{ border-top:1px solid var(--g-line2); }
+.app[data-screen^="analys"] article .body{ flex:1 1 auto; min-width:0; color:var(--g-ink); font-weight:500; }
+.app[data-screen^="analys"] article .body .meta{ color:var(--g-mut); font-weight:400; }
+
+/* ── кнопки: один словник (ghost = рамка, primary = заливка); НІКОЛИ tint-тег ── */
+.app[data-screen^="analys"] .btn{ border:1px solid var(--g-line); background:var(--g-surf); color:var(--g-acci); border-radius:var(--g-r); font-weight:600; }
+.app[data-screen^="analys"] .btn-primary{ background:var(--g-acc); border-color:var(--g-acc); color:var(--g-on); font-weight:600; }
+
+/* ── слот (рядковий ассет: «крива» / «1 точка» / «файл: …») = дрібна пігулка, НЕ кнопка ── */
+.app[data-screen^="analys"] .slot{ border:1px dashed var(--g-line); background:var(--g-bg); color:var(--g-mut); border-radius:99px; font-size:.7rem; padding:3px 9px; }
+/* ── великий слот (крива-ассет / завантаження) = сира область-плейсхолдер, БЕЗ зон/норм ── */
+.app[data-screen^="analys"] .slot-big{ border:1px dashed var(--g-line); background:var(--g-bg); color:var(--g-mut); border-radius:var(--g-r-lg); font-size:.82rem; }
+
+/* ── період (chips) = СЕГМЕНТ-контрол = ВІКНО перегляду (міс/6міс/рік), НЕ оцінка ── */
+.app[data-screen^="analys"] .field label{ color:var(--g-mut); }
+.app[data-screen^="analys"] .chip{ border:1px solid var(--g-line); background:var(--g-surf); color:var(--g-mut); border-radius:var(--g-r); font-weight:500; }
+.app[data-screen^="analys"] .chip.on{ background:var(--g-tint); color:var(--g-acci); border-color:var(--g-acc); font-weight:600; }
+
+/* ── форма: поля + автодоповнення довідника ── */
+.app[data-screen^="analys"] .field input{ border:1px solid var(--g-line); background:var(--g-surf); color:var(--g-ink); border-radius:var(--g-r); }
+.app[data-screen^="analys"] .ac-list{ border:1px solid var(--g-line); background:var(--g-surf); border-radius:var(--g-r); }
+.app[data-screen^="analys"] .ac-list li{ border-bottom-color:var(--g-line2); }
+.app[data-screen^="analys"] .ac-list .own{ background:var(--g-tint); color:var(--g-acci); font-weight:600; }   /* канонічний збіг — вагою, не кольором-оцінкою */
+.app[data-screen^="analys"] .ac-list .syn{ color:var(--g-mut); }
+.app[data-screen^="analys"] .ac-list .ac-own{ color:var(--g-acci); border-top-color:var(--g-line); }
+
+/* ── статус-помилка (ЗАВАНТАЖЕННЯ/ЗБЕРЕЖЕННЯ) = статус системи (err-токени), не показ значень ── */
+.app[data-screen^="analys"] .status{ border:1px solid var(--g-err); background:var(--g-err-tint); color:var(--g-err-ink); border-radius:var(--g-r); }
+
+/* ── порожній стан / підказки ── */
+.app[data-screen^="analys"] .empty-hint{ color:var(--g-ink); font-weight:500; }   /* заголовок порожнього */
+.app[data-screen^="analys"] main > p:not(.empty-hint):not(.status),
+.app[data-screen^="analys"] section > p{ color:var(--g-mut); }
+
+/* ── нижній бар (матеріалізовані іконки — ті самі SVG, що dashboard) ── */
+.app[data-screen^="analys"] > nav a{ color:var(--g-mut); border-right-color:var(--g-line2); }
+.app[data-screen^="analys"] > nav a svg{ width:21px; height:21px; }
+.app[data-screen^="analys"] > nav [aria-current="page"]{ color:var(--g-acci); background:transparent; font-weight:600; }
+.app[data-screen^="analys"] .nav-add{ color:var(--g-acci); }
+
+/* ── мета-нотатки каркаса — не в UI продукту ── */
+.app[data-screen^="analys"] .wf-note{ display:none; }
+
+/* ═══ ПОКАЗНИК — крива в часі (analysis-curve, n≥2) ═══════════════════════════
+   Момент Тиші: обране/останнє значення = велике СИРЕ число (факт: значення+одиниця),
+   дата + джерело поряд. Жодної оцінки — число чорнилом, без зон/стрілок/target. */
+.app[data-screen="analysis-curve"] .point-detail > h2{ font-size:.7rem; font-weight:600; text-transform:uppercase; letter-spacing:.05em; color:var(--g-mut); margin:0 0 var(--sp-2); }
+.app[data-screen="analysis-curve"] .point-detail .kv{ padding:5px 0; }
+.app[data-screen="analysis-curve"] .point-detail .kv .k{ color:var(--g-mut); }
+.app[data-screen="analysis-curve"] .point-detail .kv .v{ color:var(--g-ink); font-weight:500; }
+/* перша kv («Значення») → Момент: велике сире число (візуально, без зміни тексту/розмітки) */
+.app[data-screen="analysis-curve"] .point-detail .kv:first-of-type{ display:block; margin-bottom:var(--sp-2); }
+.app[data-screen="analysis-curve"] .point-detail .kv:first-of-type .k{ display:block; font-size:.7rem; text-transform:uppercase; letter-spacing:.05em; color:var(--g-mut); }
+.app[data-screen="analysis-curve"] .point-detail .kv:first-of-type .v{ display:block; font-size:2.4rem; font-weight:300; letter-spacing:-.03em; line-height:1.05; color:var(--g-ink); font-variant-numeric:tabular-nums; margin-top:2px; }
+/* десктоп-сітка кривої: рядки за вмістом угорі (як dashboard), без розтягу-порожнечі */
+@container screen (min-width:1024px){
+  .app[data-screen="analysis-curve"] > main:has(.point-detail){ align-content:start; }
+}
+
+/* ═══ A1 — сира міні-крива в рядку списку (динаміка видима в списку, борг O19) ═══
+   Спарклайн = лінія + точки, остання точка більша (де ми зараз), БЕЗ зон/кольору-оцінки. */
+.app[data-screen="analyses"] .spark{ flex:none; display:block; }
+.app[data-screen="analyses"] .spark svg{ display:block; }
+.app[data-screen="analyses"] .onedot{ flex:none; display:inline-flex; align-items:center; gap:6px; color:var(--g-mut); font-size:.72rem; }   /* n=1: одна крапка (лінії нема) */
+.app[data-screen="analyses"] .onedot svg{ display:block; }
+.app[data-screen="analyses"] .prow .chev{ flex:none; display:flex; align-items:center; color:var(--g-mut); }
+.app[data-screen="analyses"] .prow .chev svg{ width:18px; height:18px; }
+
+/* ═══ Сира НАМАЛЬОВАНА крива (екран кривої + панель D1) — слот→реальна крива ═══
+   Лінія+точки+вісь часу. Форма ілюстративна; МЕЖА §4: без норм/зон/target/кольору-оцінки. */
+.app[data-screen="analysis-curve"] .slot-big.curve{ display:block; border:1px solid var(--g-line2); background:var(--g-surf); border-radius:var(--g-r); padding:14px 16px; }
+.app[data-screen="analyses"] .detail .curve{ border:1px solid var(--g-line2); background:var(--g-surf); border-radius:var(--g-r); padding:12px 14px; }
+.app[data-screen^="analys"] .curve svg{ display:block; width:100%; height:auto; }
+.app[data-screen^="analys"] .curve .axis{ display:flex; justify-content:space-between; color:var(--g-mut); font-size:.72rem; margin-top:8px; font-variant-numeric:tabular-nums; }
+/* висоту кривої задає SVG (прибрати розтяг слоту 220/420) */
+.app[data-screen="analysis-curve"] > main .slot-big.curve{ min-height:0; }
+@container screen (min-width:1024px){
+  .app[data-screen="analysis-curve"] > main:has(.point-detail) > .slot-big.curve{ min-height:0; }
+}
+
+/* ═══ D1 — майстер-деталь: мобілка = лише список; десктоп = список + крива праворуч ═══ */
+/* ліва колона = картка «Показники» + кнопка додавання одразу під нею (мобілка й десктоп однаково) */
+.app[data-screen="analyses"] .col-list{ display:flex; flex-direction:column; gap:var(--sp-4); }
+.app[data-screen="analyses"] .detail{ display:none; }
+.app[data-screen="analyses"] .detail-head{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; }
+.app[data-screen="analyses"] .detail-head h2{ margin:0; color:var(--g-ink); font-size:.95rem; font-weight:600; letter-spacing:-.01em; }
+.app[data-screen="analyses"] .detail .chips{ display:flex; gap:6px; }
+.app[data-screen="analyses"] .moment-block{ display:flex; flex-direction:column; gap:2px; }
+.app[data-screen="analyses"] .m-lab{ font-size:.7rem; font-weight:600; text-transform:uppercase; letter-spacing:.05em; color:var(--g-mut); }
+.app[data-screen="analyses"] .m-value{ font-size:2.4rem; font-weight:300; letter-spacing:-.03em; line-height:1.05; color:var(--g-ink); font-variant-numeric:tabular-nums; }
+.app[data-screen="analyses"] .m-unit{ font-size:1rem; font-weight:500; color:var(--g-mut); margin-left:5px; }
+.app[data-screen="analyses"] .m-date{ font-size:.85rem; color:var(--g-mut); }
+@container screen (min-width:1024px){
+  .app[data-screen="analyses"] > main:has(.analyses-split){ max-width:1200px; width:100%; margin-inline:0; }
+  .app[data-screen="analyses"] .analyses-split{ display:grid; grid-template-columns:minmax(320px,380px) minmax(0,1fr); gap:var(--sp-6); align-items:start; width:100%; }
+  .app[data-screen="analyses"] .detail{ display:flex; flex-direction:column; gap:var(--sp-4); }
+}
+
+/* ═══ ПОКАЗНИК — одна точка (analysis-curve, n=1) ════════════════════════════
+   Немає кривої (одна точка ≠ динаміка). Єдине значення = Момент Тиші (сирий факт).
+   Нижче — дозволена чесна нота «потрібен ще ≥1 запис». БЕЗ вигаданої лінії/прогнозу. */
+.app[data-screen="analysis-curve"] .moment-solo{ display:flex; flex-direction:column; gap:4px; padding:4px 0 2px; }
+.app[data-screen="analysis-curve"] .moment-solo .m-value{ font-size:3rem; font-weight:300; letter-spacing:-.03em; line-height:1; color:var(--g-ink); font-variant-numeric:tabular-nums; }
+.app[data-screen="analysis-curve"] .moment-solo .m-unit{ font-size:1.1rem; font-weight:500; color:var(--g-mut); margin-left:6px; }
+.app[data-screen="analysis-curve"] .moment-solo .m-date{ font-size:.85rem; color:var(--g-mut); }
