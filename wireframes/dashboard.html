@@ -12,6 +12,7 @@
       --g-bg:#F1F3F4; --g-surf:#FFFFFF; --g-ink:#1B2127; --g-mut:#586067;
       --g-line:#DBDFE2; --g-line2:#EAECEE; --g-acc:#37476A; --g-acci:#33445F; --g-tint:#E7EAF1; --g-on:#FFFFFF;
       --g-r:6px; --g-r-lg:12px;
+      --g-sh:0 1px 2px rgba(20,30,40,.05),0 8px 20px -14px rgba(20,30,40,.18);
       background:var(--g-bg); color:var(--g-ink);
       font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
       border-inline-color:var(--g-line);
@@ -34,7 +35,7 @@
     .app[data-screen^="dashboard"] .hdr-search svg,
     .app[data-screen^="dashboard"] .hdr-sos svg{ width:18px; height:18px; display:block; flex:none; }
     /* СЕКЦІЯ = зовнішня картка; керований ритм (gap:0 + явні відступи), без вкладених рамок і подвійних відступів */
-    .app[data-screen^="dashboard"] section{ background:var(--g-surf); border:1px solid var(--g-line); border-radius:var(--g-r-lg); gap:0; }
+    .app[data-screen^="dashboard"] section{ background:var(--g-surf); border:1px solid var(--g-line); border-radius:var(--g-r-lg); gap:0; box-shadow:var(--g-sh); }
     .app[data-screen^="dashboard"] section > h2{ color:var(--g-ink); font-size:.95rem; font-weight:600; letter-spacing:-.01em; margin:0 0 var(--sp-3); }
     .app[data-screen^="dashboard"] section > h3{ color:var(--g-mut); font-size:.7rem; font-weight:600; text-transform:uppercase; letter-spacing:.05em; margin:var(--sp-3) 0 2px; }
     .app[data-screen^="dashboard"] section > h2 + h3{ margin-top:0; }
@@ -58,10 +59,10 @@
     .app[data-screen^="dashboard"] .moment-article{ display:block; min-height:0; padding:12px 0 2px; }
     .app[data-screen^="dashboard"] .moment-row{ display:flex; flex-direction:column; align-items:flex-start; gap:3px; text-decoration:none; }
     .app[data-screen^="dashboard"] .m-name{ font-size:.8rem; color:var(--g-mut); font-weight:500; }
-    .app[data-screen^="dashboard"] .m-value{ font-size:2.4rem; font-weight:300; letter-spacing:-.03em; color:var(--g-ink); line-height:1.05; font-variant-numeric:tabular-nums; }
+    .app[data-screen^="dashboard"] .m-value{ font-size:3rem; font-weight:300; letter-spacing:-.03em; color:var(--g-ink); line-height:1; font-variant-numeric:tabular-nums; }
     .app[data-screen^="dashboard"] .m-value .m-unit{ font-size:1rem; font-weight:500; color:var(--g-mut); margin-left:5px; }
     .app[data-screen^="dashboard"] .m-date{ font-size:.82rem; color:var(--g-mut); }
-    /* «Остання динаміка» — міні-слот кривої (борг O19: динаміка за 1 тап). Слот-бокс §0 (реальний SVG кривої не малюємо). Лише десктоп — на мобілці контенту достатньо; там останнє значення вже = 1 тап до кривої. */
+    /* «Остання динаміка» — сира міні-крива (борг O19: динаміка за 1 тап). Той самий компонент, що в Аналізах. Лише десктоп — на мобілці останнє значення вже = 1 тап до кривої. */
     .app[data-screen="dashboard"] .moment-curve{ display:none; }
     /* КНОПКИ — окремий словник від бейджів: рамка/заливка, НІКОЛИ tint-тег */
     .app[data-screen^="dashboard"] .btn{ border:1px solid var(--g-line); background:var(--g-surf); color:var(--g-acci); border-radius:var(--g-r); font-weight:600; margin-top:var(--sp-3); }
@@ -90,14 +91,10 @@
       .app[data-screen="dashboard"] section[aria-labelledby="s-crit"] > .kv{ display:inline-flex; gap:6px; padding:0; }
       .app[data-screen="dashboard"] section[aria-labelledby="s-crit"] > .kv .k{ flex:none; }
       .app[data-screen="dashboard"] section[aria-labelledby="s-crit"] > .btn{ margin-top:0; margin-left:auto; }
-      /* «Остання динаміка» — сирий міні-слот кривої наповнює колонку «Останнє» (борг O19). Без норм/зон/оцінок — лише слот. */
+      /* «Остання динаміка» — сира міні-крива наповнює колонку «Останнє» (борг O19). Лінія+точки+вісь, без норм/зон; остання точка лише розміром; один колір акценту. */
       .app[data-screen="dashboard"] .moment-article{ padding-bottom:0; }
-      .app[data-screen="dashboard"] .moment-curve{
-        display:flex; align-items:center; justify-content:center; align-self:stretch;
-        margin-top:var(--sp-3); min-height:150px;
-        border:1px dashed var(--g-line); border-radius:var(--g-r);
-        background:var(--g-bg); color:var(--g-mut); font-size:.72rem; text-align:center;
-      }
+      .app[data-screen="dashboard"] .moment-curve{ display:block; align-self:stretch; margin-top:var(--sp-3); }
+      .app[data-screen="dashboard"] .moment-curve svg{ display:block; width:100%; height:auto; }
     }
   </style>
 </head>
@@ -194,10 +191,10 @@
             <span class="m-name">Гемоглобін</span>
             <span class="m-value">128&nbsp;<span class="m-unit">г/л</span></span>
             <span class="m-date">12.07.2026 · аналіз</span>
-            <span class="moment-curve" aria-hidden="true">[крива: Гемоглобін · 5 вимірювань]</span>
+            <span class="moment-curve" aria-hidden="true"><svg viewBox="0 0 300 116" width="100%" height="auto" fill="none"><line x1="0" y1="115" x2="300" y2="115" stroke="#EAECEE" stroke-width="1"/><polyline points="12,76 82,82 152,54 222,60 288,34" stroke="#37476A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="76" r="2.5" fill="#37476A"/><circle cx="82" cy="82" r="2.5" fill="#37476A"/><circle cx="152" cy="54" r="2.5" fill="#37476A"/><circle cx="222" cy="60" r="2.5" fill="#37476A"/><circle cx="288" cy="34" r="4" fill="#37476A"/></svg></span>
           </a>
         </article>
-        <p class="wf-note">головна дія: відкрити запис. Значення сирі — без норм / зон / оцінок (CLAUDE §4). Міні-слот кривої (лише десктоп) = «остання динаміка за 1 тап» (борг O19); слот-бокс §0 — реальний SVG кривої в каркасах не малюємо (ассет у analysis-curve.html).</p>
+        <p class="wf-note">головна дія: відкрити запис. Значення сирі — без норм / зон / оцінок (CLAUDE §4). Міні-крива (лише десктоп) = «остання динаміка за 1 тап» (борг O19); сира крива — лінія+точки+вісь, форма ілюстративна, межа §4 без зон/оцінок, остання точка лише розміром.</p>
       </section>
     </main>
 

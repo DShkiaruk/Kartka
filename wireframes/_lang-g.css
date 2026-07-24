@@ -19,6 +19,7 @@
   --g-line:#DBDFE2; --g-line2:#EAECEE; --g-acc:#37476A; --g-acci:#33445F; --g-tint:#E7EAF1; --g-on:#FFFFFF;
   --g-err:#A34A38; --g-err-tint:#F1E1DD; --g-err-ink:#8E3B2B;   /* статус системи, НЕ показ значень */
   --g-r:6px; --g-r-lg:12px;
+  --g-sh:0 1px 2px rgba(20,30,40,.05),0 8px 20px -14px rgba(20,30,40,.18);   /* один токен елевації карток (concept.md 5.2) */
   background:var(--g-bg); color:var(--g-ink);
   font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   border-inline-color:var(--g-line);
@@ -36,7 +37,7 @@
 .app[data-screen^="analys"] .hdr-ctx{ color:var(--g-mut); }
 
 /* ── секція = зовнішня картка (без вкладених рамок; керований ритм) ── */
-.app[data-screen^="analys"] section{ background:var(--g-surf); border:1px solid var(--g-line); border-radius:var(--g-r-lg); gap:0; }
+.app[data-screen^="analys"] section{ background:var(--g-surf); border:1px solid var(--g-line); border-radius:var(--g-r-lg); gap:0; box-shadow:var(--g-sh); }
 .app[data-screen^="analys"] section > h2{ color:var(--g-ink); font-size:.95rem; font-weight:600; letter-spacing:-.01em; margin:0 0 var(--sp-2); }
 
 /* ── рядок списку показників: flush, hairline між рядками (це ЛІСТ однієї сутності) ── */
@@ -94,7 +95,8 @@
 /* перша kv («Значення») → Момент: велике сире число (візуально, без зміни тексту/розмітки) */
 .app[data-screen="analysis-curve"] .point-detail .kv:first-of-type{ display:block; margin-bottom:var(--sp-2); }
 .app[data-screen="analysis-curve"] .point-detail .kv:first-of-type .k{ display:block; font-size:.7rem; text-transform:uppercase; letter-spacing:.05em; color:var(--g-mut); }
-.app[data-screen="analysis-curve"] .point-detail .kv:first-of-type .v{ display:block; font-size:2.4rem; font-weight:300; letter-spacing:-.03em; line-height:1.05; color:var(--g-ink); font-variant-numeric:tabular-nums; margin-top:2px; }
+.app[data-screen="analysis-curve"] .point-detail .kv:first-of-type .v{ display:block; font-size:3rem; font-weight:300; letter-spacing:-.03em; line-height:1; color:var(--g-ink); font-variant-numeric:tabular-nums; margin-top:2px; }
+.app[data-screen="analysis-curve"] .point-detail .kv:first-of-type .v .m-unit{ font-size:1.05rem; font-weight:500; color:var(--g-mut); margin-left:2px; }
 /* десктоп-сітка кривої: рядки за вмістом угорі (як dashboard), без розтягу-порожнечі */
 @container screen (min-width:1024px){
   .app[data-screen="analysis-curve"] > main:has(.point-detail){ align-content:start; }
@@ -130,7 +132,7 @@
 .app[data-screen="analyses"] .detail .chips{ display:flex; gap:6px; }
 .app[data-screen="analyses"] .moment-block{ display:flex; flex-direction:column; gap:2px; }
 .app[data-screen="analyses"] .m-lab{ font-size:.7rem; font-weight:600; text-transform:uppercase; letter-spacing:.05em; color:var(--g-mut); }
-.app[data-screen="analyses"] .m-value{ font-size:2.4rem; font-weight:300; letter-spacing:-.03em; line-height:1.05; color:var(--g-ink); font-variant-numeric:tabular-nums; }
+.app[data-screen="analyses"] .m-value{ font-size:3rem; font-weight:300; letter-spacing:-.03em; line-height:1; color:var(--g-ink); font-variant-numeric:tabular-nums; }
 .app[data-screen="analyses"] .m-unit{ font-size:1rem; font-weight:500; color:var(--g-mut); margin-left:5px; }
 .app[data-screen="analyses"] .m-date{ font-size:.85rem; color:var(--g-mut); }
 @container screen (min-width:1024px){
