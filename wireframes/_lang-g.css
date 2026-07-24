@@ -19,7 +19,6 @@
   --g-line:#DBDFE2; --g-line2:#EAECEE; --g-acc:#37476A; --g-acci:#33445F; --g-tint:#E7EAF1; --g-on:#FFFFFF;
   --g-err:#A34A38; --g-err-tint:#F1E1DD; --g-err-ink:#8E3B2B;   /* статус системи, НЕ показ значень */
   --g-r:6px; --g-r-lg:12px;
-  --g-sh:0 1px 2px rgba(20,30,40,.05),0 8px 20px -14px rgba(20,30,40,.18);   /* один токен елевації карток (concept.md 5.2) */
   background:var(--g-bg); color:var(--g-ink);
   font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   border-inline-color:var(--g-line);
@@ -37,7 +36,7 @@
 .app[data-screen^="analys"] .hdr-ctx{ color:var(--g-mut); }
 
 /* ── секція = зовнішня картка (без вкладених рамок; керований ритм) ── */
-.app[data-screen^="analys"] section{ background:var(--g-surf); border:1px solid var(--g-line); border-radius:var(--g-r-lg); gap:0; box-shadow:var(--g-sh); }
+.app[data-screen^="analys"] section{ background:var(--g-surf); border:1px solid var(--g-line); border-radius:var(--g-r-lg); gap:0; }
 .app[data-screen^="analys"] section > h2{ color:var(--g-ink); font-size:.95rem; font-weight:600; letter-spacing:-.01em; margin:0 0 var(--sp-2); }
 
 /* ── рядок списку показників: flush, hairline між рядками (це ЛІСТ однієї сутності) ── */
@@ -113,8 +112,8 @@
 
 /* ═══ Сира НАМАЛЬОВАНА крива (екран кривої + панель D1) — слот→реальна крива ═══
    Лінія+точки+вісь часу. Форма ілюстративна; МЕЖА §4: без норм/зон/target/кольору-оцінки. */
-.app[data-screen="analysis-curve"] .slot-big.curve{ display:block; border:1px solid var(--g-line2); background:var(--g-surf); border-radius:var(--g-r); padding:14px 16px; }
-.app[data-screen="analyses"] .detail .curve{ border:1px solid var(--g-line2); background:var(--g-surf); border-radius:var(--g-r); padding:12px 14px; }
+.app[data-screen="analysis-curve"] .slot-big.curve{ display:block; border:1px solid var(--g-line2); background:var(--g-surf); border-radius:var(--g-r-lg); padding:14px 16px; }
+.app[data-screen="analyses"] .detail .curve{ border:1px solid var(--g-line2); background:var(--g-surf); border-radius:var(--g-r-lg); padding:12px 14px; }
 .app[data-screen^="analys"] .curve svg{ display:block; width:100%; height:auto; }
 .app[data-screen^="analys"] .curve .axis{ display:flex; justify-content:space-between; color:var(--g-mut); font-size:.72rem; margin-top:8px; font-variant-numeric:tabular-nums; }
 /* висоту кривої задає SVG (прибрати розтяг слоту 220/420) */

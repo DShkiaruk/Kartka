@@ -15,9 +15,7 @@
     --ok:#3E6B4E; --ok-tint:#E4EDE7; --ok-ink:#356048;
     --err:#A34A38; --err-tint:#F1E1DD; --err-ink:#8E3B2B;
     /* форма */
-    --r-sm:4px; --r-md:6px; --r-lg:10px;
-    --sh-card:0 1px 2px rgba(20,30,40,.05), 0 8px 20px -14px rgba(20,30,40,.18);
-    --sh-pop:0 4px 10px rgba(20,30,40,.14), 0 14px 30px -12px rgba(20,30,40,.30);
+    --r-sm:4px; --r-md:6px; --r-lg:12px;
     --fs:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   }
   *{box-sizing:border-box}
@@ -50,7 +48,7 @@
 
   /* ===== мова живцем ===== */
   .live{display:flex; flex-wrap:wrap; gap:28px; align-items:flex-start}
-  .phone{width:340px; max-width:100%; background:var(--surface); border:1px solid var(--line); border-radius:22px; box-shadow:var(--sh-card); padding:14px 14px 0; position:relative; overflow:hidden}
+  .phone{width:340px; max-width:100%; background:var(--surface); border:1px solid var(--line); border-radius:22px; padding:14px 14px 0; position:relative; overflow:hidden}
   .ph-top{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:6px 4px 14px}
   .switch{font:600 .95rem/1 var(--fs); color:var(--ink); background:none; border:0; display:inline-flex; align-items:center; gap:5px; cursor:pointer; padding:0}
   .switch svg{width:15px; height:15px; color:var(--mut)}
@@ -60,7 +58,7 @@
   .st-sync{background:var(--sync-tint); color:var(--sync-ink)}
 
   .ph-scroll{padding-bottom:16px}
-  .moment{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:18px 16px 16px; box-shadow:var(--sh-card)}
+  .moment{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:18px 16px 16px}
   .m-lab{font-size:.78rem; color:var(--mut); font-weight:500}
   .m-num{font-size:3rem; font-weight:300; letter-spacing:-.03em; color:var(--ink); line-height:1; margin-top:8px; font-variant-numeric:tabular-nums}
   .m-num span{font-size:1.05rem; font-weight:500; color:var(--mut); margin-left:6px}
@@ -73,7 +71,6 @@
   .d-row .v{font-size:.88rem; color:var(--ink); font-variant-numeric:tabular-nums}
   .d-row .dt{font-size:.78rem; color:var(--mut); min-width:48px; text-align:right}
 
-  .fab{position:absolute; right:16px; bottom:70px; width:48px; height:48px; border-radius:50%; background:var(--accent); color:var(--on-accent); border:0; font-size:1.5rem; line-height:1; cursor:pointer; box-shadow:var(--sh-pop); display:grid; place-items:center}
   .tabs{display:flex; margin:16px -14px 0; border-top:1px solid var(--line); background:var(--surface)}
   .tab{flex:1 1 0; display:flex; flex-direction:column; align-items:center; gap:3px; padding:9px 2px 12px; font-size:.66rem; color:var(--mut); text-decoration:none; font-weight:500}
   .tab svg{width:21px; height:21px}
@@ -122,9 +119,6 @@
   .radii .box{height:44px; background:var(--accent-tint); border:1px solid var(--accent); }
   .radii .r.sm .box{border-radius:var(--r-sm)} .radii .r.md .box{border-radius:var(--r-md)} .radii .r.lg .box{border-radius:var(--r-lg)}
   .radii .lbl{font-size:.68rem; color:var(--mut); margin-top:6px; font-family:ui-monospace,"SF Mono",Menlo,monospace}
-  .shadows{display:flex; gap:16px}
-  .shadows .s{flex:1 1 0; height:56px; background:var(--surface); border:1px solid var(--line-soft); border-radius:var(--r-md); display:grid; place-items:center; font-size:.68rem; color:var(--mut)}
-  .shadows .s.card{box-shadow:var(--sh-card)} .shadows .s.pop{box-shadow:var(--sh-pop)}
   .spacing{display:flex; gap:6px; align-items:flex-end; flex-wrap:wrap}
   .spacing .u{background:var(--accent); align-self:flex-end}
   .spacing .u i{display:block; font-style:normal; font-size:.62rem; color:var(--mut); text-align:center; margin-top:5px; font-family:ui-monospace,Menlo,monospace}
@@ -150,7 +144,7 @@
 
   /* ===== 3 живі компоненти (annotated) ===== */
   .comp{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:18px}
-  .comp-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:18px; display:flex; flex-direction:column; gap:14px; box-shadow:var(--sh-card)}
+  .comp-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:18px; display:flex; flex-direction:column; gap:14px}
   .comp-card > .ttl{display:flex; align-items:center; gap:9px; flex-wrap:wrap}
   .comp-card > .ttl h3{font-size:1.05rem; font-weight:620}
   .demo{background:var(--bg); border:1px solid var(--line-soft); border-radius:var(--r-md); padding:16px}
@@ -330,11 +324,8 @@
         </div>
       </div>
       <div class="fc">
-        <h3>Тіні <span class="a">A1</span></h3>
-        <div class="shadows">
-          <div class="s card">картка</div>
-          <div class="s pop">FAB / поп</div>
-        </div>
+        <h3>Поверхня <span class="a">A1</span></h3>
+        <p style="font-size:.82rem;color:var(--mut)">Картки <b style="color:var(--ink)">пласкі</b> — біла поверхня + hairline-рамка на сірому ґрунті, <b style="color:var(--ink)">без тіні</b>. Глибину дає контраст поверхня↔ґрунт, не елевація.</p>
       </div>
       <div class="fc">
         <h3>Відступи <span class="a">A1 · повітря</span> <span class="a">A2 · щільність</span></h3>
@@ -406,7 +397,7 @@
       <div class="comp-card">
         <div class="ttl"><h3>1 · Картка «Момент Тиші»</h3><span class="a">A1</span><span class="a m3">A3</span></div>
         <div class="demo">
-          <div class="moment" style="box-shadow:none">
+          <div class="moment">
             <div class="m-lab">Останнє вимірювання · Гемоглобін</div>
             <div class="m-num">128<span>г/л</span></div>
             <div class="m-date">14 березня 2026</div>

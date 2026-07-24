@@ -12,7 +12,6 @@
       --g-bg:#F1F3F4; --g-surf:#FFFFFF; --g-ink:#1B2127; --g-mut:#586067;
       --g-line:#DBDFE2; --g-line2:#EAECEE; --g-acc:#37476A; --g-acci:#33445F; --g-tint:#E7EAF1; --g-on:#FFFFFF;
       --g-r:6px; --g-r-lg:12px;
-      --g-sh:0 1px 2px rgba(20,30,40,.05),0 8px 20px -14px rgba(20,30,40,.18);
       background:var(--g-bg); color:var(--g-ink);
       font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
       border-inline-color:var(--g-line);
@@ -35,7 +34,7 @@
     .app[data-screen^="dashboard"] .hdr-search svg,
     .app[data-screen^="dashboard"] .hdr-sos svg{ width:18px; height:18px; display:block; flex:none; }
     /* СЕКЦІЯ = зовнішня картка; керований ритм (gap:0 + явні відступи), без вкладених рамок і подвійних відступів */
-    .app[data-screen^="dashboard"] section{ background:var(--g-surf); border:1px solid var(--g-line); border-radius:var(--g-r-lg); gap:0; box-shadow:var(--g-sh); }
+    .app[data-screen^="dashboard"] section{ background:var(--g-surf); border:1px solid var(--g-line); border-radius:var(--g-r-lg); gap:0; }
     .app[data-screen^="dashboard"] section > h2{ color:var(--g-ink); font-size:.95rem; font-weight:600; letter-spacing:-.01em; margin:0 0 var(--sp-3); }
     .app[data-screen^="dashboard"] section > h3{ color:var(--g-mut); font-size:.7rem; font-weight:600; text-transform:uppercase; letter-spacing:.05em; margin:var(--sp-3) 0 2px; }
     .app[data-screen^="dashboard"] section > h2 + h3{ margin-top:0; }
