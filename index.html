@@ -237,8 +237,20 @@
       <a href="#voice-anti">Анти-референс</a>
     </div>
 
+    <a class="sb-page" data-page="concept" href="#concept"><span class="ic" aria-hidden="true">🎨</span> Концепт <span class="tag">мова Ґ</span></a>
+    <div class="sb-sub" data-sub="concept" hidden>
+      <a href="#cn-refs">Референси</a>
+      <a href="#cn-taste">Смак</a>
+      <a href="#cn-attrs">Атрибути A1–A5</a>
+      <a href="#cn-dirs">Напрями → Ґ</a>
+      <a href="#cn-lang">Мова Ґ</a>
+      <a href="#cn-applied">Застосування</a>
+      <a href="#cn-fixed">Фіксації ч.5</a>
+      <a href="#cn-audit">Аудит</a>
+    </div>
+
     <div class="sb-label">Скоро</div>
-    <span class="sb-page soon"><span class="ic">🎨</span> Дизайн-система <span class="tag">soon</span></span>
+    <span class="sb-page soon"><span class="ic">🧱</span> Дизайн-система <span class="tag">soon</span></span>
     <span class="sb-page soon"><span class="ic">🧩</span> Компоненти <span class="tag">soon</span></span>
     <span class="sb-page soon"><span class="ic">🚀</span> Хендофф <span class="tag">soon</span></span>
   </nav>
@@ -1666,8 +1678,174 @@ flowchart TD
   <p class="ctx">Fitbit «In/Out of target range» / Apple «Out of Range» — <span class="b b-q">?</span> не підтверджено офіц. джерелом (лише Mobbin / за логіном), тому як цитату не наводимо.</p>
 </div></section>
 
+<section id="concept" data-page="concept"><div class="wrap">
+  <h2>Концепт · візуальна мова</h2>
+  <p class="sub">Шлях від банку прийомів до застосованої мови: <b>референси → смак → атрибути → напрями → обрано Ґ → стенд → застосування → аудит</b>. Це переказ суті; джерела правди — <code>concept/references.md</code> (банк) і <code>concept/concept.md</code> (смак · атрибути · напрями · фіксації ч.5); дизайн-шар — <code>PRODUCT.md</code>.</p>
+
+  <div class="card">
+    <p><b>Головний критерій фази — ВІЗУАЛЬНА МЕЖА.</b> Стрижень «не судимо» (SaMD-межа, <code>CLAUDE.md</code> §4) має візуальний вимір: <b>колір оцінює без слів</b>. Червоне значення, зелена галочка, світлофор, target-line, стрілка вниз, зона «норми» на графіку — це оцінка засобами дизайну, і вона порушує межу так само, як слово «у нормі». Тому референс тут — <b>хто показує медичні дані нейтрально</b>, а не просто гарний.</p>
+    <p class="ctx" style="margin-top:8px">Легенда межі: <span class="v v-take">✅ референс</span> показує нейтрально · <span class="v v-avoid">⛔ анти</span> оцінює кольором/зоною · <span class="v v-adapt">◐ змішаний</span> прийом брати, оцінкову деталь відкинути.</p>
+  </div>
+
+  <h3 id="cn-refs">Референси <span class="ctx">· банк прийомів</span></h3>
+  <p>Mobbin (screens / flows), пріоритет iOS/mobile; кожен екран <b>переглянуто напряму</b>, опис — з побаченого, не з метаданих. Не копіюємо екран цілим: прийом = радіус картки / місце позначки / скільки кольору / як подано значення+дата.</p>
+
+  <div class="tw"><table>
+    <tr><th>Сцена</th><th>Взяте / чого уникати</th><th>Межа</th></tr>
+    <tr><td><b>Показ значень + дат</b><br><span class="ctx">найчастіша сцена</span></td><td><b>Apple Health</b> — еталон-основа: іконка-<b>категорії</b> + назва + дата + велике число + одиниця; колір лише на іконці, не на числі. <b>Withings</b> — каркас картки (без якісного ярлика). <b>Google Fit</b> — спарклайн без зон.</td><td><span class="v v-take">✅</span> <span class="v v-adapt">◐</span></td></tr>
+    <tr><td colspan="2"><b>Superpower</b> range-смуга «де ти в діапазоні» · <b>Fitbit</b> «(in personal range)» + галочка · <b>Bevel</b> вертикальний range-gauge «Normal / Lower» · <b>Oura</b> «Fair / Pay attention / Optimal»</td><td><span class="v v-avoid">⛔</span></td></tr>
+    <tr><td><b>Крива в часі</b><br><span class="ctx">найгостріша межа</span></td><td><b>The Outsiders</b> — нейтральний <b>тултип</b> по точці (значення + дата) + підпис точок + селектор діапазону 7D/4W/6M (це час, не норма).</td><td><span class="v v-adapt">◐</span></td></tr>
+    <tr><td colspan="2"><b>The Outsiders</b> смуги Good/Average/Fair/Poor · зони High Risk/Detraining · <b>baseline</b> «stayed within your normal range» · <b>Fitbit</b> заштрихована «In Personal Range» + «Above/Below»</td><td><span class="v v-avoid">⛔</span></td></tr>
+    <tr><td><b>Профіль + алергії</b></td><td><b>Plazo</b> — основа хабу: спокійний список рядків, <b>алергії без тривожного кольору</b>. <b>Shangri-La</b> / <b>Alan</b> — маскування чутливого. <b>GoodRx</b> — рядок доступу простими словами. <b>Amazon Family</b> — структура сітки членів.</td><td><span class="v v-take">✅</span></td></tr>
+    <tr><td><b>Порожній стан</b></td><td><b>Gymshark</b> — основа P4: бліда ілюстрація + що це таке + одна дія. <b>Aaptiv</b> — «Once you do X, you'll see it here». <b>Gentler Streak</b> — пояснити <b>чому</b> порожньо.</td><td><span class="v v-take">✅</span></td></tr>
+    <tr><td colspan="2"><b>Fitbit</b> «0 · No target» — пунктирна <b>target-line ще до появи даних</b> · <b>Aaptiv</b> «Eek! Nothing to see here» (тон-жарт — не наш регістр)</td><td><span class="v v-avoid">⛔</span></td></tr>
+    <tr><td><b>Приватність</b></td><td><b>Withings</b> — основа E2: «will never be shared without your consent», спокійна впевненість без страху. <b>Apple Health</b> — інтейк базової картки нейтрально.</td><td><span class="v v-take">✅</span></td></tr>
+  </table></div>
+
+  <blockquote><b>Ключова знахідка.</b> У переглянутій вибірці <b>майже всі</b> застосунки банять графік: заливають зонами «норми», ведуть baseline/target-лінію або клеять ярлики Good/Fair/Poor. Нейтральної кривої практично немає — це підтверджує, що <b>крива без зон = свідомий диференціатор Kartka</b>, а не «недороблений графік».</blockquote>
+
+  <details>
+    <summary>Візуальні анти-патерни — звід (9)</summary>
+    <ol>
+      <li>Зона / заштрихована смуга «норми» на графіку.</li>
+      <li>Baseline- або target-лінія на кривій.</li>
+      <li>Ярлики Good / Fair / Poor / Normal / «personal range» біля значення чи на осі.</li>
+      <li>Світлофор: зелена галочка = ок, червоне = погано.</li>
+      <li>Range-gauge (вертикальний кольоровий термометр біля показника).</li>
+      <li>Крапка-на-шкалі-діапазону («де ти в нормі»).</li>
+      <li>Кольорове саме <b>значення</b> (червоний HR) або стрілка вгору/вниз як оцінка.</li>
+      <li>Якісний ярлик під значенням («High HR», «Gaining muscle»).</li>
+      <li>Жартівливий тон у порожньому стані («Eek!») — не наш регістр.</li>
+    </ol>
+    <p class="ctx"><b>Єдиний виправданий акцент</b> — алергії / екстрений екран: <b>факт-прапорець</b>, не судження; стримано, не поширювати «тривожно-червоне» на звичайні дані.</p>
+  </details>
+
+  <h3 id="cn-taste">Смак дизайнера <span class="ctx">· 7 обраних застосунків</span></h3>
+  <p>Окремий факт-прохід застосунків, які <b>обрав користувач</b> (подобаються візуально). По кожному: прийоми (як зверстано) · межа (чи оцінює — прямо) · вердикт: <span class="v v-take">РЕФЕРЕНС</span> · <span class="v v-adapt">ЕСТЕТИКА-ТАК-ЛОГІКА-НІ</span> (беремо форму, не логіку).</p>
+
+  <div class="tw"><table>
+    <tr><th>Застосунок</th><th>Форма — беру</th><th>Логіка — уникаю</th><th>Вердикт</th></tr>
+    <tr><td><b>Apple Health</b></td><td>Рядок «іконка-категорії + назва + дата + велике число + одиниця»; колір лише на іконці; список категорій</td><td>average-лінія в Highlights · «Sleep Score» у favorites <span class="ctx">(score підповзає навіть сюди)</span></td><td><span class="v v-take">РЕФЕРЕНС</span></td></tr>
+    <tr><td><b>Stoic</b></td><td>Суто монохром; ієрархія <b>вагою й сірим-vs-чорним</b>, не відтінком; uppercase-лейбл + час справа</td><td><span class="ctx">не оцінює — монохром = нема чим судити</span>; застереження: журнал-наратив їсть швидкий скан</td><td><span class="v v-take">РЕФЕРЕНС</span></td></tr>
+    <tr><td><b>Hers</b></td><td>Білий, повітряний; один сильний <b>чорний CTA-акцент</b>; дрібні uppercase-сірі секційні лейбли; двоколонкові pill-стат-картки</td><td>score «Severe Anxiety 16/21» + слайдер «Medication zone / You are here»</td><td><span class="v v-take">РЕФЕРЕНС</span> <span class="ctx">(форма)</span></td></tr>
+    <tr><td><b>Alma</b></td><td>Тепле тло sage-green + cream, мʼякі картки, <b>serif-заголовки</b>, щедре повітря</td><td>«Alma Score» кільце+число, macro-rings «0 of 1943», порівняння людей «59 / 40», streak</td><td><span class="v v-adapt">ЕТ-ЛН</span></td></tr>
+    <tr><td><b>GO Club</b></td><td>Щільний факт-рядок «іконка·значення·одиниця»; великі скановані <b>числа-герої</b>; сміливість кольору</td><td>goal «% Completed» · <b>червона average-лінія</b>; тон гучний — не наш спокій</td><td><span class="v v-adapt">ЕТ-ЛН</span></td></tr>
+    <tr><td><b>Lovi</b></td><td>Pill-чіп-мультивибір з іконками; степер «X/Y»; day-selector; мʼяке заокруглення й тло</td><td>увесь scoring: «99% fit», mood-шкали «Bad…Awesome», per-zone скін-аналіз</td><td><span class="v v-adapt">ЕТ-ЛН</span></td></tr>
+    <tr><td><b>Apple Fitness</b></td><td>Картка «велике число + одиниця + блідий спарклайн»; <b>категорійне</b> колір-кодування (за метрикою, не добре/погано)</td><td>activity-ring «46/250» (ціль), awards, стрілки Trends; темний тон не наш</td><td><span class="v v-adapt">ЕТ-ЛН</span></td></tr>
+  </table></div>
+
+  <blockquote><b>Наскрізний висновок.</b> Тепло і спокій самі по собі <b>межу не порушують</b> — порушує <b>scoring</b>, який ці застосунки на теплоту навісили (Alma — найяскравіше). Kartka бере <b>форму</b> й лишає <b>число + дату нейтральними</b>.</blockquote>
+
+  <div class="card">
+    <p><b>Анти-референси смаку.</b></p>
+    <ul>
+      <li><b>Кремово-теракотовий «затишок»</b> — AI-рефлекс на бриф «сімейний/теплий». Прямо: навіть у улюбленій <b>Alma</b> cream тягне в цей бік → теплоту беремо через sage/зелень + повітря + serif, cream дозуємо. <span class="ctx">(Потрійно підтверджено: анти-смак + cream <code>#F4F1EA</code> як AI-дефолт 2026 + Alma-тензія.)</span></li>
+      <li><b>Сірі градієнти-заглушки замість контенту</b> — placeholder-сірість як «дизайн».</li>
+      <li><b>ОЦІНКА КОЛЬОРОМ / ЧИСЛОМ = МЕЖА візуально</b> — score / кільце / зона / average-лінія / світлофор / колір на значенні. Саме це відкидаємо в улюблених (беремо форму, не логіку).</li>
+    </ul>
+  </div>
+
+  <h3 id="cn-attrs">Атрибути <span class="ctx">· 5 пар-протилежностей</span></h3>
+  <p>Кожна пара має <b>рядок-джерело</b> (дані персон / jtbd / voice), <b>прийом</b> із банку з атрибуцією застосунку і <b>тест межі</b>. Пара без рядка-джерела — геть.</p>
+
+  <div class="tw"><table>
+    <tr><th>Атрибут</th><th>Джерело</th><th>Прийом (звідки)</th><th>Тест межі</th></tr>
+    <tr><td><b>A1</b> спокійно ↔ не тривожно</td><td><span class="me">O1</span> «продає спокій і впевненість → тон теплий, не клінічний» · <span class="me">O12</span> тема тривожна → теплий тон = зниження барʼєра</td><td>теплота через sage + повітря + serif ← <b>Alma</b>; колір лише на службовій іконці ← <b>Apple Health</b></td><td>✓ теплота = тло/типо, не оцінка значень</td></tr>
+    <tr><td><b>A2</b> скан за 10 сек ↔ не читається</td><td><span class="me">P3</span> «чужий лікар за ~10 сек вихопив суть: мітка + значення» · <span class="me">O18</span> дістати один факт</td><td>щільний факт-рядок ← <b>GO Club</b>; «назва + дата + велике число + одиниця» ← <b>Apple Health</b></td><td>✓ велике число + мітка + дата = сирий факт, не вирок</td></tr>
+    <tr><td><b>A3</b> показує ↔ <b>не судить</b> <span class="b b-rish">межа</span></td><td><span class="me">P1</span> «сире значення, дату, факт; ніколи не оцінює» · <span class="me">jtbd R4</span> «без референсних норм і оцінок» · <span class="me">O19</span> динаміку, не окремі цифри</td><td>точка (число+дата) ← <b>Apple Health</b> / тултип ← <b>The Outsiders</b>; часовий перемикач ← Apple / The Outsiders. <b>Сама крива без зон — власний прийом Kartka</b>, у банку нейтральної кривої немає</td><td>✓ це і є межа в чистому вигляді</td></tr>
+    <tr><td><b>A4</b> приватність тихо ↔ не сигналізація</td><td><span class="me">P2</span> «спокійний факт контролю, названий раз; не гучний security-меседж» · <span class="me">O9</span> приватність = умова входу</td><td>екран згоди ← <b>Withings</b>; маскування чутливого ← <b>Shangri-La</b> / <b>Alan</b>; рядок доступу ← <b>GoodRx</b></td><td>✓ маскування нейтральне; ✗ щит/замок/«100%» відкинуто</td></tr>
+    <tr><td><b>A5</b> порожньо запрошує ↔ не докоряє</td><td><span class="me">P4</span> «порожній стан — запрошення внести перше цінне, ніколи не докір» · <span class="me">O2</span> заходять реактивно, у стресі</td><td>бліда ілюстрація + що це + одна дія ← <b>Gymshark</b>; «Once you do X…» ← <b>Aaptiv</b></td><td>✓ запрошення нейтральне; ✗ <b>target-line ще до даних</b> (Fitbit) відкинуто</td></tr>
+  </table></div>
+
+  <h3 id="cn-dirs">Напрями → обрано Ґ</h3>
+  <p>Три базові напрями як <b>різні архітектури</b> (не один шаблон у трьох палітрах) + два синтези. Рефлекс-палітри (крем · теракота · лікарняний-блакитний · зелений-здоровʼя) відкинуто; slop-тест пройдено. Стенд — <a href="concept/directions.html" target="_blank" rel="noopener">concept/directions.html</a>.</p>
+
+  <div class="tw"><table>
+    <tr><th></th><th>Напрям</th><th>Суть (архітектура)</th><th>Скін</th></tr>
+    <tr><td class="c">А</td><td><b>Тиша</b></td><td>один запис у фокусі, повітря</td><td>прохолодний нейтрал + indigo <code>#37476A</code>, sans, радіус 6</td></tr>
+    <tr><td class="c">Б</td><td><b>Зошит</b></td><td>щоденник рядками, вклеєна виписка</td><td>тепло-сірий + oxblood <code>#7C2F35</code>, serif+sans, радіус 10</td></tr>
+    <tr><td class="c">В</td><td><b>Досьє</b></td><td>щільна таблиця, скан за 10 сек</td><td>монохром, grotesque+mono, радіус 3</td></tr>
+    <tr><td class="c">Г</td><td><b>Спокійна таблиця</b></td><td>структура В у скіні А (плоска таблиця)</td><td>скін Тиші</td></tr>
+    <tr><td class="c"><b>Ґ</b></td><td><b>Фокус + Список</b> <span class="v v-take">обрано</span></td><td><b>Момент Тиші</b> (одне велике число) + <b>Досьє</b> (решта списком); ієрархія</td><td>скін Тиші (indigo, sans, повітря, радіус 6)</td></tr>
+  </table></div>
+
+  <div class="card">
+    <p><b>Чому Ґ.</b> З <b>А</b> — UI-вигляд: прохолодний нейтрал + один indigo-акцент, sans, повітря, велике <b>легке</b> число як «Момент» (спокій, A1). З <b>В</b> — структура/зміст: багатозапис + банер алергії, але подані <b>ієрархією</b> (одне головне число у фокусі, решта списком, що сканується — A2). <b>Не Г</b>, бо Г = плоска таблиця (сильна для архіву), а Ґ дає <b>і емоцію</b>, <b>і повну картину</b> — природно лягає на Головну.</p>
+    <p class="ctx" style="margin-top:8px"><b>Компроміс (записано):</b> герой їсть вертикаль → для довгого «списку всього» гірший за чисту таблицю Г; там доречний табличний режим (Г лишається в резерві для розділу «Записи»). <b>Тест межі:</b> велике число — найтонше місце (найлегше тягне оцінку) → тримати сирим.</p>
+  </div>
+
+  <h3 id="cn-lang">Мова Ґ <span class="ctx">· стенд</span></h3>
+  <p>Живий стенд мови — <a href="concept/concept.html" target="_blank" rel="noopener">concept/concept.html</a>: мова живцем (прев'ю екрана) + палітра · типографіка · форма · іконки · фото + три живі компоненти, кожне рішення підписане атрибутом.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <p><b>Палітра.</b> Нейтраль: тло <code>#F1F3F4</code> · поверхня <code>#FFFFFF</code> · чорнило <code>#1B2127</code> · приглушене <code>#586067</code> · лінія <code>#DBDFE2</code>. Акцент: <code>#37476A</code> (дії/фокус) · <code>#33445F</code> (лінк/лейбл) · <code>#E7EAF1</code> (тінт).</p>
+      <p class="ctx" style="margin-top:8px"><b>Семантика</b> (синк <code>#4E5E82</code> · локально <code>#5A6668</code> · успіх <code>#3E6B4E</code> · помилка <code>#A34A38</code>) — <b>лише статус системи</b>, ніколи на значенні показника.</p>
+    </div>
+    <div class="card">
+      <p><b>Типографіка.</b> Одна system-родина вагами (product-регістр): 300 · 400 · 500 · 600. Число Моменту — окремий крок шкали (<b>3rem / 300</b>, tabular-nums); далі H1 1.5 / H2 1.2 / назва показника 1 / body .95 / значення .9 tabular / мітка .8.</p>
+      <p class="ctx" style="margin-top:8px"><b>Форма.</b> Радіуси 4 · 6 · 12; картки <b>пласкі</b> (біле на сірому ґрунті + hairline-рамка, без тіні); іконки — тонка лінія stroke ~1.5, заокруглені кінці; фото лише мініатюра-вкладення документа, людей не показуємо.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p><b>Три живі компоненти.</b> ① <b>Картка «Момент Тиші»</b> — показник + велике сире значення + дата <span class="ctx">(найтонше місце: без ↑/↓, без кольору на числі, без «у нормі»)</span>. ② <b>Список «Досьє»</b> — рядок «назва · значення · дата», tabular-цифри, hairline-дільники, скан за 10 сек. ③ <b>Форма «Додати вимірювання»</b> — підписи словами Словника, дефолт дати = сьогодні, кнопка «Зберегти» за механікою.</p>
+  </div>
+
+  <h3 id="cn-applied">Застосування <span class="ctx">· мова на каркасах</span></h3>
+  <p>Мову перенесено на реальні каркаси (візуальний шар поверх <code>_wireframe.css</code>; текст і структуру не змінювали). Спільний шар — <code>wireframes/_lang-g.css</code>, тож кожен повтор компонента має ті самі токени.</p>
+  <ul>
+    <li><b>Планка · Головна:</b> <a href="wireframes/dashboard.html" target="_blank" rel="noopener">dashboard</a> <span class="ctx">· <a href="wireframes/dashboard-empty.html" target="_blank" rel="noopener">порожній / холодний старт</a></span></li>
+    <li><b>Другий екран · Аналізи:</b> <a href="wireframes/analyses.html" target="_blank" rel="noopener">список показників</a> <span class="ctx">· <a href="wireframes/analyses-empty.html" target="_blank" rel="noopener">порожній</a> · <a href="wireframes/analyses-loading.html" target="_blank" rel="noopener">завантаження</a> · <a href="wireframes/analyses-error.html" target="_blank" rel="noopener">помилка</a></span></li>
+    <li><a href="wireframes/analysis-curve.html" target="_blank" rel="noopener">Показник — крива (n≥2)</a> <span class="ctx">· <a href="wireframes/analysis-curve-onepoint.html" target="_blank" rel="noopener">одна точка (n=1)</a></span></li>
+    <li><a href="wireframes/analysis-add.html" target="_blank" rel="noopener">Додати вимірювання</a> <span class="ctx">· <a href="wireframes/analysis-add-error.html" target="_blank" rel="noopener">помилка збереження</a></span></li>
+  </ul>
+  <div class="card">
+    <p><b>Що дало застосування.</b> Динаміка стала <b>видимою в списку</b>: кожен рядок показника несе <b>сиру міні-криву (спарклайн)</b>, n=1 — крапку з підписом «1 запис»; крива з слот-бокса стала <b>реальною сирою кривою</b> (лінія + точки + вісь часу). На десктопі Аналізи — <b>майстер-деталь</b> (список ліворуч + крива обраного праворуч), Головна — «остання динаміка» міні-кривою. Це закрило борг <span class="me">O19</span> <span class="ctx">(anti-Synevo: динаміка не захована, крива за 1 тап — <code>sitemap.md</code>)</span>.</p>
+  </div>
+
+  <h3 id="cn-fixed">Фіксації застосування <span class="ctx">· concept.md ч.5</span></h3>
+  <p>Рішення, що зʼявилися <b>при застосуванні</b> й яких Частини 2–4 не фіксували (MD веде HTML — §9):</p>
+  <div class="tw"><table>
+    <tr><th></th><th>Рішення</th></tr>
+    <tr><td class="c"><b>5.1</b></td><td><b>«Момент» — 2 рівні розміру за РОЛЛЮ:</b> герой <b>3rem/300</b> (головний фокус: дашборд, деталь показника, n=1) · у списку — крок Value <b>.9rem</b>. ⚠ Рівень визначає <b>роль елемента на екрані</b>, <b>ніколи не значення</b> показника: жодне число не більше за інше через свою величину. Обидва — те саме легке чорнило.</td></tr>
+    <tr><td class="c"><b>5.2</b></td><td><b>Форма · пласкі картки:</b> біла поверхня + hairline-рамка на сірому ґрунті, <b>без тіні</b>. Глибину дає контраст поверхня↔ґрунт, не елевація. <span class="ctx">(Рішення переглянуто на розкочуванні — тінь прибрано з усіх екранів.)</span></td></tr>
+    <tr><td class="c"><b>5.3</b></td><td><b>Семантична палітра = статус СИСТЕМИ</b> (синк · локально · збережено · помилка збереження). Жоден семантичний колір <b>не потрапляє на значення показника</b> — ні зеленого «в нормі», ні червоного «відхилення». A3-паркан.</td></tr>
+    <tr><td class="c"><b>5.4</b></td><td><b>Радіуси:</b> 4 (мініатюри) · 6 (контроли) · 12 (картки й контент-бокси, зокрема бокс кривої) · 99 (пігулка-тег). Один радіус карток = 12, без різнобою.</td></tr>
+    <tr><td class="c"><b>5.5</b></td><td><b>Крива · вісь:</b> горизонтальна лінія-вісь — лише faint і <b>внизу</b> (підлога); <b>ніколи не піднімається в поле графіка</b> — будь-яка лінія в полі читається як baseline / target = оцінка. Остання точка — <b>лише розміром</b>, не кольором; уся крива — один колір акценту.</td></tr>
+    <tr><td class="c"><b>5.6</b></td><td><b>Відкритий борг — узгодження демо-даних</b> <span class="b b-q">?</span> <code>anamnesis.html</code> показує Гемоглобін <b>118 г/л · 08.07.2026</b>, тоді як dashboard / Аналізи / крива — <b>128 г/л · 12.07.2026</b>; стенд датує «14 березня» й несе інший демо-набір; доки-приклади ще кажуть «про Маму», а екрани — «про Олену». Це <b>борг даних</b>, не візуал і не копі — окремим проходом.</td></tr>
+  </table></div>
+
+  <h3 id="cn-audit">Аудит концепту</h3>
+  <p>Фінальна перевірка пофарбованих екранів проти <code>concept.md</code> (смак · атрибути) і <code>voice.md</code>, з презумпцією «дефекти є». Перший клас — <b>візуальна межа</b>: її детермінований лінтер не ловить, тільки порядкове читання кожної точки, підпису й осі.</p>
+  <div class="grid2">
+    <div class="card">
+      <p><b>Витримало <span class="dot d-g"></span></b></p>
+      <ul>
+        <li><b>Межа на числі</b> — велике значення = чорнило; без ↑↓ / % / зон / target / кольору-оцінки.</li>
+        <li><b>Дозволене не зрізане</b> (over-correction): зум-період міс/6міс/рік, нота n=1 «потрібен ще ≥1 запис», «мало даних», «у черзі» — це <b>факт нестачі даних</b>, не вирок.</li>
+        <li><b>Атрибуції A1–A5</b> — усі імена застосунків справді є в <code>references.md</code> (жодної вигаданої атрибуції).</li>
+        <li><b>Тон</b> — копі екранів відповідає P1–P5.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <p><b>Виправлено <span class="dot d-a"></span></b></p>
+      <ul>
+        <li><b>Межа:</b> остання точка спарклайна мала <b>окремий колір</b> + розмір → тепер один колір, <b>лише розмір</b> <span class="ctx">(колір на одній точці = початок оцінки)</span>.</li>
+        <li><b>Контраст:</b> плейсхолдер і футер стенду були <b>3.16:1</b> / <b>2.84:1</b> → приведено до <b>6.4:1</b> / <b>5.75:1</b> <span class="ctx">(футер сам заявляв «контраст перевірено» — тепер це правда)</span>.</li>
+        <li><b>Консистентність:</b> розмір Моменту (різнобій 2.4 / 3rem) → 2 рівні за роллю; тінь → пласко скрізь; радіуси боксів кривої 6 → 12.</li>
+        <li><b>IA:</b> таб-бар стенду показував Ліки / Аналізи + FAB → приведено до <code>sitemap.md</code> (Головна · Записи · Додати · Показати). <b>Стенд не веде IA.</b></li>
+        <li><b>Заглушка:</b> «остання динаміка» на Головній була сірим слот-боксом → реальна сира крива, той самий компонент, що в Аналізах.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="ctx">Свідомо лишено як не-дефект: <b>одна родина шрифтів</b> (product-регістр Ґ — «одна родина часто правильна») і <b>тире</b> в замкненій українській копі. Окремо логовано борг демо-даних (5.6).</p>
+
+  <p class="ctx">Далі: продуктовий <code>DESIGN.md</code> — числа й ролі токенів (ще не створено). Дизайн-шар і межа у візуалі — <code>PRODUCT.md</code>; ця сторінка не дублює <code>concept/</code>, лише переказує суть і веде на файли (§9).</p>
+</div></section>
+
 <footer><div class="wrap">
-  <p>Kartka — research synthesis. Джерело правди: MD-файли в <code>research/</code> (research.md · jtbd.md · personas.md · user-pains.md · competitors.md · ux-patterns.md · benchmark.md · patterns-information-architecture.md) + <code>sitemap.md</code> (IA-сутності). Контент цієї сторінки не виходить за межі цих файлів.</p>
+  <p>Kartka — research synthesis. Джерело правди: MD-файли в <code>research/</code> (research.md · jtbd.md · personas.md · user-pains.md · competitors.md · ux-patterns.md · benchmark.md · patterns-information-architecture.md) + <code>sitemap.md</code> (IA-сутності) + <code>wireframes/</code> (_screens.md · voice.md · microcopy.md) + <code>concept/</code> (references.md · concept.md). Контент цієї сторінки не виходить за межі цих файлів.</p>
 </div></footer>
 
 </main><!-- /.content -->
