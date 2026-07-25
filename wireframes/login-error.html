@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Вхід — не вдався (узагальнене повідомлення)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Вхід. СТАН: ВХІД НЕ ВДАВСЯ.  FLOW: flows.md MAIN-ВХІД → try{Пара підходить?} →|ні| lerr.
+
+  КЛЮЧОВЕ РІШЕННЯ — АНТИ-ENUMERATION (безпека проти UX, свідомо на користь безпеки):
+  повідомлення ОДНЕ Й ТЕ САМЕ, незалежно від того, чи існує акаунт:
+    ✅ «E-mail або пароль не підходять»
+    ❌ «такого e-mail немає» / «пароль невірний» / «акаунт заблоковано»
+  Причина: інакше перебором зʼясують, ЧИЇ адреси зареєстровані в МЕДИЧНОМУ застосунку —
+  сам факт реєстрації тут уже чутливий. OWASP: узагальнене повідомлення + однаковий час
+  відповіді + rate-limit. Ціна — гірша діагностичність; компенсуємо видимим відновленням.
+  ТОН (voice P5): «не вдалося», а НЕ «ви ввели неправильно» — без звинувачення й паніки.
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Вхід:</span>
+        <a href="login.html">База</a>
+        <span class="cur">Вхід не вдався</span>
+        <a href="password-reset.html">Відновлення пароля</a>
+      </div>
+
+  <div class="app" data-screen="login">
+
+    <header>
+      <span class="hdr-title">Kartka</span>
+    </header>
+
+    <main>
+      <h1>Вхід</h1>
+
+      <p class="status">E-mail або пароль не підходять. Спробуйте ще раз.</p>
+
+      <form>
+        <div class="field">
+          <label for="em2">E-mail</label>
+          <input id="em2" type="email" inputmode="email" autocomplete="username" value="olena@example.com">
+        </div>
+        <div class="field">
+          <label for="pw2">Пароль</label>
+          <input id="pw2" type="password" autocomplete="current-password">
+        </div>
+      </form>
+
+      <p><a href="password-reset.html">Забули пароль?</a></p>
+
+      <p class="empty-hint">Після кількох невдалих спроб вхід ненадовго призупиняється — це захист акаунту.</p>
+
+      <p class="wf-note">Одне узагальнене повідомлення (не два різні) — анти-enumeration: не кажемо, чи існує акаунт. Введений e-mail лишається в полі (не змушуємо набирати знову — принцип №1, вартість введення); пароль очищено. Rate-limit названо як ФАКТ захисту, без погроз і без лічильника спроб. Екстрена картка доступна без входу (R5).</p>
+    </main>
+
+    <div class="actionbar">
+      <span class="grow"></span>
+      <a class="btn btn-primary" href="dashboard.html">Увійти</a>
+    </div>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

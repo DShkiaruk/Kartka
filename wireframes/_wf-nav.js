@@ -16,6 +16,15 @@
 (function () {
   var TREE = [
     { section: 'ВХІД / ОНБОРДИНГ', screens: [
+      // брама доступу: вхід + відновлення пароля (наскрізна умова всіх flow)
+      { name: 'Вхід — e-mail + пароль', file: 'login.html', exists: true, states: [
+        { name: 'Вхід не вдався (узагальнено)', file: 'login-error.html', exists: true }
+      ] },
+      { name: 'Відновлення пароля', file: 'password-reset.html', exists: true, states: [
+        { name: 'Лист надіслано (узагальнено)', file: 'password-reset-sent.html', exists: true },
+        { name: 'Новий пароль', file: 'password-new.html', exists: true },
+        { name: 'Посилання недійсне', file: 'password-reset-expired.html', exists: true }
+      ] },
       { name: 'Онбординг — Додай СЕБЕ', file: 'onboarding.html', exists: true }
     ] },
     { section: 'ДОМІВКА', screens: [

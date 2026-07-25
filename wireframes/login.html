@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Вхід (база)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Вхід — e-mail + пароль. СТАН: база.  (закриває IA-борг «login-error + відновлення»)
+  FLOW: flows.md «MAIN — ВХІД і ВІДНОВЛЕННЯ ДОСТУПУ» → auth{Увійшов?} →|ні| login.
+  ДЖЕРЕЛО СТАНІВ: _screens.md розділ MAIN-ВХІД (база + «вхід не вдався»).
+  СТЕК: CLAUDE §6 — Supabase Auth, email+пароль (без OAuth/2FA у MVP).
+
+  ЧОМУ ВІДНОВЛЕННЯ ВИДИМЕ ОДРАЗУ (а не за меню): CLAUDE §5 обрав at-rest із ключами на
+  сервері (не E2EE) САМЕ заради відновлення доступу — «втратив пароль = втратив медархів»
+  неприйнятно. Тож шлях відновлення — частина обіцянки, а не дрібний лінк.
+  ТОН (voice P2): приватність тихо — жодних щитів, замків, «100% захисту» на вході.
+  МЕЖА §4: медданих тут немає; критичне доступне БЕЗ входу з офлайн-ярлика (R5, CLAUDE §6).
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Вхід:</span>
+        <span class="cur">База</span>
+        <a href="login-error.html">Вхід не вдався</a>
+        <a href="password-reset.html">Відновлення пароля</a>
+      </div>
+
+  <div class="app" data-screen="login">
+
+    <header>
+      <span class="hdr-title">Kartka</span>
+    </header>
+
+    <main>
+      <h1>Вхід</h1>
+      <p class="lead">Приватний медичний щоденник вашої родини.</p>
+
+      <form>
+        <div class="field">
+          <label for="em">E-mail</label>
+          <input id="em" type="email" inputmode="email" autocomplete="username" placeholder="ви@example.com">
+        </div>
+        <div class="field">
+          <label for="pw">Пароль</label>
+          <input id="pw" type="password" autocomplete="current-password">
+        </div>
+      </form>
+
+      <p><a href="password-reset.html">Забули пароль?</a></p>
+
+      <p class="empty-hint">Екстрена картка доступна без входу — з ярлика на домашньому екрані.</p>
+
+      <p class="wf-note">Системні контроли (type=email/password + autocomplete) — не текст-поля. «Забули пароль?» видиме одразу (не в меню): відновлення = виконання обіцянки CLAUDE §5. Немає нижнього бару (застосунок-контексту ще нема). Немає реєстрації: новий користувач заходить через онбординг (поза скоупом цього борга).</p>
+    </main>
+
+    <div class="actionbar">
+      <span class="grow"></span>
+      <a class="btn btn-primary" href="dashboard.html">Увійти</a>
+    </div>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>
