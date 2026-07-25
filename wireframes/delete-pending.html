@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Запит на видалення створено (30 днів на скасування)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Запит на видалення акаунту створено. СТАН: база (= «запит активний»).
+  FLOW: flows.md MAIN-ЕКСПОРТ/ВИДАЛЕННЯ → pend → cancel{Скасувати?} → dp | gone.
+
+  ЧОМУ GRACE, А НЕ МИТТЄВЕ СТИРАННЯ: люди жалкують про видалення, а відкотити «angry user»
+  дешевше, ніж відновити стерті дані — тим паче медичний архів, який Kartka обіцяє «на все
+  життя» (research.md). 30 днів — практика індустрії, НЕ вимога закону: GDPR вимагає
+  виконати без невиправданої затримки (орієнтир 1 місяць), тож термін лишається в межах.
+  ДРУГИЙ КАНАЛ: лист на e-mail — щоб запит не міг «тихо» пройти мимо власника.
+  СКАСУВАННЯ БЕЗ КВЕСТУ: звичайний вхід у застосунок протягом терміну скасовує запит.
+  ТОН (voice P5): не лякаємо там, де втрати ще немає; кажемо факт + дату + шлях назад.
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Дані та приватність:</span>
+        <a href="data-privacy.html">База</a>
+        <a href="delete-confirm.html">Підтвердження видалення</a>
+        <span class="cur">Запит створено (30 днів)</span>
+      </div>
+
+  <div class="app" data-screen="delete-pending">
+
+    <header>
+      <span class="hdr-title">Видалення акаунту</span>
+    </header>
+
+    <main>
+      <p class="status">Запит створено · дані буде стерто <b>11.08.2026</b></p>
+
+      <p>До цієї дати все на місці. Щоб скасувати — просто увійдіть у Kartka й натисніть «Скасувати видалення».</p>
+
+      <section aria-labelledby="dpn-next">
+        <h2 id="dpn-next">Що буде далі</h2>
+        <ul>
+          <li>Лист із підтвердженням надіслано на ваш e-mail.</li>
+          <li><b>30 днів</b> запит можна скасувати.</li>
+          <li>Після цього дані всіх профілів буде стерто, а вхід перестане працювати.</li>
+        </ul>
+      </section>
+
+      <div class="share-row">
+        <a class="btn btn-primary" href="data-privacy.html">Скасувати видалення</a>
+        <a class="btn" href="dashboard.html">На головну</a>
+      </div>
+
+      <p class="empty-hint">Якщо ви ще не забрали копію даних — це можна зробити до 11.08.2026.</p>
+
+      <p class="wf-note">Дата конкретна (11.08.2026 = 12.07.2026 + 30 днів, за фікстуром _fixtures.md), не «через 30 днів» — так видно, скільки насправді часу. «Скасувати видалення» — головна дія на екрані: шлях назад має бути найпростішим. Стан живе, поки термін не сплив; повторний вхід показує той самий екран, а не порожній застосунок.</p>
+    </main>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

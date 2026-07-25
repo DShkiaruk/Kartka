@@ -104,6 +104,11 @@
     { section: 'НАСКРІЗНЕ', screens: [
       { name: 'Записи — архів (hub)', file: 'records-index.html', exists: true },
       // нагадування — спільна поверхня R3 (ліки) + R4 (візити); стани від дозволу ОС
+      // GDPR: експорт (Art 20) + два рівні видалення (Art 17)
+      { name: 'Дані та приватність (експорт + видалення)', file: 'data-privacy.html', exists: true, states: [
+        { name: 'Підтвердження видалення акаунту', file: 'delete-confirm.html', exists: true },
+        { name: 'Запит створено (30 днів на скасування)', file: 'delete-pending.html', exists: true }
+      ] },
       { name: 'Нагадування — канал і дозвіл', file: 'reminders-config.html', exists: true, states: [
         { name: 'До запиту (праймер)', file: 'reminders-primer.html', exists: true },
         { name: 'Вимкнено (канал без дозволу)', file: 'reminders-denied.html', exists: true },

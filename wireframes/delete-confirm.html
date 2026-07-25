@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Підтвердження видалення акаунту</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Підтвердження видалення акаунту. СТАН: база.
+  FLOW: flows.md MAIN-ЕКСПОРТ/ВИДАЛЕННЯ → warn → offer{Забрати копію?} → conf (пароль) → pend.
+
+  ГАЛЬМА ПРОПОРЦІЙНІ НЕЗВОРОТНОСТІ (рішення flows.md, 4 штуки):
+    1) ПЕРЕЛІК того, що зникне — конкретно, не «усі дані»;
+    2) ПРОПОЗИЦІЯ ЕКСПОРТУ спершу (Art 20 + анти-lock-in) — тут, а не в довідці;
+    3) ПАРОЛЬ — підтвердження власника, щоб це не був випадковий тап;
+    4) далі 30 днів grace (наступний екран) — тобто навіть після натиску є шлях назад.
+  ЧОМУ САМЕ ТУТ ЦЕ ВАЖЛИВО: акаунт містить дані ІНШИХ людей (особлива категорія) —
+  людина мусить бачити, що стирає не лише «своє».
+  ТОН (voice P5): попереджаємо ДО дії, без драми й без «ви впевнені?!»-театру.
+  Це закриває правило voice «Небезпечна дія», яке досі було [?] (незворотної дії не існувало).
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Дані та приватність:</span>
+        <a href="data-privacy.html">База</a>
+        <span class="cur">Підтвердження видалення</span>
+        <a href="delete-pending.html">Запит створено (30 днів)</a>
+      </div>
+
+  <div class="app" data-screen="delete-confirm">
+
+    <header>
+      <a class="hdr-back" href="data-privacy.html" aria-label="Назад до даних і приватності">‹ Дані та приватність</a>
+      <span class="hdr-title">Видалення акаунту</span>
+    </header>
+
+    <main>
+      <p class="lead">Ця дія не повертається. Разом з акаунтом зникнуть дані всіх профілів родини.</p>
+
+      <section aria-labelledby="dc-what">
+        <h2 id="dc-what">Що зникне</h2>
+        <ul>
+          <li>Профілі: <b>Я · Олена · Тато · Софійка</b></li>
+          <li>Базові картки: алергії, хроніка, група крові</li>
+          <li>Документи й прикріплені файли</li>
+          <li>Аналізи та історія показників</li>
+          <li>Ліки, журнал прийомів, візити</li>
+          <li>Екстрена картка та її офлайн-копія</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="dc-export">
+        <h2 id="dc-export">Спершу забрати копію?</h2>
+        <p>Архів з усіма записами лишиться у вас навіть після видалення.</p>
+        <a class="btn" href="data-privacy.html">Експортувати все</a>
+      </section>
+
+      <section aria-labelledby="dc-pw">
+        <h2 id="dc-pw">Підтвердіть, що це ви</h2>
+        <div class="field">
+          <label for="dpw">Пароль</label>
+          <input id="dpw" type="password" autocomplete="current-password">
+        </div>
+        <p class="wf-note">пароль, а не «введіть DELETE»: власник підтверджується тим, що вже знає; невірний пароль — інлайн-валідація в полі, не окремий екран</p>
+      </section>
+
+      <p class="empty-hint">Після підтвердження буде 30 днів, щоб скасувати.</p>
+
+      <p class="wf-note">Перелік конкретний (не «усі ваші дані») — людина мусить бачити, що стирає й дані РІДНИХ. «Скасувати» стоїть першим у панелі дій: за замовчуванням — безпечний вихід.</p>
+    </main>
+
+    <div class="actionbar">
+      <a class="btn" href="data-privacy.html">Скасувати</a>
+      <span class="grow"></span>
+      <a class="btn btn-primary" href="delete-pending.html">Видалити акаунт</a>
+    </div>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>
