@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Нагадування — потрібен домашній екран (iOS)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Нагадування. СТАН: НЕ ВСТАНОВЛЕНО НА ДОМАШНІЙ ЕКРАН (iOS).
+  ЧОМУ ОКРЕМИЙ СТАН: на iOS/iPadOS web-push працює ЛИШЕ для застосунків, доданих на
+  домашній екран (WebKit: «support for Web Push to Home Screen web apps»). У браузерній
+  вкладці сповіщень на пристрій не буде — навіть якщо користувач хоче дозволити.
+  Тобто це НЕ відмова користувача (стан -denied), а невиконана ПЕРЕДУМОВА.
+  ДЖЕРЕЛО: flows.md R3 (вузли hsq / a2hs) · _screens.md R3 п.2 · CLAUDE §6 (PWA, iOS-обмеження).
+  ТОН (voice P5/P2): чесна умова + вихід; не лякаємо й не соромимо за «неправильний» вхід.
+  ЗВ'ЯЗОК: та сама передумова живить R5 (офлайн-ярлик екстреної картки) — CLAUDE §6.
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Нагадування:</span>
+        <a href="reminders-config.html">Увімкнено (база)</a>
+        <a href="reminders-primer.html">До запиту (праймер)</a>
+        <a href="reminders-denied.html">Вимкнено (відмова)</a>
+        <span class="cur">Не на домашньому екрані</span>
+      </div>
+
+  <div class="app" data-screen="reminders-install">
+
+    <header>
+      <a class="hdr-back" href="medication-add.html" aria-label="Назад до форми ліків">‹ Додати ліки</a>
+      <span class="hdr-title">Нагадування</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">для: Олена</span>
+    </header>
+
+    <main>
+      <p class="status">Сповіщення на пристрій доступні <b>після додавання Kartka на домашній екран</b></p>
+
+      <p>На iPhone та iPad сповіщення працюють лише тоді, коли застосунок відкрито з домашнього екрана — не з вкладки браузера. Це обмеження системи, не налаштування Kartka.</p>
+
+      <section aria-labelledby="ri-how">
+        <h2 id="ri-how">Як додати</h2>
+        <ol>
+          <li>Меню «Поділитися» в браузері <span class="slot">іконка: поділитися</span></li>
+          <li>«На екран «Домівка»»</li>
+          <li>Відкрити Kartka з домашнього екрана</li>
+        </ol>
+      </section>
+
+      <section aria-labelledby="ri-works">
+        <h2 id="ri-works">Поки що працює</h2>
+        <ul>
+          <li><b>E-mail</b> — нагадування листом.</li>
+          <li><b>Головна · «Сьогодні»</b> — усе на сьогодні при відкритті.</li>
+          <li><b>Календар</b> — для візитів: «додати в календар».</li>
+        </ul>
+      </section>
+
+      <div class="share-row">
+        <a class="btn" href="reminders-config.html">Канал нагадувань</a>
+        <a class="btn" href="dashboard.html">Відкрити «Сьогодні»</a>
+      </div>
+
+      <p class="wf-note">Той самий крок «на домашній екран» потрібен і для офлайн-ярлика екстреної картки (R5, CLAUDE §6) — тому підказка не разова примха, а передумова двох обіцянок. Кроки — текст, не скріншот системного меню (§0: чуже UI не малюємо). Це НЕ стан «-denied»: тут користувач ще нічого не відмовляв.</p>
+    </main>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

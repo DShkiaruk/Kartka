@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Нагадування — праймер до запиту дозволу</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Нагадування. СТАН: ПРАЙМЕР — пояснення ПЕРЕД системним запитом дозволу.
+  ЧОМУ ОКРЕМИЙ СТАН (технічна причина): спроба ОДНА. Дозвіл на сповіщення просять лише
+  у відповідь на дію користувача (WebKit), а після відмови застосунок НЕ МОЖЕ запитати
+  повторно — вмикається тільки в Налаштуваннях ОС. Тому спершу пояснюємо цінність,
+  і лише потім тапом викликаємо системний діалог (pre-permission priming).
+  ДЖЕРЕЛО: flows.md R3 (вузол primer) · _screens.md R3 п.2.
+  ТОН (voice P2): спокійний факт, без гучного «дозвольте!» і без страху пропустити.
+  МЕЖА: обіцяємо ФАКТ (час прийняти), не оцінку дисципліни.
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Нагадування:</span>
+        <a href="reminders-config.html">Увімкнено (база)</a>
+        <span class="cur">До запиту (праймер)</span>
+        <a href="reminders-denied.html">Вимкнено (відмова)</a>
+        <a href="reminders-install.html">Не на домашньому екрані</a>
+      </div>
+
+  <div class="app" data-screen="reminders-primer">
+
+    <header>
+      <a class="hdr-back" href="medication-add.html" aria-label="Назад до форми ліків">‹ Додати ліки</a>
+      <span class="hdr-title">Нагадування</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">для: Олена</span>
+    </header>
+
+    <main>
+      <p class="lead">Нагадувати про прийом на цьому пристрої?</p>
+
+      <p>Kartka надішле сповіщення у час прийому — <b>назва препарату, доза й час</b>, більше нічого.</p>
+
+      <ul>
+        <li>Дозвіл питає система, <b>один раз</b>.</li>
+        <li>Якщо відмовити — увімкнути потім можна лише в <b>Налаштуваннях</b> пристрою.</li>
+        <li>Без дозволу нагадування працюють на <b>e-mail</b>, а все на сьогодні видно на <b>Головній</b>.</li>
+      </ul>
+
+      <div class="share-row">
+        <a class="btn btn-primary" href="reminders-config.html">Увімкнути сповіщення</a>
+        <a class="btn" href="reminders-denied.html">Не зараз</a>
+      </div>
+
+      <p class="wf-note">Праймер — НЕ системний діалог: це наш екран ПЕРЕД ним (pre-permission priming). Тап «Увімкнути» → системний запит (той самий тап-жест, якого вимагає WebKit) → далі база або стан «Вимкнено». «Не зараз» веде в стан без дозволу, не в глухий кут: канал e-mail + in-app лишаються. Системний діалог не малюємо — він належить ОС (§0 слот-принцип).</p>
+    </main>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

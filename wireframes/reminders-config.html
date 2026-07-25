@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Нагадування — канал і дозвіл (база)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Нагадування — канал і дозвіл. СТАН: база (сповіщення увімкнено).
+  НАСКРІЗНА поверхня: перевикористовується з «Додати ліки» (R3) і «Додати візит» (R4).
+  ДЖЕРЕЛО: _screens.md R3 п.2 (перекласифіковано: не «галочка в формі», а власна поверхня
+  з реальними станами) + flows.md R3/R4 (брама «домашній екран + дозвіл» → канал).
+
+  ЧОМУ ЦЕ ОКРЕМА ПОВЕРХНЯ (технічна причина, не смак):
+  • web-нотифікація й push мають ОДИН дозвіл: при `denied` origin не може показати
+    системне сповіщення ВЗАГАЛІ (MDN Notifications API) → «локальне нагадування» як
+    fallback НЕМОЖЛИВЕ (стару заяву в flows.md виправлено);
+  • на iOS web-push існує ЛИШЕ після додавання на домашній екран, а дозвіл просять
+    лише у відповідь на дію користувача (WebKit) → спроба ОДНА.
+  Тому користувач мусить бачити: який канал працює ЗАРАЗ і що буде, якщо дозволу нема.
+
+  СТАНИ (окремі файли): -primer (до запиту) · -denied (відмовлено) · -install (не на home screen).
+  МЕЖА (CLAUDE §4): нагадування = ФАКТ «час прийняти» / «візит завтра»; ніколи не оцінка
+  («ви пропустили», % дисципліни) — AVOID R3.
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <!-- РИШТУВАННЯ: стани цієї поверхні поряд -->
+      <div class="wfnav-compare">
+        <span class="lbl">Нагадування:</span>
+        <span class="cur">Увімкнено (база)</span>
+        <a href="reminders-primer.html">До запиту (праймер)</a>
+        <a href="reminders-denied.html">Вимкнено (відмова)</a>
+        <a href="reminders-install.html">Не на домашньому екрані</a>
+      </div>
+
+  <div class="app" data-screen="reminders-config">
+
+    <header>
+      <a class="hdr-back" href="medication-add.html" aria-label="Назад до форми ліків">‹ Додати ліки</a>
+      <span class="hdr-title">Нагадування</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">для: Олена</span>
+    </header>
+
+    <main>
+      <p class="status">Сповіщення увімкнено · канал: <b>на пристрій</b></p>
+
+      <form autocomplete="off">
+        <fieldset>
+          <legend>Коли нагадувати</legend>
+          <label class="opt"><input type="checkbox" checked> Нагадувати про прийом</label>
+          <div class="field">
+            <label for="lead">Випередження</label>
+            <select id="lead">
+              <option selected>у час прийому</option>
+              <option>за 15 хвилин</option>
+              <option>за годину</option>
+            </select>
+            <p class="wf-note">для візитів (R4) той самий контрол, але дефолт «за тиждень» — планові завчасно (сц.5)</p>
+          </div>
+          <div class="field">
+            <label>Тихі години</label>
+            <div class="meta-row">
+              <input type="time" value="22:00" aria-label="Тихі години від">
+              <span class="ctx">—</span>
+              <input type="time" value="07:00" aria-label="Тихі години до">
+            </div>
+            <p class="wf-note">у тихі години не надсилаємо; подія лишається в «Сьогодні»</p>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Канал</legend>
+          <label class="opt"><input type="radio" name="chan" value="push" checked> На пристрій <span class="ctx">· доступно</span></label>
+          <label class="opt"><input type="radio" name="chan" value="email"> E-mail</label>
+          <p class="wf-note">канал «на пристрій» доступний, бо застосунок на домашньому екрані І дозвіл на сповіщення є. Якщо дозволу нема — цей варіант недоступний (див. стан «Вимкнено»), і працює e-mail.</p>
+        </fieldset>
+      </form>
+
+      <p>Незалежно від каналу, усе на сьогодні завжди видно на <b>Головній</b> — у кластері «Сьогодні».</p>
+
+      <p class="wf-note">durable-екран: зберігається автоматично при зміні/закритті → кнопка «Готово» (voice: «Зберегти» лише для форм-створення). МЕЖА: показуємо розклад і факт, без агрегатів-оцінок.</p>
+    </main>
+
+    <div class="actionbar">
+      <span class="grow"></span>
+      <a class="btn btn-primary" href="medication-add.html">Готово</a>
+    </div>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>

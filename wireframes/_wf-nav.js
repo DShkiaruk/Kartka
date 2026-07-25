@@ -94,6 +94,12 @@
     ] },
     { section: 'НАСКРІЗНЕ', screens: [
       { name: 'Записи — архів (hub)', file: 'records-index.html', exists: true },
+      // нагадування — спільна поверхня R3 (ліки) + R4 (візити); стани від дозволу ОС
+      { name: 'Нагадування — канал і дозвіл', file: 'reminders-config.html', exists: true, states: [
+        { name: 'До запиту (праймер)', file: 'reminders-primer.html', exists: true },
+        { name: 'Вимкнено (канал без дозволу)', file: 'reminders-denied.html', exists: true },
+        { name: 'Потрібен домашній екран (iOS)', file: 'reminders-install.html', exists: true }
+      ] },
       // ➕-вибір типу — overlay поверх Дашборда (§7); окрема сторінка лише як референс структури
       { name: 'Швидке додавання (overlay §7)', file: 'quick-add.html', exists: true }
     ] }

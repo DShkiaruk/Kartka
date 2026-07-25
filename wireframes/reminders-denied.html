@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartka — каркас: Нагадування — сповіщення вимкнено (канал без дозволу)</title>
+  <link rel="stylesheet" href="_wireframe.css">
+</head>
+<!--
+  ЕКРАН: Нагадування. СТАН: ВИМКНЕНО — дозволу на сповіщення немає (відмовлено / недоступно).
+  ЦЕ ГОЛОВНИЙ СТАН ЦЬОГО БОРГУ: раніше джерело обіцяло fallback «локальне нагадування» —
+  він НЕМОЖЛИВИЙ: web-нотифікація й push мають ОДИН дозвіл, при `denied` origin не може
+  показати системне сповіщення взагалі (MDN Notifications API). Тому тут показуємо ЛИШЕ
+  канали, що не потребують дозволу:
+    • e-mail — надсилає сервер, дозвіл не потрібен;
+    • in-app «Сьогодні» / «Попереду» — видно при відкритті застосунку (уже існує на Головній);
+    • .ics «додати в календар» — для візитів: нагадує календар користувача, без наших дозволів.
+  Повторно запитати дозвіл НЕ МОЖЕМО (після відмови — лише Налаштування ОС) → даємо
+  чесну інструкцію, а не кнопку, що нічого не зробить.
+  ДЖЕРЕЛО: flows.md R3/R4 (вузол chan) · _screens.md R3 п.2.
+  ТОН (voice P5): обмеження + вихід, без паніки й без докору. НЕ «ви пропустите!».
+-->
+<body>
+  <div class="wfnav-layout">
+
+    <nav class="wfnav-tree" id="wfnav-tree" aria-label="Навігація вайрфреймів (риштування)"></nav>
+
+    <div class="wfnav-stage">
+
+      <div class="wfnav-compare">
+        <span class="lbl">Нагадування:</span>
+        <a href="reminders-config.html">Увімкнено (база)</a>
+        <a href="reminders-primer.html">До запиту (праймер)</a>
+        <span class="cur">Вимкнено (відмова)</span>
+        <a href="reminders-install.html">Не на домашньому екрані</a>
+      </div>
+
+  <div class="app" data-screen="reminders-denied">
+
+    <header>
+      <a class="hdr-back" href="medication-add.html" aria-label="Назад до форми ліків">‹ Додати ліки</a>
+      <span class="hdr-title">Нагадування</span>
+      <span class="spacer"></span>
+      <span class="hdr-ctx">для: Олена</span>
+    </header>
+
+    <main>
+      <p class="status">Сповіщення на пристрій вимкнено · нагадування йдуть на <b>e-mail</b></p>
+
+      <section aria-labelledby="rd-works">
+        <h2 id="rd-works">Що працює зараз</h2>
+        <ul>
+          <li><b>E-mail</b> — лист у час прийому (надсилає сервер, дозвіл не потрібен).</li>
+          <li><b>Головна · «Сьогодні»</b> — усе на сьогодні видно щоразу, коли відкриваєте Kartka.</li>
+          <li><b>Календар</b> — для візитів: «додати в календар», далі нагадує ваш календар.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="rd-enable">
+        <h2 id="rd-enable">Якщо хочете сповіщення на пристрій</h2>
+        <p>Дозвіл питає система, і повторно ми запитати не можемо. Увімкнути можна в <b>Налаштуваннях пристрою</b>: Налаштування → Kartka → Сповіщення.</p>
+      </section>
+
+      <div class="share-row">
+        <a class="btn" href="reminders-config.html">Канал нагадувань</a>
+        <a class="btn" href="dashboard.html">Відкрити «Сьогодні»</a>
+      </div>
+
+      <p class="wf-note">Кнопки «Спробувати ще раз» тут НЕМА свідомо: після відмови повторний системний запит неможливий, тож кнопка обманювала б (пор. voice P5 — не нав'язувати retry там, де він не працює). Замість неї — чесна інструкція + робочі канали. МЕЖА: жодного «ви пропустили» чи % дисципліни (AVOID R3) — лише факт, який канал діє.</p>
+    </main>
+
+  </div><!-- /.app -->
+
+    </div><!-- /.wfnav-stage -->
+  </div><!-- /.wfnav-layout -->
+
+  <script src="_wf-nav.js"></script>
+</body>
+</html>
