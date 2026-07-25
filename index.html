@@ -1057,7 +1057,8 @@ flowchart TD
   scope -->|критичне| sections
   sections --> net{"Є мережа?"}
 
-  net -->|так| gen["Генерація PDF на сервері — loading (2)"]
+  net -->|так| genTap["Тап «Згенерувати» (2)"]
+  genTap --> gen["Генерація PDF на сервері — loading (не тап: робота системи)"]
   gen --> genok{"Згенеровано?"}
   genok -->|ні| generr["Помилка — Повторити / показати кешований"]
   generr --> gen
