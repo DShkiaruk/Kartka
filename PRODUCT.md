@@ -51,6 +51,16 @@ indigo-акцент, system-sans (product-регістр, одна родина)
 - [`concept/concept.md`](./concept/concept.md) — смак · атрибути A1–A5 · напрями · **Частина 5** (фіксації застосування Ґ: розмір-рівні, тіні, семантика, радіуси, вісь).
 - [`concept/directions.html`](./concept/directions.html) — 3 базові напрями + синтези (стенд).
 - [`concept/concept.html`](./concept/concept.html) — **стенд мови Ґ** (палітра, типо, форма, компоненти).
+- [`concept/direction-d.html`](./concept/direction-d.html) — **напрям Д «Викрійка»** (четвертий концепт
+  методом кубиків worlds+dice; альтернатива для порівняння — обраним лишається Ґ; рішення й
+  трасування ролу — `concept.md`, Частина 4).
+- [`concept/direction-e.html`](./concept/direction-e.html) · [`concept/direction-ye.html`](./concept/direction-ye.html) —
+  **напрями Е «Численник» і Є «Контролька»** (раунди 2–3 того ж ланцюга кубиків; максимально різні
+  концепції — світлий плакатний день-аркуш vs темна плівка кадрів; альтернативи для порівняння).
+  Порівняння поруч + матриця осей — [`concept/directions-dice.html`](./concept/directions-dice.html).
+- [`concept/direction-zh.html`](./concept/direction-zh.html) — **напрям Ж «Фокус + кадри»**:
+  запінений користувачем синтез Ґ+Є (скін і структура Тиші + кадри-ілюстрації-слайдер від Є);
+  кандидат на розвиток Ґ — формула й рішення в `concept.md`, Частина 4.
 - **Застосовано** (планка): `wireframes/dashboard*` + розділ Аналізи через спільний `wireframes/_lang-g.css`.
 
 **Наступний крок:** продуктовий `DESIGN.md` (числа й ролі токенів) — ще не створено.
