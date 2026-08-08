@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kartka · Напрям Д «Викрійка» · стенд дашборда</title>
+<style>
+  /* ===== нейтральний хром стенду (не біасить світ) ===== */
+  :root{
+    --page:#FAFAF9; --panel:#FFFFFF; --chrome-ink:#1A1C1E; --chrome-mut:#5C6167;
+    --chrome-line:#E3E4E6;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--page); color:var(--chrome-ink);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1280px; margin:0 auto; padding:0 clamp(16px,3vw,32px)}
+  header.top{padding:clamp(30px,5vw,54px) 0 10px}
+  header.top h1{font-size:clamp(1.7rem,3.4vw,2.4rem); line-height:1.08; letter-spacing:-.02em; margin:0; text-wrap:balance; font-weight:640}
+  header.top .sub{margin-top:12px; color:var(--chrome-mut); max-width:72ch; font-size:1.02rem}
+  header.top .sub b{color:var(--chrome-ink)}
+  header.top code{font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:.86em; background:#EFEFEE; padding:1px 5px; border-radius:4px}
+  .boundary{margin-top:18px; border:1px solid var(--chrome-line); border-radius:10px; padding:13px 16px; background:var(--panel); font-size:.9rem; color:var(--chrome-mut); display:flex; gap:11px; align-items:flex-start; max-width:860px}
+  .boundary b{color:var(--chrome-ink)}
+  .boundary .mk{flex:none; width:22px; height:22px; border-radius:6px; background:#1A1C1E; color:#fff; display:grid; place-items:center; font-weight:700; font-size:.85rem; margin-top:1px}
+  h2.sec{font-size:1.15rem; letter-spacing:-.01em; margin:44px 0 6px; font-weight:640}
+  p.secsub{margin:0 0 18px; color:var(--chrome-mut); font-size:.92rem; max-width:78ch}
+  .laws{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:12px}
+  .law{background:var(--panel); border:1px solid var(--chrome-line); border-radius:10px; padding:14px 16px}
+  .law b{display:block; font-size:.82rem; margin-bottom:5px}
+  .law p{margin:0; font-size:.82rem; color:var(--chrome-mut); line-height:1.5}
+
+  /* ============================================================
+     СВІТ Д «ВИКРІЙКА · СИНЬКА» — токени (живуть лише в .d)
+     ============================================================ */
+  .d{
+    --blue:#17314F;          /* прусська синь світлокопії — ґрунт */
+    --deep:#0E1E33;          /* стіл-паспарту під аркушами */
+    --milk:#E9F0F6;          /* білі лінії й текст копії */
+    --dim:#A8BDD2;           /* вицвілий підпис */
+    --gold:#E8C15A;          /* кравецька крейда: активне · дії · мітки */
+    --gline:rgba(233,240,246,.10); /* бліда сітка аркуша */
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-family:var(--sans); color:var(--milk);
+  }
+
+  .table-top{background:var(--deep); border:1px solid var(--chrome-line); border-radius:14px; padding:clamp(18px,3vw,34px); display:flex; flex-wrap:wrap; gap:clamp(18px,3vw,30px); align-items:flex-start; justify-content:center}
+
+  .sheet{
+    background:
+      linear-gradient(90deg, var(--gline) 1px, transparent 1px),
+      linear-gradient(0deg, var(--gline) 1px, transparent 1px),
+      var(--blue);
+    background-size:26px 26px, 26px 26px, auto;
+    border:1px solid rgba(233,240,246,.28);
+    position:relative;
+  }
+  /* стос синьок під активним аркушем */
+  .sheet::before, .sheet::after{content:""; position:absolute; z-index:-1; border:1px solid rgba(233,240,246,.18)}
+  .sheet::before{inset:8px -6px -6px 8px; background:#152C47}
+  .sheet::after{inset:16px -12px -12px 16px; background:#122740}
+  .phone.sheet{width:375px; max-width:100%; flex:none}
+  .desk.sheet{flex:1 1 640px; min-width:320px; max-width:820px}
+
+  /* шапка: вушка шарів + екстрена */
+  .d header.bar{display:flex; align-items:stretch; gap:0; border-bottom:1px solid var(--milk)}
+  .tabs{display:flex; align-items:flex-end; gap:3px; padding:8px 8px 0; flex:1 1 auto; min-width:0; overflow-x:auto}
+  .tab{
+    flex:none; display:inline-flex; align-items:center; gap:7px;
+    font:600 .8rem/1 var(--sans); color:var(--dim);
+    background:transparent; border:1px dashed rgba(233,240,246,.35); border-bottom:none;
+    padding:7px 9px 8px; cursor:pointer;
+  }
+  .tab .ln{width:14px; height:0; border-top:2px solid var(--milk); opacity:.4}
+  .tab[aria-selected="true"]{
+    color:var(--milk); background:var(--blue);
+    border:1px solid var(--milk); border-bottom:1px solid var(--blue);
+    margin-bottom:-1px;
+  }
+  .tab[aria-selected="true"] .ln{border-top-color:var(--gold); opacity:1}
+  .tab .role{font-weight:400; color:var(--dim); font-size:.72rem}
+  .sos{
+    flex:none; display:inline-flex; align-items:center; gap:6px; margin:8px 10px;
+    font:700 .7rem/1 var(--sans); letter-spacing:.03em; color:var(--blue);
+    border:none; padding:7px 9px; background:var(--gold); cursor:pointer;
+  }
+  .sos svg{width:12px; height:12px; display:block}
+
+  /* деталь викрійки: ОРГАНІЧНИЙ контур лекала, не прямокутник */
+  .piece{margin:18px 14px 0; border:1.5px solid var(--milk); background:transparent; padding:14px 18px 16px; position:relative}
+  .piece.r1{border-radius:58% 10% 46% 12% / 34% 14% 38% 12%}
+  .piece.r2{border-radius:12% 52% 14% 48% / 12% 36% 12% 40%}
+  .piece.r3{border-radius:44% 14% 52% 10% / 30% 10% 36% 14%; border-style:dashed}
+  .piece.r4{border-radius:14% 46% 12% 54% / 14% 34% 12% 38%}
+  .piece > h3{
+    margin:0 0 10px; font:700 .7rem/1.2 var(--mono); letter-spacing:.1em;
+    color:var(--milk); text-transform:uppercase; display:flex; align-items:baseline; gap:8px;
+  }
+  .piece > h3 .no{color:var(--dim); font-weight:400}
+  .piece .chalkmark{position:absolute; top:8px; right:16px; width:26px; height:8px; color:var(--gold)}
+  .piece .chalkmark svg{display:block; width:100%; height:100%}
+
+  /* мотив розрізу між деталями */
+  .cutline{display:flex; align-items:center; gap:10px; margin:14px 20px 0; color:var(--dim)}
+  .cutline .dash{flex:1 1 auto; border-top:1.5px dashed rgba(233,240,246,.4)}
+  .cutline svg{width:16px; height:16px; flex:none; transform:rotate(-90deg)}
+
+  /* критичне */
+  .crit{display:flex; flex-wrap:wrap; gap:7px}
+  .crit .fact{
+    display:inline-flex; align-items:center; gap:7px; font:600 .84rem/1 var(--sans); color:var(--milk);
+    border:1px solid rgba(233,240,246,.5); border-radius:99px; padding:7px 12px;
+  }
+  .crit .fact .k{font:400 .7rem/1 var(--sans); color:var(--dim)}
+
+  /* прийоми */
+  .dose{display:flex; align-items:center; gap:11px; padding:9px 0; border-top:1px dotted rgba(233,240,246,.3)}
+  .dose:first-of-type{border-top:none}
+  .dose .t{font:600 .82rem/1 var(--mono); color:var(--milk); flex:none; font-variant-numeric:tabular-nums}
+  .dose .n{flex:1 1 auto; min-width:0; font-size:.9rem}
+  .dose .n small{display:block; color:var(--dim); font-size:.74rem; margin-top:2px}
+  .dose .st{font:400 .7rem/1 var(--sans); color:var(--dim); flex:none}
+  .notch{
+    flex:none; width:26px; height:26px; border:1.5px solid var(--milk); border-radius:50%;
+    background:transparent; display:grid; place-items:center; cursor:pointer; padding:0;
+  }
+  .notch svg{width:14px; height:14px; display:block; color:var(--blue)}
+  .notch.done{background:var(--gold); border-color:var(--gold)}
+  .notch:not(.done) svg{opacity:0}
+
+  /* розмірна стрілка */
+  .dim{display:flex; flex-direction:column; gap:4px; padding:6px 0 2px}
+  .dim .val{display:flex; align-items:baseline; gap:8px; font-family:var(--mono); font-variant-numeric:tabular-nums; color:var(--milk)}
+  .dim.hero .val{font-size:2.6rem; font-weight:400; line-height:1; letter-spacing:-.02em}
+  .dim.hero .val .unit{font-size:1rem; color:var(--dim)}
+  .dim .arrow{display:flex; align-items:center; gap:8px; color:var(--milk)}
+  .dim .arrow svg{flex:none; display:block}
+  .dim .arrow .lab{font:400 .74rem/1 var(--sans); color:var(--dim); white-space:nowrap}
+  .dim.row{flex-direction:row; align-items:center; gap:10px; padding:9px 0; border-top:1px dotted rgba(233,240,246,.3)}
+  .dim.row .name{flex:1 1 auto; min-width:0; font-size:.9rem}
+  .dim.row .name small{color:var(--dim)}
+  .dim.row .val{font-size:.9rem; font-weight:600}
+  .dim.row .val .unit{font-size:.74rem; color:var(--dim); font-weight:400}
+  .dim.row .date{font:400 .74rem/1 var(--mono); color:var(--dim); font-variant-numeric:tabular-nums}
+
+  /* крива-лекало: біла лінія, наколки; поруч інструмент */
+  .curve{padding:4px 0 0; position:relative}
+  .curve svg.plot{display:block; width:100%; height:auto}
+  .curve .axis{display:flex; justify-content:space-between; font:400 .7rem/1 var(--mono); color:var(--dim); margin-top:6px; font-variant-numeric:tabular-nums}
+  .frcurve{position:absolute; right:2px; top:-6px; width:54px; height:40px; color:var(--gold); opacity:.9}
+  .frcurve svg{display:block; width:100%; height:100%}
+
+  /* легенда */
+  .legend{margin:16px 14px; border:1px solid rgba(233,240,246,.3); border-radius:99px; padding:9px 16px; display:flex; flex-wrap:wrap; gap:10px 18px}
+  .legend .li{display:inline-flex; align-items:center; gap:8px; font:400 .72rem/1 var(--sans); color:var(--dim)}
+  .legend .li b{color:var(--milk); font-weight:600}
+  .legend .sw{width:26px; height:0; flex:none}
+  .legend .solid{border-top:2px solid var(--milk)}
+  .legend .fold{border-top:2px dashed var(--milk)}
+  .legend .chalk{border-top:3px solid var(--gold)}
+
+  /* штампи-дії */
+  .d nav.stamps{display:flex; border-top:1px solid var(--milk); margin-top:4px}
+  .stamp{
+    flex:1 1 0; display:flex; flex-direction:column; align-items:center; gap:4px;
+    padding:9px 4px 11px; font:600 .66rem/1 var(--sans); color:var(--dim);
+    background:transparent; border:none; border-left:1px dotted rgba(233,240,246,.3); cursor:pointer;
+  }
+  .stamp:first-child{border-left:none}
+  .stamp svg{width:17px; height:17px; display:block}
+  .stamp.cur{color:var(--blue); background:var(--gold)}
+  .stamp.add{color:var(--milk); font-weight:700}
+
+  .desk .cloth{display:grid; grid-template-columns:minmax(220px,300px) minmax(0,1fr); gap:0}
+  .desk .rail{border-right:1px dashed rgba(233,240,246,.3); display:flex; flex-direction:column}
+  .desk .rail .piece{margin:18px 14px 0}
+  .desk .main{display:flex; flex-direction:column}
+  @media (max-width:760px){
+    .desk .cloth{grid-template-columns:minmax(0,1fr)}
+    .desk .rail{border-right:none}
+  }
+
+  .d button:focus-visible, .d .tab:focus-visible{outline:2.5px solid var(--gold); outline-offset:2px}
+  .notch, .tab, .stamp, .sos{transition:background .18s cubic-bezier(.25,1,.5,1)}
+  .notch:hover{border-color:var(--gold)}
+  .stamp:hover{color:var(--milk)}
+  @media (prefers-reduced-motion:reduce){ .notch, .tab, .stamp, .sos{transition:none} }
+
+  /* компоненти + AA (хром) */
+  .comp{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px}
+  .comp .c{background:var(--panel); border:1px solid var(--chrome-line); border-radius:10px; padding:14px 16px}
+  .comp .c b{display:block; font-size:.8rem; margin-bottom:8px}
+  .comp .c p{margin:8px 0 0; font-size:.76rem; color:var(--chrome-mut); line-height:1.5}
+  .comp .demo{padding:14px; border:1px solid var(--chrome-line)}
+  table.aa{border-collapse:collapse; font-size:.8rem; width:100%; max-width:760px}
+  table.aa th, table.aa td{text-align:left; padding:7px 12px 7px 0; border-bottom:1px solid var(--chrome-line); color:var(--chrome-mut)}
+  table.aa th{color:var(--chrome-ink); font-weight:600}
+  table.aa td b{color:var(--chrome-ink); font-weight:600}
+  table.aa .chip{display:inline-block; width:13px; height:13px; border:1px solid rgba(0,0,0,.12); vertical-align:-2px; margin-right:6px}
+  footer.foot{margin:52px 0 40px; color:var(--chrome-mut); font-size:.82rem; max-width:80ch}
+  footer.foot a{color:var(--chrome-ink)}
+</style>
+</head>
+<body>
+<!--
+THESIS: дашборд родини як викрійка, віддрукована СИНЬКОЮ — креслення фіксує
+факти (контури, розмірні стрілки, наколки) і нічого не оцінює; відмовляємось
+від карткового health-дашборда і від тихого сірого мінімалізму.
+OWN-WORLD: drenched прусська синь світлокопії з блідою сіткою, білі лінії
+й молочний текст, ОРГАНІЧНІ криві контури деталей (лекала, не прямокутники),
+золота кравецька крейда лише на активному стані й діях, мотив «✂ лінія
+розрізу» між деталями, моноширинні молочні цифри.
+STORY: Координаторка розгортає синьку Олени: критичне в пігулках-контурах,
+прийоми з крейдовими кружками, найбільша розмірна стрілка = останній вимір;
+крива — біла лінія по наколках із золотим лекалом поруч. Жодних оцінок.
+FIRST VIEWPORT: вушка шарів (активна Олена, золота крейда) + ЕКСТРЕНЕ золотом;
+лекало-деталь КРИТИЧНЕ; ✂-розріз; деталь СЬОГОДНІ з прийомами; деталь ПОПЕРЕДУ
+штрих-пунктиром; деталь ОСТАННЄ з герой-стрілкою 128 г/л; легенда-пігулка;
+штампи внизу.
+FORM: викрійка (синька) — кандидат 4 раунд-1 списку; seed 45fdc353, mode
+operate, каталог 94ff10ff20de; рол утримано користувачем; рендиція v2
+(повний матеріальний діапазон) — concept.md ч.4.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the
+finish review, the verdict, and the concept.md record (DESIGN.md — наступний крок).
+-->
+<div class="wrap">
+
+<header class="top">
+  <h1>Напрям Д «Викрійка» — стенд дашборда <small style="font-weight:400; color:var(--chrome-mut)">· рендиція v2 «синька»</small></h1>
+  <p class="sub">Четвертий концепт методом кубиків (рол <code>45fdc353</code>, деталі —
+  <code>concept.md</code> ч.4). Рендиція v2: викрійку друкуємо <b>синькою</b> —
+  drenched прусська синь, білі лінії, органічні лекала-форми, золота крейда.
+  Дані — строго з <code>_fixtures.md</code>. <b>Обраним напрямом продукту лишається Ґ.</b></p>
+  <div class="boundary">
+    <span class="mk">§4</span>
+    <span><b>Межа «показує, не судить» — гейт світу.</b> Синь = матеріал копії, не стан
+    даних. Золота крейда = розмітка активного/дій, ніколи значення. Розмірна стрілка =
+    число + дата; найбільша = роль «останній вимір у фокусі». Крива — біла сира лінія по
+    наколках, без зон/норм/target.</span>
+  </div>
+</header>
+
+<h2 class="sec">П'ять законів світу (рендиція v2)</h2>
+<p class="secsub">Граматика викрійки, віддрукованої на світлокопії.</p>
+<div class="laws">
+  <div class="law"><b>Палітра / матеріал</b><p>Прусська синь аркуша на темному паспарту; білі лінії копії; молочний текст; золота кравецька крейда лише на активному й діях.</p></div>
+  <div class="law"><b>Типо / композиція</b><p>Молочні моноширинні цифри й мітки; sans для тексту; деталі — органічні криві контури лекал; «✂ лінія розрізу» членує аркуш.</p></div>
+  <div class="law"><b>Топологія</b><p>Аркуш = профіль-день; вушка шарів = родина (активний шар — золота крейда); деталі-лекала = кластери (критичне · сьогодні · попереду · останнє).</p></div>
+  <div class="law"><b>Контроли / стани</b><p>Суцільний контур = зафіксовано; штрих-пунктир = заплановано; крейдовий кружок = факт прийому; крейда = вибране/активне.</p></div>
+  <div class="law"><b>Адаптив / рух</b><p>Мобілка — рулон синьки; десктоп — розгорнутий аркуш зі стосом копій під ним. Рух: розгортання шару 150–250 мс; reduced-motion — без.</p></div>
+</div>
+
+<h2 class="sec">Мобільна поверхня</h2>
+<p class="secsub">Синька Олени. Кластери — зі <code>sitemap.md</code>, дані — <code>_fixtures.md</code>.</p>
+
+<div class="table-top">
+  <div class="d phone sheet">
+    <header class="bar">
+      <div class="tabs" role="tablist" aria-label="Шари родини">
+        <button class="tab" role="tab" aria-selected="true"><span class="ln" aria-hidden="true"></span>Олена <span class="role">мама</span></button>
+        <button class="tab" role="tab" aria-selected="false"><span class="ln" aria-hidden="true"></span>Я</button>
+        <button class="tab" role="tab" aria-selected="false"><span class="ln" aria-hidden="true"></span>С</button>
+      </div>
+      <button class="sos" type="button" aria-label="Екстрена картка">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 2v12M2 8h12"/></svg>
+        ЕКСТРЕНЕ
+      </button>
+    </header>
+
+    <section class="piece r1" aria-labelledby="p1h">
+      <span class="chalkmark" aria-hidden="true"><svg viewBox="0 0 26 8" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M2 6 C7 2, 12 7, 24 2"/></svg></span>
+      <h3 id="p1h"><span class="no">Деталь 1</span> Критичне</h3>
+      <div class="crit">
+        <span class="fact"><span class="k">Алергія</span> Пеніцилін</span>
+        <span class="fact"><span class="k">Хроніка</span> Гіпертонія</span>
+        <span class="fact"><span class="k">Кров</span> A(II)&nbsp;Rh+</span>
+      </div>
+    </section>
+
+    <div class="cutline" aria-hidden="true">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="2.6"/><circle cx="6" cy="14" r="2.6"/><path d="M8 7.5 17 16M8 12.5 17 4"/></svg>
+      <span class="dash"></span>
+    </div>
+
+    <section class="piece r2" aria-labelledby="p2h">
+      <span class="chalkmark" aria-hidden="true"><svg viewBox="0 0 26 8" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M2 6 C7 2, 12 7, 24 2"/></svg></span>
+      <h3 id="p2h"><span class="no">Деталь 2</span> Сьогодні</h3>
+      <div class="dose">
+        <button class="notch done" type="button" aria-pressed="true" aria-label="Еналаприл о 08:00 — прийнято">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4"/></svg>
+        </button>
+        <span class="t">08:00</span>
+        <span class="n">Еналаприл 10&nbsp;мг</span>
+        <span class="st">прийнято</span>
+      </div>
+      <div class="dose">
+        <button class="notch" type="button" aria-pressed="false" aria-label="Аторвастатин о 20:00 — позначити прийнятим">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4"/></svg>
+        </button>
+        <span class="t">20:00</span>
+        <span class="n">Аторвастатин 20&nbsp;мг</span>
+      </div>
+    </section>
+
+    <section class="piece r3" aria-labelledby="p3h">
+      <h3 id="p3h"><span class="no">Деталь 3</span> Попереду</h3>
+      <div class="dose" style="border-top:none">
+        <span class="t">16.07</span>
+        <span class="n">Кардіолог <small>14:00 · заплановано</small></span>
+      </div>
+    </section>
+
+    <section class="piece r4" aria-labelledby="p4h">
+      <span class="chalkmark" aria-hidden="true"><svg viewBox="0 0 26 8" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M2 6 C7 2, 12 7, 24 2"/></svg></span>
+      <h3 id="p4h"><span class="no">Деталь 4</span> Останнє</h3>
+      <div class="dim hero">
+        <div class="arrow"><span class="lab">Гемоглобін</span></div>
+        <div class="val">128 <span class="unit">г/л</span></div>
+        <div class="arrow" aria-hidden="true">
+          <svg width="100%" height="10" viewBox="0 0 260 10" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 5h252M4 1v8M256 1v8M4 5l7-3.5M4 5l7 3.5M256 5l-7-3.5M256 5l-7 3.5"/></svg>
+        </div>
+        <div class="arrow"><span class="lab">останній вимір · 12.07.2026</span></div>
+      </div>
+      <div class="dim row">
+        <span class="name">Глюкоза</span>
+        <span class="val">5,1 <span class="unit">ммоль/л</span></span>
+        <span class="date">03.07</span>
+      </div>
+      <div class="dim row">
+        <span class="name">Виписка <small>— поліклініка №4</small></span>
+        <span class="date">10.07</span>
+      </div>
+    </section>
+
+    <div class="legend" aria-label="Умовні позначення">
+      <span class="li"><span class="sw solid" aria-hidden="true"></span><b>зафіксовано</b></span>
+      <span class="li"><span class="sw fold" aria-hidden="true"></span><b>заплановано</b></span>
+      <span class="li"><span class="sw chalk" aria-hidden="true"></span><b>крейда = активне</b></span>
+    </div>
+
+    <nav class="stamps" aria-label="Навігація">
+      <button class="stamp cur" type="button">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 9.5 10 3l7 6.5M5 8.5V17h10V8.5"/></svg>
+        Головна
+      </button>
+      <button class="stamp" type="button">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 4h12v13H4zM7 8h6M7 11h6M7 14h4"/></svg>
+        Записи
+      </button>
+      <button class="stamp add" type="button">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 4v12M4 10h12"/></svg>
+        Додати
+      </button>
+      <button class="stamp" type="button">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M10 3v9m0-9L6.5 6.5M10 3l3.5 3.5M4 12v5h12v-5"/></svg>
+        Показати
+      </button>
+    </nav>
+  </div>
+</div>
+
+<h2 class="sec">Десктопна поверхня</h2>
+<p class="secsub">Синька розгорнута на паспарту: рейка критичного й планів, деталі дня праворуч.</p>
+
+<div class="table-top">
+  <div class="d desk sheet">
+    <header class="bar">
+      <div class="tabs" role="tablist" aria-label="Шари родини">
+        <button class="tab" role="tab" aria-selected="true"><span class="ln" aria-hidden="true"></span>Олена <span class="role">мама</span></button>
+        <button class="tab" role="tab" aria-selected="false"><span class="ln" aria-hidden="true"></span>Я</button>
+        <button class="tab" role="tab" aria-selected="false"><span class="ln" aria-hidden="true"></span>Тато</button>
+        <button class="tab" role="tab" aria-selected="false"><span class="ln" aria-hidden="true"></span>Софійка</button>
+      </div>
+      <button class="sos" type="button" aria-label="Екстрена картка">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 2v12M2 8h12"/></svg>
+        ЕКСТРЕНЕ
+      </button>
+    </header>
+    <div class="cloth">
+      <div class="rail">
+        <section class="piece r1" aria-labelledby="d1h">
+          <span class="chalkmark" aria-hidden="true"><svg viewBox="0 0 26 8" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M2 6 C7 2, 12 7, 24 2"/></svg></span>
+          <h3 id="d1h"><span class="no">Деталь 1</span> Критичне</h3>
+          <div class="crit" style="flex-direction:column; align-items:stretch">
+            <span class="fact"><span class="k">Алергія</span> Пеніцилін</span>
+            <span class="fact"><span class="k">Хроніка</span> Гіпертонія</span>
+            <span class="fact"><span class="k">Кров</span> A(II)&nbsp;Rh+</span>
+          </div>
+        </section>
+        <section class="piece r3" aria-labelledby="d3h">
+          <h3 id="d3h"><span class="no">Деталь 3</span> Попереду</h3>
+          <div class="dose" style="border-top:none">
+            <span class="t">16.07</span>
+            <span class="n">Кардіолог <small>14:00 · заплановано</small></span>
+          </div>
+        </section>
+      </div>
+      <div class="main">
+        <section class="piece r2" aria-labelledby="d2h">
+          <span class="chalkmark" aria-hidden="true"><svg viewBox="0 0 26 8" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M2 6 C7 2, 12 7, 24 2"/></svg></span>
+          <h3 id="d2h"><span class="no">Деталь 2</span> Сьогодні</h3>
+          <div class="dose">
+            <button class="notch done" type="button" aria-pressed="true" aria-label="Еналаприл о 08:00 — прийнято">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4"/></svg>
+            </button>
+            <span class="t">08:00</span>
+            <span class="n">Еналаприл 10&nbsp;мг</span>
+            <span class="st">прийнято</span>
+          </div>
+          <div class="dose">
+            <button class="notch" type="button" aria-pressed="false" aria-label="Аторвастатин о 20:00 — позначити прийнятим">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4"/></svg>
+            </button>
+            <span class="t">20:00</span>
+            <span class="n">Аторвастатин 20&nbsp;мг</span>
+          </div>
+        </section>
+        <section class="piece r4" aria-labelledby="d4h">
+          <span class="chalkmark" aria-hidden="true"><svg viewBox="0 0 26 8" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M2 6 C7 2, 12 7, 24 2"/></svg></span>
+          <h3 id="d4h"><span class="no">Деталь 4</span> Останнє · Гемоглобін</h3>
+          <div class="dim hero">
+            <div class="val">128 <span class="unit">г/л</span></div>
+            <div class="arrow" aria-hidden="true">
+              <svg width="100%" height="10" viewBox="0 0 260 10" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 5h252M4 1v8M256 1v8M4 5l7-3.5M4 5l7 3.5M256 5l-7-3.5M256 5l-7 3.5"/></svg>
+            </div>
+            <div class="arrow"><span class="lab">останній вимір · 12.07.2026 · 5 вимірювань</span></div>
+          </div>
+          <div class="curve" aria-label="Крива Гемоглобіну — сирі значення в часі">
+            <span class="frcurve" aria-hidden="true" title="лекало">
+              <svg viewBox="0 0 54 40" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 36 C10 8, 30 4, 50 10 C36 12, 20 18, 16 36 Z"/></svg>
+            </span>
+            <svg class="plot" viewBox="0 0 520 120" role="img" aria-hidden="true">
+              <line x1="8" y1="112" x2="512" y2="112" stroke="rgba(233,240,246,.35)" stroke-width="1"/>
+              <polyline points="24,74 140,58 256,84 372,44 488,52" fill="none" stroke="#E9F0F6" stroke-width="1.5"/>
+              <circle cx="24" cy="74" r="2.6" fill="#17314F" stroke="#E9F0F6" stroke-width="1.4"/>
+              <circle cx="140" cy="58" r="2.6" fill="#17314F" stroke="#E9F0F6" stroke-width="1.4"/>
+              <circle cx="256" cy="84" r="2.6" fill="#17314F" stroke="#E9F0F6" stroke-width="1.4"/>
+              <circle cx="372" cy="44" r="2.6" fill="#17314F" stroke="#E9F0F6" stroke-width="1.4"/>
+              <circle cx="488" cy="52" r="4.4" fill="#17314F" stroke="#E9F0F6" stroke-width="1.6"/>
+            </svg>
+            <div class="axis"><span>лют</span><span>бер</span><span>кві</span><span>тра</span><span>лип</span></div>
+          </div>
+          <div class="dim row">
+            <span class="name">Глюкоза</span>
+            <span class="val">5,1 <span class="unit">ммоль/л</span></span>
+            <span class="date">03.07</span>
+          </div>
+          <div class="dim row">
+            <span class="name">Вітамін D <small>— 1 запис, потрібен ще ≥1 для кривої</small></span>
+            <span class="val">28 <span class="unit">нг/мл</span></span>
+            <span class="date">20.06</span>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="legend" aria-label="Умовні позначення" style="border-radius:99px">
+      <span class="li"><span class="sw solid" aria-hidden="true"></span><b>зафіксовано</b></span>
+      <span class="li"><span class="sw fold" aria-hidden="true"></span><b>заплановано</b></span>
+      <span class="li"><span class="sw chalk" aria-hidden="true"></span><b>крейда = активне</b></span>
+    </div>
+  </div>
+</div>
+
+<h2 class="sec">Компоненти світу</h2>
+<p class="secsub">Носії мови — кожен під межу §4.</p>
+<div class="comp">
+  <div class="c">
+    <b>Лекало-деталь (органічний контур)</b>
+    <div class="d demo" style="background:var(--blue)">
+      <section class="piece r1" style="margin:6px 2px">
+        <h3><span class="no">Деталь</span> Приклад</h3>
+        <div class="crit"><span class="fact"><span class="k">Алергія</span> Пеніцилін</span></div>
+      </section>
+    </div>
+    <p>Контейнер = крива деталь викрійки, не прямокутник. Біла лінія копії; форма несе світ, не дані.</p>
+  </div>
+  <div class="c">
+    <b>Розмірна стрілка на синьці</b>
+    <div class="d demo" style="background:var(--blue)">
+      <div class="dim hero" style="padding:4px 2px">
+        <div class="val" style="font-size:1.9rem">5,1 <span class="unit">ммоль/л</span></div>
+        <div class="arrow" aria-hidden="true"><svg width="100%" height="10" viewBox="0 0 200 10" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 5h192M4 1v8M196 1v8M4 5l7-3.5M4 5l7 3.5M196 5l-7-3.5M196 5l-7 3.5"/></svg></div>
+        <div class="arrow"><span class="lab">Глюкоза · 03.07.2026</span></div>
+      </div>
+    </div>
+    <p>Молочні моно-цифри на сині. Розмір стрілки = роль на екрані, ніколи не значення.</p>
+  </div>
+  <div class="c">
+    <b>Крейдовий кружок (чек прийому)</b>
+    <div class="d demo" style="background:var(--blue); display:flex; gap:14px; align-items:center">
+      <button class="notch done" type="button" aria-label="приклад: позначено"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4"/></svg></button>
+      <button class="notch" type="button" aria-label="приклад: не позначено"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4"/></svg></button>
+      <span style="font:400 .74rem/1.4 var(--sans); color:var(--dim)">золота крейда = факт «позначено»</span>
+    </div>
+    <p>Крейда — розмітка кравця: активне й дії. Не сигнальний колір, не оцінка.</p>
+  </div>
+  <div class="c">
+    <b>✂ Лінія розрізу</b>
+    <div class="d demo" style="background:var(--blue)">
+      <div class="cutline" style="margin:6px 2px">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="2.6"/><circle cx="6" cy="14" r="2.6"/><path d="M8 7.5 17 16M8 12.5 17 4"/></svg>
+        <span class="dash"></span>
+      </div>
+    </div>
+    <p>Членування аркуша мовою самого артефакта — ножиці й пунктир замість порожніх відступів.</p>
+  </div>
+</div>
+
+<h2 class="sec">Контраст (WCAG AA) — перевірено обчислювально</h2>
+<p class="secsub">Кожна текстова пара світу на синьці <code>#17314F</code>.</p>
+<table class="aa">
+  <tr><th>Пара</th><th>Значення</th><th>Коефіцієнт</th><th>Вимога</th></tr>
+  <tr><td><span class="chip" style="background:#E9F0F6"></span>молочний текст / синька</td><td><b>#E9F0F6</b> на #17314F</td><td><b>11,49:1</b></td><td>≥4,5 ✓</td></tr>
+  <tr><td><span class="chip" style="background:#A8BDD2"></span>вицвілий підпис / синька</td><td><b>#A8BDD2</b> на #17314F</td><td><b>6,85:1</b></td><td>≥4,5 ✓</td></tr>
+  <tr><td><span class="chip" style="background:#E8C15A"></span>крейда-золото / синька</td><td><b>#E8C15A</b> на #17314F</td><td><b>7,68:1</b></td><td>≥4,5 ✓</td></tr>
+  <tr><td><span class="chip" style="background:#17314F"></span>чорнило дії / золото</td><td><b>#17314F</b> на #E8C15A</td><td><b>7,68:1</b></td><td>≥4,5 ✓</td></tr>
+  <tr><td><span class="chip" style="background:#E9F0F6"></span>біла лінія / синька (не текст)</td><td><b>#E9F0F6</b> на #17314F</td><td><b>11,49:1</b></td><td>≥3 ✓</td></tr>
+</table>
+
+<footer class="foot">
+  <p><b>Джерела:</b> рішення напряму й рендиція v2 — <a href="concept.md">concept.md</a> (Частина 4);
+  демо-дані — <a href="../wireframes/_fixtures.md">_fixtures.md</a>; межа — CLAUDE.md §4 + PRODUCT.md.
+  Рол відтворюваний: <code>concept-seed.mjs --scope direction --mode operate --from 45fdc353 --reroll 1</code>.
+  Стенд — альтернатива для порівняння; обраний напрям продукту — Ґ
+  (<a href="concept.html">concept.html</a>). Сусідні стенди:
+  <a href="direction-e.html">Е «Численник»</a> · <a href="direction-ye.html">Є «Контролька»</a>.</p>
+</footer>
+
+</div>
+</body>
+</html>

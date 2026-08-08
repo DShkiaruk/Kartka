@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kartka · Напрям Е «Численник» · стенд дашборда</title>
+<style>
+  /* ===== нейтральний хром стенду ===== */
+  :root{
+    --page:#FAFAF9; --panel:#FFFFFF; --chrome-ink:#1A1C1E; --chrome-mut:#5C6167;
+    --chrome-line:#E3E4E6;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--page); color:var(--chrome-ink);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1280px; margin:0 auto; padding:0 clamp(16px,3vw,32px)}
+  header.top{padding:clamp(30px,5vw,54px) 0 10px}
+  header.top h1{font-size:clamp(1.7rem,3.4vw,2.4rem); line-height:1.08; letter-spacing:-.02em; margin:0; text-wrap:balance; font-weight:640}
+  header.top .sub{margin-top:12px; color:var(--chrome-mut); max-width:72ch; font-size:1.02rem}
+  header.top .sub b{color:var(--chrome-ink)}
+  header.top code{font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:.86em; background:#EFEFEE; padding:1px 5px; border-radius:4px}
+  .boundary{margin-top:18px; border:1px solid var(--chrome-line); border-radius:10px; padding:13px 16px; background:var(--panel); font-size:.9rem; color:var(--chrome-mut); display:flex; gap:11px; align-items:flex-start; max-width:860px}
+  .boundary b{color:var(--chrome-ink)}
+  .boundary .mk{flex:none; width:22px; height:22px; border-radius:6px; background:#1A1C1E; color:#fff; display:grid; place-items:center; font-weight:700; font-size:.85rem; margin-top:1px}
+  h2.sec{font-size:1.15rem; letter-spacing:-.01em; margin:44px 0 6px; font-weight:640}
+  p.secsub{margin:0 0 18px; color:var(--chrome-mut); font-size:.92rem; max-width:78ch}
+  .laws{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:12px}
+  .law{background:var(--panel); border:1px solid var(--chrome-line); border-radius:10px; padding:14px 16px}
+  .law b{display:block; font-size:.82rem; margin-bottom:5px}
+  .law p{margin:0; font-size:.82rem; color:var(--chrome-mut); line-height:1.5}
+
+  /* ============================================================
+     СВІТ Е «ЧИСЛЕННИК · ДВОКОЛІРНИЙ ДРУК» — токени (лише в .e)
+     ============================================================ */
+  .e{
+    --paper:#F3EDDE;         /* дешевий газетний папір блоку */
+    --stub:#EAE3D0;          /* корінці / зворот */
+    --board:#D8D0BC;         /* картонна підкладка */
+    --ink:#221E1A;           /* чорна друкарська фарба */
+    --mut:#625B4D;           /* службовий рядок */
+    --line:#C9C0A8;          /* лінійка */
+    --red:#C03A2B;           /* червона фарба плашки (друк №2) */
+    --redtx:#B23726;         /* червоний ТЕКСТ на папері (AA) */
+    --white:#FBF8EF;         /* білий по червоній плашці */
+    --disp:"Bodoni 72","Bodoni 72 Oldstyle","Didot","Playfair Display",Georgia,serif; /* fat-face плаката */
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-family:var(--sans); color:var(--ink);
+  }
+
+  .wall{background:var(--board); border:1px solid var(--chrome-line); border-radius:14px; padding:clamp(18px,3vw,34px); display:flex; flex-wrap:wrap; gap:clamp(18px,3vw,30px); align-items:flex-start; justify-content:center}
+
+  .pad{width:375px; max-width:100%; flex:none; display:flex; flex-direction:column; background:var(--paper); border:1px solid var(--line)}
+  .pad.wide{width:auto; flex:1 1 640px; min-width:320px; max-width:860px}
+
+  /* червона друкарська плашка-шапка */
+  .e header.masthead{
+    background:var(--red); color:var(--white);
+    padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:10px;
+  }
+  .masthead .brand{font-family:var(--disp); font-size:1.3rem; letter-spacing:.04em; line-height:1}
+  .masthead .who{font:600 .78rem/1 var(--sans); color:var(--white); background:transparent; border:1px solid rgba(251,248,239,.55); padding:6px 10px; cursor:pointer}
+  .masthead .who .role{font-weight:400; font-size:.7rem}
+  .masthead .sos{font:700 .7rem/1 var(--sans); letter-spacing:.05em; color:var(--red); background:var(--white); border:none; padding:7px 10px; cursor:pointer; display:inline-flex; align-items:center; gap:6px}
+  .masthead .sos svg{width:12px; height:12px; display:block}
+
+  /* критичне: під плашкою, між подвійними лінійками */
+  .critline{border-bottom:1px solid var(--ink); padding:8px 14px; font-size:.8rem; color:var(--mut)}
+  .critline b{color:var(--ink); font-weight:650}
+
+  /* набірна орнаментальна лінійка */
+  .orn{display:flex; justify-content:center; gap:8px; padding:10px 0 2px; color:var(--ink)}
+  .orn i{width:7px; height:7px; background:currentColor; transform:rotate(45deg); flex:none}
+  .orn i:nth-child(even){background:var(--redtx)}
+
+  /* аркуш дня */
+  .dayhead{text-align:center; padding:8px 16px 0}
+  .dayhead .month{font-family:var(--disp); font-size:1.05rem; letter-spacing:.1em; text-transform:uppercase}
+  .dayhead .weekday{font:400 .8rem/1 var(--sans); color:var(--mut); margin-top:6px; letter-spacing:.24em; text-transform:uppercase}
+  .bignum{
+    text-align:center; font-family:var(--disp);
+    font-size:9.5rem; font-weight:700; line-height:.86; letter-spacing:-.01em;
+    margin:6px 0 0; font-variant-numeric:lining-nums;
+  }
+  .bignum small{display:block; font:600 .72rem/1 var(--sans); color:var(--redtx); letter-spacing:.34em; margin-top:12px; text-transform:uppercase}
+  /* товста-тонка друкарська пара лінійок */
+  .rulepair{margin:14px 16px 0}
+  .rulepair::before{content:""; display:block; border-top:3px solid var(--ink)}
+  .rulepair::after{content:""; display:block; border-top:1px solid var(--ink); margin-top:2px}
+
+  /* записи дня */
+  .entry{display:flex; align-items:center; gap:11px; padding:11px 16px; border-bottom:1px solid var(--line)}
+  .entry:last-of-type{border-bottom:none}
+  .entry .t{font:600 .84rem/1 var(--mono); font-variant-numeric:tabular-nums; flex:none}
+  .entry .n{flex:1 1 auto; min-width:0; font-size:.93rem}
+  .entry .n small{display:block; color:var(--mut); font-size:.74rem; margin-top:2px}
+  .entry .st{font:400 .72rem/1 var(--sans); color:var(--mut); flex:none}
+  .tick{
+    flex:none; width:24px; height:24px; border:2px solid var(--ink);
+    background:var(--paper); display:grid; place-items:center; cursor:pointer; padding:0;
+  }
+  .tick svg{width:14px; height:14px; display:block; color:var(--paper)}
+  .tick[aria-pressed="false"] svg{opacity:0}
+  .tick[aria-pressed="true"]{background:var(--ink)}
+
+  /* останній вимір: цифри плаката */
+  .meas{padding:12px 16px 14px}
+  .meas .lab{font:600 .68rem/1 var(--sans); color:var(--mut); letter-spacing:.18em; text-transform:uppercase}
+  .meas .v{display:flex; align-items:baseline; gap:10px; margin-top:4px; flex-wrap:wrap}
+  .meas .v b{font-family:var(--disp); font-size:2.6rem; font-weight:700; line-height:1; letter-spacing:0}
+  .meas .v .unit{font:400 .85rem/1 var(--sans); color:var(--mut)}
+  .meas .v .date{margin-left:auto; font:400 .78rem/1 var(--mono); color:var(--mut); font-variant-numeric:tabular-nums}
+  .meas .v .date .sun{color:var(--redtx); font-weight:700}
+  .meas.small .v b{font-size:1.5rem}
+
+  /* стос майбутніх */
+  .stack{border-top:1px dashed var(--line); background:var(--stub); padding:9px 16px; display:flex; align-items:center; gap:10px; font-size:.8rem; color:var(--mut)}
+  .stack .d{font:600 .8rem/1 var(--mono); color:var(--ink); flex:none}
+
+  /* підшивка: fat-face числа днів */
+  .binder{margin-top:0}
+  .binder h3{font:600 .72rem/1.2 var(--sans); letter-spacing:.3em; text-transform:uppercase; color:var(--white); background:var(--ink); margin:0; padding:9px 16px; text-align:center}
+  .stubrow{display:flex; align-items:center; gap:14px; background:var(--stub); border-bottom:1px solid var(--line); padding:8px 16px}
+  .stubrow .num{font-family:var(--disp); font-size:1.9rem; font-weight:700; line-height:1; flex:none; min-width:56px; text-align:center}
+  .stubrow .num small{display:block; font:400 .6rem/1 var(--sans); color:var(--mut); letter-spacing:.12em; text-transform:uppercase; margin-top:3px}
+  .stubrow .num.sun{color:var(--redtx)}
+  .stubrow .what{flex:1 1 auto; min-width:0; font-size:.86rem}
+  .stubrow .what small{color:var(--mut)}
+  .stubrow .val{font:600 .9rem/1 var(--mono); font-variant-numeric:tabular-nums; flex:none}
+  .stubrow .val .unit{font-weight:400; font-size:.72rem; color:var(--mut)}
+
+  /* дії: друкарські плашки */
+  .e nav.acts{display:flex; gap:0; border-top:3px solid var(--ink)}
+  .acts button{
+    flex:1 1 0; font:700 .74rem/1 var(--sans); letter-spacing:.14em; text-transform:uppercase; color:var(--ink);
+    background:var(--paper); border:none; border-left:1px solid var(--ink); padding:13px 6px; cursor:pointer;
+  }
+  .acts button:first-child{border-left:none}
+  .acts button.prim{background:var(--red); color:var(--white)}
+  .acts button:hover{background:var(--stub)}
+  .acts button.prim:hover{background:#A93325}
+  .e button:focus-visible{outline:2.5px solid var(--ink); outline-offset:2px}
+  .acts button, .tick, .masthead .who, .masthead .sos{transition:background .18s cubic-bezier(.25,1,.5,1)}
+  @media (prefers-reduced-motion:reduce){ .acts button, .tick, .masthead .who, .masthead .sos{transition:none} }
+
+  /* десктоп */
+  .pad.wide .deskgrid{display:grid; grid-template-columns:minmax(320px,430px) minmax(0,1fr); gap:0; align-items:stretch}
+  .pad.wide .deskgrid > div:last-child{border-left:1px solid var(--ink)}
+  @media (max-width:760px){
+    .pad.wide .deskgrid{grid-template-columns:minmax(0,1fr)}
+    .pad.wide .deskgrid > div:last-child{border-left:none; border-top:3px solid var(--ink)}
+  }
+
+  /* компоненти + AA (хром) */
+  .comp{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px}
+  .comp .c{background:var(--panel); border:1px solid var(--chrome-line); border-radius:10px; padding:14px 16px}
+  .comp .c b{display:block; font-size:.8rem; margin-bottom:8px}
+  .comp .c p{margin:8px 0 0; font-size:.76rem; color:var(--chrome-mut); line-height:1.5}
+  .comp .demo{padding:14px; border:1px solid var(--chrome-line)}
+  table.aa{border-collapse:collapse; font-size:.8rem; width:100%; max-width:760px}
+  table.aa th, table.aa td{text-align:left; padding:7px 12px 7px 0; border-bottom:1px solid var(--chrome-line); color:var(--chrome-mut)}
+  table.aa th{color:var(--chrome-ink); font-weight:600}
+  table.aa td b{color:var(--chrome-ink); font-weight:600}
+  table.aa .chip{display:inline-block; width:13px; height:13px; border:1px solid rgba(0,0,0,.12); vertical-align:-2px; margin-right:6px}
+  footer.foot{margin:52px 0 40px; color:var(--chrome-mut); font-size:.82rem; max-width:80ch}
+  footer.foot a{color:var(--chrome-ink)}
+</style>
+</head>
+<body>
+<!--
+THESIS: дашборд як аркуш відривного численника, віддрукований у ДВІ ФАРБИ —
+сьогодні є плакатний паперовий аркуш дня; відмовляємось і від карткової сітки,
+і від тихої нейтральної типографіки.
+OWN-WORLD: газетний папір блоку на картоні, чорна друкарська фарба + червона
+плашка (шапка, головна дія, неділя в календарі), fat-face цифра дня
+(Bodoni-клас — дерев'яний шрифт плаката), набірні ромби-орнаменти, товста-тонка
+пара лінійок, корінці підшивки з fat-face числами.
+STORY: Координаторка бачить плакатний аркуш: ЛИПЕНЬ / ВІВТОРОК / 14 у
+fat-face, прийоми між лінійками, останній вимір цифрами плаката; підшивка
+внизу тримає минулі дні. Червоне — фарба артефакта, ніколи не оцінка.
+FIRST VIEWPORT: червона плашка (KARTKA · Олена · ЕКСТРЕНЕ) → критичне під
+плашкою (R5) → орнамент → ЛИПЕНЬ / вівторок / 14 fat-face → лінійки → прийоми
+→ останній вимір → стос майбутніх (15.07 · 16.07) → підшивка → дії-плашки.
+FORM: відривний численник — кандидат 5 раунд-2 списку; seed 45fdc353,
+reroll 2, mode operate, каталог 94ff10ff20de; рендиція v2 — concept.md ч.4.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the
+finish review, the verdict, and the concept.md record (DESIGN.md — наступний крок).
+-->
+<div class="wrap">
+
+<header class="top">
+  <h1>Напрям Е «Численник» — стенд дашборда <small style="font-weight:400; color:var(--chrome-mut)">· рендиція v2 «двоколірний друк»</small></h1>
+  <p class="sub">П'ятий концепт методом кубиків: раунд 2 ланцюга <code>45fdc353</code>
+  (трасування — <code>concept.md</code> ч.4). Рендиція v2: справжня мова численника —
+  <b>двоколірний друк</b>: червона плашка + чорна фарба + fat-face цифра дня.
+  Дані — строго з <code>_fixtures.md</code> (канон «демо-сьогодні = 14.07.2026, вівторок»).
+  <b>Обраним напрямом продукту лишається Ґ.</b></p>
+  <div class="boundary">
+    <span class="mk">§4</span>
+    <span><b>Межа «показує, не судить» — гейт світу.</b> Fat-face цифра = <b>дата</b>
+    (факт календаря). Червона фарба живе за правилами друку артефакта: плашка-шапка,
+    головна дія, неділя/свято — <b>ніколи значення показника</b> (значення завжди чорною
+    фарбою). Виміри — сирий рядок «мітка · значення · дата».</span>
+  </div>
+</header>
+
+<h2 class="sec">П'ять законів світу (рендиція v2)</h2>
+<p class="secsub">Граматика відривного численника, віддрукованого у дві фарби.</p>
+<div class="laws">
+  <div class="law"><b>Палітра / матеріал</b><p>Газетний папір на картоні; чорна фарба; червона плашка = друк №2 (шапка · головна дія · неділя); корінці — приглушений папір.</p></div>
+  <div class="law"><b>Типо / композиція</b><p>Fat-face цифра дня (Bodoni-клас); розріджені капс-рядки; набірні ромби-орнаменти; товста-тонка пара лінійок; моно для часу й значень у рядках.</p></div>
+  <div class="law"><b>Топологія</b><p>Сьогодні = аркуш-плакат у фокусі; майбутнє = стос під ним; минуле = підшивка з fat-face числами днів; профіль і критичне — на плашці й під нею.</p></div>
+  <div class="law"><b>Контроли / стани</b><p>Квадратний друкарський чек (заливка фарбою = факт); відрив = закриття дня; заплановане = у стосі; головна дія — червона плашка.</p></div>
+  <div class="law"><b>Адаптив / рух</b><p>Мобілка — сам аркуш; десктоп — аркуш + підшивка через лінійку. Рух: один відрив аркуша 150–250 мс; reduced-motion — без.</p></div>
+</div>
+
+<h2 class="sec">Мобільна поверхня</h2>
+<p class="secsub">Плакатний аркуш дня Олени. Кластери — зі <code>sitemap.md</code>, дані — <code>_fixtures.md</code>.</p>
+
+<div class="wall">
+  <div class="e pad">
+    <header class="masthead">
+      <span class="brand">Kartka</span>
+      <button class="who" type="button">Олена <span class="role">мама</span></button>
+      <button class="sos" type="button" aria-label="Екстрена картка">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 2v12M2 8h12"/></svg>
+        ЕКСТРЕНЕ
+      </button>
+    </header>
+    <p class="critline">Алергія — <b>Пеніцилін</b> · Хроніка — <b>Гіпертонія</b> · Кров — <b>A(II)&nbsp;Rh+</b></p>
+
+    <div class="orn" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="dayhead">
+      <div class="month">Липень 2026</div>
+      <div class="weekday">Вівторок</div>
+    </div>
+    <p class="bignum">14<small>Сьогодні</small></p>
+    <div class="rulepair" aria-hidden="true"></div>
+
+    <div class="entry">
+      <button class="tick" type="button" aria-pressed="true" aria-label="Еналаприл о 08:00 — прийнято">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4"/></svg>
+      </button>
+      <span class="t">08:00</span>
+      <span class="n">Еналаприл 10&nbsp;мг</span>
+      <span class="st">прийнято</span>
+    </div>
+    <div class="entry">
+      <button class="tick" type="button" aria-pressed="false" aria-label="Аторвастатин о 20:00 — позначити прийнятим">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4"/></svg>
+      </button>
+      <span class="t">20:00</span>
+      <span class="n">Аторвастатин 20&nbsp;мг</span>
+    </div>
+
+    <div class="meas">
+      <div class="lab">Останнє записане · Гемоглобін</div>
+      <div class="v"><b>128</b> <span class="unit">г/л</span> <span class="date"><span class="sun">нд</span> 12.07</span></div>
+    </div>
+    <div class="meas small" style="padding-top:0">
+      <div class="v"><b>5,1</b> <span class="unit">ммоль/л · Глюкоза</span> <span class="date">пт 03.07</span></div>
+    </div>
+
+    <div class="stack"><span class="d">15.07</span> <span>середа — порожній аркуш</span></div>
+    <div class="stack" style="border-bottom:1px dashed var(--line)"><span class="d">16.07</span> <span>Кардіолог · 14:00 · заплановано</span></div>
+
+    <div class="binder">
+      <h3>Підшивка</h3>
+      <div class="stubrow">
+        <span class="num sun">12<small>нд · лип</small></span>
+        <span class="what">Гемоглобін <small>— вимірювання</small></span>
+        <span class="val">128 <span class="unit">г/л</span></span>
+      </div>
+      <div class="stubrow">
+        <span class="num">10<small>пт · лип</small></span>
+        <span class="what">Виписка <small>— поліклініка №4, кардіолог</small></span>
+      </div>
+      <div class="stubrow">
+        <span class="num">03<small>пт · лип</small></span>
+        <span class="what">Глюкоза <small>— вимірювання</small></span>
+        <span class="val">5,1 <span class="unit">ммоль/л</span></span>
+      </div>
+    </div>
+
+    <nav class="acts" aria-label="Дії">
+      <button type="button">Записи</button>
+      <button class="prim" type="button">＋ Додати</button>
+      <button type="button">Показати</button>
+    </nav>
+  </div>
+</div>
+
+<h2 class="sec">Десктопна поверхня</h2>
+<p class="secsub">Блок на стіні: плакатний аркуш ліворуч, підшивка через лінійку. Той самий друк.</p>
+
+<div class="wall">
+  <div class="e pad wide">
+    <header class="masthead">
+      <span class="brand">Kartka</span>
+      <button class="who" type="button">Олена <span class="role">мама</span></button>
+      <button class="sos" type="button" aria-label="Екстрена картка">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 2v12M2 8h12"/></svg>
+        ЕКСТРЕНЕ
+      </button>
+    </header>
+    <p class="critline">Алергія — <b>Пеніцилін</b> · Хроніка — <b>Гіпертонія</b> · Кров — <b>A(II)&nbsp;Rh+</b></p>
+    <div class="deskgrid">
+      <div>
+        <div class="orn" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="dayhead">
+          <div class="month">Липень 2026</div>
+          <div class="weekday">Вівторок</div>
+        </div>
+        <p class="bignum">14<small>Сьогодні</small></p>
+        <div class="rulepair" aria-hidden="true"></div>
+        <div class="entry">
+          <button class="tick" type="button" aria-pressed="true" aria-label="Еналаприл о 08:00 — прийнято">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4"/></svg>
+          </button>
+          <span class="t">08:00</span>
+          <span class="n">Еналаприл 10&nbsp;мг</span>
+          <span class="st">прийнято</span>
+        </div>
+        <div class="entry">
+          <button class="tick" type="button" aria-pressed="false" aria-label="Аторвастатин о 20:00 — позначити прийнятим">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4"/></svg>
+          </button>
+          <span class="t">20:00</span>
+          <span class="n">Аторвастатин 20&nbsp;мг</span>
+        </div>
+        <div class="meas">
+          <div class="lab">Останнє записане · Гемоглобін</div>
+          <div class="v"><b>128</b> <span class="unit">г/л</span> <span class="date"><span class="sun">нд</span> 12.07</span></div>
+        </div>
+        <div class="stack"><span class="d">15.07</span> <span>середа — порожній аркуш</span></div>
+        <div class="stack"><span class="d">16.07</span> <span>Кардіолог · 14:00 · заплановано</span></div>
+      </div>
+      <div>
+        <div class="binder">
+          <h3>Підшивка</h3>
+          <div class="stubrow">
+            <span class="num sun">12<small>нд · лип</small></span>
+            <span class="what">Гемоглобін <small>— вимірювання</small></span>
+            <span class="val">128 <span class="unit">г/л</span></span>
+          </div>
+          <div class="stubrow">
+            <span class="num">10<small>пт · лип</small></span>
+            <span class="what">Виписка <small>— поліклініка №4, кардіолог</small></span>
+          </div>
+          <div class="stubrow">
+            <span class="num">03<small>пт · лип</small></span>
+            <span class="what">Глюкоза <small>— вимірювання</small></span>
+            <span class="val">5,1 <span class="unit">ммоль/л</span></span>
+          </div>
+          <div class="stubrow" style="border-bottom:none">
+            <span class="num">20<small>сб · чер</small></span>
+            <span class="what">Вітамін D <small>— 1 запис, потрібен ще ≥1 для кривої</small></span>
+            <span class="val">28 <span class="unit">нг/мл</span></span>
+          </div>
+        </div>
+        <nav class="acts" aria-label="Дії">
+          <button type="button">Записи</button>
+          <button class="prim" type="button">＋ Додати</button>
+          <button type="button">Показати</button>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2 class="sec">Компоненти світу</h2>
+<p class="secsub">Носії мови — кожен під межу §4.</p>
+<div class="comp">
+  <div class="c">
+    <b>Fat-face цифра дня (= дата)</b>
+    <div class="e demo" style="background:var(--paper)">
+      <div class="dayhead" style="padding-top:0"><div class="month" style="font-size:.85rem">Липень 2026</div><div class="weekday">Вівторок</div></div>
+      <p class="bignum" style="font-size:4.6rem">14<small>Сьогодні</small></p>
+    </div>
+    <p>Дерев'яний шрифт плаката (Bodoni-клас). Розмір = роль «сьогодні у фокусі»; сама цифра — факт календаря.</p>
+  </div>
+  <div class="c">
+    <b>Червона плашка (друк №2)</b>
+    <div class="e demo" style="padding:0; overflow:hidden">
+      <header class="masthead" style="margin:0">
+        <span class="brand">Kartka</span>
+        <span style="font:700 .7rem/1 var(--sans); letter-spacing:.05em; color:var(--red); background:var(--white); padding:7px 10px">ЕКСТРЕНЕ</span>
+      </header>
+    </div>
+    <p>Червона фарба = плашка шапки, головна дія, неділя в підшивці. На значення не переходить ніколи.</p>
+  </div>
+  <div class="c">
+    <b>Друкарський чек прийому</b>
+    <div class="e demo" style="background:var(--paper); display:flex; gap:14px; align-items:center">
+      <button class="tick" type="button" aria-pressed="true" aria-label="приклад: прийнято"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4"/></svg></button>
+      <button class="tick" type="button" aria-pressed="false" aria-label="приклад: не позначено"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4"/></svg></button>
+      <span style="font:400 .74rem/1.4 var(--sans); color:var(--mut)">заливка чорною фарбою = факт</span>
+    </div>
+    <p>Квадратна каса літер: залито = позначено. Без зеленого «молодець».</p>
+  </div>
+  <div class="c">
+    <b>Набірний орнамент + лінійки</b>
+    <div class="e demo" style="background:var(--paper)">
+      <div class="orn" style="padding-top:2px" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="rulepair" style="margin:10px 4px 0" aria-hidden="true"></div>
+    </div>
+    <p>Ромби каси й товста-тонка пара — набірна графіка друкарні, членує аркуш замість карток.</p>
+  </div>
+</div>
+
+<h2 class="sec">Контраст (WCAG AA) — перевірено обчислювально</h2>
+<p class="secsub">Кожна текстова пара світу.</p>
+<table class="aa">
+  <tr><th>Пара</th><th>Значення</th><th>Коефіцієнт</th><th>Вимога</th></tr>
+  <tr><td><span class="chip" style="background:#221E1A"></span>фарба / папір</td><td><b>#221E1A</b> на #F3EDDE</td><td><b>14,17:1</b></td><td>≥4,5 ✓</td></tr>
+  <tr><td><span class="chip" style="background:#625B4D"></span>службовий / папір</td><td><b>#625B4D</b> на #F3EDDE</td><td><b>5,76:1</b></td><td>≥4,5 ✓</td></tr>
+  <tr><td><span class="chip" style="background:#B23726"></span>червоний текст / папір</td><td><b>#B23726</b> на #F3EDDE</td><td><b>5,19:1</b></td><td>≥4,5 ✓</td></tr>
+  <tr><td><span class="chip" style="background:#FBF8EF"></span>білий / червона плашка</td><td><b>#FBF8EF</b> на #C03A2B</td><td><b>5,09:1</b></td><td>≥4,5 ✓</td></tr>
+  <tr><td><span class="chip" style="background:#221E1A"></span>фарба / картон</td><td><b>#221E1A</b> на #D8D0BC</td><td><b>10,77:1</b></td><td>≥4,5 ✓</td></tr>
+</table>
+
+<footer class="foot">
+  <p><b>Джерела:</b> рішення напряму й рендиція v2 — <a href="concept.md">concept.md</a> (Частина 4);
+  демо-дані — <a href="../wireframes/_fixtures.md">_fixtures.md</a> (канон «демо-сьогодні
+  14.07.2026, вт»); межа — CLAUDE.md §4 + PRODUCT.md. Рол відтворюваний:
+  <code>concept-seed.mjs --scope direction --mode operate --from 45fdc353 --reroll 2</code>.
+  Шрифт цифри — системний Bodoni-клас macOS (фолбеки Didot/Georgia); фінальний шрифт — етап tokens.
+  Обраний напрям продукту — Ґ (<a href="concept.html">concept.html</a>). Сусідні стенди:
+  <a href="direction-d.html">Д «Викрійка»</a> · <a href="direction-ye.html">Є «Контролька»</a>.</p>
+</footer>
+
+</div>
+</body>
+</html>

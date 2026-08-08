@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kartka · Кубикові напрями Д·Е·Є — порівняння</title>
+<style>
+  /* ===== нейтральний хром стенду ===== */
+  :root{
+    --page:#FAFAF9; --panel:#FFFFFF; --chrome-ink:#1A1C1E; --chrome-mut:#5C6167;
+    --chrome-line:#E3E4E6;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--page); color:var(--chrome-ink);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1440px; margin:0 auto; padding:0 clamp(16px,3vw,32px)}
+  header.top{padding:clamp(30px,5vw,54px) 0 10px}
+  header.top h1{font-size:clamp(1.7rem,3.4vw,2.4rem); line-height:1.08; letter-spacing:-.02em; margin:0; text-wrap:balance; font-weight:640}
+  header.top .sub{margin-top:12px; color:var(--chrome-mut); max-width:76ch; font-size:1.02rem}
+  header.top .sub b{color:var(--chrome-ink)}
+  header.top code{font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:.86em; background:#EFEFEE; padding:1px 5px; border-radius:4px}
+  .boundary{margin-top:18px; border:1px solid var(--chrome-line); border-radius:10px; padding:13px 16px; background:var(--panel); font-size:.9rem; color:var(--chrome-mut); display:flex; gap:11px; align-items:flex-start; max-width:900px}
+  .boundary b{color:var(--chrome-ink)}
+  .boundary .mk{flex:none; width:22px; height:22px; border-radius:6px; background:#1A1C1E; color:#fff; display:grid; place-items:center; font-weight:700; font-size:.85rem; margin-top:1px}
+  h2.sec{font-size:1.15rem; letter-spacing:-.01em; margin:44px 0 6px; font-weight:640}
+  p.secsub{margin:0 0 18px; color:var(--chrome-mut); font-size:.92rem; max-width:80ch}
+
+  /* матриця осей */
+  .axes{overflow-x:auto}
+  table.ax{border-collapse:collapse; font-size:.82rem; min-width:720px; width:100%}
+  table.ax th, table.ax td{text-align:left; padding:8px 14px 8px 0; border-bottom:1px solid var(--chrome-line); color:var(--chrome-mut); vertical-align:top}
+  table.ax th{color:var(--chrome-ink); font-weight:640}
+  table.ax td b{color:var(--chrome-ink); font-weight:600}
+  table.ax .chips{display:inline-flex; gap:4px; vertical-align:-2px; margin-right:6px}
+  table.ax .chips i{width:13px; height:13px; border:1px solid rgba(0,0,0,.12); display:block}
+
+  /* три колонки порівняння */
+  .compare{display:flex; flex-wrap:wrap; gap:clamp(16px,2.4vw,26px); align-items:flex-start; justify-content:center; padding:8px 0 20px}
+  .col{flex:1 1 380px; max-width:460px; min-width:320px}
+  .col > .colhead{padding:0 2px 10px}
+  .col > .colhead .tag{font:700 .72rem/1 ui-monospace,Menlo,monospace; letter-spacing:.14em; color:var(--chrome-mut)}
+  .col > .colhead h3{margin:4px 0 0; font-size:1.06rem; letter-spacing:-.01em}
+  .col > .colhead p{margin:5px 0 0; font-size:.82rem; color:var(--chrome-mut); line-height:1.5}
+  .col > .colhead a{color:var(--chrome-ink)}
+  .ground{border:1px solid var(--chrome-line); border-radius:14px; padding:clamp(14px,2vw,24px); display:flex; justify-content:center}
+  .ground.g-d{background:#0E1E33}
+  .ground.g-e{background:#D8D0BC}
+  .ground.g-k{background:#0C0B08}
+
+  /* ============================================================
+     СВІТ Д «ВИКРІЙКА · СИНЬКА» (скопійовано з direction-d.html, приskoплено .d)
+     ============================================================ */
+  .d{
+    --blue:#17314F; --deep:#0E1E33; --milk:#E9F0F6; --dim:#A8BDD2; --gold:#E8C15A;
+    --gline:rgba(233,240,246,.10);
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-family:var(--sans); color:var(--milk);
+  }
+  .d.sheet{
+    background:
+      linear-gradient(90deg, var(--gline) 1px, transparent 1px),
+      linear-gradient(0deg, var(--gline) 1px, transparent 1px),
+      var(--blue);
+    background-size:26px 26px, 26px 26px, auto;
+    border:1px solid rgba(233,240,246,.28);
+    position:relative; width:375px; max-width:100%;
+  }
+  .d.sheet::before, .d.sheet::after{content:""; position:absolute; z-index:0; border:1px solid rgba(233,240,246,.18)}
+  .d.sheet::before{inset:8px -6px -6px 8px; background:#152C47; z-index:-1}
+  .d.sheet::after{inset:16px -12px -12px 16px; background:#122740; z-index:-1}
+  .d header.bar{display:flex; align-items:stretch; gap:0; border-bottom:1px solid var(--milk)}
+  .d .tabs{display:flex; align-items:flex-end; gap:3px; padding:8px 8px 0; flex:1 1 auto; min-width:0; overflow-x:auto}
+  .d .tab{flex:none; display:inline-flex; align-items:center; gap:7px; font:600 .8rem/1 var(--sans); color:var(--dim); background:transparent; border:1px dashed rgba(233,240,246,.35); border-bottom:none; padding:7px 9px 8px; cursor:pointer}
+  .d .tab .ln{width:14px; height:0; border-top:2px solid var(--milk); opacity:.4}
+  .d .tab[aria-selected="true"]{color:var(--milk); background:var(--blue); border:1px solid var(--milk); border-bottom:1px solid var(--blue); margin-bottom:-1px}
+  .d .tab[aria-selected="true"] .ln{border-top-color:var(--gold); opacity:1}
+  .d .tab .role{font-weight:400; color:var(--dim); font-size:.72rem}
+  .d .sos{flex:none; display:inline-flex; align-items:center; gap:6px; margin:8px 10px; font:700 .7rem/1 var(--sans); letter-spacing:.03em; color:var(--blue); border:none; padding:7px 9px; background:var(--gold); cursor:pointer}
+  .d .sos svg{width:12px; height:12px; display:block}
+  .d .piece{margin:18px 14px 0; border:1.5px solid var(--milk); background:transparent; padding:14px 18px 16px; position:relative}
+  .d .piece.r1{border-radius:58% 10% 46% 12% / 34% 14% 38% 12%}
+  .d .piece.r2{border-radius:12% 52% 14% 48% / 12% 36% 12% 40%}
+  .d .piece.r3{border-radius:44% 14% 52% 10% / 30% 10% 36% 14%; border-style:dashed}
+  .d .piece.r4{border-radius:14% 46% 12% 54% / 14% 34% 12% 38%}
+  .d .piece > h3{margin:0 0 10px; font:700 .7rem/1.2 var(--mono); letter-spacing:.1em; color:var(--milk); text-transform:uppercase; display:flex; align-items:baseline; gap:8px}
+  .d .piece > h3 .no{color:var(--dim); font-weight:400}
+  .d .piece .chalkmark{position:absolute; top:8px; right:16px; width:26px; height:8px; color:var(--gold)}
+  .d .piece .chalkmark svg{display:block; width:100%; height:100%}
+  .d .cutline{display:flex; align-items:center; gap:10px; margin:14px 20px 0; color:var(--dim)}
+  .d .cutline .dash{flex:1 1 auto; border-top:1.5px dashed rgba(233,240,246,.4)}
+  .d .cutline svg{width:16px; height:16px; flex:none; transform:rotate(-90deg)}
+  .d .crit{display:flex; flex-wrap:wrap; gap:7px}
+  .d .crit .fact{display:inline-flex; align-items:center; gap:7px; font:600 .84rem/1 var(--sans); color:var(--milk); border:1px solid rgba(233,240,246,.5); border-radius:99px; padding:7px 12px}
+  .d .crit .fact .k{font:400 .7rem/1 var(--sans); color:var(--dim)}
+  .d .dose{display:flex; align-items:center; gap:11px; padding:9px 0; border-top:1px dotted rgba(233,240,246,.3)}
+  .d .dose:first-of-type{border-top:none}
+  .d .dose .t{font:600 .82rem/1 var(--mono); color:var(--milk); flex:none; font-variant-numeric:tabular-nums}
+  .d .dose .n{flex:1 1 auto; min-width:0; font-size:.9rem}
+  .d .dose .n small{display:block; color:var(--dim); font-size:.74rem; margin-top:2px}
+  .d .dose .st{font:400 .7rem/1 var(--sans); color:var(--dim); flex:none}
+  .d .notch{flex:none; width:26px; height:26px; border:1.5px solid var(--milk); border-radius:50%; background:transparent; display:grid; place-items:center; cursor:pointer; padding:0}
+  .d .notch svg{width:14px; height:14px; display:block; color:var(--blue)}
+  .d .notch.done{background:var(--gold); border-color:var(--gold)}
+  .d .notch:not(.done) svg{opacity:0}
+  .d .dim{display:flex; flex-direction:column; gap:4px; padding:6px 0 2px}
+  .d .dim .val{display:flex; align-items:baseline; gap:8px; font-family:var(--mono); font-variant-numeric:tabular-nums; color:var(--milk)}
+  .d .dim.hero .val{font-size:2.6rem; font-weight:400; line-height:1; letter-spacing:-.02em}
+  .d .dim.hero .val .unit{font-size:1rem; color:var(--dim)}
+  .d .dim .arrow{display:flex; align-items:center; gap:8px; color:var(--milk)}
+  .d .dim .arrow svg{flex:none; display:block}
+  .d .dim .arrow .lab{font:400 .74rem/1 var(--sans); color:var(--dim); white-space:nowrap}
+  .d .dim.row{flex-direction:row; align-items:center; gap:10px; padding:9px 0; border-top:1px dotted rgba(233,240,246,.3)}
+  .d .dim.row .name{flex:1 1 auto; min-width:0; font-size:.9rem}
+  .d .dim.row .name small{color:var(--dim)}
+  .d .dim.row .val{font-size:.9rem; font-weight:600}
+  .d .dim.row .val .unit{font-size:.74rem; color:var(--dim); font-weight:400}
+  .d .dim.row .date{font:400 .74rem/1 var(--mono); color:var(--dim); font-variant-numeric:tabular-nums}
+  .d .legend{margin:16px 14px; border:1px solid rgba(233,240,246,.3); border-radius:99px; padding:9px 16px; display:flex; flex-wrap:wrap; gap:10px 18px}
+  .d .legend .li{display:inline-flex; align-items:center; gap:8px; font:400 .72rem/1 var(--sans); color:var(--dim)}
+  .d .legend .li b{color:var(--milk); font-weight:600}
+  .d .legend .sw{width:26px; height:0; flex:none}
+  .d .legend .solid{border-top:2px solid var(--milk)}
+  .d .legend .fold{border-top:2px dashed var(--milk)}
+  .d .legend .chalk{border-top:3px solid var(--gold)}
+  .d nav.stamps{display:flex; border-top:1px solid var(--milk); margin-top:4px}
+  .d .stamp{flex:1 1 0; display:flex; flex-direction:column; align-items:center; gap:4px; padding:9px 4px 11px; font:600 .66rem/1 var(--sans); color:var(--dim); background:transparent; border:none; border-left:1px dotted rgba(233,240,246,.3); cursor:pointer}
+  .d .stamp:first-child{border-left:none}
+  .d .stamp svg{width:17px; height:17px; display:block}
+  .d .stamp.cur{color:var(--blue); background:var(--gold)}
+  .d .stamp.add{color:var(--milk); font-weight:700}
+  .d button:focus-visible, .d .tab:focus-visible{outline:2.5px solid var(--gold); outline-offset:2px}
+
+  /* ============================================================
+     СВІТ Е «ЧИСЛЕННИК · ДВОКОЛІРНИЙ ДРУК» (з direction-e.html, .e)
+     ============================================================ */
+  .e{
+    --paper:#F3EDDE; --stub:#EAE3D0; --board:#D8D0BC; --ink:#221E1A; --mut:#625B4D;
+    --line:#C9C0A8; --red:#C03A2B; --redtx:#B23726; --white:#FBF8EF;
+    --disp:"Bodoni 72","Bodoni 72 Oldstyle","Didot","Playfair Display",Georgia,serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-family:var(--sans); color:var(--ink);
+  }
+  .e.pad{width:375px; max-width:100%; display:flex; flex-direction:column; background:var(--paper); border:1px solid var(--line)}
+  .e header.masthead{background:var(--red); color:var(--white); padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:10px}
+  .e .masthead .brand{font-family:var(--disp); font-size:1.3rem; letter-spacing:.04em; line-height:1}
+  .e .masthead .who{font:600 .78rem/1 var(--sans); color:var(--white); background:transparent; border:1px solid rgba(251,248,239,.55); padding:6px 10px; cursor:pointer}
+  .e .masthead .who .role{font-weight:400; font-size:.7rem}
+  .e .masthead .sos{font:700 .7rem/1 var(--sans); letter-spacing:.05em; color:var(--red); background:var(--white); border:none; padding:7px 10px; cursor:pointer; display:inline-flex; align-items:center; gap:6px}
+  .e .masthead .sos svg{width:12px; height:12px; display:block}
+  .e .critline{border-bottom:1px solid var(--ink); padding:8px 14px; font-size:.8rem; color:var(--mut); margin:0}
+  .e .critline b{color:var(--ink); font-weight:650}
+  .e .orn{display:flex; justify-content:center; gap:8px; padding:10px 0 2px; color:var(--ink)}
+  .e .orn i{width:7px; height:7px; background:currentColor; transform:rotate(45deg); flex:none}
+  .e .orn i:nth-child(even){background:var(--redtx)}
+  .e .dayhead{text-align:center; padding:8px 16px 0}
+  .e .dayhead .month{font-family:var(--disp); font-size:1.05rem; letter-spacing:.1em; text-transform:uppercase}
+  .e .dayhead .weekday{font:400 .8rem/1 var(--sans); color:var(--mut); margin-top:6px; letter-spacing:.24em; text-transform:uppercase}
+  .e .bignum{text-align:center; font-family:var(--disp); font-size:9.5rem; font-weight:700; line-height:.86; letter-spacing:-.01em; margin:6px 0 0; font-variant-numeric:lining-nums}
+  .e .bignum small{display:block; font:600 .72rem/1 var(--sans); color:var(--redtx); letter-spacing:.34em; margin-top:12px; text-transform:uppercase}
+  .e .rulepair{margin:14px 16px 0}
+  .e .rulepair::before{content:""; display:block; border-top:3px solid var(--ink)}
+  .e .rulepair::after{content:""; display:block; border-top:1px solid var(--ink); margin-top:2px}
+  .e .entry{display:flex; align-items:center; gap:11px; padding:11px 16px; border-bottom:1px solid var(--line)}
+  .e .entry:last-of-type{border-bottom:none}
+  .e .entry .t{font:600 .84rem/1 var(--mono); font-variant-numeric:tabular-nums; flex:none}
+  .e .entry .n{flex:1 1 auto; min-width:0; font-size:.93rem}
+  .e .entry .st{font:400 .72rem/1 var(--sans); color:var(--mut); flex:none}
+  .e .tick{flex:none; width:24px; height:24px; border:2px solid var(--ink); background:var(--paper); display:grid; place-items:center; cursor:pointer; padding:0}
+  .e .tick svg{width:14px; height:14px; display:block; color:var(--paper)}
+  .e .tick[aria-pressed="false"] svg{opacity:0}
+  .e .tick[aria-pressed="true"]{background:var(--ink)}
+  .e .meas{padding:12px 16px 14px}
+  .e .meas .lab{font:600 .68rem/1 var(--sans); color:var(--mut); letter-spacing:.18em; text-transform:uppercase}
+  .e .meas .v{display:flex; align-items:baseline; gap:10px; margin-top:4px; flex-wrap:wrap}
+  .e .meas .v b{font-family:var(--disp); font-size:2.6rem; font-weight:700; line-height:1; letter-spacing:0}
+  .e .meas .v .unit{font:400 .85rem/1 var(--sans); color:var(--mut)}
+  .e .meas .v .date{margin-left:auto; font:400 .78rem/1 var(--mono); color:var(--mut); font-variant-numeric:tabular-nums}
+  .e .meas .v .date .sun{color:var(--redtx); font-weight:700}
+  .e .meas.small .v b{font-size:1.5rem}
+  .e .stack{border-top:1px dashed var(--line); background:var(--stub); padding:9px 16px; display:flex; align-items:center; gap:10px; font-size:.8rem; color:var(--mut)}
+  .e .stack .d{font:600 .8rem/1 var(--mono); color:var(--ink); flex:none}
+  .e .binder h3{font:600 .72rem/1.2 var(--sans); letter-spacing:.3em; text-transform:uppercase; color:var(--white); background:var(--ink); margin:0; padding:9px 16px; text-align:center}
+  .e .stubrow{display:flex; align-items:center; gap:14px; background:var(--stub); border-bottom:1px solid var(--line); padding:8px 16px}
+  .e .stubrow .num{font-family:var(--disp); font-size:1.9rem; font-weight:700; line-height:1; flex:none; min-width:56px; text-align:center}
+  .e .stubrow .num small{display:block; font:400 .6rem/1 var(--sans); color:var(--mut); letter-spacing:.12em; text-transform:uppercase; margin-top:3px}
+  .e .stubrow .num.sun{color:var(--redtx)}
+  .e .stubrow .what{flex:1 1 auto; min-width:0; font-size:.86rem}
+  .e .stubrow .what small{color:var(--mut)}
+  .e .stubrow .val{font:600 .9rem/1 var(--mono); font-variant-numeric:tabular-nums; flex:none}
+  .e .stubrow .val .unit{font-weight:400; font-size:.72rem; color:var(--mut)}
+  .e nav.acts{display:flex; gap:0; border-top:3px solid var(--ink)}
+  .e .acts button{flex:1 1 0; font:700 .74rem/1 var(--sans); letter-spacing:.14em; text-transform:uppercase; color:var(--ink); background:var(--paper); border:none; border-left:1px solid var(--ink); padding:13px 6px; cursor:pointer}
+  .e .acts button:first-child{border-left:none}
+  .e .acts button.prim{background:var(--red); color:var(--white)}
+  .e button:focus-visible{outline:2.5px solid var(--ink); outline-offset:2px}
+
+  /* ============================================================
+     СВІТ Є «КОНТРОЛЬКА · KODAK» (з direction-ye.html, .k)
+     ============================================================ */
+  .k{
+    --room:#141210; --filmedge:#231F18; --milk:#F0EDE2; --dim:#A69F8E;
+    --kodak:#F0C013; --wax:#F6F3E9; --frame:#F2EFE5; --ink:#262420; --mutf:#5C574C;
+    --cond:"Avenir Next Condensed","AvenirNextCondensed-DemiBold","Arial Narrow",system-ui,sans-serif;
+    --type:"American Typewriter","Courier New",Courier,monospace;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-family:var(--sans); color:var(--milk);
+  }
+  .k.print{background:var(--room); width:390px; max-width:100%; padding:0 0 14px; overflow:hidden}
+  .k header.kbar{background:var(--kodak); color:var(--room); display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 16px}
+  .k .kbar .mark{font-family:var(--cond); font-weight:700; font-size:1.05rem; letter-spacing:.16em; text-transform:uppercase; white-space:nowrap}
+  .k .kbar .who{font-family:var(--cond); font-weight:600; font-size:.85rem; letter-spacing:.06em; color:var(--room); background:transparent; border:2px solid var(--room); padding:5px 10px; cursor:pointer; text-transform:uppercase}
+  .k .kbar .sos{font-family:var(--cond); font-weight:700; font-size:.85rem; letter-spacing:.08em; color:var(--kodak); background:var(--room); border:none; padding:7px 11px; cursor:pointer; text-transform:uppercase; display:inline-flex; align-items:center; gap:6px}
+  .k .kbar .sos svg{width:12px; height:12px; display:block}
+  .k .caption{padding:12px 16px 4px; font-family:var(--type); font-size:.78rem; color:var(--dim); line-height:1.6; margin:0}
+  .k .caption b{color:var(--milk); font-weight:700}
+  .k .strips{padding:6px 10px 4px; display:flex; flex-direction:column; gap:16px}
+  .k .strip{background:var(--filmedge); padding:0 8px; position:relative}
+  .k .strip.tilt-a{transform:rotate(-1.4deg)}
+  .k .strip.tilt-b{transform:rotate(1deg)}
+  .k .strip.tilt-c{transform:rotate(-.6deg)}
+  .k .strip .perf{height:11px; display:flex; gap:13px; padding:3px 6px 0; overflow:hidden}
+  .k .strip .perf i{width:9px; height:6px; background:var(--room); border-radius:2px; flex:none}
+  .k .striplabel{display:flex; justify-content:space-between; align-items:baseline; padding:5px 6px 2px}
+  .k .striplabel .n{font-family:var(--cond); font-weight:700; font-size:.8rem; letter-spacing:.2em; color:var(--kodak); text-transform:uppercase}
+  .k .striplabel .c{font-family:var(--type); font-size:.66rem; color:var(--dim)}
+  .k .frames{display:flex; gap:9px; padding:17px 3px 8px; overflow-x:auto}
+  .k .frame{flex:none; width:158px; background:var(--frame); color:var(--ink); border-radius:5px; padding:0 0 9px; position:relative; cursor:pointer; border:2px solid transparent; text-align:left; font-family:var(--sans); overflow:visible}
+  .k .frame > .no{position:absolute; top:-4px; right:5px; transform:translateY(-100%); font:700 .62rem/1.5 var(--mono); color:var(--kodak); letter-spacing:.08em}
+  .k .frame .pic{display:block; width:100%; height:52px; border-radius:4px 4px 0 0; background:#E5E0D0; color:#6B6353; overflow:hidden}
+  .k .frame .pic svg{display:block; width:100%; height:100%}
+  .k .frame .tx{display:block; padding:8px 10px 0}
+  .k .frame .kind{display:block; font-family:var(--type); font-size:.62rem; color:var(--mutf); letter-spacing:.04em}
+  .k .frame .name{display:block; font-size:.86rem; font-weight:650; margin-top:3px}
+  .k .frame .fv{display:flex; align-items:baseline; gap:5px; font-family:var(--mono); font-variant-numeric:tabular-nums; margin-top:5px}
+  .k .frame .fv b{font-size:1.1rem; font-weight:600}
+  .k .frame .fv .unit{font-size:.68rem; color:var(--mutf)}
+  .k .frame .fd{display:block; font-family:var(--type); font-size:.66rem; color:var(--mutf); margin-top:5px; font-variant-numeric:tabular-nums}
+  .k .frame .took{display:inline-flex; align-items:center; gap:6px; margin-top:5px; font:700 .7rem/1 var(--sans); color:var(--ink)}
+  .k .frame .took svg{width:12px; height:12px; display:block}
+  .k .frame .took.off{color:var(--mutf); font-weight:400}
+  .k .frame.add{background:transparent; border:1.5px dashed var(--dim); color:var(--dim); display:grid; place-items:center; font-family:var(--cond); font-weight:600; font-size:.85rem; letter-spacing:.06em; min-height:118px; border-radius:5px}
+  .k .frame.sel{border-color:transparent}
+  .k .frame.sel .waxmark{position:absolute; inset:-9px -7px -7px -9px; color:var(--wax); pointer-events:none}
+  .k .frame.sel .waxmark svg{display:block; width:100%; height:100%}
+  .k .loupe{background:var(--frame); color:var(--ink); border-radius:8px; padding:14px 16px; margin:12px 16px 2px; position:relative}
+  .k .loupe .no{position:absolute; top:8px; right:12px; font:700 .66rem/1 var(--mono); color:var(--mutf)}
+  .k .loupe .kind{font-family:var(--type); font-size:.68rem; color:var(--mutf)}
+  .k .loupe .name{font-family:var(--cond); font-weight:700; font-size:1.15rem; letter-spacing:.02em; margin-top:3px; text-transform:uppercase}
+  .k .loupe .lv{display:flex; align-items:baseline; gap:8px; font-family:var(--mono); font-variant-numeric:tabular-nums; margin-top:8px}
+  .k .loupe .lv b{font-size:2.5rem; font-weight:500; letter-spacing:-.02em; line-height:1}
+  .k .loupe .lv .unit{font-size:.9rem; color:var(--mutf)}
+  .k .loupe .ld{font-family:var(--type); font-size:.72rem; color:var(--mutf); margin-top:8px; font-variant-numeric:tabular-nums}
+  .k nav.edgeacts{display:flex; gap:9px; padding:12px 16px 0}
+  .k .edgeacts button{flex:1 1 0; font-family:var(--cond); font-weight:700; font-size:.85rem; letter-spacing:.08em; text-transform:uppercase; color:var(--milk); background:transparent; border:1.5px solid var(--dim); padding:11px 6px; cursor:pointer}
+  .k .edgeacts button.prim{background:var(--kodak); color:var(--room); border-color:var(--kodak)}
+  .k button:focus-visible{outline:2.5px solid var(--kodak); outline-offset:2px}
+
+  footer.foot{margin:52px 0 40px; color:var(--chrome-mut); font-size:.82rem; max-width:84ch}
+  footer.foot a{color:var(--chrome-ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <h1>Кубикові напрями Д·Е·Є — порівняння поруч</h1>
+  <p class="sub">Три мобільні поверхні дашборда в одному стенді (рендиції v2 — повний
+  матеріальний діапазон кожного артефакта). Той самий екран, ті самі дані з
+  <code>_fixtures.md</code> — три різні світи. Трасування ролів ланцюга
+  <code>45fdc353</code> і рішення — <code>concept.md</code>, Частина 4.
+  <b>Обраним напрямом продукту лишається Ґ.</b> Повні стенди (закони · десктоп ·
+  компоненти · AA-таблиці) — за лінками в колонках.</p>
+  <div class="boundary">
+    <span class="mk">§4</span>
+    <span><b>Межа спільна для всіх трьох:</b> колір = матеріал/маркування артефакта
+    (синь копії · червона фарба друку · жовтий Kodak) — <b>ніколи значення показника</b>.
+    Значення завжди чорнилом/молоком; розмір = роль елемента; жодних зон/норм/оцінок.</span>
+  </div>
+</header>
+
+<h2 class="sec">Матриця осей</h2>
+<div class="axes">
+<table class="ax">
+  <tr><th>Вісь</th><th>Д «Синька»</th><th>Е «Двоколірний друк»</th><th>Є «Kodak»</th></tr>
+  <tr><td><b>Колір</b></td>
+    <td><span class="chips"><i style="background:#17314F"></i><i style="background:#E9F0F6"></i><i style="background:#E8C15A"></i></span>drenched прусська синь + золота крейда</td>
+    <td><span class="chips"><i style="background:#F3EDDE"></i><i style="background:#221E1A"></i><i style="background:#C03A2B"></i></span>газетний папір + чорна фарба + червона плашка</td>
+    <td><span class="chips"><i style="background:#141210"></i><i style="background:#F0C013"></i><i style="background:#F2EFE5"></i></span>чорна кімната + жовтий Kodak drench</td></tr>
+  <tr><td><b>Шрифт</b></td><td>молочний креслярський моно</td><td><b>Bodoni fat-face</b> (дерев'яний шрифт плаката)</td><td><b>Condensed-капс + Typewriter</b></td></tr>
+  <tr><td><b>Форми</b></td><td><b>органічні лекала</b> — жодного прямокутника</td><td>вертикальний плакат-моноліт, товста-тонка лінійки</td><td>закруглені кадри, <b>стрічки під нахилом</b></td></tr>
+  <tr><td><b>Лейаут</b></td><td>контури-деталі по аркушу, шари родини вушками</td><td>один аркуш дня + стос + підшивка</td><td>горизонтальні плівки на світлостолі + лупа</td></tr>
+  <tr><td><b>Асети / графіка</b></td><td>✂ лінія розрізу · наколки · стос синьок · лекало</td><td>набірні ромби · fat-числа підшивки · червона неділя</td><td><b>дуотонові мініатюри</b> · воскова обводка від руки · перфорація</td></tr>
+  <tr><td><b>Герой</b></td><td>розмірна стрілка ←128→</td><td>плакатна цифра <b>14</b> (= дата)</td><td>кадр 128 під лупою</td></tr>
+  <tr><td><b>Час</b></td><td>шари одного дня</td><td>вертикаль днів (відривність)</td><td>горизонталь плівки (хронологія)</td></tr>
+</table>
+</div>
+
+<h2 class="sec">Три поверхні поруч</h2>
+<p class="secsub">Мобільний дашборд Олени · 14.07.2026. Скроль кожної стрічки/аркуша — незалежний.</p>
+
+<div class="compare">
+
+  <!-- ================= Д ================= -->
+  <div class="col">
+    <div class="colhead">
+      <span class="tag">Д · РАУНД 1 · РОЛ УТРИМАНО</span>
+      <h3>Викрійка — синька</h3>
+      <p>Родина як шари світлокопії; факт = розмірна стрілка. <a href="direction-d.html">Повний стенд →</a></p>
+    </div>
+    <div class="ground g-d">
+      <div class="d sheet">
+        <header class="bar">
+          <div class="tabs" role="tablist" aria-label="Шари родини">
+            <button class="tab" role="tab" aria-selected="true"><span class="ln" aria-hidden="true"></span>Олена <span class="role">мама</span></button>
+            <button class="tab" role="tab" aria-selected="false"><span class="ln" aria-hidden="true"></span>Я</button>
+            <button class="tab" role="tab" aria-selected="false"><span class="ln" aria-hidden="true"></span>С</button>
+          </div>
+          <button class="sos" type="button" aria-label="Екстрена картка">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 2v12M2 8h12"/></svg>
+            ЕКСТРЕНЕ
+          </button>
+        </header>
+        <section class="piece r1" aria-labelledby="cd1">
+          <span class="chalkmark" aria-hidden="true"><svg viewBox="0 0 26 8" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M2 6 C7 2, 12 7, 24 2"/></svg></span>
+          <h3 id="cd1"><span class="no">Деталь 1</span> Критичне</h3>
+          <div class="crit">
+            <span class="fact"><span class="k">Алергія</span> Пеніцилін</span>
+            <span class="fact"><span class="k">Хроніка</span> Гіпертонія</span>
+            <span class="fact"><span class="k">Кров</span> A(II)&nbsp;Rh+</span>
+          </div>
+        </section>
+        <div class="cutline" aria-hidden="true">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="2.6"/><circle cx="6" cy="14" r="2.6"/><path d="M8 7.5 17 16M8 12.5 17 4"/></svg>
+          <span class="dash"></span>
+        </div>
+        <section class="piece r2" aria-labelledby="cd2">
+          <span class="chalkmark" aria-hidden="true"><svg viewBox="0 0 26 8" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M2 6 C7 2, 12 7, 24 2"/></svg></span>
+          <h3 id="cd2"><span class="no">Деталь 2</span> Сьогодні</h3>
+          <div class="dose">
+            <button class="notch done" type="button" aria-pressed="true" aria-label="Еналаприл о 08:00 — прийнято">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4"/></svg>
+            </button>
+            <span class="t">08:00</span>
+            <span class="n">Еналаприл 10&nbsp;мг</span>
+            <span class="st">прийнято</span>
+          </div>
+          <div class="dose">
+            <button class="notch" type="button" aria-pressed="false" aria-label="Аторвастатин о 20:00 — позначити прийнятим">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4"/></svg>
+            </button>
+            <span class="t">20:00</span>
+            <span class="n">Аторвастатин 20&nbsp;мг</span>
+          </div>
+        </section>
+        <section class="piece r3" aria-labelledby="cd3">
+          <h3 id="cd3"><span class="no">Деталь 3</span> Попереду</h3>
+          <div class="dose" style="border-top:none">
+            <span class="t">16.07</span>
+            <span class="n">Кардіолог <small>14:00 · заплановано</small></span>
+          </div>
+        </section>
+        <section class="piece r4" aria-labelledby="cd4">
+          <span class="chalkmark" aria-hidden="true"><svg viewBox="0 0 26 8" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M2 6 C7 2, 12 7, 24 2"/></svg></span>
+          <h3 id="cd4"><span class="no">Деталь 4</span> Останнє</h3>
+          <div class="dim hero">
+            <div class="arrow"><span class="lab">Гемоглобін</span></div>
+            <div class="val">128 <span class="unit">г/л</span></div>
+            <div class="arrow" aria-hidden="true">
+              <svg width="100%" height="10" viewBox="0 0 260 10" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 5h252M4 1v8M256 1v8M4 5l7-3.5M4 5l7 3.5M256 5l-7-3.5M256 5l-7 3.5"/></svg>
+            </div>
+            <div class="arrow"><span class="lab">останній вимір · 12.07.2026</span></div>
+          </div>
+          <div class="dim row">
+            <span class="name">Глюкоза</span>
+            <span class="val">5,1 <span class="unit">ммоль/л</span></span>
+            <span class="date">03.07</span>
+          </div>
+          <div class="dim row">
+            <span class="name">Виписка <small>— поліклініка №4</small></span>
+            <span class="date">10.07</span>
+          </div>
+        </section>
+        <div class="legend" aria-label="Умовні позначення">
+          <span class="li"><span class="sw solid" aria-hidden="true"></span><b>зафіксовано</b></span>
+          <span class="li"><span class="sw fold" aria-hidden="true"></span><b>заплановано</b></span>
+          <span class="li"><span class="sw chalk" aria-hidden="true"></span><b>крейда = активне</b></span>
+        </div>
+        <nav class="stamps" aria-label="Навігація">
+          <button class="stamp cur" type="button">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 9.5 10 3l7 6.5M5 8.5V17h10V8.5"/></svg>
+            Головна
+          </button>
+          <button class="stamp" type="button">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 4h12v13H4zM7 8h6M7 11h6M7 14h4"/></svg>
+            Записи
+          </button>
+          <button class="stamp add" type="button">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 4v12M4 10h12"/></svg>
+            Додати
+          </button>
+          <button class="stamp" type="button">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M10 3v9m0-9L6.5 6.5M10 3l3.5 3.5M4 12v5h12v-5"/></svg>
+            Показати
+          </button>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Е ================= -->
+  <div class="col">
+    <div class="colhead">
+      <span class="tag">Е · РАУНД 2 · РОЛ УТРИМАНО</span>
+      <h3>Численник — двоколірний друк</h3>
+      <p>Сьогодні = плакатний аркуш дня; минуле = підшивка. <a href="direction-e.html">Повний стенд →</a></p>
+    </div>
+    <div class="ground g-e">
+      <div class="e pad">
+        <header class="masthead">
+          <span class="brand">Kartka</span>
+          <button class="who" type="button">Олена <span class="role">мама</span></button>
+          <button class="sos" type="button" aria-label="Екстрена картка">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 2v12M2 8h12"/></svg>
+            ЕКСТРЕНЕ
+          </button>
+        </header>
+        <p class="critline">Алергія — <b>Пеніцилін</b> · Хроніка — <b>Гіпертонія</b> · Кров — <b>A(II)&nbsp;Rh+</b></p>
+        <div class="orn" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="dayhead">
+          <div class="month">Липень 2026</div>
+          <div class="weekday">Вівторок</div>
+        </div>
+        <p class="bignum">14<small>Сьогодні</small></p>
+        <div class="rulepair" aria-hidden="true"></div>
+        <div class="entry">
+          <button class="tick" type="button" aria-pressed="true" aria-label="Еналаприл о 08:00 — прийнято">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4"/></svg>
+          </button>
+          <span class="t">08:00</span>
+          <span class="n">Еналаприл 10&nbsp;мг</span>
+          <span class="st">прийнято</span>
+        </div>
+        <div class="entry">
+          <button class="tick" type="button" aria-pressed="false" aria-label="Аторвастатин о 20:00 — позначити прийнятим">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4"/></svg>
+          </button>
+          <span class="t">20:00</span>
+          <span class="n">Аторвастатин 20&nbsp;мг</span>
+        </div>
+        <div class="meas">
+          <div class="lab">Останнє записане · Гемоглобін</div>
+          <div class="v"><b>128</b> <span class="unit">г/л</span> <span class="date"><span class="sun">нд</span> 12.07</span></div>
+        </div>
+        <div class="meas small" style="padding-top:0">
+          <div class="v"><b>5,1</b> <span class="unit">ммоль/л · Глюкоза</span> <span class="date">пт 03.07</span></div>
+        </div>
+        <div class="stack"><span class="d">15.07</span> <span>середа — порожній аркуш</span></div>
+        <div class="stack" style="border-bottom:1px dashed var(--line)"><span class="d">16.07</span> <span>Кардіолог · 14:00 · заплановано</span></div>
+        <div class="binder">
+          <h3>Підшивка</h3>
+          <div class="stubrow">
+            <span class="num sun">12<small>нд · лип</small></span>
+            <span class="what">Гемоглобін <small>— вимірювання</small></span>
+            <span class="val">128 <span class="unit">г/л</span></span>
+          </div>
+          <div class="stubrow">
+            <span class="num">10<small>пт · лип</small></span>
+            <span class="what">Виписка <small>— поліклініка №4, кардіолог</small></span>
+          </div>
+          <div class="stubrow">
+            <span class="num">03<small>пт · лип</small></span>
+            <span class="what">Глюкоза <small>— вимірювання</small></span>
+            <span class="val">5,1 <span class="unit">ммоль/л</span></span>
+          </div>
+        </div>
+        <nav class="acts" aria-label="Дії">
+          <button type="button">Записи</button>
+          <button class="prim" type="button">＋ Додати</button>
+          <button type="button">Показати</button>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Є ================= -->
+  <div class="col">
+    <div class="colhead">
+      <span class="tag">Є · РАУНД 3 · РОЛ УТРИМАНО</span>
+      <h3>Контролька — Kodak</h3>
+      <p>Архів = плівка; вибране обведено воском. <a href="direction-ye.html">Повний стенд →</a></p>
+    </div>
+    <div class="ground g-k">
+      <div class="k print">
+        <header class="kbar">
+          <span class="mark">Kartka</span>
+          <button class="who" type="button">Олена · мама</button>
+          <button class="sos" type="button" aria-label="Екстрена картка">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 2v12M2 8h12"/></svg>
+            Екстрене
+          </button>
+        </header>
+        <p class="caption">Алергія — <b>Пеніцилін</b> · Хроніка — <b>Гіпертонія</b> · Кров — <b>A(II)&nbsp;Rh+</b></p>
+        <div class="loupe">
+          <span class="no">№ 12.07</span>
+          <div class="kind">лупа · вибраний кадр</div>
+          <div class="name">Гемоглобін</div>
+          <div class="lv"><b>128</b> <span class="unit">г/л</span></div>
+          <div class="ld">вимірювання · 12.07.2026 · 5 кадрів на стрічці</div>
+        </div>
+        <div class="strips">
+          <div class="strip tilt-a">
+            <div class="perf" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="striplabel"><span class="n">Аналізи</span><span class="c">хронологія →</span></div>
+            <div class="frames">
+              <button class="frame sel" type="button" aria-pressed="true">
+                <span class="waxmark" aria-hidden="true"><svg viewBox="0 0 176 150" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M14 24 C40 6, 140 4, 164 20 C176 32, 172 122, 158 136 C120 150, 34 148, 18 134 C4 118, 6 44, 16 27"/></svg></span>
+                <span class="no">12.07</span>
+                <span class="pic" aria-hidden="true"><svg viewBox="0 0 158 52" fill="none"><rect x="0" y="0" width="158" height="52" fill="#E5E0D0"/><rect x="18" y="8" width="70" height="6" rx="2" fill="#6B6353"/><rect x="18" y="20" width="96" height="4" rx="2" fill="#8B8371"/><rect x="18" y="29" width="84" height="4" rx="2" fill="#8B8371"/><rect x="18" y="38" width="60" height="4" rx="2" fill="#8B8371"/><circle cx="132" cy="33" r="12" stroke="#6B6353" stroke-width="2.4"/></svg></span>
+                <span class="tx">
+                  <span class="kind">вимірювання</span>
+                  <span class="name">Гемоглобін</span>
+                  <span class="fv"><b>128</b> <span class="unit">г/л</span></span>
+                  <span class="fd">12.07.2026</span>
+                </span>
+              </button>
+              <button class="frame" type="button" aria-pressed="false">
+                <span class="no">03.07</span>
+                <span class="pic" aria-hidden="true"><svg viewBox="0 0 158 52" fill="none"><rect x="0" y="0" width="158" height="52" fill="#E5E0D0"/><rect x="18" y="8" width="70" height="6" rx="2" fill="#6B6353"/><rect x="18" y="20" width="96" height="4" rx="2" fill="#8B8371"/><rect x="18" y="29" width="84" height="4" rx="2" fill="#8B8371"/><rect x="18" y="38" width="60" height="4" rx="2" fill="#8B8371"/><circle cx="132" cy="33" r="12" stroke="#6B6353" stroke-width="2.4"/></svg></span>
+                <span class="tx">
+                  <span class="kind">вимірювання</span>
+                  <span class="name">Глюкоза</span>
+                  <span class="fv"><b>5,1</b> <span class="unit">ммоль/л</span></span>
+                  <span class="fd">03.07.2026</span>
+                </span>
+              </button>
+              <button class="frame" type="button" aria-pressed="false">
+                <span class="no">20.06</span>
+                <span class="pic" aria-hidden="true"><svg viewBox="0 0 158 52" fill="none"><rect x="0" y="0" width="158" height="52" fill="#E5E0D0"/><rect x="18" y="8" width="70" height="6" rx="2" fill="#6B6353"/><rect x="18" y="20" width="96" height="4" rx="2" fill="#8B8371"/><rect x="18" y="29" width="84" height="4" rx="2" fill="#8B8371"/><rect x="18" y="38" width="60" height="4" rx="2" fill="#8B8371"/><circle cx="132" cy="33" r="12" stroke="#6B6353" stroke-width="2.4"/></svg></span>
+                <span class="tx">
+                  <span class="kind">вимірювання · 1 запис</span>
+                  <span class="name">Вітамін D</span>
+                  <span class="fv"><b>28</b> <span class="unit">нг/мл</span></span>
+                  <span class="fd">20.06.2026</span>
+                </span>
+              </button>
+              <button class="frame add" type="button">＋ новий кадр</button>
+            </div>
+            <div class="perf" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="strip tilt-b">
+            <div class="perf" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="striplabel"><span class="n">Сьогодні · 14.07</span><span class="c">прийоми</span></div>
+            <div class="frames">
+              <button class="frame" type="button">
+                <span class="no">08:00</span>
+                <span class="pic" aria-hidden="true"><svg viewBox="0 0 158 52" fill="none"><rect x="0" y="0" width="158" height="52" fill="#E5E0D0"/><rect x="62" y="6" width="20" height="9" rx="2" fill="#6B6353"/><rect x="56" y="15" width="32" height="32" rx="4" stroke="#6B6353" stroke-width="2.4"/><rect x="62" y="26" width="20" height="5" rx="2" fill="#8B8371"/></svg></span>
+                <span class="tx">
+                  <span class="kind">ліки</span>
+                  <span class="name">Еналаприл 10&nbsp;мг</span>
+                  <span class="took"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4"/></svg> прийнято</span>
+                </span>
+              </button>
+              <button class="frame" type="button">
+                <span class="no">20:00</span>
+                <span class="pic" aria-hidden="true"><svg viewBox="0 0 158 52" fill="none"><rect x="0" y="0" width="158" height="52" fill="#E5E0D0"/><rect x="62" y="6" width="20" height="9" rx="2" fill="#6B6353"/><rect x="56" y="15" width="32" height="32" rx="4" stroke="#6B6353" stroke-width="2.4"/><rect x="62" y="26" width="20" height="5" rx="2" fill="#8B8371"/></svg></span>
+                <span class="tx">
+                  <span class="kind">ліки</span>
+                  <span class="name">Аторвастатин 20&nbsp;мг</span>
+                  <span class="took off">ще не позначено</span>
+                </span>
+              </button>
+            </div>
+            <div class="perf" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="strip tilt-c">
+            <div class="perf" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="striplabel"><span class="n">Візити · Документи</span><span class="c">разом</span></div>
+            <div class="frames">
+              <button class="frame" type="button">
+                <span class="no">16.07</span>
+                <span class="pic" aria-hidden="true"><svg viewBox="0 0 158 52" fill="none"><rect x="0" y="0" width="158" height="52" fill="#E5E0D0"/><rect x="60" y="8" width="38" height="38" rx="3" stroke="#6B6353" stroke-width="2.4"/><rect x="60" y="8" width="38" height="10" fill="#6B6353"/><rect x="68" y="26" width="8" height="8" rx="1" fill="#8B8371"/><rect x="82" y="26" width="8" height="8" rx="1" fill="#8B8371"/></svg></span>
+                <span class="tx">
+                  <span class="kind">візит · заплановано</span>
+                  <span class="name">Кардіолог</span>
+                  <span class="fd">16.07.2026 · 14:00</span>
+                </span>
+              </button>
+              <button class="frame" type="button">
+                <span class="no">10.07</span>
+                <span class="pic" aria-hidden="true"><svg viewBox="0 0 158 52" fill="none"><rect x="0" y="0" width="158" height="52" fill="#E5E0D0"/><rect x="56" y="6" width="34" height="42" rx="2" stroke="#6B6353" stroke-width="2.2"/><rect x="62" y="14" width="22" height="3" rx="1.5" fill="#8B8371"/><rect x="62" y="21" width="22" height="3" rx="1.5" fill="#8B8371"/><rect x="62" y="28" width="14" height="3" rx="1.5" fill="#8B8371"/><circle cx="96" cy="40" r="8" stroke="#6B6353" stroke-width="2"/></svg></span>
+                <span class="tx">
+                  <span class="kind">документ</span>
+                  <span class="name">Виписка</span>
+                  <span class="fd">поліклініка №4 · 10.07.2026</span>
+                </span>
+              </button>
+            </div>
+            <div class="perf" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <nav class="edgeacts" aria-label="Дії">
+          <button type="button">Записи</button>
+          <button class="prim" type="button">＋ Додати</button>
+          <button type="button">Показати</button>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="foot">
+  <p><b>Джерела:</b> рішення напрямів, трасування ролів і рендиція v2 — <a href="concept.md">concept.md</a>
+  (Частина 4); демо-дані — <a href="../wireframes/_fixtures.md">_fixtures.md</a>; межа — CLAUDE.md §4 +
+  PRODUCT.md. Повні стенди: <a href="direction-d.html">Д «Викрійка»</a> ·
+  <a href="direction-e.html">Е «Численник»</a> · <a href="direction-ye.html">Є «Контролька»</a>.
+  Обраний напрям продукту — Ґ (<a href="concept.html">concept.html</a>); попередні напрями А–Ґ —
+  <a href="directions.html">directions.html</a>.</p>
+</footer>
+
+</div>
+</body>
+</html>
