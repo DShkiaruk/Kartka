@@ -21,7 +21,7 @@
 |-------|--------------|--------|
 | [`research/`](./research/) | **[`research.md`](./research/research.md) — синтез-хаб** (наскрізні висновки + рішення + гіпотези). Деталі: **люди** — [`jtbd.md`](./research/jtbd.md) (стрижневий + ієрархія jobs main/related/emotional/social, матриця пріоритизації, 10 сценаріїв) і [`personas.md`](./research/personas.md) (ролі-персони, профілі, прогалини G1–G9); [`competitors.md`](./research/competitors.md), [`user-pains.md`](./research/user-pains.md), [`ux-patterns.md`](./research/ux-patterns.md), [`benchmark.md`](./research/benchmark.md), [`patterns-information-architecture.md`](./research/patterns-information-architecture.md) + [`screens/`](./research/screens/). | ✅ синтез |
 | [`wireframes/`](./wireframes/) | Низькодеталізовані каркаси **всіх MVP-потоків** (R1/R2/R5/R3/R4) + проєкції, mobile+desktop в одному файлі, стани з матриці, аудит [`_critique.md`](./wireframes/_critique.md). Див. розділ «Wireframes» нижче. | ✅ каркас |
-| [`concept/`](./concept/) | **Візуальна мова продукту** — банк референсів → смак/атрибути → напрями → **обрано Ґ «Фокус + Список»** + стенд мови + застосована планка; далі — альтернативи **Д–Є (метод кубиків)** і **синтез Ж (кандидат)**. Див. розділ «Concept» нижче. | 🔄 Ґ · Ж-кандидат |
+| [`concept/`](./concept/) | **Візуальна мова продукту** — банк референсів → смак/атрибути → напрями (А–Ґ, потім Д–Ж кубиками) → **обрано Ж «Фокус + кадри»** (синтез, що розвиває Ґ) + стенди. Див. розділ «Concept» нижче. | 🔄 напрям Ж |
 | [`tokens/`](./tokens/) | Колір, типографіка, відступи, радіуси — джерело правди візуалу. | ⏳ далі |
 | [`components/`](./components/) | Окремі UI-компоненти: специфікації й стани. | ⏳ далі |
 | [`design-system/`](./design-system/) | Принципи + патерни, що поєднують токени й компоненти. | ⏳ далі |
@@ -94,22 +94,21 @@ R4 Аналізи (крива без норм) · R4 Візити · R2 Анам
 ## Concept
 
 Візуальна мова **продукту** (не research-сторінки) — окремий воркстрім у
-[`concept/`](./concept/): банк прийомів → смак → атрибути → напрями → **обрано Ґ
-«Фокус + Список»** → стенд → застосування.
+[`concept/`](./concept/): банк прийомів → смак → атрибути → напрями (А–Ґ, потім
+Д–Ж кубиками) → **обрано Ж «Фокус + кадри»** (синтез, що розвиває Ґ) → стенд.
 
 - [`concept/references.md`](./concept/references.md) — банк прийомів (Mobbin) під межу «показує, не судить» + факт-прохід 7 обраних застосунків.
-- [`concept/concept.md`](./concept/concept.md) — смак · атрибути A1–A5 · напрями (А–Ж, з трасуванням ролів) · **Частина 5** (фіксації застосування Ґ).
-- [`concept/directions.html`](./concept/directions.html) · [`concept/concept.html`](./concept/concept.html) — стенд напрямів А–Ґ і **стенд мови Ґ**.
-- **Застосовано** (планка): `wireframes/dashboard*` + розділ Аналізи через спільний [`wireframes/_lang-g.css`](./wireframes/_lang-g.css).
+- [`concept/concept.md`](./concept/concept.md) — смак · атрибути A1–A5 · напрями (А–Ж, з трасуванням ролів) · **Частина 5** (фіксації, що Ж успадковує від Ґ).
+- [`concept/direction-zh.html`](./concept/direction-zh.html) — **стенд обраного напряму Ж «Фокус + кадри»**.
+- [`concept/concept.html`](./concept/concept.html) · [`concept/directions.html`](./concept/directions.html) — стенд скіну-бази (мова Ґ) і архів напрямів А–Ґ.
+- **Застосовано скін** (планка Ґ): `wireframes/dashboard*` + розділ Аналізи через спільний [`wireframes/_lang-g.css`](./wireframes/_lang-g.css). ⚠ Перенос на мову Ж — наступний крок.
 - **Альтернативи методом кубиків** (worlds+dice, ключ `45fdc353`): стенди
   [Д «Викрійка»](./concept/direction-d.html) · [Е «Численник»](./concept/direction-e.html) ·
-  [Є «Контролька»](./concept/direction-ye.html) + [порівняння з матрицею осей](./concept/directions-dice.html).
-- **Синтез Ж «Фокус + кадри»** (пін автора, Ґ+Є; кандидат на розвиток Ґ) —
-  [стенд](./concept/direction-zh.html); демо-дані всіх стендів — канон
-  [`wireframes/_fixtures.md`](./wireframes/_fixtures.md).
+  [Є «Контролька»](./concept/direction-ye.html) + [порівняння з матрицею осей](./concept/directions-dice.html);
+  демо-дані всіх стендів — канон [`wireframes/_fixtures.md`](./wireframes/_fixtures.md).
 
 Дизайн-шар (тон, палітра, **межа у візуалі**) — джерело правди [`PRODUCT.md`](./PRODUCT.md)
-(«Візуальна мова продукту»); продуктовий `DESIGN.md` (токени) — наступний крок.
+(«Візуальна мова продукту»); перенос Ж на каркаси + продуктовий `DESIGN.md` (токени) — наступний крок.
 Деталь — у `concept/` (README не дублює).
 
 ---
